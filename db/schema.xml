@@ -252,6 +252,13 @@
 	    <parameter name="level_column" value="level_depth" />
 	    <parameter name="use_scope" value="false" />
   	</behavior>
+  	<behavior name="i18n">
+    	<parameter name="i18n_columns" value="name, description" />
+    	<parameter name="locale_column" value="id_lang" />
+    	<parameter name="i18n_table" value="category_lang" />
+    	<parameter name="i18n_phpname" value="CategoryLang" />
+    	<parameter name="default_locale" value="1" />
+  	</behavior>
   </table>
   <table name="category_group" phpName="CategoryGroup" idMethod="native">
     <column name="id_category" phpName="IdCategory" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true" primaryKey="true"/>
@@ -1334,6 +1341,14 @@
     <index name="date_add">
       	<index-column name="date_add"/>
     </index>
+    
+    <behavior name="i18n">
+    	<parameter name="i18n_columns" value="name, description" />
+    	<parameter name="locale_column" value="id_lang" />
+    	<parameter name="i18n_table" value="product_lang" />
+    	<parameter name="i18n_phpname" value="ProductLang" />
+  	</behavior>
+  	
   </table>
   <table name="product_attachment" phpName="ProductAttachment" idMethod="native">
     <column name="id_product" phpName="IdProduct" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true" required="true"/>
