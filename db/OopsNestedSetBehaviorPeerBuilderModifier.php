@@ -8,16 +8,26 @@ class OopsNestedSetBehaviorPeerBuilderModifier extends NestedSetBehaviorPeerBuil
 		
 		$script = parent :: staticAttributes($builder);
 		
+		$tableName = $this->table->getName();
+		
 		$script = str_replace(
 			"const LEFT_COL = '" . $tableName . '.' . $this->getColumnConstant('left_column') . "';", 
-			"const LEFT_COL = _DB_PREFIX_ . '" . $tableName . '.' . $this->getColumnConstant('left_column') . "';", $script);
-		$script = str_replace(
-			"const RIGHT_COL = '" . $tableName . '.' . $this->getColumnConstant('right_column') . "';", 
-			"const RIGHT_COL = _DB_PREFIX_ . '" . $tableName . '.' . $this->getColumnConstant('right_column') . "';", $script);
-		$script = str_replace(
-			"const LEVEL_COL = '" . $tableName . '.' . $this->getColumnConstant('level_column') . "';", 
-			"const LEVEL_COL = _DB_PREFIX_ . '" . $tableName . '.' . $this->getColumnConstant('level_column') . "';", $script);
+			"const LEFT_COL = '" . $tableName . '.' . $this->getColumnConstant('left_column') . "';", $script);
 		
+		/*
+		$script .= "
+public static \$LEFT_COL = _DB_PREFIX_ . self :: LEFT_COL;
+public static \$RIGHT_COL = _DB_PREFIX_ . self :: RIGHT_COL;
+public static \$LEVEL_COL = _DB_PREFIX_ . self :: LEVEL_COL;
+";
+
+		if ($this->behavior->useScope()) {
+			$script .= 	"
+public static \$SCOPE_COL = _DB_PREFIX_ . self :: SCOPE_COL;
+";
+		}
+		*/
+
 		return $script;
 		
 	}

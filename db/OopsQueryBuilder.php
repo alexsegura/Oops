@@ -4,6 +4,13 @@ require_once 'builder/om/QueryBuilder.php';
 
 class OopsQueryBuilder extends QueryBuilder {
 	
+	/*
+	public function getColumnConstant($col, $classname = null) {
+		$columnConstant = parent :: getColumnConstant($col, $classname);
+		return str_replace("::", "::\$", $columnConstant);
+	}
+	*/
+	
 	protected function addFindPkSimple(&$script) {
 		
 		parent :: addFindPkSimple($script);
@@ -13,10 +20,29 @@ class OopsQueryBuilder extends QueryBuilder {
 		
 		$tableName = $table->getName();
 		
-		
 		$script = str_replace(
-			$table->getName(), 
-			"' . _DB_PREFIX_ . '$tableName", $script);
+			"FROM `$tableName`", 
+			"FROM `' . _DB_PREFIX_ . '$tableName`", $script);
+		
+	} 
+	
+	public function build() {
+		
+		$script = parent :: build();
+		
+		/*
+		$script = str_replace(
+			"::LEFT_COL", 
+			"::LEFT_COL()", $script);
+		$script = str_replace(
+			"::RIGHT_COL", 
+			"::RIGHT_COL()", $script);
+		$script = str_replace(
+			"::LEVEL_COL", 
+			"::LEVEL_COL()", $script);
+		*/
+		
+		return $script;
 		
 	}
 	

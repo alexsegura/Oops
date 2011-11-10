@@ -16,13 +16,19 @@ class OopsObjectBuilder extends PHP5ObjectBuilder {
 		
 		$tableName = $table->getName();
 		
-		
 		$script = str_replace(
-			$table->getName(), 
-			"' . _DB_PREFIX_ . '$tableName", $script);
+			"INSERT INTO `$tableName`", 
+			"INSERT INTO `' .  _DB_PREFIX_ . '$tableName`", $script);
 		
 		return $script;
 		
 	}
+	
+	/*
+	public function getColumnConstant($col, $classname = null) {
+		$columnConstant = parent :: getColumnConstant($col, $classname);
+		return str_replace("::", "::\$", $columnConstant);
+	}
+	*/
 	
 }
