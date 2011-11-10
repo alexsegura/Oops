@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_attribute_impact' table.
+ * Base class that represents a row from the 'attribute_impact' table.
  *
  * 
  *
@@ -488,7 +488,7 @@ abstract class Oops_Model_Base_AttributeImpact extends BaseObject  implements Pe
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_attribute_impact` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'attribute_impact` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

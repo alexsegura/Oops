@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_scene_lang' table.
+ * Base class that represents a row from the 'scene_lang' table.
  *
  * 
  *
@@ -404,7 +404,7 @@ abstract class Oops_Model_Base_SceneLang extends BaseObject  implements Persiste
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_scene_lang` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'scene_lang` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

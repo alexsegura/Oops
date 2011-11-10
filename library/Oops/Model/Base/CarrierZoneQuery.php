@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_carrier_zone' table.
+ * Base class that represents a query for the 'carrier_zone' table.
  *
  * 
  *
@@ -112,7 +112,7 @@ abstract class Oops_Model_Base_CarrierZoneQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_CARRIER`, `ID_ZONE` FROM `djland_carrier_zone` WHERE `ID_CARRIER` = :p0 AND `ID_ZONE` = :p1';
+		$sql = 'SELECT `ID_CARRIER`, `ID_ZONE` FROM `' . _DB_PREFIX_ . 'carrier_zone` WHERE `ID_CARRIER` = :p0 AND `ID_ZONE` = :p1';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key[0], PDO::PARAM_INT);

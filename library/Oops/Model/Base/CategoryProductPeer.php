@@ -1,8 +1,13 @@
 <?php
 
 
+define('OOPS_MODEL_CATEGORYPRODUCT_ID_CATEGORY', _DB_PREFIX_ . 'category_product.ID_CATEGORY');
+define('OOPS_MODEL_CATEGORYPRODUCT_ID_PRODUCT', _DB_PREFIX_ . 'category_product.ID_PRODUCT');
+define('OOPS_MODEL_CATEGORYPRODUCT_POSITION', _DB_PREFIX_ . 'category_product.POSITION');
+define('OOPS_MODEL_CATEGORYPRODUCT_TABLE_NAME', _DB_PREFIX_ . 'category_product');
+
 /**
- * Base static class for performing query and update operations on the 'djland_category_product' table.
+ * Base static class for performing query and update operations on the 'category_product' table.
  *
  * 
  *
@@ -14,7 +19,7 @@ abstract class Oops_Model_Base_CategoryProductPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_category_product';
+	const TABLE_NAME = OOPS_MODEL_CATEGORYPRODUCT_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_CategoryProduct';
@@ -35,13 +40,13 @@ abstract class Oops_Model_Base_CategoryProductPeer {
 	const NUM_HYDRATE_COLUMNS = 3;
 
 	/** the column name for the ID_CATEGORY field */
-	const ID_CATEGORY = 'djland_category_product.ID_CATEGORY';
+	const ID_CATEGORY = OOPS_MODEL_CATEGORYPRODUCT_ID_CATEGORY;
 
 	/** the column name for the ID_PRODUCT field */
-	const ID_PRODUCT = 'djland_category_product.ID_PRODUCT';
+	const ID_PRODUCT = OOPS_MODEL_CATEGORYPRODUCT_ID_PRODUCT;
 
 	/** the column name for the POSITION field */
-	const POSITION = 'djland_category_product.POSITION';
+	const POSITION = OOPS_MODEL_CATEGORYPRODUCT_POSITION;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -349,7 +354,7 @@ abstract class Oops_Model_Base_CategoryProductPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_category_product
+	 * Method to invalidate the instance pool of all tables related to category_product
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -1194,7 +1199,7 @@ abstract class Oops_Model_Base_CategoryProductPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_category_product table.
+	 * Deletes all rows from the category_product table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_page_type' table.
+ * Base class that represents a query for the 'page_type' table.
  *
  * 
  *
@@ -112,7 +112,7 @@ abstract class Oops_Model_Base_PageTypeQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_PAGE_TYPE`, `NAME` FROM `djland_page_type` WHERE `ID_PAGE_TYPE` = :p0';
+		$sql = 'SELECT `ID_PAGE_TYPE`, `NAME` FROM `' . _DB_PREFIX_ . 'page_type` WHERE `ID_PAGE_TYPE` = :p0';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

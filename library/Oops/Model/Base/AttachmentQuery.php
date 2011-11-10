@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_attachment' table.
+ * Base class that represents a query for the 'attachment' table.
  *
  * 
  *
@@ -120,7 +120,7 @@ abstract class Oops_Model_Base_AttachmentQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_ATTACHMENT`, `FILE`, `FILE_NAME`, `MIME` FROM `djland_attachment` WHERE `ID_ATTACHMENT` = :p0';
+		$sql = 'SELECT `ID_ATTACHMENT`, `FILE`, `FILE_NAME`, `MIME` FROM `' . _DB_PREFIX_ . 'attachment` WHERE `ID_ATTACHMENT` = :p0';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

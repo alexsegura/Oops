@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_carrier_zone' table.
+ * Base class that represents a row from the 'carrier_zone' table.
  *
  * 
  *
@@ -364,7 +364,7 @@ abstract class Oops_Model_Base_CarrierZone extends BaseObject  implements Persis
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_carrier_zone` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'carrier_zone` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

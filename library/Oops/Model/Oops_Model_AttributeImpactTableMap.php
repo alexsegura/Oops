@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_attribute_impact' table.
+ * This class defines the structure of the 'attribute_impact' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_AttributeImpactTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_attribute_impact');
+		$this->setName(_DB_PREFIX_ . 'attribute_impact');
 		$this->setPhpName('AttributeImpact');
 		$this->setClassname('Oops_Model_AttributeImpact');
 		$this->setPackage('prestashop');

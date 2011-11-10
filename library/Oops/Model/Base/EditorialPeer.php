@@ -1,8 +1,12 @@
 <?php
 
 
+define('OOPS_MODEL_EDITORIAL_ID_EDITORIAL', _DB_PREFIX_ . 'editorial.ID_EDITORIAL');
+define('OOPS_MODEL_EDITORIAL_BODY_HOME_LOGO_LINK', _DB_PREFIX_ . 'editorial.BODY_HOME_LOGO_LINK');
+define('OOPS_MODEL_EDITORIAL_TABLE_NAME', _DB_PREFIX_ . 'editorial');
+
 /**
- * Base static class for performing query and update operations on the 'djland_editorial' table.
+ * Base static class for performing query and update operations on the 'editorial' table.
  *
  * 
  *
@@ -14,7 +18,7 @@ abstract class Oops_Model_Base_EditorialPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_editorial';
+	const TABLE_NAME = OOPS_MODEL_EDITORIAL_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_Editorial';
@@ -35,10 +39,10 @@ abstract class Oops_Model_Base_EditorialPeer {
 	const NUM_HYDRATE_COLUMNS = 2;
 
 	/** the column name for the ID_EDITORIAL field */
-	const ID_EDITORIAL = 'djland_editorial.ID_EDITORIAL';
+	const ID_EDITORIAL = OOPS_MODEL_EDITORIAL_ID_EDITORIAL;
 
 	/** the column name for the BODY_HOME_LOGO_LINK field */
-	const BODY_HOME_LOGO_LINK = 'djland_editorial.BODY_HOME_LOGO_LINK';
+	const BODY_HOME_LOGO_LINK = OOPS_MODEL_EDITORIAL_BODY_HOME_LOGO_LINK;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -344,7 +348,7 @@ abstract class Oops_Model_Base_EditorialPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_editorial
+	 * Method to invalidate the instance pool of all tables related to editorial
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -564,7 +568,7 @@ abstract class Oops_Model_Base_EditorialPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_editorial table.
+	 * Deletes all rows from the editorial table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

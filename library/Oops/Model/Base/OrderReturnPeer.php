@@ -1,8 +1,17 @@
 <?php
 
 
+define('OOPS_MODEL_ORDERRETURN_ID_ORDER_RETURN', _DB_PREFIX_ . 'order_return.ID_ORDER_RETURN');
+define('OOPS_MODEL_ORDERRETURN_ID_CUSTOMER', _DB_PREFIX_ . 'order_return.ID_CUSTOMER');
+define('OOPS_MODEL_ORDERRETURN_ID_ORDER', _DB_PREFIX_ . 'order_return.ID_ORDER');
+define('OOPS_MODEL_ORDERRETURN_STATE', _DB_PREFIX_ . 'order_return.STATE');
+define('OOPS_MODEL_ORDERRETURN_QUESTION', _DB_PREFIX_ . 'order_return.QUESTION');
+define('OOPS_MODEL_ORDERRETURN_DATE_ADD', _DB_PREFIX_ . 'order_return.DATE_ADD');
+define('OOPS_MODEL_ORDERRETURN_DATE_UPD', _DB_PREFIX_ . 'order_return.DATE_UPD');
+define('OOPS_MODEL_ORDERRETURN_TABLE_NAME', _DB_PREFIX_ . 'order_return');
+
 /**
- * Base static class for performing query and update operations on the 'djland_order_return' table.
+ * Base static class for performing query and update operations on the 'order_return' table.
  *
  * 
  *
@@ -14,7 +23,7 @@ abstract class Oops_Model_Base_OrderReturnPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_order_return';
+	const TABLE_NAME = OOPS_MODEL_ORDERRETURN_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_OrderReturn';
@@ -35,25 +44,25 @@ abstract class Oops_Model_Base_OrderReturnPeer {
 	const NUM_HYDRATE_COLUMNS = 7;
 
 	/** the column name for the ID_ORDER_RETURN field */
-	const ID_ORDER_RETURN = 'djland_order_return.ID_ORDER_RETURN';
+	const ID_ORDER_RETURN = OOPS_MODEL_ORDERRETURN_ID_ORDER_RETURN;
 
 	/** the column name for the ID_CUSTOMER field */
-	const ID_CUSTOMER = 'djland_order_return.ID_CUSTOMER';
+	const ID_CUSTOMER = OOPS_MODEL_ORDERRETURN_ID_CUSTOMER;
 
 	/** the column name for the ID_ORDER field */
-	const ID_ORDER = 'djland_order_return.ID_ORDER';
+	const ID_ORDER = OOPS_MODEL_ORDERRETURN_ID_ORDER;
 
 	/** the column name for the STATE field */
-	const STATE = 'djland_order_return.STATE';
+	const STATE = OOPS_MODEL_ORDERRETURN_STATE;
 
 	/** the column name for the QUESTION field */
-	const QUESTION = 'djland_order_return.QUESTION';
+	const QUESTION = OOPS_MODEL_ORDERRETURN_QUESTION;
 
 	/** the column name for the DATE_ADD field */
-	const DATE_ADD = 'djland_order_return.DATE_ADD';
+	const DATE_ADD = OOPS_MODEL_ORDERRETURN_DATE_ADD;
 
 	/** the column name for the DATE_UPD field */
-	const DATE_UPD = 'djland_order_return.DATE_UPD';
+	const DATE_UPD = OOPS_MODEL_ORDERRETURN_DATE_UPD;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -369,7 +378,7 @@ abstract class Oops_Model_Base_OrderReturnPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_order_return
+	 * Method to invalidate the instance pool of all tables related to order_return
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -589,7 +598,7 @@ abstract class Oops_Model_Base_OrderReturnPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_order_return table.
+	 * Deletes all rows from the order_return table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

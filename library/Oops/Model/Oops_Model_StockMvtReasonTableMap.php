@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_stock_mvt_reason' table.
+ * This class defines the structure of the 'stock_mvt_reason' table.
  *
  *
  *
@@ -32,13 +32,13 @@ class Oops_Model_StockMvtReasonTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_stock_mvt_reason');
+		$this->setName(_DB_PREFIX_ . 'stock_mvt_reason');
 		$this->setPhpName('StockMvtReason');
 		$this->setClassname('Oops_Model_StockMvtReason');
 		$this->setPackage('prestashop');
 		$this->setUseIdGenerator(true);
 		// columns
-		$this->addForeignPrimaryKey('ID_STOCK_MVT_REASON', 'IdStockMvtReason', 'INTEGER' , 'djland_stock_mvt', 'ID_STOCK_MVT_REASON', true, null, null);
+		$this->addForeignPrimaryKey('ID_STOCK_MVT_REASON', 'IdStockMvtReason', 'INTEGER' , 'stock_mvt', 'ID_STOCK_MVT_REASON', true, null, null);
 		$this->addPrimaryKey('SIGN', 'Sign', 'BOOLEAN', true, 1, true);
 		$this->addColumn('DATE_ADD', 'DateAdd', 'TIMESTAMP', true, null, null);
 		$this->addColumn('DATE_UPD', 'DateUpd', 'TIMESTAMP', true, null, null);

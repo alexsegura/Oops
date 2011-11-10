@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_specific_price_priority' table.
+ * Base class that represents a query for the 'specific_price_priority' table.
  *
  * 
  *
@@ -116,7 +116,7 @@ abstract class Oops_Model_Base_SpecificPricePriorityQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_SPECIFIC_PRICE_PRIORITY`, `ID_PRODUCT`, `PRIORITY` FROM `djland_specific_price_priority` WHERE `ID_SPECIFIC_PRICE_PRIORITY` = :p0 AND `ID_PRODUCT` = :p1';
+		$sql = 'SELECT `ID_SPECIFIC_PRICE_PRIORITY`, `ID_PRODUCT`, `PRIORITY` FROM `' . _DB_PREFIX_ . 'specific_price_priority` WHERE `ID_SPECIFIC_PRICE_PRIORITY` = :p0 AND `ID_PRODUCT` = :p1';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key[0], PDO::PARAM_INT);

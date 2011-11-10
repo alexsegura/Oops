@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_state' table.
+ * This class defines the structure of the 'state' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_StateTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_state');
+		$this->setName(_DB_PREFIX_ . 'state');
 		$this->setPhpName('State');
 		$this->setClassname('Oops_Model_State');
 		$this->setPackage('prestashop');

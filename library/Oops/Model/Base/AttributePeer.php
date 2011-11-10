@@ -1,8 +1,13 @@
 <?php
 
 
+define('OOPS_MODEL_ATTRIBUTE_ID_ATTRIBUTE', _DB_PREFIX_ . 'attribute.ID_ATTRIBUTE');
+define('OOPS_MODEL_ATTRIBUTE_ID_ATTRIBUTE_GROUP', _DB_PREFIX_ . 'attribute.ID_ATTRIBUTE_GROUP');
+define('OOPS_MODEL_ATTRIBUTE_COLOR', _DB_PREFIX_ . 'attribute.COLOR');
+define('OOPS_MODEL_ATTRIBUTE_TABLE_NAME', _DB_PREFIX_ . 'attribute');
+
 /**
- * Base static class for performing query and update operations on the 'djland_attribute' table.
+ * Base static class for performing query and update operations on the 'attribute' table.
  *
  * 
  *
@@ -14,7 +19,7 @@ abstract class Oops_Model_Base_AttributePeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_attribute';
+	const TABLE_NAME = OOPS_MODEL_ATTRIBUTE_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_Attribute';
@@ -35,13 +40,13 @@ abstract class Oops_Model_Base_AttributePeer {
 	const NUM_HYDRATE_COLUMNS = 3;
 
 	/** the column name for the ID_ATTRIBUTE field */
-	const ID_ATTRIBUTE = 'djland_attribute.ID_ATTRIBUTE';
+	const ID_ATTRIBUTE = OOPS_MODEL_ATTRIBUTE_ID_ATTRIBUTE;
 
 	/** the column name for the ID_ATTRIBUTE_GROUP field */
-	const ID_ATTRIBUTE_GROUP = 'djland_attribute.ID_ATTRIBUTE_GROUP';
+	const ID_ATTRIBUTE_GROUP = OOPS_MODEL_ATTRIBUTE_ID_ATTRIBUTE_GROUP;
 
 	/** the column name for the COLOR field */
-	const COLOR = 'djland_attribute.COLOR';
+	const COLOR = OOPS_MODEL_ATTRIBUTE_COLOR;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -349,7 +354,7 @@ abstract class Oops_Model_Base_AttributePeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_attribute
+	 * Method to invalidate the instance pool of all tables related to attribute
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -569,7 +574,7 @@ abstract class Oops_Model_Base_AttributePeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_attribute table.
+	 * Deletes all rows from the attribute table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

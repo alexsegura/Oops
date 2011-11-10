@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_access' table.
+ * Base class that represents a query for the 'access' table.
  *
  * 
  *
@@ -128,7 +128,7 @@ abstract class Oops_Model_Base_AccessQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_PROFILE`, `ID_TAB`, `VIEW`, `ADD`, `EDIT`, `DELETE` FROM `djland_access` WHERE `ID_PROFILE` = :p0 AND `ID_TAB` = :p1';
+		$sql = 'SELECT `ID_PROFILE`, `ID_TAB`, `VIEW`, `ADD`, `EDIT`, `DELETE` FROM `' . _DB_PREFIX_ . 'access` WHERE `ID_PROFILE` = :p0 AND `ID_TAB` = :p1';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key[0], PDO::PARAM_INT);

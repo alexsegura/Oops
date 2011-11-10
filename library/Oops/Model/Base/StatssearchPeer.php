@@ -1,8 +1,14 @@
 <?php
 
 
+define('OOPS_MODEL_STATSSEARCH_ID_STATSSEARCH', _DB_PREFIX_ . 'statssearch.ID_STATSSEARCH');
+define('OOPS_MODEL_STATSSEARCH_KEYWORDS', _DB_PREFIX_ . 'statssearch.KEYWORDS');
+define('OOPS_MODEL_STATSSEARCH_RESULTS', _DB_PREFIX_ . 'statssearch.RESULTS');
+define('OOPS_MODEL_STATSSEARCH_DATE_ADD', _DB_PREFIX_ . 'statssearch.DATE_ADD');
+define('OOPS_MODEL_STATSSEARCH_TABLE_NAME', _DB_PREFIX_ . 'statssearch');
+
 /**
- * Base static class for performing query and update operations on the 'djland_statssearch' table.
+ * Base static class for performing query and update operations on the 'statssearch' table.
  *
  * 
  *
@@ -14,7 +20,7 @@ abstract class Oops_Model_Base_StatssearchPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_statssearch';
+	const TABLE_NAME = OOPS_MODEL_STATSSEARCH_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_Statssearch';
@@ -35,16 +41,16 @@ abstract class Oops_Model_Base_StatssearchPeer {
 	const NUM_HYDRATE_COLUMNS = 4;
 
 	/** the column name for the ID_STATSSEARCH field */
-	const ID_STATSSEARCH = 'djland_statssearch.ID_STATSSEARCH';
+	const ID_STATSSEARCH = OOPS_MODEL_STATSSEARCH_ID_STATSSEARCH;
 
 	/** the column name for the KEYWORDS field */
-	const KEYWORDS = 'djland_statssearch.KEYWORDS';
+	const KEYWORDS = OOPS_MODEL_STATSSEARCH_KEYWORDS;
 
 	/** the column name for the RESULTS field */
-	const RESULTS = 'djland_statssearch.RESULTS';
+	const RESULTS = OOPS_MODEL_STATSSEARCH_RESULTS;
 
 	/** the column name for the DATE_ADD field */
-	const DATE_ADD = 'djland_statssearch.DATE_ADD';
+	const DATE_ADD = OOPS_MODEL_STATSSEARCH_DATE_ADD;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -354,7 +360,7 @@ abstract class Oops_Model_Base_StatssearchPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_statssearch
+	 * Method to invalidate the instance pool of all tables related to statssearch
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -574,7 +580,7 @@ abstract class Oops_Model_Base_StatssearchPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_statssearch table.
+	 * Deletes all rows from the statssearch table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

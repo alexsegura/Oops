@@ -1,8 +1,15 @@
 <?php
 
 
+define('OOPS_MODEL_SUPPLIER_ID_SUPPLIER', _DB_PREFIX_ . 'supplier.ID_SUPPLIER');
+define('OOPS_MODEL_SUPPLIER_NAME', _DB_PREFIX_ . 'supplier.NAME');
+define('OOPS_MODEL_SUPPLIER_DATE_ADD', _DB_PREFIX_ . 'supplier.DATE_ADD');
+define('OOPS_MODEL_SUPPLIER_DATE_UPD', _DB_PREFIX_ . 'supplier.DATE_UPD');
+define('OOPS_MODEL_SUPPLIER_ACTIVE', _DB_PREFIX_ . 'supplier.ACTIVE');
+define('OOPS_MODEL_SUPPLIER_TABLE_NAME', _DB_PREFIX_ . 'supplier');
+
 /**
- * Base static class for performing query and update operations on the 'djland_supplier' table.
+ * Base static class for performing query and update operations on the 'supplier' table.
  *
  * 
  *
@@ -14,7 +21,7 @@ abstract class Oops_Model_Base_SupplierPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_supplier';
+	const TABLE_NAME = OOPS_MODEL_SUPPLIER_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_Supplier';
@@ -35,19 +42,19 @@ abstract class Oops_Model_Base_SupplierPeer {
 	const NUM_HYDRATE_COLUMNS = 5;
 
 	/** the column name for the ID_SUPPLIER field */
-	const ID_SUPPLIER = 'djland_supplier.ID_SUPPLIER';
+	const ID_SUPPLIER = OOPS_MODEL_SUPPLIER_ID_SUPPLIER;
 
 	/** the column name for the NAME field */
-	const NAME = 'djland_supplier.NAME';
+	const NAME = OOPS_MODEL_SUPPLIER_NAME;
 
 	/** the column name for the DATE_ADD field */
-	const DATE_ADD = 'djland_supplier.DATE_ADD';
+	const DATE_ADD = OOPS_MODEL_SUPPLIER_DATE_ADD;
 
 	/** the column name for the DATE_UPD field */
-	const DATE_UPD = 'djland_supplier.DATE_UPD';
+	const DATE_UPD = OOPS_MODEL_SUPPLIER_DATE_UPD;
 
 	/** the column name for the ACTIVE field */
-	const ACTIVE = 'djland_supplier.ACTIVE';
+	const ACTIVE = OOPS_MODEL_SUPPLIER_ACTIVE;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -359,7 +366,7 @@ abstract class Oops_Model_Base_SupplierPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_supplier
+	 * Method to invalidate the instance pool of all tables related to supplier
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -814,7 +821,7 @@ abstract class Oops_Model_Base_SupplierPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_supplier table.
+	 * Deletes all rows from the supplier table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

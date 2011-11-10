@@ -1,8 +1,13 @@
 <?php
 
 
+define('OOPS_MODEL_CARRIERLANG_ID_CARRIER', _DB_PREFIX_ . 'carrier_lang.ID_CARRIER');
+define('OOPS_MODEL_CARRIERLANG_ID_LANG', _DB_PREFIX_ . 'carrier_lang.ID_LANG');
+define('OOPS_MODEL_CARRIERLANG_DELAY', _DB_PREFIX_ . 'carrier_lang.DELAY');
+define('OOPS_MODEL_CARRIERLANG_TABLE_NAME', _DB_PREFIX_ . 'carrier_lang');
+
 /**
- * Base static class for performing query and update operations on the 'djland_carrier_lang' table.
+ * Base static class for performing query and update operations on the 'carrier_lang' table.
  *
  * 
  *
@@ -14,7 +19,7 @@ abstract class Oops_Model_Base_CarrierLangPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_carrier_lang';
+	const TABLE_NAME = OOPS_MODEL_CARRIERLANG_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_CarrierLang';
@@ -35,13 +40,13 @@ abstract class Oops_Model_Base_CarrierLangPeer {
 	const NUM_HYDRATE_COLUMNS = 3;
 
 	/** the column name for the ID_CARRIER field */
-	const ID_CARRIER = 'djland_carrier_lang.ID_CARRIER';
+	const ID_CARRIER = OOPS_MODEL_CARRIERLANG_ID_CARRIER;
 
 	/** the column name for the ID_LANG field */
-	const ID_LANG = 'djland_carrier_lang.ID_LANG';
+	const ID_LANG = OOPS_MODEL_CARRIERLANG_ID_LANG;
 
 	/** the column name for the DELAY field */
-	const DELAY = 'djland_carrier_lang.DELAY';
+	const DELAY = OOPS_MODEL_CARRIERLANG_DELAY;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -349,7 +354,7 @@ abstract class Oops_Model_Base_CarrierLangPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_carrier_lang
+	 * Method to invalidate the instance pool of all tables related to carrier_lang
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -565,7 +570,7 @@ abstract class Oops_Model_Base_CarrierLangPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_carrier_lang table.
+	 * Deletes all rows from the carrier_lang table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_discount_type' table.
+ * Base class that represents a query for the 'discount_type' table.
  *
  * 
  *
@@ -108,7 +108,7 @@ abstract class Oops_Model_Base_DiscountTypeQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_DISCOUNT_TYPE` FROM `djland_discount_type` WHERE `ID_DISCOUNT_TYPE` = :p0';
+		$sql = 'SELECT `ID_DISCOUNT_TYPE` FROM `' . _DB_PREFIX_ . 'discount_type` WHERE `ID_DISCOUNT_TYPE` = :p0';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

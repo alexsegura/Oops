@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_supplier_lang' table.
+ * Base class that represents a query for the 'supplier_lang' table.
  *
  * 
  *
@@ -128,7 +128,7 @@ abstract class Oops_Model_Base_SupplierLangQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_SUPPLIER`, `ID_LANG`, `DESCRIPTION`, `META_TITLE`, `META_KEYWORDS`, `META_DESCRIPTION` FROM `djland_supplier_lang` WHERE `ID_SUPPLIER` = :p0 AND `ID_LANG` = :p1';
+		$sql = 'SELECT `ID_SUPPLIER`, `ID_LANG`, `DESCRIPTION`, `META_TITLE`, `META_KEYWORDS`, `META_DESCRIPTION` FROM `' . _DB_PREFIX_ . 'supplier_lang` WHERE `ID_SUPPLIER` = :p0 AND `ID_LANG` = :p1';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key[0], PDO::PARAM_INT);

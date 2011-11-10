@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_profile_lang' table.
+ * Base class that represents a query for the 'profile_lang' table.
  *
  * 
  *
@@ -116,7 +116,7 @@ abstract class Oops_Model_Base_ProfileLangQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_LANG`, `ID_PROFILE`, `NAME` FROM `djland_profile_lang` WHERE `ID_LANG` = :p0 AND `ID_PROFILE` = :p1';
+		$sql = 'SELECT `ID_LANG`, `ID_PROFILE`, `NAME` FROM `' . _DB_PREFIX_ . 'profile_lang` WHERE `ID_LANG` = :p0 AND `ID_PROFILE` = :p1';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key[0], PDO::PARAM_INT);

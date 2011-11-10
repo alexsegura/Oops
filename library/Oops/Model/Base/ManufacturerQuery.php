@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_manufacturer' table.
+ * Base class that represents a query for the 'manufacturer' table.
  *
  * 
  *
@@ -124,7 +124,7 @@ abstract class Oops_Model_Base_ManufacturerQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_MANUFACTURER`, `NAME`, `DATE_ADD`, `DATE_UPD`, `ACTIVE` FROM `djland_manufacturer` WHERE `ID_MANUFACTURER` = :p0';
+		$sql = 'SELECT `ID_MANUFACTURER`, `NAME`, `DATE_ADD`, `DATE_UPD`, `ACTIVE` FROM `' . _DB_PREFIX_ . 'manufacturer` WHERE `ID_MANUFACTURER` = :p0';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

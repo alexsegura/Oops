@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_tag' table.
+ * This class defines the structure of the 'tag' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_TagTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_tag');
+		$this->setName(_DB_PREFIX_ . 'tag');
 		$this->setPhpName('Tag');
 		$this->setClassname('Oops_Model_Tag');
 		$this->setPackage('prestashop');

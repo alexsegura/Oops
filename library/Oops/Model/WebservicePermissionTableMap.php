@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_webservice_permission' table.
+ * This class defines the structure of the 'webservice_permission' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_WebservicePermissionTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_webservice_permission');
+		$this->setName(_DB_PREFIX_ . 'webservice_permission');
 		$this->setPhpName('WebservicePermission');
 		$this->setClassname('Oops_Model_WebservicePermission');
 		$this->setPackage('prestashop');

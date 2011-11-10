@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_referrer' table.
+ * This class defines the structure of the 'referrer' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_ReferrerTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_referrer');
+		$this->setName(_DB_PREFIX_ . 'referrer');
 		$this->setPhpName('Referrer');
 		$this->setClassname('Oops_Model_Referrer');
 		$this->setPackage('prestashop');

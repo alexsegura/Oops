@@ -1,8 +1,21 @@
 <?php
 
 
+define('OOPS_MODEL_COUNTRY_ID_COUNTRY', _DB_PREFIX_ . 'country.ID_COUNTRY');
+define('OOPS_MODEL_COUNTRY_ID_ZONE', _DB_PREFIX_ . 'country.ID_ZONE');
+define('OOPS_MODEL_COUNTRY_ID_CURRENCY', _DB_PREFIX_ . 'country.ID_CURRENCY');
+define('OOPS_MODEL_COUNTRY_ISO_CODE', _DB_PREFIX_ . 'country.ISO_CODE');
+define('OOPS_MODEL_COUNTRY_CALL_PREFIX', _DB_PREFIX_ . 'country.CALL_PREFIX');
+define('OOPS_MODEL_COUNTRY_ACTIVE', _DB_PREFIX_ . 'country.ACTIVE');
+define('OOPS_MODEL_COUNTRY_CONTAINS_STATES', _DB_PREFIX_ . 'country.CONTAINS_STATES');
+define('OOPS_MODEL_COUNTRY_NEED_IDENTIFICATION_NUMBER', _DB_PREFIX_ . 'country.NEED_IDENTIFICATION_NUMBER');
+define('OOPS_MODEL_COUNTRY_NEED_ZIP_CODE', _DB_PREFIX_ . 'country.NEED_ZIP_CODE');
+define('OOPS_MODEL_COUNTRY_ZIP_CODE_FORMAT', _DB_PREFIX_ . 'country.ZIP_CODE_FORMAT');
+define('OOPS_MODEL_COUNTRY_DISPLAY_TAX_LABEL', _DB_PREFIX_ . 'country.DISPLAY_TAX_LABEL');
+define('OOPS_MODEL_COUNTRY_TABLE_NAME', _DB_PREFIX_ . 'country');
+
 /**
- * Base static class for performing query and update operations on the 'djland_country' table.
+ * Base static class for performing query and update operations on the 'country' table.
  *
  * 
  *
@@ -14,7 +27,7 @@ abstract class Oops_Model_Base_CountryPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_country';
+	const TABLE_NAME = OOPS_MODEL_COUNTRY_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_Country';
@@ -35,37 +48,37 @@ abstract class Oops_Model_Base_CountryPeer {
 	const NUM_HYDRATE_COLUMNS = 11;
 
 	/** the column name for the ID_COUNTRY field */
-	const ID_COUNTRY = 'djland_country.ID_COUNTRY';
+	const ID_COUNTRY = OOPS_MODEL_COUNTRY_ID_COUNTRY;
 
 	/** the column name for the ID_ZONE field */
-	const ID_ZONE = 'djland_country.ID_ZONE';
+	const ID_ZONE = OOPS_MODEL_COUNTRY_ID_ZONE;
 
 	/** the column name for the ID_CURRENCY field */
-	const ID_CURRENCY = 'djland_country.ID_CURRENCY';
+	const ID_CURRENCY = OOPS_MODEL_COUNTRY_ID_CURRENCY;
 
 	/** the column name for the ISO_CODE field */
-	const ISO_CODE = 'djland_country.ISO_CODE';
+	const ISO_CODE = OOPS_MODEL_COUNTRY_ISO_CODE;
 
 	/** the column name for the CALL_PREFIX field */
-	const CALL_PREFIX = 'djland_country.CALL_PREFIX';
+	const CALL_PREFIX = OOPS_MODEL_COUNTRY_CALL_PREFIX;
 
 	/** the column name for the ACTIVE field */
-	const ACTIVE = 'djland_country.ACTIVE';
+	const ACTIVE = OOPS_MODEL_COUNTRY_ACTIVE;
 
 	/** the column name for the CONTAINS_STATES field */
-	const CONTAINS_STATES = 'djland_country.CONTAINS_STATES';
+	const CONTAINS_STATES = OOPS_MODEL_COUNTRY_CONTAINS_STATES;
 
 	/** the column name for the NEED_IDENTIFICATION_NUMBER field */
-	const NEED_IDENTIFICATION_NUMBER = 'djland_country.NEED_IDENTIFICATION_NUMBER';
+	const NEED_IDENTIFICATION_NUMBER = OOPS_MODEL_COUNTRY_NEED_IDENTIFICATION_NUMBER;
 
 	/** the column name for the NEED_ZIP_CODE field */
-	const NEED_ZIP_CODE = 'djland_country.NEED_ZIP_CODE';
+	const NEED_ZIP_CODE = OOPS_MODEL_COUNTRY_NEED_ZIP_CODE;
 
 	/** the column name for the ZIP_CODE_FORMAT field */
-	const ZIP_CODE_FORMAT = 'djland_country.ZIP_CODE_FORMAT';
+	const ZIP_CODE_FORMAT = OOPS_MODEL_COUNTRY_ZIP_CODE_FORMAT;
 
 	/** the column name for the DISPLAY_TAX_LABEL field */
-	const DISPLAY_TAX_LABEL = 'djland_country.DISPLAY_TAX_LABEL';
+	const DISPLAY_TAX_LABEL = OOPS_MODEL_COUNTRY_DISPLAY_TAX_LABEL;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -389,7 +402,7 @@ abstract class Oops_Model_Base_CountryPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_country
+	 * Method to invalidate the instance pool of all tables related to country
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -609,7 +622,7 @@ abstract class Oops_Model_Base_CountryPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_country table.
+	 * Deletes all rows from the country table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

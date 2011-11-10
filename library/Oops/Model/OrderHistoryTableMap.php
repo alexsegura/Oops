@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_order_history' table.
+ * This class defines the structure of the 'order_history' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_OrderHistoryTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_order_history');
+		$this->setName(_DB_PREFIX_ . 'order_history');
 		$this->setPhpName('OrderHistory');
 		$this->setClassname('Oops_Model_OrderHistory');
 		$this->setPackage('prestashop');

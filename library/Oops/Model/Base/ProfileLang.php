@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_profile_lang' table.
+ * Base class that represents a row from the 'profile_lang' table.
  *
  * 
  *
@@ -404,7 +404,7 @@ abstract class Oops_Model_Base_ProfileLang extends BaseObject  implements Persis
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_profile_lang` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'profile_lang` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

@@ -1,8 +1,33 @@
 <?php
 
 
+define('OOPS_MODEL_REFERRER_ID_REFERRER', _DB_PREFIX_ . 'referrer.ID_REFERRER');
+define('OOPS_MODEL_REFERRER_NAME', _DB_PREFIX_ . 'referrer.NAME');
+define('OOPS_MODEL_REFERRER_PASSWD', _DB_PREFIX_ . 'referrer.PASSWD');
+define('OOPS_MODEL_REFERRER_HTTP_REFERER_REGEXP', _DB_PREFIX_ . 'referrer.HTTP_REFERER_REGEXP');
+define('OOPS_MODEL_REFERRER_HTTP_REFERER_LIKE', _DB_PREFIX_ . 'referrer.HTTP_REFERER_LIKE');
+define('OOPS_MODEL_REFERRER_REQUEST_URI_REGEXP', _DB_PREFIX_ . 'referrer.REQUEST_URI_REGEXP');
+define('OOPS_MODEL_REFERRER_REQUEST_URI_LIKE', _DB_PREFIX_ . 'referrer.REQUEST_URI_LIKE');
+define('OOPS_MODEL_REFERRER_HTTP_REFERER_REGEXP_NOT', _DB_PREFIX_ . 'referrer.HTTP_REFERER_REGEXP_NOT');
+define('OOPS_MODEL_REFERRER_HTTP_REFERER_LIKE_NOT', _DB_PREFIX_ . 'referrer.HTTP_REFERER_LIKE_NOT');
+define('OOPS_MODEL_REFERRER_REQUEST_URI_REGEXP_NOT', _DB_PREFIX_ . 'referrer.REQUEST_URI_REGEXP_NOT');
+define('OOPS_MODEL_REFERRER_REQUEST_URI_LIKE_NOT', _DB_PREFIX_ . 'referrer.REQUEST_URI_LIKE_NOT');
+define('OOPS_MODEL_REFERRER_BASE_FEE', _DB_PREFIX_ . 'referrer.BASE_FEE');
+define('OOPS_MODEL_REFERRER_PERCENT_FEE', _DB_PREFIX_ . 'referrer.PERCENT_FEE');
+define('OOPS_MODEL_REFERRER_CLICK_FEE', _DB_PREFIX_ . 'referrer.CLICK_FEE');
+define('OOPS_MODEL_REFERRER_CACHE_VISITORS', _DB_PREFIX_ . 'referrer.CACHE_VISITORS');
+define('OOPS_MODEL_REFERRER_CACHE_VISITS', _DB_PREFIX_ . 'referrer.CACHE_VISITS');
+define('OOPS_MODEL_REFERRER_CACHE_PAGES', _DB_PREFIX_ . 'referrer.CACHE_PAGES');
+define('OOPS_MODEL_REFERRER_CACHE_REGISTRATIONS', _DB_PREFIX_ . 'referrer.CACHE_REGISTRATIONS');
+define('OOPS_MODEL_REFERRER_CACHE_ORDERS', _DB_PREFIX_ . 'referrer.CACHE_ORDERS');
+define('OOPS_MODEL_REFERRER_CACHE_SALES', _DB_PREFIX_ . 'referrer.CACHE_SALES');
+define('OOPS_MODEL_REFERRER_CACHE_REG_RATE', _DB_PREFIX_ . 'referrer.CACHE_REG_RATE');
+define('OOPS_MODEL_REFERRER_CACHE_ORDER_RATE', _DB_PREFIX_ . 'referrer.CACHE_ORDER_RATE');
+define('OOPS_MODEL_REFERRER_DATE_ADD', _DB_PREFIX_ . 'referrer.DATE_ADD');
+define('OOPS_MODEL_REFERRER_TABLE_NAME', _DB_PREFIX_ . 'referrer');
+
 /**
- * Base static class for performing query and update operations on the 'djland_referrer' table.
+ * Base static class for performing query and update operations on the 'referrer' table.
  *
  * 
  *
@@ -14,7 +39,7 @@ abstract class Oops_Model_Base_ReferrerPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_referrer';
+	const TABLE_NAME = OOPS_MODEL_REFERRER_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_Referrer';
@@ -35,73 +60,73 @@ abstract class Oops_Model_Base_ReferrerPeer {
 	const NUM_HYDRATE_COLUMNS = 23;
 
 	/** the column name for the ID_REFERRER field */
-	const ID_REFERRER = 'djland_referrer.ID_REFERRER';
+	const ID_REFERRER = OOPS_MODEL_REFERRER_ID_REFERRER;
 
 	/** the column name for the NAME field */
-	const NAME = 'djland_referrer.NAME';
+	const NAME = OOPS_MODEL_REFERRER_NAME;
 
 	/** the column name for the PASSWD field */
-	const PASSWD = 'djland_referrer.PASSWD';
+	const PASSWD = OOPS_MODEL_REFERRER_PASSWD;
 
 	/** the column name for the HTTP_REFERER_REGEXP field */
-	const HTTP_REFERER_REGEXP = 'djland_referrer.HTTP_REFERER_REGEXP';
+	const HTTP_REFERER_REGEXP = OOPS_MODEL_REFERRER_HTTP_REFERER_REGEXP;
 
 	/** the column name for the HTTP_REFERER_LIKE field */
-	const HTTP_REFERER_LIKE = 'djland_referrer.HTTP_REFERER_LIKE';
+	const HTTP_REFERER_LIKE = OOPS_MODEL_REFERRER_HTTP_REFERER_LIKE;
 
 	/** the column name for the REQUEST_URI_REGEXP field */
-	const REQUEST_URI_REGEXP = 'djland_referrer.REQUEST_URI_REGEXP';
+	const REQUEST_URI_REGEXP = OOPS_MODEL_REFERRER_REQUEST_URI_REGEXP;
 
 	/** the column name for the REQUEST_URI_LIKE field */
-	const REQUEST_URI_LIKE = 'djland_referrer.REQUEST_URI_LIKE';
+	const REQUEST_URI_LIKE = OOPS_MODEL_REFERRER_REQUEST_URI_LIKE;
 
 	/** the column name for the HTTP_REFERER_REGEXP_NOT field */
-	const HTTP_REFERER_REGEXP_NOT = 'djland_referrer.HTTP_REFERER_REGEXP_NOT';
+	const HTTP_REFERER_REGEXP_NOT = OOPS_MODEL_REFERRER_HTTP_REFERER_REGEXP_NOT;
 
 	/** the column name for the HTTP_REFERER_LIKE_NOT field */
-	const HTTP_REFERER_LIKE_NOT = 'djland_referrer.HTTP_REFERER_LIKE_NOT';
+	const HTTP_REFERER_LIKE_NOT = OOPS_MODEL_REFERRER_HTTP_REFERER_LIKE_NOT;
 
 	/** the column name for the REQUEST_URI_REGEXP_NOT field */
-	const REQUEST_URI_REGEXP_NOT = 'djland_referrer.REQUEST_URI_REGEXP_NOT';
+	const REQUEST_URI_REGEXP_NOT = OOPS_MODEL_REFERRER_REQUEST_URI_REGEXP_NOT;
 
 	/** the column name for the REQUEST_URI_LIKE_NOT field */
-	const REQUEST_URI_LIKE_NOT = 'djland_referrer.REQUEST_URI_LIKE_NOT';
+	const REQUEST_URI_LIKE_NOT = OOPS_MODEL_REFERRER_REQUEST_URI_LIKE_NOT;
 
 	/** the column name for the BASE_FEE field */
-	const BASE_FEE = 'djland_referrer.BASE_FEE';
+	const BASE_FEE = OOPS_MODEL_REFERRER_BASE_FEE;
 
 	/** the column name for the PERCENT_FEE field */
-	const PERCENT_FEE = 'djland_referrer.PERCENT_FEE';
+	const PERCENT_FEE = OOPS_MODEL_REFERRER_PERCENT_FEE;
 
 	/** the column name for the CLICK_FEE field */
-	const CLICK_FEE = 'djland_referrer.CLICK_FEE';
+	const CLICK_FEE = OOPS_MODEL_REFERRER_CLICK_FEE;
 
 	/** the column name for the CACHE_VISITORS field */
-	const CACHE_VISITORS = 'djland_referrer.CACHE_VISITORS';
+	const CACHE_VISITORS = OOPS_MODEL_REFERRER_CACHE_VISITORS;
 
 	/** the column name for the CACHE_VISITS field */
-	const CACHE_VISITS = 'djland_referrer.CACHE_VISITS';
+	const CACHE_VISITS = OOPS_MODEL_REFERRER_CACHE_VISITS;
 
 	/** the column name for the CACHE_PAGES field */
-	const CACHE_PAGES = 'djland_referrer.CACHE_PAGES';
+	const CACHE_PAGES = OOPS_MODEL_REFERRER_CACHE_PAGES;
 
 	/** the column name for the CACHE_REGISTRATIONS field */
-	const CACHE_REGISTRATIONS = 'djland_referrer.CACHE_REGISTRATIONS';
+	const CACHE_REGISTRATIONS = OOPS_MODEL_REFERRER_CACHE_REGISTRATIONS;
 
 	/** the column name for the CACHE_ORDERS field */
-	const CACHE_ORDERS = 'djland_referrer.CACHE_ORDERS';
+	const CACHE_ORDERS = OOPS_MODEL_REFERRER_CACHE_ORDERS;
 
 	/** the column name for the CACHE_SALES field */
-	const CACHE_SALES = 'djland_referrer.CACHE_SALES';
+	const CACHE_SALES = OOPS_MODEL_REFERRER_CACHE_SALES;
 
 	/** the column name for the CACHE_REG_RATE field */
-	const CACHE_REG_RATE = 'djland_referrer.CACHE_REG_RATE';
+	const CACHE_REG_RATE = OOPS_MODEL_REFERRER_CACHE_REG_RATE;
 
 	/** the column name for the CACHE_ORDER_RATE field */
-	const CACHE_ORDER_RATE = 'djland_referrer.CACHE_ORDER_RATE';
+	const CACHE_ORDER_RATE = OOPS_MODEL_REFERRER_CACHE_ORDER_RATE;
 
 	/** the column name for the DATE_ADD field */
-	const DATE_ADD = 'djland_referrer.DATE_ADD';
+	const DATE_ADD = OOPS_MODEL_REFERRER_DATE_ADD;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -449,7 +474,7 @@ abstract class Oops_Model_Base_ReferrerPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_referrer
+	 * Method to invalidate the instance pool of all tables related to referrer
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -669,7 +694,7 @@ abstract class Oops_Model_Base_ReferrerPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_referrer table.
+	 * Deletes all rows from the referrer table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

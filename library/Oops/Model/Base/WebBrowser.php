@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_web_browser' table.
+ * Base class that represents a row from the 'web_browser' table.
  *
  * 
  *
@@ -368,7 +368,7 @@ abstract class Oops_Model_Base_WebBrowser extends BaseObject  implements Persist
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_web_browser` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'web_browser` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

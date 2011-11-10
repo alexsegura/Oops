@@ -1,8 +1,11 @@
 <?php
 
 
+define('OOPS_MODEL_PROFILE_ID_PROFILE', _DB_PREFIX_ . 'profile.ID_PROFILE');
+define('OOPS_MODEL_PROFILE_TABLE_NAME', _DB_PREFIX_ . 'profile');
+
 /**
- * Base static class for performing query and update operations on the 'djland_profile' table.
+ * Base static class for performing query and update operations on the 'profile' table.
  *
  * 
  *
@@ -14,7 +17,7 @@ abstract class Oops_Model_Base_ProfilePeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_profile';
+	const TABLE_NAME = OOPS_MODEL_PROFILE_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_Profile';
@@ -35,7 +38,7 @@ abstract class Oops_Model_Base_ProfilePeer {
 	const NUM_HYDRATE_COLUMNS = 1;
 
 	/** the column name for the ID_PROFILE field */
-	const ID_PROFILE = 'djland_profile.ID_PROFILE';
+	const ID_PROFILE = OOPS_MODEL_PROFILE_ID_PROFILE;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -339,7 +342,7 @@ abstract class Oops_Model_Base_ProfilePeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_profile
+	 * Method to invalidate the instance pool of all tables related to profile
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -559,7 +562,7 @@ abstract class Oops_Model_Base_ProfilePeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_profile table.
+	 * Deletes all rows from the profile table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

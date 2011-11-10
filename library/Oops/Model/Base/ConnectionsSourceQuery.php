@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_connections_source' table.
+ * Base class that represents a query for the 'connections_source' table.
  *
  * 
  *
@@ -128,7 +128,7 @@ abstract class Oops_Model_Base_ConnectionsSourceQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_CONNECTIONS_SOURCE`, `ID_CONNECTIONS`, `HTTP_REFERER`, `REQUEST_URI`, `KEYWORDS`, `DATE_ADD` FROM `djland_connections_source` WHERE `ID_CONNECTIONS_SOURCE` = :p0';
+		$sql = 'SELECT `ID_CONNECTIONS_SOURCE`, `ID_CONNECTIONS`, `HTTP_REFERER`, `REQUEST_URI`, `KEYWORDS`, `DATE_ADD` FROM `' . _DB_PREFIX_ . 'connections_source` WHERE `ID_CONNECTIONS_SOURCE` = :p0';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_cart' table.
+ * Base class that represents a row from the 'cart' table.
  *
  * 
  *
@@ -962,7 +962,7 @@ abstract class Oops_Model_Base_Cart extends BaseObject  implements Persistent
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_cart` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'cart` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

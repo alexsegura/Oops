@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_specific_price' table.
+ * Base class that represents a row from the 'specific_price' table.
  *
  * 
  *
@@ -828,7 +828,7 @@ abstract class Oops_Model_Base_SpecificPrice extends BaseObject  implements Pers
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_specific_price` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'specific_price` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

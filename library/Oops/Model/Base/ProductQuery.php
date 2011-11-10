@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_product' table.
+ * Base class that represents a query for the 'product' table.
  *
  * 
  *
@@ -284,7 +284,7 @@ abstract class Oops_Model_Base_ProductQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_PRODUCT`, `ID_SUPPLIER`, `ID_MANUFACTURER`, `ID_TAX_RULES_GROUP`, `ID_CATEGORY_DEFAULT`, `ID_COLOR_DEFAULT`, `ON_SALE`, `ONLINE_ONLY`, `EAN13`, `UPC`, `ECOTAX`, `QUANTITY`, `MINIMAL_QUANTITY`, `PRICE`, `WHOLESALE_PRICE`, `UNITY`, `UNIT_PRICE_RATIO`, `ADDITIONAL_SHIPPING_COST`, `REFERENCE`, `SUPPLIER_REFERENCE`, `LOCATION`, `WIDTH`, `HEIGHT`, `DEPTH`, `WEIGHT`, `OUT_OF_STOCK`, `QUANTITY_DISCOUNT`, `CUSTOMIZABLE`, `UPLOADABLE_FILES`, `TEXT_FIELDS`, `ACTIVE`, `AVAILABLE_FOR_ORDER`, `CONDITION`, `SHOW_PRICE`, `INDEXED`, `CACHE_IS_PACK`, `CACHE_HAS_ATTACHMENTS`, `CACHE_DEFAULT_ATTRIBUTE`, `DATE_ADD`, `DATE_UPD` FROM `djland_product` WHERE `ID_PRODUCT` = :p0';
+		$sql = 'SELECT `ID_PRODUCT`, `ID_SUPPLIER`, `ID_MANUFACTURER`, `ID_TAX_RULES_GROUP`, `ID_CATEGORY_DEFAULT`, `ID_COLOR_DEFAULT`, `ON_SALE`, `ONLINE_ONLY`, `EAN13`, `UPC`, `ECOTAX`, `QUANTITY`, `MINIMAL_QUANTITY`, `PRICE`, `WHOLESALE_PRICE`, `UNITY`, `UNIT_PRICE_RATIO`, `ADDITIONAL_SHIPPING_COST`, `REFERENCE`, `SUPPLIER_REFERENCE`, `LOCATION`, `WIDTH`, `HEIGHT`, `DEPTH`, `WEIGHT`, `OUT_OF_STOCK`, `QUANTITY_DISCOUNT`, `CUSTOMIZABLE`, `UPLOADABLE_FILES`, `TEXT_FIELDS`, `ACTIVE`, `AVAILABLE_FOR_ORDER`, `CONDITION`, `SHOW_PRICE`, `INDEXED`, `CACHE_IS_PACK`, `CACHE_HAS_ATTACHMENTS`, `CACHE_DEFAULT_ATTRIBUTE`, `DATE_ADD`, `DATE_UPD` FROM `' . _DB_PREFIX_ . 'product` WHERE `ID_PRODUCT` = :p0';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -2116,7 +2116,7 @@ abstract class Oops_Model_Base_ProductQuery extends ModelCriteria
 
 	/**
 	 * Filter the query by a related Category object
-	 * using the djland_category_product table as cross reference
+	 * using the category_product table as cross reference
 	 *
 	 * @param     Category $category the related object to use as filter
 	 * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
@@ -2145,6 +2145,61 @@ abstract class Oops_Model_Base_ProductQuery extends ModelCriteria
 		}
 
 		return $this;
+	}
+
+	// i18n behavior
+	
+	/**
+	 * Adds a JOIN clause to the query using the i18n relation
+	 *
+	 * @param     string $locale Locale to use for the join condition, e.g. 'fr_FR'
+	 * @param     string $relationAlias optional alias for the relation
+	 * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'. Defaults to left join.
+	 *
+	 * @return    Oops_Model_ProductQuery The current query, for fluid interface
+	 */
+	public function joinI18n($locale = 'en_EN', $relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+	{
+		$relationName = $relationAlias ? $relationAlias : 'ProductLang';
+		return $this
+			->joinProductLang($relationAlias, $joinType)
+			->addJoinCondition($relationName, $relationName . '.IdLang = ?', $locale);
+	}
+	
+	/**
+	 * Adds a JOIN clause to the query and hydrates the related I18n object.
+	 * Shortcut for $c->joinI18n($locale)->with()
+	 *
+	 * @param     string $locale Locale to use for the join condition, e.g. 'fr_FR'
+	 * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'. Defaults to left join.
+	 *
+	 * @return    Oops_Model_ProductQuery The current query, for fluid interface
+	 */
+	public function joinWithI18n($locale = 'en_EN', $joinType = Criteria::LEFT_JOIN)
+	{
+		$this
+			->joinI18n($locale, null, $joinType)
+			->with('ProductLang');
+		$this->with['ProductLang']->setIsWithOneToMany(false);
+		return $this;
+	}
+	
+	/**
+	 * Use the I18n relation query object
+	 *
+	 * @see       useQuery()
+	 *
+	 * @param     string $locale Locale to use for the join condition, e.g. 'fr_FR'
+	 * @param     string $relationAlias optional alias for the relation
+	 * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'. Defaults to left join.
+	 *
+	 * @return    Oops_Model_ProductLangQuery A secondary query class using the current class as primary query
+	 */
+	public function useI18nQuery($locale = 'en_EN', $relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+	{
+		return $this
+			->joinI18n($locale, $relationAlias, $joinType)
+			->useQuery($relationAlias ? $relationAlias : 'ProductLang', 'Oops_Model_ProductLangQuery');
 	}
 
 } // Oops_Model_Base_ProductQuery

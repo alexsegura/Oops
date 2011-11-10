@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_order_message' table.
+ * Base class that represents a query for the 'order_message' table.
  *
  * 
  *
@@ -112,7 +112,7 @@ abstract class Oops_Model_Base_OrderMessageQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_ORDER_MESSAGE`, `DATE_ADD` FROM `djland_order_message` WHERE `ID_ORDER_MESSAGE` = :p0';
+		$sql = 'SELECT `ID_ORDER_MESSAGE`, `DATE_ADD` FROM `' . _DB_PREFIX_ . 'order_message` WHERE `ID_ORDER_MESSAGE` = :p0';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

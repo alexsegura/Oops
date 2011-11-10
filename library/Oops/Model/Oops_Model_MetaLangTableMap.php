@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_meta_lang' table.
+ * This class defines the structure of the 'meta_lang' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_MetaLangTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_meta_lang');
+		$this->setName(_DB_PREFIX_ . 'meta_lang');
 		$this->setPhpName('MetaLang');
 		$this->setClassname('Oops_Model_MetaLang');
 		$this->setPackage('prestashop');

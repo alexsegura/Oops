@@ -1,8 +1,12 @@
 <?php
 
 
+define('OOPS_MODEL_CUSTOMERGROUP_ID_CUSTOMER', _DB_PREFIX_ . 'customer_group.ID_CUSTOMER');
+define('OOPS_MODEL_CUSTOMERGROUP_ID_GROUP', _DB_PREFIX_ . 'customer_group.ID_GROUP');
+define('OOPS_MODEL_CUSTOMERGROUP_TABLE_NAME', _DB_PREFIX_ . 'customer_group');
+
 /**
- * Base static class for performing query and update operations on the 'djland_customer_group' table.
+ * Base static class for performing query and update operations on the 'customer_group' table.
  *
  * 
  *
@@ -14,7 +18,7 @@ abstract class Oops_Model_Base_CustomerGroupPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_customer_group';
+	const TABLE_NAME = OOPS_MODEL_CUSTOMERGROUP_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_CustomerGroup';
@@ -35,10 +39,10 @@ abstract class Oops_Model_Base_CustomerGroupPeer {
 	const NUM_HYDRATE_COLUMNS = 2;
 
 	/** the column name for the ID_CUSTOMER field */
-	const ID_CUSTOMER = 'djland_customer_group.ID_CUSTOMER';
+	const ID_CUSTOMER = OOPS_MODEL_CUSTOMERGROUP_ID_CUSTOMER;
 
 	/** the column name for the ID_GROUP field */
-	const ID_GROUP = 'djland_customer_group.ID_GROUP';
+	const ID_GROUP = OOPS_MODEL_CUSTOMERGROUP_ID_GROUP;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -344,7 +348,7 @@ abstract class Oops_Model_Base_CustomerGroupPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_customer_group
+	 * Method to invalidate the instance pool of all tables related to customer_group
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -568,7 +572,7 @@ abstract class Oops_Model_Base_CustomerGroupPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_customer_group table.
+	 * Deletes all rows from the customer_group table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

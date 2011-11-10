@@ -1,8 +1,21 @@
 <?php
 
 
+define('OOPS_MODEL_CURRENCY_ID_CURRENCY', _DB_PREFIX_ . 'currency.ID_CURRENCY');
+define('OOPS_MODEL_CURRENCY_NAME', _DB_PREFIX_ . 'currency.NAME');
+define('OOPS_MODEL_CURRENCY_ISO_CODE', _DB_PREFIX_ . 'currency.ISO_CODE');
+define('OOPS_MODEL_CURRENCY_ISO_CODE_NUM', _DB_PREFIX_ . 'currency.ISO_CODE_NUM');
+define('OOPS_MODEL_CURRENCY_SIGN', _DB_PREFIX_ . 'currency.SIGN');
+define('OOPS_MODEL_CURRENCY_BLANK', _DB_PREFIX_ . 'currency.BLANK');
+define('OOPS_MODEL_CURRENCY_FORMAT', _DB_PREFIX_ . 'currency.FORMAT');
+define('OOPS_MODEL_CURRENCY_DECIMALS', _DB_PREFIX_ . 'currency.DECIMALS');
+define('OOPS_MODEL_CURRENCY_CONVERSION_RATE', _DB_PREFIX_ . 'currency.CONVERSION_RATE');
+define('OOPS_MODEL_CURRENCY_DELETED', _DB_PREFIX_ . 'currency.DELETED');
+define('OOPS_MODEL_CURRENCY_ACTIVE', _DB_PREFIX_ . 'currency.ACTIVE');
+define('OOPS_MODEL_CURRENCY_TABLE_NAME', _DB_PREFIX_ . 'currency');
+
 /**
- * Base static class for performing query and update operations on the 'djland_currency' table.
+ * Base static class for performing query and update operations on the 'currency' table.
  *
  * 
  *
@@ -14,7 +27,7 @@ abstract class Oops_Model_Base_CurrencyPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_currency';
+	const TABLE_NAME = OOPS_MODEL_CURRENCY_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_Currency';
@@ -35,37 +48,37 @@ abstract class Oops_Model_Base_CurrencyPeer {
 	const NUM_HYDRATE_COLUMNS = 11;
 
 	/** the column name for the ID_CURRENCY field */
-	const ID_CURRENCY = 'djland_currency.ID_CURRENCY';
+	const ID_CURRENCY = OOPS_MODEL_CURRENCY_ID_CURRENCY;
 
 	/** the column name for the NAME field */
-	const NAME = 'djland_currency.NAME';
+	const NAME = OOPS_MODEL_CURRENCY_NAME;
 
 	/** the column name for the ISO_CODE field */
-	const ISO_CODE = 'djland_currency.ISO_CODE';
+	const ISO_CODE = OOPS_MODEL_CURRENCY_ISO_CODE;
 
 	/** the column name for the ISO_CODE_NUM field */
-	const ISO_CODE_NUM = 'djland_currency.ISO_CODE_NUM';
+	const ISO_CODE_NUM = OOPS_MODEL_CURRENCY_ISO_CODE_NUM;
 
 	/** the column name for the SIGN field */
-	const SIGN = 'djland_currency.SIGN';
+	const SIGN = OOPS_MODEL_CURRENCY_SIGN;
 
 	/** the column name for the BLANK field */
-	const BLANK = 'djland_currency.BLANK';
+	const BLANK = OOPS_MODEL_CURRENCY_BLANK;
 
 	/** the column name for the FORMAT field */
-	const FORMAT = 'djland_currency.FORMAT';
+	const FORMAT = OOPS_MODEL_CURRENCY_FORMAT;
 
 	/** the column name for the DECIMALS field */
-	const DECIMALS = 'djland_currency.DECIMALS';
+	const DECIMALS = OOPS_MODEL_CURRENCY_DECIMALS;
 
 	/** the column name for the CONVERSION_RATE field */
-	const CONVERSION_RATE = 'djland_currency.CONVERSION_RATE';
+	const CONVERSION_RATE = OOPS_MODEL_CURRENCY_CONVERSION_RATE;
 
 	/** the column name for the DELETED field */
-	const DELETED = 'djland_currency.DELETED';
+	const DELETED = OOPS_MODEL_CURRENCY_DELETED;
 
 	/** the column name for the ACTIVE field */
-	const ACTIVE = 'djland_currency.ACTIVE';
+	const ACTIVE = OOPS_MODEL_CURRENCY_ACTIVE;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -389,7 +402,7 @@ abstract class Oops_Model_Base_CurrencyPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_currency
+	 * Method to invalidate the instance pool of all tables related to currency
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -609,7 +622,7 @@ abstract class Oops_Model_Base_CurrencyPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_currency table.
+	 * Deletes all rows from the currency table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_product_attribute_combination' table.
+ * Base class that represents a query for the 'product_attribute_combination' table.
  *
  * 
  *
@@ -112,7 +112,7 @@ abstract class Oops_Model_Base_ProductAttributeCombinationQuery extends ModelCri
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_ATTRIBUTE`, `ID_PRODUCT_ATTRIBUTE` FROM `djland_product_attribute_combination` WHERE `ID_ATTRIBUTE` = :p0 AND `ID_PRODUCT_ATTRIBUTE` = :p1';
+		$sql = 'SELECT `ID_ATTRIBUTE`, `ID_PRODUCT_ATTRIBUTE` FROM `' . _DB_PREFIX_ . 'product_attribute_combination` WHERE `ID_ATTRIBUTE` = :p0 AND `ID_PRODUCT_ATTRIBUTE` = :p1';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key[0], PDO::PARAM_INT);

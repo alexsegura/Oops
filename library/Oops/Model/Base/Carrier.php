@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_carrier' table.
+ * Base class that represents a row from the 'carrier' table.
  *
  * 
  *
@@ -992,7 +992,7 @@ abstract class Oops_Model_Base_Carrier extends BaseObject  implements Persistent
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_carrier` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'carrier` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

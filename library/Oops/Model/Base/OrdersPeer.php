@@ -1,8 +1,41 @@
 <?php
 
 
+define('OOPS_MODEL_ORDERS_ID_ORDER', _DB_PREFIX_ . 'orders.ID_ORDER');
+define('OOPS_MODEL_ORDERS_ID_CARRIER', _DB_PREFIX_ . 'orders.ID_CARRIER');
+define('OOPS_MODEL_ORDERS_ID_LANG', _DB_PREFIX_ . 'orders.ID_LANG');
+define('OOPS_MODEL_ORDERS_ID_CUSTOMER', _DB_PREFIX_ . 'orders.ID_CUSTOMER');
+define('OOPS_MODEL_ORDERS_ID_CART', _DB_PREFIX_ . 'orders.ID_CART');
+define('OOPS_MODEL_ORDERS_ID_CURRENCY', _DB_PREFIX_ . 'orders.ID_CURRENCY');
+define('OOPS_MODEL_ORDERS_ID_ADDRESS_DELIVERY', _DB_PREFIX_ . 'orders.ID_ADDRESS_DELIVERY');
+define('OOPS_MODEL_ORDERS_ID_ADDRESS_INVOICE', _DB_PREFIX_ . 'orders.ID_ADDRESS_INVOICE');
+define('OOPS_MODEL_ORDERS_SECURE_KEY', _DB_PREFIX_ . 'orders.SECURE_KEY');
+define('OOPS_MODEL_ORDERS_PAYMENT', _DB_PREFIX_ . 'orders.PAYMENT');
+define('OOPS_MODEL_ORDERS_CONVERSION_RATE', _DB_PREFIX_ . 'orders.CONVERSION_RATE');
+define('OOPS_MODEL_ORDERS_MODULE', _DB_PREFIX_ . 'orders.MODULE');
+define('OOPS_MODEL_ORDERS_RECYCLABLE', _DB_PREFIX_ . 'orders.RECYCLABLE');
+define('OOPS_MODEL_ORDERS_GIFT', _DB_PREFIX_ . 'orders.GIFT');
+define('OOPS_MODEL_ORDERS_GIFT_MESSAGE', _DB_PREFIX_ . 'orders.GIFT_MESSAGE');
+define('OOPS_MODEL_ORDERS_SHIPPING_NUMBER', _DB_PREFIX_ . 'orders.SHIPPING_NUMBER');
+define('OOPS_MODEL_ORDERS_TOTAL_DISCOUNTS', _DB_PREFIX_ . 'orders.TOTAL_DISCOUNTS');
+define('OOPS_MODEL_ORDERS_TOTAL_PAID', _DB_PREFIX_ . 'orders.TOTAL_PAID');
+define('OOPS_MODEL_ORDERS_TOTAL_PAID_REAL', _DB_PREFIX_ . 'orders.TOTAL_PAID_REAL');
+define('OOPS_MODEL_ORDERS_TOTAL_PRODUCTS', _DB_PREFIX_ . 'orders.TOTAL_PRODUCTS');
+define('OOPS_MODEL_ORDERS_TOTAL_PRODUCTS_WT', _DB_PREFIX_ . 'orders.TOTAL_PRODUCTS_WT');
+define('OOPS_MODEL_ORDERS_TOTAL_SHIPPING', _DB_PREFIX_ . 'orders.TOTAL_SHIPPING');
+define('OOPS_MODEL_ORDERS_CARRIER_TAX_RATE', _DB_PREFIX_ . 'orders.CARRIER_TAX_RATE');
+define('OOPS_MODEL_ORDERS_TOTAL_WRAPPING', _DB_PREFIX_ . 'orders.TOTAL_WRAPPING');
+define('OOPS_MODEL_ORDERS_INVOICE_NUMBER', _DB_PREFIX_ . 'orders.INVOICE_NUMBER');
+define('OOPS_MODEL_ORDERS_DELIVERY_NUMBER', _DB_PREFIX_ . 'orders.DELIVERY_NUMBER');
+define('OOPS_MODEL_ORDERS_INVOICE_DATE', _DB_PREFIX_ . 'orders.INVOICE_DATE');
+define('OOPS_MODEL_ORDERS_DELIVERY_DATE', _DB_PREFIX_ . 'orders.DELIVERY_DATE');
+define('OOPS_MODEL_ORDERS_VALID', _DB_PREFIX_ . 'orders.VALID');
+define('OOPS_MODEL_ORDERS_DATE_ADD', _DB_PREFIX_ . 'orders.DATE_ADD');
+define('OOPS_MODEL_ORDERS_DATE_UPD', _DB_PREFIX_ . 'orders.DATE_UPD');
+define('OOPS_MODEL_ORDERS_TABLE_NAME', _DB_PREFIX_ . 'orders');
+
 /**
- * Base static class for performing query and update operations on the 'djland_orders' table.
+ * Base static class for performing query and update operations on the 'orders' table.
  *
  * 
  *
@@ -14,7 +47,7 @@ abstract class Oops_Model_Base_OrdersPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_orders';
+	const TABLE_NAME = OOPS_MODEL_ORDERS_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_Orders';
@@ -35,97 +68,97 @@ abstract class Oops_Model_Base_OrdersPeer {
 	const NUM_HYDRATE_COLUMNS = 31;
 
 	/** the column name for the ID_ORDER field */
-	const ID_ORDER = 'djland_orders.ID_ORDER';
+	const ID_ORDER = OOPS_MODEL_ORDERS_ID_ORDER;
 
 	/** the column name for the ID_CARRIER field */
-	const ID_CARRIER = 'djland_orders.ID_CARRIER';
+	const ID_CARRIER = OOPS_MODEL_ORDERS_ID_CARRIER;
 
 	/** the column name for the ID_LANG field */
-	const ID_LANG = 'djland_orders.ID_LANG';
+	const ID_LANG = OOPS_MODEL_ORDERS_ID_LANG;
 
 	/** the column name for the ID_CUSTOMER field */
-	const ID_CUSTOMER = 'djland_orders.ID_CUSTOMER';
+	const ID_CUSTOMER = OOPS_MODEL_ORDERS_ID_CUSTOMER;
 
 	/** the column name for the ID_CART field */
-	const ID_CART = 'djland_orders.ID_CART';
+	const ID_CART = OOPS_MODEL_ORDERS_ID_CART;
 
 	/** the column name for the ID_CURRENCY field */
-	const ID_CURRENCY = 'djland_orders.ID_CURRENCY';
+	const ID_CURRENCY = OOPS_MODEL_ORDERS_ID_CURRENCY;
 
 	/** the column name for the ID_ADDRESS_DELIVERY field */
-	const ID_ADDRESS_DELIVERY = 'djland_orders.ID_ADDRESS_DELIVERY';
+	const ID_ADDRESS_DELIVERY = OOPS_MODEL_ORDERS_ID_ADDRESS_DELIVERY;
 
 	/** the column name for the ID_ADDRESS_INVOICE field */
-	const ID_ADDRESS_INVOICE = 'djland_orders.ID_ADDRESS_INVOICE';
+	const ID_ADDRESS_INVOICE = OOPS_MODEL_ORDERS_ID_ADDRESS_INVOICE;
 
 	/** the column name for the SECURE_KEY field */
-	const SECURE_KEY = 'djland_orders.SECURE_KEY';
+	const SECURE_KEY = OOPS_MODEL_ORDERS_SECURE_KEY;
 
 	/** the column name for the PAYMENT field */
-	const PAYMENT = 'djland_orders.PAYMENT';
+	const PAYMENT = OOPS_MODEL_ORDERS_PAYMENT;
 
 	/** the column name for the CONVERSION_RATE field */
-	const CONVERSION_RATE = 'djland_orders.CONVERSION_RATE';
+	const CONVERSION_RATE = OOPS_MODEL_ORDERS_CONVERSION_RATE;
 
 	/** the column name for the MODULE field */
-	const MODULE = 'djland_orders.MODULE';
+	const MODULE = OOPS_MODEL_ORDERS_MODULE;
 
 	/** the column name for the RECYCLABLE field */
-	const RECYCLABLE = 'djland_orders.RECYCLABLE';
+	const RECYCLABLE = OOPS_MODEL_ORDERS_RECYCLABLE;
 
 	/** the column name for the GIFT field */
-	const GIFT = 'djland_orders.GIFT';
+	const GIFT = OOPS_MODEL_ORDERS_GIFT;
 
 	/** the column name for the GIFT_MESSAGE field */
-	const GIFT_MESSAGE = 'djland_orders.GIFT_MESSAGE';
+	const GIFT_MESSAGE = OOPS_MODEL_ORDERS_GIFT_MESSAGE;
 
 	/** the column name for the SHIPPING_NUMBER field */
-	const SHIPPING_NUMBER = 'djland_orders.SHIPPING_NUMBER';
+	const SHIPPING_NUMBER = OOPS_MODEL_ORDERS_SHIPPING_NUMBER;
 
 	/** the column name for the TOTAL_DISCOUNTS field */
-	const TOTAL_DISCOUNTS = 'djland_orders.TOTAL_DISCOUNTS';
+	const TOTAL_DISCOUNTS = OOPS_MODEL_ORDERS_TOTAL_DISCOUNTS;
 
 	/** the column name for the TOTAL_PAID field */
-	const TOTAL_PAID = 'djland_orders.TOTAL_PAID';
+	const TOTAL_PAID = OOPS_MODEL_ORDERS_TOTAL_PAID;
 
 	/** the column name for the TOTAL_PAID_REAL field */
-	const TOTAL_PAID_REAL = 'djland_orders.TOTAL_PAID_REAL';
+	const TOTAL_PAID_REAL = OOPS_MODEL_ORDERS_TOTAL_PAID_REAL;
 
 	/** the column name for the TOTAL_PRODUCTS field */
-	const TOTAL_PRODUCTS = 'djland_orders.TOTAL_PRODUCTS';
+	const TOTAL_PRODUCTS = OOPS_MODEL_ORDERS_TOTAL_PRODUCTS;
 
 	/** the column name for the TOTAL_PRODUCTS_WT field */
-	const TOTAL_PRODUCTS_WT = 'djland_orders.TOTAL_PRODUCTS_WT';
+	const TOTAL_PRODUCTS_WT = OOPS_MODEL_ORDERS_TOTAL_PRODUCTS_WT;
 
 	/** the column name for the TOTAL_SHIPPING field */
-	const TOTAL_SHIPPING = 'djland_orders.TOTAL_SHIPPING';
+	const TOTAL_SHIPPING = OOPS_MODEL_ORDERS_TOTAL_SHIPPING;
 
 	/** the column name for the CARRIER_TAX_RATE field */
-	const CARRIER_TAX_RATE = 'djland_orders.CARRIER_TAX_RATE';
+	const CARRIER_TAX_RATE = OOPS_MODEL_ORDERS_CARRIER_TAX_RATE;
 
 	/** the column name for the TOTAL_WRAPPING field */
-	const TOTAL_WRAPPING = 'djland_orders.TOTAL_WRAPPING';
+	const TOTAL_WRAPPING = OOPS_MODEL_ORDERS_TOTAL_WRAPPING;
 
 	/** the column name for the INVOICE_NUMBER field */
-	const INVOICE_NUMBER = 'djland_orders.INVOICE_NUMBER';
+	const INVOICE_NUMBER = OOPS_MODEL_ORDERS_INVOICE_NUMBER;
 
 	/** the column name for the DELIVERY_NUMBER field */
-	const DELIVERY_NUMBER = 'djland_orders.DELIVERY_NUMBER';
+	const DELIVERY_NUMBER = OOPS_MODEL_ORDERS_DELIVERY_NUMBER;
 
 	/** the column name for the INVOICE_DATE field */
-	const INVOICE_DATE = 'djland_orders.INVOICE_DATE';
+	const INVOICE_DATE = OOPS_MODEL_ORDERS_INVOICE_DATE;
 
 	/** the column name for the DELIVERY_DATE field */
-	const DELIVERY_DATE = 'djland_orders.DELIVERY_DATE';
+	const DELIVERY_DATE = OOPS_MODEL_ORDERS_DELIVERY_DATE;
 
 	/** the column name for the VALID field */
-	const VALID = 'djland_orders.VALID';
+	const VALID = OOPS_MODEL_ORDERS_VALID;
 
 	/** the column name for the DATE_ADD field */
-	const DATE_ADD = 'djland_orders.DATE_ADD';
+	const DATE_ADD = OOPS_MODEL_ORDERS_DATE_ADD;
 
 	/** the column name for the DATE_UPD field */
-	const DATE_UPD = 'djland_orders.DATE_UPD';
+	const DATE_UPD = OOPS_MODEL_ORDERS_DATE_UPD;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -489,7 +522,7 @@ abstract class Oops_Model_Base_OrdersPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_orders
+	 * Method to invalidate the instance pool of all tables related to orders
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -709,7 +742,7 @@ abstract class Oops_Model_Base_OrdersPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_orders table.
+	 * Deletes all rows from the orders table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

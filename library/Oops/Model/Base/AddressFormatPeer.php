@@ -1,8 +1,12 @@
 <?php
 
 
+define('OOPS_MODEL_ADDRESSFORMAT_ID_COUNTRY', _DB_PREFIX_ . 'address_format.ID_COUNTRY');
+define('OOPS_MODEL_ADDRESSFORMAT_FORMAT', _DB_PREFIX_ . 'address_format.FORMAT');
+define('OOPS_MODEL_ADDRESSFORMAT_TABLE_NAME', _DB_PREFIX_ . 'address_format');
+
 /**
- * Base static class for performing query and update operations on the 'djland_address_format' table.
+ * Base static class for performing query and update operations on the 'address_format' table.
  *
  * 
  *
@@ -14,7 +18,7 @@ abstract class Oops_Model_Base_AddressFormatPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_address_format';
+	const TABLE_NAME = OOPS_MODEL_ADDRESSFORMAT_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_AddressFormat';
@@ -35,10 +39,10 @@ abstract class Oops_Model_Base_AddressFormatPeer {
 	const NUM_HYDRATE_COLUMNS = 2;
 
 	/** the column name for the ID_COUNTRY field */
-	const ID_COUNTRY = 'djland_address_format.ID_COUNTRY';
+	const ID_COUNTRY = OOPS_MODEL_ADDRESSFORMAT_ID_COUNTRY;
 
 	/** the column name for the FORMAT field */
-	const FORMAT = 'djland_address_format.FORMAT';
+	const FORMAT = OOPS_MODEL_ADDRESSFORMAT_FORMAT;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -344,7 +348,7 @@ abstract class Oops_Model_Base_AddressFormatPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_address_format
+	 * Method to invalidate the instance pool of all tables related to address_format
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -560,7 +564,7 @@ abstract class Oops_Model_Base_AddressFormatPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_address_format table.
+	 * Deletes all rows from the address_format table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

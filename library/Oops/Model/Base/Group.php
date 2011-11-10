@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_group' table.
+ * Base class that represents a row from the 'group' table.
  *
  * 
  *
@@ -580,7 +580,7 @@ abstract class Oops_Model_Base_Group extends BaseObject  implements Persistent
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_group` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'group` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

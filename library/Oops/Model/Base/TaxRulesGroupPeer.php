@@ -1,8 +1,13 @@
 <?php
 
 
+define('OOPS_MODEL_TAXRULESGROUP_ID_TAX_RULES_GROUP', _DB_PREFIX_ . 'tax_rules_group.ID_TAX_RULES_GROUP');
+define('OOPS_MODEL_TAXRULESGROUP_NAME', _DB_PREFIX_ . 'tax_rules_group.NAME');
+define('OOPS_MODEL_TAXRULESGROUP_ACTIVE', _DB_PREFIX_ . 'tax_rules_group.ACTIVE');
+define('OOPS_MODEL_TAXRULESGROUP_TABLE_NAME', _DB_PREFIX_ . 'tax_rules_group');
+
 /**
- * Base static class for performing query and update operations on the 'djland_tax_rules_group' table.
+ * Base static class for performing query and update operations on the 'tax_rules_group' table.
  *
  * 
  *
@@ -14,7 +19,7 @@ abstract class Oops_Model_Base_TaxRulesGroupPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_tax_rules_group';
+	const TABLE_NAME = OOPS_MODEL_TAXRULESGROUP_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_TaxRulesGroup';
@@ -35,13 +40,13 @@ abstract class Oops_Model_Base_TaxRulesGroupPeer {
 	const NUM_HYDRATE_COLUMNS = 3;
 
 	/** the column name for the ID_TAX_RULES_GROUP field */
-	const ID_TAX_RULES_GROUP = 'djland_tax_rules_group.ID_TAX_RULES_GROUP';
+	const ID_TAX_RULES_GROUP = OOPS_MODEL_TAXRULESGROUP_ID_TAX_RULES_GROUP;
 
 	/** the column name for the NAME field */
-	const NAME = 'djland_tax_rules_group.NAME';
+	const NAME = OOPS_MODEL_TAXRULESGROUP_NAME;
 
 	/** the column name for the ACTIVE field */
-	const ACTIVE = 'djland_tax_rules_group.ACTIVE';
+	const ACTIVE = OOPS_MODEL_TAXRULESGROUP_ACTIVE;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -349,7 +354,7 @@ abstract class Oops_Model_Base_TaxRulesGroupPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_tax_rules_group
+	 * Method to invalidate the instance pool of all tables related to tax_rules_group
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -569,7 +574,7 @@ abstract class Oops_Model_Base_TaxRulesGroupPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_tax_rules_group table.
+	 * Deletes all rows from the tax_rules_group table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

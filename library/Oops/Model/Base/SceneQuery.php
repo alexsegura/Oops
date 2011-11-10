@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_scene' table.
+ * Base class that represents a query for the 'scene' table.
  *
  * 
  *
@@ -112,7 +112,7 @@ abstract class Oops_Model_Base_SceneQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_SCENE`, `ACTIVE` FROM `djland_scene` WHERE `ID_SCENE` = :p0';
+		$sql = 'SELECT `ID_SCENE`, `ACTIVE` FROM `' . _DB_PREFIX_ . 'scene` WHERE `ID_SCENE` = :p0';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

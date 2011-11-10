@@ -1,8 +1,15 @@
 <?php
 
 
+define('OOPS_MODEL_CONFIGURATION_ID_CONFIGURATION', _DB_PREFIX_ . 'configuration.ID_CONFIGURATION');
+define('OOPS_MODEL_CONFIGURATION_NAME', _DB_PREFIX_ . 'configuration.NAME');
+define('OOPS_MODEL_CONFIGURATION_VALUE', _DB_PREFIX_ . 'configuration.VALUE');
+define('OOPS_MODEL_CONFIGURATION_DATE_ADD', _DB_PREFIX_ . 'configuration.DATE_ADD');
+define('OOPS_MODEL_CONFIGURATION_DATE_UPD', _DB_PREFIX_ . 'configuration.DATE_UPD');
+define('OOPS_MODEL_CONFIGURATION_TABLE_NAME', _DB_PREFIX_ . 'configuration');
+
 /**
- * Base static class for performing query and update operations on the 'djland_configuration' table.
+ * Base static class for performing query and update operations on the 'configuration' table.
  *
  * 
  *
@@ -14,7 +21,7 @@ abstract class Oops_Model_Base_ConfigurationPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_configuration';
+	const TABLE_NAME = OOPS_MODEL_CONFIGURATION_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_Configuration';
@@ -35,19 +42,19 @@ abstract class Oops_Model_Base_ConfigurationPeer {
 	const NUM_HYDRATE_COLUMNS = 5;
 
 	/** the column name for the ID_CONFIGURATION field */
-	const ID_CONFIGURATION = 'djland_configuration.ID_CONFIGURATION';
+	const ID_CONFIGURATION = OOPS_MODEL_CONFIGURATION_ID_CONFIGURATION;
 
 	/** the column name for the NAME field */
-	const NAME = 'djland_configuration.NAME';
+	const NAME = OOPS_MODEL_CONFIGURATION_NAME;
 
 	/** the column name for the VALUE field */
-	const VALUE = 'djland_configuration.VALUE';
+	const VALUE = OOPS_MODEL_CONFIGURATION_VALUE;
 
 	/** the column name for the DATE_ADD field */
-	const DATE_ADD = 'djland_configuration.DATE_ADD';
+	const DATE_ADD = OOPS_MODEL_CONFIGURATION_DATE_ADD;
 
 	/** the column name for the DATE_UPD field */
-	const DATE_UPD = 'djland_configuration.DATE_UPD';
+	const DATE_UPD = OOPS_MODEL_CONFIGURATION_DATE_UPD;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -359,7 +366,7 @@ abstract class Oops_Model_Base_ConfigurationPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_configuration
+	 * Method to invalidate the instance pool of all tables related to configuration
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -579,7 +586,7 @@ abstract class Oops_Model_Base_ConfigurationPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_configuration table.
+	 * Deletes all rows from the configuration table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

@@ -1,8 +1,13 @@
 <?php
 
 
+define('OOPS_MODEL_FEATUREVALUELANG_ID_FEATURE_VALUE', _DB_PREFIX_ . 'feature_value_lang.ID_FEATURE_VALUE');
+define('OOPS_MODEL_FEATUREVALUELANG_ID_LANG', _DB_PREFIX_ . 'feature_value_lang.ID_LANG');
+define('OOPS_MODEL_FEATUREVALUELANG_VALUE', _DB_PREFIX_ . 'feature_value_lang.VALUE');
+define('OOPS_MODEL_FEATUREVALUELANG_TABLE_NAME', _DB_PREFIX_ . 'feature_value_lang');
+
 /**
- * Base static class for performing query and update operations on the 'djland_feature_value_lang' table.
+ * Base static class for performing query and update operations on the 'feature_value_lang' table.
  *
  * 
  *
@@ -14,7 +19,7 @@ abstract class Oops_Model_Base_FeatureValueLangPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_feature_value_lang';
+	const TABLE_NAME = OOPS_MODEL_FEATUREVALUELANG_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_FeatureValueLang';
@@ -35,13 +40,13 @@ abstract class Oops_Model_Base_FeatureValueLangPeer {
 	const NUM_HYDRATE_COLUMNS = 3;
 
 	/** the column name for the ID_FEATURE_VALUE field */
-	const ID_FEATURE_VALUE = 'djland_feature_value_lang.ID_FEATURE_VALUE';
+	const ID_FEATURE_VALUE = OOPS_MODEL_FEATUREVALUELANG_ID_FEATURE_VALUE;
 
 	/** the column name for the ID_LANG field */
-	const ID_LANG = 'djland_feature_value_lang.ID_LANG';
+	const ID_LANG = OOPS_MODEL_FEATUREVALUELANG_ID_LANG;
 
 	/** the column name for the VALUE field */
-	const VALUE = 'djland_feature_value_lang.VALUE';
+	const VALUE = OOPS_MODEL_FEATUREVALUELANG_VALUE;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -349,7 +354,7 @@ abstract class Oops_Model_Base_FeatureValueLangPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_feature_value_lang
+	 * Method to invalidate the instance pool of all tables related to feature_value_lang
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -573,7 +578,7 @@ abstract class Oops_Model_Base_FeatureValueLangPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_feature_value_lang table.
+	 * Deletes all rows from the feature_value_lang table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

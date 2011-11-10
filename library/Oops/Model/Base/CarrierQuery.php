@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_carrier' table.
+ * Base class that represents a query for the 'carrier' table.
  *
  * 
  *
@@ -160,7 +160,7 @@ abstract class Oops_Model_Base_CarrierQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_CARRIER`, `ID_TAX_RULES_GROUP`, `NAME`, `URL`, `ACTIVE`, `DELETED`, `SHIPPING_HANDLING`, `RANGE_BEHAVIOR`, `IS_MODULE`, `IS_FREE`, `SHIPPING_EXTERNAL`, `NEED_RANGE`, `EXTERNAL_MODULE_NAME`, `SHIPPING_METHOD` FROM `djland_carrier` WHERE `ID_CARRIER` = :p0';
+		$sql = 'SELECT `ID_CARRIER`, `ID_TAX_RULES_GROUP`, `NAME`, `URL`, `ACTIVE`, `DELETED`, `SHIPPING_HANDLING`, `RANGE_BEHAVIOR`, `IS_MODULE`, `IS_FREE`, `SHIPPING_EXTERNAL`, `NEED_RANGE`, `EXTERNAL_MODULE_NAME`, `SHIPPING_METHOD` FROM `' . _DB_PREFIX_ . 'carrier` WHERE `ID_CARRIER` = :p0';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

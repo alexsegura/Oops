@@ -1,8 +1,22 @@
 <?php
 
 
+define('OOPS_MODEL_SPECIFICPRICE_ID_SPECIFIC_PRICE', _DB_PREFIX_ . 'specific_price.ID_SPECIFIC_PRICE');
+define('OOPS_MODEL_SPECIFICPRICE_ID_PRODUCT', _DB_PREFIX_ . 'specific_price.ID_PRODUCT');
+define('OOPS_MODEL_SPECIFICPRICE_ID_SHOP', _DB_PREFIX_ . 'specific_price.ID_SHOP');
+define('OOPS_MODEL_SPECIFICPRICE_ID_CURRENCY', _DB_PREFIX_ . 'specific_price.ID_CURRENCY');
+define('OOPS_MODEL_SPECIFICPRICE_ID_COUNTRY', _DB_PREFIX_ . 'specific_price.ID_COUNTRY');
+define('OOPS_MODEL_SPECIFICPRICE_ID_GROUP', _DB_PREFIX_ . 'specific_price.ID_GROUP');
+define('OOPS_MODEL_SPECIFICPRICE_PRICE', _DB_PREFIX_ . 'specific_price.PRICE');
+define('OOPS_MODEL_SPECIFICPRICE_FROM_QUANTITY', _DB_PREFIX_ . 'specific_price.FROM_QUANTITY');
+define('OOPS_MODEL_SPECIFICPRICE_REDUCTION', _DB_PREFIX_ . 'specific_price.REDUCTION');
+define('OOPS_MODEL_SPECIFICPRICE_REDUCTION_TYPE', _DB_PREFIX_ . 'specific_price.REDUCTION_TYPE');
+define('OOPS_MODEL_SPECIFICPRICE_FROM', _DB_PREFIX_ . 'specific_price.FROM');
+define('OOPS_MODEL_SPECIFICPRICE_TO', _DB_PREFIX_ . 'specific_price.TO');
+define('OOPS_MODEL_SPECIFICPRICE_TABLE_NAME', _DB_PREFIX_ . 'specific_price');
+
 /**
- * Base static class for performing query and update operations on the 'djland_specific_price' table.
+ * Base static class for performing query and update operations on the 'specific_price' table.
  *
  * 
  *
@@ -14,7 +28,7 @@ abstract class Oops_Model_Base_SpecificPricePeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_specific_price';
+	const TABLE_NAME = OOPS_MODEL_SPECIFICPRICE_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_SpecificPrice';
@@ -35,40 +49,40 @@ abstract class Oops_Model_Base_SpecificPricePeer {
 	const NUM_HYDRATE_COLUMNS = 12;
 
 	/** the column name for the ID_SPECIFIC_PRICE field */
-	const ID_SPECIFIC_PRICE = 'djland_specific_price.ID_SPECIFIC_PRICE';
+	const ID_SPECIFIC_PRICE = OOPS_MODEL_SPECIFICPRICE_ID_SPECIFIC_PRICE;
 
 	/** the column name for the ID_PRODUCT field */
-	const ID_PRODUCT = 'djland_specific_price.ID_PRODUCT';
+	const ID_PRODUCT = OOPS_MODEL_SPECIFICPRICE_ID_PRODUCT;
 
 	/** the column name for the ID_SHOP field */
-	const ID_SHOP = 'djland_specific_price.ID_SHOP';
+	const ID_SHOP = OOPS_MODEL_SPECIFICPRICE_ID_SHOP;
 
 	/** the column name for the ID_CURRENCY field */
-	const ID_CURRENCY = 'djland_specific_price.ID_CURRENCY';
+	const ID_CURRENCY = OOPS_MODEL_SPECIFICPRICE_ID_CURRENCY;
 
 	/** the column name for the ID_COUNTRY field */
-	const ID_COUNTRY = 'djland_specific_price.ID_COUNTRY';
+	const ID_COUNTRY = OOPS_MODEL_SPECIFICPRICE_ID_COUNTRY;
 
 	/** the column name for the ID_GROUP field */
-	const ID_GROUP = 'djland_specific_price.ID_GROUP';
+	const ID_GROUP = OOPS_MODEL_SPECIFICPRICE_ID_GROUP;
 
 	/** the column name for the PRICE field */
-	const PRICE = 'djland_specific_price.PRICE';
+	const PRICE = OOPS_MODEL_SPECIFICPRICE_PRICE;
 
 	/** the column name for the FROM_QUANTITY field */
-	const FROM_QUANTITY = 'djland_specific_price.FROM_QUANTITY';
+	const FROM_QUANTITY = OOPS_MODEL_SPECIFICPRICE_FROM_QUANTITY;
 
 	/** the column name for the REDUCTION field */
-	const REDUCTION = 'djland_specific_price.REDUCTION';
+	const REDUCTION = OOPS_MODEL_SPECIFICPRICE_REDUCTION;
 
 	/** the column name for the REDUCTION_TYPE field */
-	const REDUCTION_TYPE = 'djland_specific_price.REDUCTION_TYPE';
+	const REDUCTION_TYPE = OOPS_MODEL_SPECIFICPRICE_REDUCTION_TYPE;
 
 	/** the column name for the FROM field */
-	const FROM = 'djland_specific_price.FROM';
+	const FROM = OOPS_MODEL_SPECIFICPRICE_FROM;
 
 	/** the column name for the TO field */
-	const TO = 'djland_specific_price.TO';
+	const TO = OOPS_MODEL_SPECIFICPRICE_TO;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -394,7 +408,7 @@ abstract class Oops_Model_Base_SpecificPricePeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_specific_price
+	 * Method to invalidate the instance pool of all tables related to specific_price
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -614,7 +628,7 @@ abstract class Oops_Model_Base_SpecificPricePeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_specific_price table.
+	 * Deletes all rows from the specific_price table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

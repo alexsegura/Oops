@@ -1,8 +1,14 @@
 <?php
 
 
+define('OOPS_MODEL_CUSTOMIZATIONFIELD_ID_CUSTOMIZATION_FIELD', _DB_PREFIX_ . 'customization_field.ID_CUSTOMIZATION_FIELD');
+define('OOPS_MODEL_CUSTOMIZATIONFIELD_ID_PRODUCT', _DB_PREFIX_ . 'customization_field.ID_PRODUCT');
+define('OOPS_MODEL_CUSTOMIZATIONFIELD_TYPE', _DB_PREFIX_ . 'customization_field.TYPE');
+define('OOPS_MODEL_CUSTOMIZATIONFIELD_REQUIRED', _DB_PREFIX_ . 'customization_field.REQUIRED');
+define('OOPS_MODEL_CUSTOMIZATIONFIELD_TABLE_NAME', _DB_PREFIX_ . 'customization_field');
+
 /**
- * Base static class for performing query and update operations on the 'djland_customization_field' table.
+ * Base static class for performing query and update operations on the 'customization_field' table.
  *
  * 
  *
@@ -14,7 +20,7 @@ abstract class Oops_Model_Base_CustomizationFieldPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_customization_field';
+	const TABLE_NAME = OOPS_MODEL_CUSTOMIZATIONFIELD_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_CustomizationField';
@@ -35,16 +41,16 @@ abstract class Oops_Model_Base_CustomizationFieldPeer {
 	const NUM_HYDRATE_COLUMNS = 4;
 
 	/** the column name for the ID_CUSTOMIZATION_FIELD field */
-	const ID_CUSTOMIZATION_FIELD = 'djland_customization_field.ID_CUSTOMIZATION_FIELD';
+	const ID_CUSTOMIZATION_FIELD = OOPS_MODEL_CUSTOMIZATIONFIELD_ID_CUSTOMIZATION_FIELD;
 
 	/** the column name for the ID_PRODUCT field */
-	const ID_PRODUCT = 'djland_customization_field.ID_PRODUCT';
+	const ID_PRODUCT = OOPS_MODEL_CUSTOMIZATIONFIELD_ID_PRODUCT;
 
 	/** the column name for the TYPE field */
-	const TYPE = 'djland_customization_field.TYPE';
+	const TYPE = OOPS_MODEL_CUSTOMIZATIONFIELD_TYPE;
 
 	/** the column name for the REQUIRED field */
-	const REQUIRED = 'djland_customization_field.REQUIRED';
+	const REQUIRED = OOPS_MODEL_CUSTOMIZATIONFIELD_REQUIRED;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -354,7 +360,7 @@ abstract class Oops_Model_Base_CustomizationFieldPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_customization_field
+	 * Method to invalidate the instance pool of all tables related to customization_field
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -574,7 +580,7 @@ abstract class Oops_Model_Base_CustomizationFieldPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_customization_field table.
+	 * Deletes all rows from the customization_field table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

@@ -1,8 +1,15 @@
 <?php
 
 
+define('OOPS_MODEL_ORDERDISCOUNT_ID_ORDER_DISCOUNT', _DB_PREFIX_ . 'order_discount.ID_ORDER_DISCOUNT');
+define('OOPS_MODEL_ORDERDISCOUNT_ID_ORDER', _DB_PREFIX_ . 'order_discount.ID_ORDER');
+define('OOPS_MODEL_ORDERDISCOUNT_ID_DISCOUNT', _DB_PREFIX_ . 'order_discount.ID_DISCOUNT');
+define('OOPS_MODEL_ORDERDISCOUNT_NAME', _DB_PREFIX_ . 'order_discount.NAME');
+define('OOPS_MODEL_ORDERDISCOUNT_VALUE', _DB_PREFIX_ . 'order_discount.VALUE');
+define('OOPS_MODEL_ORDERDISCOUNT_TABLE_NAME', _DB_PREFIX_ . 'order_discount');
+
 /**
- * Base static class for performing query and update operations on the 'djland_order_discount' table.
+ * Base static class for performing query and update operations on the 'order_discount' table.
  *
  * 
  *
@@ -14,7 +21,7 @@ abstract class Oops_Model_Base_OrderDiscountPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_order_discount';
+	const TABLE_NAME = OOPS_MODEL_ORDERDISCOUNT_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_OrderDiscount';
@@ -35,19 +42,19 @@ abstract class Oops_Model_Base_OrderDiscountPeer {
 	const NUM_HYDRATE_COLUMNS = 5;
 
 	/** the column name for the ID_ORDER_DISCOUNT field */
-	const ID_ORDER_DISCOUNT = 'djland_order_discount.ID_ORDER_DISCOUNT';
+	const ID_ORDER_DISCOUNT = OOPS_MODEL_ORDERDISCOUNT_ID_ORDER_DISCOUNT;
 
 	/** the column name for the ID_ORDER field */
-	const ID_ORDER = 'djland_order_discount.ID_ORDER';
+	const ID_ORDER = OOPS_MODEL_ORDERDISCOUNT_ID_ORDER;
 
 	/** the column name for the ID_DISCOUNT field */
-	const ID_DISCOUNT = 'djland_order_discount.ID_DISCOUNT';
+	const ID_DISCOUNT = OOPS_MODEL_ORDERDISCOUNT_ID_DISCOUNT;
 
 	/** the column name for the NAME field */
-	const NAME = 'djland_order_discount.NAME';
+	const NAME = OOPS_MODEL_ORDERDISCOUNT_NAME;
 
 	/** the column name for the VALUE field */
-	const VALUE = 'djland_order_discount.VALUE';
+	const VALUE = OOPS_MODEL_ORDERDISCOUNT_VALUE;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -359,7 +366,7 @@ abstract class Oops_Model_Base_OrderDiscountPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_order_discount
+	 * Method to invalidate the instance pool of all tables related to order_discount
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -579,7 +586,7 @@ abstract class Oops_Model_Base_OrderDiscountPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_order_discount table.
+	 * Deletes all rows from the order_discount table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

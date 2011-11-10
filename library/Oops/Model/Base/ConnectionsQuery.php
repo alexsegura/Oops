@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_connections' table.
+ * Base class that represents a query for the 'connections' table.
  *
  * 
  *
@@ -128,7 +128,7 @@ abstract class Oops_Model_Base_ConnectionsQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_CONNECTIONS`, `ID_GUEST`, `ID_PAGE`, `IP_ADDRESS`, `DATE_ADD`, `HTTP_REFERER` FROM `djland_connections` WHERE `ID_CONNECTIONS` = :p0';
+		$sql = 'SELECT `ID_CONNECTIONS`, `ID_GUEST`, `ID_PAGE`, `IP_ADDRESS`, `DATE_ADD`, `HTTP_REFERER` FROM `' . _DB_PREFIX_ . 'connections` WHERE `ID_CONNECTIONS` = :p0';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

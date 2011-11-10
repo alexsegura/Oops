@@ -1,8 +1,13 @@
 <?php
 
 
+define('OOPS_MODEL_DATERANGE_ID_DATE_RANGE', _DB_PREFIX_ . 'date_range.ID_DATE_RANGE');
+define('OOPS_MODEL_DATERANGE_TIME_START', _DB_PREFIX_ . 'date_range.TIME_START');
+define('OOPS_MODEL_DATERANGE_TIME_END', _DB_PREFIX_ . 'date_range.TIME_END');
+define('OOPS_MODEL_DATERANGE_TABLE_NAME', _DB_PREFIX_ . 'date_range');
+
 /**
- * Base static class for performing query and update operations on the 'djland_date_range' table.
+ * Base static class for performing query and update operations on the 'date_range' table.
  *
  * 
  *
@@ -14,7 +19,7 @@ abstract class Oops_Model_Base_DateRangePeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_date_range';
+	const TABLE_NAME = OOPS_MODEL_DATERANGE_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_DateRange';
@@ -35,13 +40,13 @@ abstract class Oops_Model_Base_DateRangePeer {
 	const NUM_HYDRATE_COLUMNS = 3;
 
 	/** the column name for the ID_DATE_RANGE field */
-	const ID_DATE_RANGE = 'djland_date_range.ID_DATE_RANGE';
+	const ID_DATE_RANGE = OOPS_MODEL_DATERANGE_ID_DATE_RANGE;
 
 	/** the column name for the TIME_START field */
-	const TIME_START = 'djland_date_range.TIME_START';
+	const TIME_START = OOPS_MODEL_DATERANGE_TIME_START;
 
 	/** the column name for the TIME_END field */
-	const TIME_END = 'djland_date_range.TIME_END';
+	const TIME_END = OOPS_MODEL_DATERANGE_TIME_END;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -349,7 +354,7 @@ abstract class Oops_Model_Base_DateRangePeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_date_range
+	 * Method to invalidate the instance pool of all tables related to date_range
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -569,7 +574,7 @@ abstract class Oops_Model_Base_DateRangePeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_date_range table.
+	 * Deletes all rows from the date_range table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

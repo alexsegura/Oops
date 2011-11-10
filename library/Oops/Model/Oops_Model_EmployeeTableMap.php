@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_employee' table.
+ * This class defines the structure of the 'employee' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_EmployeeTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_employee');
+		$this->setName(_DB_PREFIX_ . 'employee');
 		$this->setPhpName('Employee');
 		$this->setClassname('Oops_Model_Employee');
 		$this->setPackage('prestashop');

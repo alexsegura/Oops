@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_order_history' table.
+ * Base class that represents a query for the 'order_history' table.
  *
  * 
  *
@@ -124,7 +124,7 @@ abstract class Oops_Model_Base_OrderHistoryQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_ORDER_HISTORY`, `ID_EMPLOYEE`, `ID_ORDER`, `ID_ORDER_STATE`, `DATE_ADD` FROM `djland_order_history` WHERE `ID_ORDER_HISTORY` = :p0';
+		$sql = 'SELECT `ID_ORDER_HISTORY`, `ID_EMPLOYEE`, `ID_ORDER`, `ID_ORDER_STATE`, `DATE_ADD` FROM `' . _DB_PREFIX_ . 'order_history` WHERE `ID_ORDER_HISTORY` = :p0';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

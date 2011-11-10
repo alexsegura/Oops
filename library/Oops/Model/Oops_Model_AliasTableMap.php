@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_alias' table.
+ * This class defines the structure of the 'alias' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_AliasTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_alias');
+		$this->setName(_DB_PREFIX_ . 'alias');
 		$this->setPhpName('Alias');
 		$this->setClassname('Oops_Model_Alias');
 		$this->setPackage('prestashop');

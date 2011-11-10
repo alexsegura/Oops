@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_connections' table.
+ * Base class that represents a row from the 'connections' table.
  *
  * 
  *
@@ -558,7 +558,7 @@ abstract class Oops_Model_Base_Connections extends BaseObject  implements Persis
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_connections` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'connections` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_scene_category' table.
+ * Base class that represents a row from the 'scene_category' table.
  *
  * 
  *
@@ -364,7 +364,7 @@ abstract class Oops_Model_Base_SceneCategory extends BaseObject  implements Pers
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_scene_category` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'scene_category` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

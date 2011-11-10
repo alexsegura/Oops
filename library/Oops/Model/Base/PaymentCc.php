@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_payment_cc' table.
+ * Base class that represents a row from the 'payment_cc' table.
  *
  * 
  *
@@ -718,7 +718,7 @@ abstract class Oops_Model_Base_PaymentCc extends BaseObject  implements Persiste
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_payment_cc` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'payment_cc` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

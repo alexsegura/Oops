@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_stock_mvt_reason_lang' table.
+ * This class defines the structure of the 'stock_mvt_reason_lang' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_StockMvtReasonLangTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_stock_mvt_reason_lang');
+		$this->setName(_DB_PREFIX_ . 'stock_mvt_reason_lang');
 		$this->setPhpName('StockMvtReasonLang');
 		$this->setClassname('Oops_Model_StockMvtReasonLang');
 		$this->setPackage('prestashop');

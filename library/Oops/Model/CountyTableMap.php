@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_county' table.
+ * This class defines the structure of the 'county' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_CountyTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_county');
+		$this->setName(_DB_PREFIX_ . 'county');
 		$this->setPhpName('County');
 		$this->setClassname('Oops_Model_County');
 		$this->setPackage('prestashop');

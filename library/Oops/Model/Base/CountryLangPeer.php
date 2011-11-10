@@ -1,8 +1,13 @@
 <?php
 
 
+define('OOPS_MODEL_COUNTRYLANG_ID_COUNTRY', _DB_PREFIX_ . 'country_lang.ID_COUNTRY');
+define('OOPS_MODEL_COUNTRYLANG_ID_LANG', _DB_PREFIX_ . 'country_lang.ID_LANG');
+define('OOPS_MODEL_COUNTRYLANG_NAME', _DB_PREFIX_ . 'country_lang.NAME');
+define('OOPS_MODEL_COUNTRYLANG_TABLE_NAME', _DB_PREFIX_ . 'country_lang');
+
 /**
- * Base static class for performing query and update operations on the 'djland_country_lang' table.
+ * Base static class for performing query and update operations on the 'country_lang' table.
  *
  * 
  *
@@ -14,7 +19,7 @@ abstract class Oops_Model_Base_CountryLangPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_country_lang';
+	const TABLE_NAME = OOPS_MODEL_COUNTRYLANG_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_CountryLang';
@@ -35,13 +40,13 @@ abstract class Oops_Model_Base_CountryLangPeer {
 	const NUM_HYDRATE_COLUMNS = 3;
 
 	/** the column name for the ID_COUNTRY field */
-	const ID_COUNTRY = 'djland_country_lang.ID_COUNTRY';
+	const ID_COUNTRY = OOPS_MODEL_COUNTRYLANG_ID_COUNTRY;
 
 	/** the column name for the ID_LANG field */
-	const ID_LANG = 'djland_country_lang.ID_LANG';
+	const ID_LANG = OOPS_MODEL_COUNTRYLANG_ID_LANG;
 
 	/** the column name for the NAME field */
-	const NAME = 'djland_country_lang.NAME';
+	const NAME = OOPS_MODEL_COUNTRYLANG_NAME;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -349,7 +354,7 @@ abstract class Oops_Model_Base_CountryLangPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_country_lang
+	 * Method to invalidate the instance pool of all tables related to country_lang
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -565,7 +570,7 @@ abstract class Oops_Model_Base_CountryLangPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_country_lang table.
+	 * Deletes all rows from the country_lang table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

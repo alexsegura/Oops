@@ -1,8 +1,14 @@
 <?php
 
 
+define('OOPS_MODEL_GROUPREDUCTION_ID_GROUP_REDUCTION', _DB_PREFIX_ . 'group_reduction.ID_GROUP_REDUCTION');
+define('OOPS_MODEL_GROUPREDUCTION_ID_GROUP', _DB_PREFIX_ . 'group_reduction.ID_GROUP');
+define('OOPS_MODEL_GROUPREDUCTION_ID_CATEGORY', _DB_PREFIX_ . 'group_reduction.ID_CATEGORY');
+define('OOPS_MODEL_GROUPREDUCTION_REDUCTION', _DB_PREFIX_ . 'group_reduction.REDUCTION');
+define('OOPS_MODEL_GROUPREDUCTION_TABLE_NAME', _DB_PREFIX_ . 'group_reduction');
+
 /**
- * Base static class for performing query and update operations on the 'djland_group_reduction' table.
+ * Base static class for performing query and update operations on the 'group_reduction' table.
  *
  * 
  *
@@ -14,7 +20,7 @@ abstract class Oops_Model_Base_GroupReductionPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_group_reduction';
+	const TABLE_NAME = OOPS_MODEL_GROUPREDUCTION_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_GroupReduction';
@@ -35,16 +41,16 @@ abstract class Oops_Model_Base_GroupReductionPeer {
 	const NUM_HYDRATE_COLUMNS = 4;
 
 	/** the column name for the ID_GROUP_REDUCTION field */
-	const ID_GROUP_REDUCTION = 'djland_group_reduction.ID_GROUP_REDUCTION';
+	const ID_GROUP_REDUCTION = OOPS_MODEL_GROUPREDUCTION_ID_GROUP_REDUCTION;
 
 	/** the column name for the ID_GROUP field */
-	const ID_GROUP = 'djland_group_reduction.ID_GROUP';
+	const ID_GROUP = OOPS_MODEL_GROUPREDUCTION_ID_GROUP;
 
 	/** the column name for the ID_CATEGORY field */
-	const ID_CATEGORY = 'djland_group_reduction.ID_CATEGORY';
+	const ID_CATEGORY = OOPS_MODEL_GROUPREDUCTION_ID_CATEGORY;
 
 	/** the column name for the REDUCTION field */
-	const REDUCTION = 'djland_group_reduction.REDUCTION';
+	const REDUCTION = OOPS_MODEL_GROUPREDUCTION_REDUCTION;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -354,7 +360,7 @@ abstract class Oops_Model_Base_GroupReductionPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_group_reduction
+	 * Method to invalidate the instance pool of all tables related to group_reduction
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -574,7 +580,7 @@ abstract class Oops_Model_Base_GroupReductionPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_group_reduction table.
+	 * Deletes all rows from the group_reduction table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

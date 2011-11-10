@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_supplier' table.
+ * This class defines the structure of the 'supplier' table.
  *
  *
  *
@@ -32,13 +32,13 @@ class Oops_Model_SupplierTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_supplier');
+		$this->setName(_DB_PREFIX_ . 'supplier');
 		$this->setPhpName('Supplier');
 		$this->setClassname('Oops_Model_Supplier');
 		$this->setPackage('prestashop');
 		$this->setUseIdGenerator(true);
 		// columns
-		$this->addForeignPrimaryKey('ID_SUPPLIER', 'IdSupplier', 'INTEGER' , 'djland_product', 'ID_SUPPLIER', true, 10, null);
+		$this->addForeignPrimaryKey('ID_SUPPLIER', 'IdSupplier', 'INTEGER' , 'product', 'ID_SUPPLIER', true, 10, null);
 		$this->addColumn('NAME', 'Name', 'VARCHAR', true, 64, null);
 		$this->addColumn('DATE_ADD', 'DateAdd', 'TIMESTAMP', true, null, null);
 		$this->addColumn('DATE_UPD', 'DateUpd', 'TIMESTAMP', true, null, null);

@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_tab' table.
+ * This class defines the structure of the 'tab' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_TabTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_tab');
+		$this->setName(_DB_PREFIX_ . 'tab');
 		$this->setPhpName('Tab');
 		$this->setClassname('Oops_Model_Tab');
 		$this->setPackage('prestashop');

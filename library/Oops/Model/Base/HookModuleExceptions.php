@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_hook_module_exceptions' table.
+ * Base class that represents a row from the 'hook_module_exceptions' table.
  *
  * 
  *
@@ -448,7 +448,7 @@ abstract class Oops_Model_Base_HookModuleExceptions extends BaseObject  implemen
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_hook_module_exceptions` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'hook_module_exceptions` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

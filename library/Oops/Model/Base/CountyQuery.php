@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_county' table.
+ * Base class that represents a query for the 'county' table.
  *
  * 
  *
@@ -120,7 +120,7 @@ abstract class Oops_Model_Base_CountyQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_COUNTY`, `NAME`, `ID_STATE`, `ACTIVE` FROM `djland_county` WHERE `ID_COUNTY` = :p0';
+		$sql = 'SELECT `ID_COUNTY`, `NAME`, `ID_STATE`, `ACTIVE` FROM `' . _DB_PREFIX_ . 'county` WHERE `ID_COUNTY` = :p0';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

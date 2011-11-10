@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_cms_category_lang' table.
+ * This class defines the structure of the 'cms_category_lang' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_CmsCategoryLangTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_cms_category_lang');
+		$this->setName(_DB_PREFIX_ . 'cms_category_lang');
 		$this->setPhpName('CmsCategoryLang');
 		$this->setClassname('Oops_Model_CmsCategoryLang');
 		$this->setPackage('prestashop');

@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_meta_lang' table.
+ * Base class that represents a row from the 'meta_lang' table.
  *
  * 
  *
@@ -524,7 +524,7 @@ abstract class Oops_Model_Base_MetaLang extends BaseObject  implements Persisten
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_meta_lang` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'meta_lang` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_message_readed' table.
+ * Base class that represents a row from the 'message_readed' table.
  *
  * 
  *
@@ -434,7 +434,7 @@ abstract class Oops_Model_Base_MessageReaded extends BaseObject  implements Pers
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_message_readed` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'message_readed` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

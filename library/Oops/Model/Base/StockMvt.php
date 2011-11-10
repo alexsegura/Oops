@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_stock_mvt' table.
+ * Base class that represents a row from the 'stock_mvt' table.
  *
  * 
  *
@@ -763,7 +763,7 @@ abstract class Oops_Model_Base_StockMvt extends BaseObject  implements Persisten
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_stock_mvt` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'stock_mvt` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

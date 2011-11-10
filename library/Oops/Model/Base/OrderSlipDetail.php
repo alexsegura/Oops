@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_order_slip_detail' table.
+ * Base class that represents a row from the 'order_slip_detail' table.
  *
  * 
  *
@@ -430,7 +430,7 @@ abstract class Oops_Model_Base_OrderSlipDetail extends BaseObject  implements Pe
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_order_slip_detail` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'order_slip_detail` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

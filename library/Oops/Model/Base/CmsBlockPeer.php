@@ -1,8 +1,16 @@
 <?php
 
 
+define('OOPS_MODEL_CMSBLOCK_ID_CMS_BLOCK', _DB_PREFIX_ . 'cms_block.ID_CMS_BLOCK');
+define('OOPS_MODEL_CMSBLOCK_ID_CMS_CATEGORY', _DB_PREFIX_ . 'cms_block.ID_CMS_CATEGORY');
+define('OOPS_MODEL_CMSBLOCK_NAME', _DB_PREFIX_ . 'cms_block.NAME');
+define('OOPS_MODEL_CMSBLOCK_LOCATION', _DB_PREFIX_ . 'cms_block.LOCATION');
+define('OOPS_MODEL_CMSBLOCK_POSITION', _DB_PREFIX_ . 'cms_block.POSITION');
+define('OOPS_MODEL_CMSBLOCK_DISPLAY_STORE', _DB_PREFIX_ . 'cms_block.DISPLAY_STORE');
+define('OOPS_MODEL_CMSBLOCK_TABLE_NAME', _DB_PREFIX_ . 'cms_block');
+
 /**
- * Base static class for performing query and update operations on the 'djland_cms_block' table.
+ * Base static class for performing query and update operations on the 'cms_block' table.
  *
  * 
  *
@@ -14,7 +22,7 @@ abstract class Oops_Model_Base_CmsBlockPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_cms_block';
+	const TABLE_NAME = OOPS_MODEL_CMSBLOCK_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_CmsBlock';
@@ -35,22 +43,22 @@ abstract class Oops_Model_Base_CmsBlockPeer {
 	const NUM_HYDRATE_COLUMNS = 6;
 
 	/** the column name for the ID_CMS_BLOCK field */
-	const ID_CMS_BLOCK = 'djland_cms_block.ID_CMS_BLOCK';
+	const ID_CMS_BLOCK = OOPS_MODEL_CMSBLOCK_ID_CMS_BLOCK;
 
 	/** the column name for the ID_CMS_CATEGORY field */
-	const ID_CMS_CATEGORY = 'djland_cms_block.ID_CMS_CATEGORY';
+	const ID_CMS_CATEGORY = OOPS_MODEL_CMSBLOCK_ID_CMS_CATEGORY;
 
 	/** the column name for the NAME field */
-	const NAME = 'djland_cms_block.NAME';
+	const NAME = OOPS_MODEL_CMSBLOCK_NAME;
 
 	/** the column name for the LOCATION field */
-	const LOCATION = 'djland_cms_block.LOCATION';
+	const LOCATION = OOPS_MODEL_CMSBLOCK_LOCATION;
 
 	/** the column name for the POSITION field */
-	const POSITION = 'djland_cms_block.POSITION';
+	const POSITION = OOPS_MODEL_CMSBLOCK_POSITION;
 
 	/** the column name for the DISPLAY_STORE field */
-	const DISPLAY_STORE = 'djland_cms_block.DISPLAY_STORE';
+	const DISPLAY_STORE = OOPS_MODEL_CMSBLOCK_DISPLAY_STORE;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -364,7 +372,7 @@ abstract class Oops_Model_Base_CmsBlockPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_cms_block
+	 * Method to invalidate the instance pool of all tables related to cms_block
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -584,7 +592,7 @@ abstract class Oops_Model_Base_CmsBlockPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_cms_block table.
+	 * Deletes all rows from the cms_block table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

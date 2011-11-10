@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_attachment_lang' table.
+ * Base class that represents a row from the 'attachment_lang' table.
  *
  * 
  *
@@ -448,7 +448,7 @@ abstract class Oops_Model_Base_AttachmentLang extends BaseObject  implements Per
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_attachment_lang` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'attachment_lang` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

@@ -1,8 +1,28 @@
 <?php
 
 
+define('OOPS_MODEL_STORE_ID_STORE', _DB_PREFIX_ . 'store.ID_STORE');
+define('OOPS_MODEL_STORE_ID_COUNTRY', _DB_PREFIX_ . 'store.ID_COUNTRY');
+define('OOPS_MODEL_STORE_ID_STATE', _DB_PREFIX_ . 'store.ID_STATE');
+define('OOPS_MODEL_STORE_NAME', _DB_PREFIX_ . 'store.NAME');
+define('OOPS_MODEL_STORE_ADDRESS1', _DB_PREFIX_ . 'store.ADDRESS1');
+define('OOPS_MODEL_STORE_ADDRESS2', _DB_PREFIX_ . 'store.ADDRESS2');
+define('OOPS_MODEL_STORE_CITY', _DB_PREFIX_ . 'store.CITY');
+define('OOPS_MODEL_STORE_POSTCODE', _DB_PREFIX_ . 'store.POSTCODE');
+define('OOPS_MODEL_STORE_LATITUDE', _DB_PREFIX_ . 'store.LATITUDE');
+define('OOPS_MODEL_STORE_LONGITUDE', _DB_PREFIX_ . 'store.LONGITUDE');
+define('OOPS_MODEL_STORE_HOURS', _DB_PREFIX_ . 'store.HOURS');
+define('OOPS_MODEL_STORE_PHONE', _DB_PREFIX_ . 'store.PHONE');
+define('OOPS_MODEL_STORE_FAX', _DB_PREFIX_ . 'store.FAX');
+define('OOPS_MODEL_STORE_EMAIL', _DB_PREFIX_ . 'store.EMAIL');
+define('OOPS_MODEL_STORE_NOTE', _DB_PREFIX_ . 'store.NOTE');
+define('OOPS_MODEL_STORE_ACTIVE', _DB_PREFIX_ . 'store.ACTIVE');
+define('OOPS_MODEL_STORE_DATE_ADD', _DB_PREFIX_ . 'store.DATE_ADD');
+define('OOPS_MODEL_STORE_DATE_UPD', _DB_PREFIX_ . 'store.DATE_UPD');
+define('OOPS_MODEL_STORE_TABLE_NAME', _DB_PREFIX_ . 'store');
+
 /**
- * Base static class for performing query and update operations on the 'djland_store' table.
+ * Base static class for performing query and update operations on the 'store' table.
  *
  * 
  *
@@ -14,7 +34,7 @@ abstract class Oops_Model_Base_StorePeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_store';
+	const TABLE_NAME = OOPS_MODEL_STORE_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_Store';
@@ -35,58 +55,58 @@ abstract class Oops_Model_Base_StorePeer {
 	const NUM_HYDRATE_COLUMNS = 18;
 
 	/** the column name for the ID_STORE field */
-	const ID_STORE = 'djland_store.ID_STORE';
+	const ID_STORE = OOPS_MODEL_STORE_ID_STORE;
 
 	/** the column name for the ID_COUNTRY field */
-	const ID_COUNTRY = 'djland_store.ID_COUNTRY';
+	const ID_COUNTRY = OOPS_MODEL_STORE_ID_COUNTRY;
 
 	/** the column name for the ID_STATE field */
-	const ID_STATE = 'djland_store.ID_STATE';
+	const ID_STATE = OOPS_MODEL_STORE_ID_STATE;
 
 	/** the column name for the NAME field */
-	const NAME = 'djland_store.NAME';
+	const NAME = OOPS_MODEL_STORE_NAME;
 
 	/** the column name for the ADDRESS1 field */
-	const ADDRESS1 = 'djland_store.ADDRESS1';
+	const ADDRESS1 = OOPS_MODEL_STORE_ADDRESS1;
 
 	/** the column name for the ADDRESS2 field */
-	const ADDRESS2 = 'djland_store.ADDRESS2';
+	const ADDRESS2 = OOPS_MODEL_STORE_ADDRESS2;
 
 	/** the column name for the CITY field */
-	const CITY = 'djland_store.CITY';
+	const CITY = OOPS_MODEL_STORE_CITY;
 
 	/** the column name for the POSTCODE field */
-	const POSTCODE = 'djland_store.POSTCODE';
+	const POSTCODE = OOPS_MODEL_STORE_POSTCODE;
 
 	/** the column name for the LATITUDE field */
-	const LATITUDE = 'djland_store.LATITUDE';
+	const LATITUDE = OOPS_MODEL_STORE_LATITUDE;
 
 	/** the column name for the LONGITUDE field */
-	const LONGITUDE = 'djland_store.LONGITUDE';
+	const LONGITUDE = OOPS_MODEL_STORE_LONGITUDE;
 
 	/** the column name for the HOURS field */
-	const HOURS = 'djland_store.HOURS';
+	const HOURS = OOPS_MODEL_STORE_HOURS;
 
 	/** the column name for the PHONE field */
-	const PHONE = 'djland_store.PHONE';
+	const PHONE = OOPS_MODEL_STORE_PHONE;
 
 	/** the column name for the FAX field */
-	const FAX = 'djland_store.FAX';
+	const FAX = OOPS_MODEL_STORE_FAX;
 
 	/** the column name for the EMAIL field */
-	const EMAIL = 'djland_store.EMAIL';
+	const EMAIL = OOPS_MODEL_STORE_EMAIL;
 
 	/** the column name for the NOTE field */
-	const NOTE = 'djland_store.NOTE';
+	const NOTE = OOPS_MODEL_STORE_NOTE;
 
 	/** the column name for the ACTIVE field */
-	const ACTIVE = 'djland_store.ACTIVE';
+	const ACTIVE = OOPS_MODEL_STORE_ACTIVE;
 
 	/** the column name for the DATE_ADD field */
-	const DATE_ADD = 'djland_store.DATE_ADD';
+	const DATE_ADD = OOPS_MODEL_STORE_DATE_ADD;
 
 	/** the column name for the DATE_UPD field */
-	const DATE_UPD = 'djland_store.DATE_UPD';
+	const DATE_UPD = OOPS_MODEL_STORE_DATE_UPD;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -424,7 +444,7 @@ abstract class Oops_Model_Base_StorePeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_store
+	 * Method to invalidate the instance pool of all tables related to store
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -644,7 +664,7 @@ abstract class Oops_Model_Base_StorePeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_store table.
+	 * Deletes all rows from the store table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

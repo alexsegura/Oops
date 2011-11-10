@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_store' table.
+ * Base class that represents a query for the 'store' table.
  *
  * 
  *
@@ -176,7 +176,7 @@ abstract class Oops_Model_Base_StoreQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_STORE`, `ID_COUNTRY`, `ID_STATE`, `NAME`, `ADDRESS1`, `ADDRESS2`, `CITY`, `POSTCODE`, `LATITUDE`, `LONGITUDE`, `HOURS`, `PHONE`, `FAX`, `EMAIL`, `NOTE`, `ACTIVE`, `DATE_ADD`, `DATE_UPD` FROM `djland_store` WHERE `ID_STORE` = :p0';
+		$sql = 'SELECT `ID_STORE`, `ID_COUNTRY`, `ID_STATE`, `NAME`, `ADDRESS1`, `ADDRESS2`, `CITY`, `POSTCODE`, `LATITUDE`, `LONGITUDE`, `HOURS`, `PHONE`, `FAX`, `EMAIL`, `NOTE`, `ACTIVE`, `DATE_ADD`, `DATE_UPD` FROM `' . _DB_PREFIX_ . 'store` WHERE `ID_STORE` = :p0';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

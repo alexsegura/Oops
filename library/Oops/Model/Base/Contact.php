@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_contact' table.
+ * Base class that represents a row from the 'contact' table.
  *
  * 
  *
@@ -488,7 +488,7 @@ abstract class Oops_Model_Base_Contact extends BaseObject  implements Persistent
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_contact` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'contact` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

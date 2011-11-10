@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_quick_access_lang' table.
+ * This class defines the structure of the 'quick_access_lang' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_QuickAccessLangTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_quick_access_lang');
+		$this->setName(_DB_PREFIX_ . 'quick_access_lang');
 		$this->setPhpName('QuickAccessLang');
 		$this->setClassname('Oops_Model_QuickAccessLang');
 		$this->setPackage('prestashop');

@@ -1,8 +1,13 @@
 <?php
 
 
+define('OOPS_MODEL_MODULE_ID_MODULE', _DB_PREFIX_ . 'module.ID_MODULE');
+define('OOPS_MODEL_MODULE_NAME', _DB_PREFIX_ . 'module.NAME');
+define('OOPS_MODEL_MODULE_ACTIVE', _DB_PREFIX_ . 'module.ACTIVE');
+define('OOPS_MODEL_MODULE_TABLE_NAME', _DB_PREFIX_ . 'module');
+
 /**
- * Base static class for performing query and update operations on the 'djland_module' table.
+ * Base static class for performing query and update operations on the 'module' table.
  *
  * 
  *
@@ -14,7 +19,7 @@ abstract class Oops_Model_Base_ModulePeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_module';
+	const TABLE_NAME = OOPS_MODEL_MODULE_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_Module';
@@ -35,13 +40,13 @@ abstract class Oops_Model_Base_ModulePeer {
 	const NUM_HYDRATE_COLUMNS = 3;
 
 	/** the column name for the ID_MODULE field */
-	const ID_MODULE = 'djland_module.ID_MODULE';
+	const ID_MODULE = OOPS_MODEL_MODULE_ID_MODULE;
 
 	/** the column name for the NAME field */
-	const NAME = 'djland_module.NAME';
+	const NAME = OOPS_MODEL_MODULE_NAME;
 
 	/** the column name for the ACTIVE field */
-	const ACTIVE = 'djland_module.ACTIVE';
+	const ACTIVE = OOPS_MODEL_MODULE_ACTIVE;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -349,7 +354,7 @@ abstract class Oops_Model_Base_ModulePeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_module
+	 * Method to invalidate the instance pool of all tables related to module
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -569,7 +574,7 @@ abstract class Oops_Model_Base_ModulePeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_module table.
+	 * Deletes all rows from the module table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

@@ -1,8 +1,14 @@
 <?php
 
 
+define('OOPS_MODEL_CONTACTLANG_ID_CONTACT', _DB_PREFIX_ . 'contact_lang.ID_CONTACT');
+define('OOPS_MODEL_CONTACTLANG_ID_LANG', _DB_PREFIX_ . 'contact_lang.ID_LANG');
+define('OOPS_MODEL_CONTACTLANG_NAME', _DB_PREFIX_ . 'contact_lang.NAME');
+define('OOPS_MODEL_CONTACTLANG_DESCRIPTION', _DB_PREFIX_ . 'contact_lang.DESCRIPTION');
+define('OOPS_MODEL_CONTACTLANG_TABLE_NAME', _DB_PREFIX_ . 'contact_lang');
+
 /**
- * Base static class for performing query and update operations on the 'djland_contact_lang' table.
+ * Base static class for performing query and update operations on the 'contact_lang' table.
  *
  * 
  *
@@ -14,7 +20,7 @@ abstract class Oops_Model_Base_ContactLangPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_contact_lang';
+	const TABLE_NAME = OOPS_MODEL_CONTACTLANG_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_ContactLang';
@@ -35,16 +41,16 @@ abstract class Oops_Model_Base_ContactLangPeer {
 	const NUM_HYDRATE_COLUMNS = 4;
 
 	/** the column name for the ID_CONTACT field */
-	const ID_CONTACT = 'djland_contact_lang.ID_CONTACT';
+	const ID_CONTACT = OOPS_MODEL_CONTACTLANG_ID_CONTACT;
 
 	/** the column name for the ID_LANG field */
-	const ID_LANG = 'djland_contact_lang.ID_LANG';
+	const ID_LANG = OOPS_MODEL_CONTACTLANG_ID_LANG;
 
 	/** the column name for the NAME field */
-	const NAME = 'djland_contact_lang.NAME';
+	const NAME = OOPS_MODEL_CONTACTLANG_NAME;
 
 	/** the column name for the DESCRIPTION field */
-	const DESCRIPTION = 'djland_contact_lang.DESCRIPTION';
+	const DESCRIPTION = OOPS_MODEL_CONTACTLANG_DESCRIPTION;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -354,7 +360,7 @@ abstract class Oops_Model_Base_ContactLangPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_contact_lang
+	 * Method to invalidate the instance pool of all tables related to contact_lang
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -570,7 +576,7 @@ abstract class Oops_Model_Base_ContactLangPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_contact_lang table.
+	 * Deletes all rows from the contact_lang table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

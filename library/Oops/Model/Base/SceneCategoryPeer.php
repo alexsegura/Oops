@@ -1,8 +1,12 @@
 <?php
 
 
+define('OOPS_MODEL_SCENECATEGORY_ID_SCENE', _DB_PREFIX_ . 'scene_category.ID_SCENE');
+define('OOPS_MODEL_SCENECATEGORY_ID_CATEGORY', _DB_PREFIX_ . 'scene_category.ID_CATEGORY');
+define('OOPS_MODEL_SCENECATEGORY_TABLE_NAME', _DB_PREFIX_ . 'scene_category');
+
 /**
- * Base static class for performing query and update operations on the 'djland_scene_category' table.
+ * Base static class for performing query and update operations on the 'scene_category' table.
  *
  * 
  *
@@ -14,7 +18,7 @@ abstract class Oops_Model_Base_SceneCategoryPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_scene_category';
+	const TABLE_NAME = OOPS_MODEL_SCENECATEGORY_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_SceneCategory';
@@ -35,10 +39,10 @@ abstract class Oops_Model_Base_SceneCategoryPeer {
 	const NUM_HYDRATE_COLUMNS = 2;
 
 	/** the column name for the ID_SCENE field */
-	const ID_SCENE = 'djland_scene_category.ID_SCENE';
+	const ID_SCENE = OOPS_MODEL_SCENECATEGORY_ID_SCENE;
 
 	/** the column name for the ID_CATEGORY field */
-	const ID_CATEGORY = 'djland_scene_category.ID_CATEGORY';
+	const ID_CATEGORY = OOPS_MODEL_SCENECATEGORY_ID_CATEGORY;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -344,7 +348,7 @@ abstract class Oops_Model_Base_SceneCategoryPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_scene_category
+	 * Method to invalidate the instance pool of all tables related to scene_category
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -568,7 +572,7 @@ abstract class Oops_Model_Base_SceneCategoryPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_scene_category table.
+	 * Deletes all rows from the scene_category table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

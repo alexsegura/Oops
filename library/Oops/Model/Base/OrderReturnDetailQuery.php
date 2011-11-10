@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_order_return_detail' table.
+ * Base class that represents a query for the 'order_return_detail' table.
  *
  * 
  *
@@ -120,7 +120,7 @@ abstract class Oops_Model_Base_OrderReturnDetailQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_ORDER_RETURN`, `ID_ORDER_DETAIL`, `ID_CUSTOMIZATION`, `PRODUCT_QUANTITY` FROM `djland_order_return_detail` WHERE `ID_ORDER_RETURN` = :p0 AND `ID_ORDER_DETAIL` = :p1 AND `ID_CUSTOMIZATION` = :p2';
+		$sql = 'SELECT `ID_ORDER_RETURN`, `ID_ORDER_DETAIL`, `ID_CUSTOMIZATION`, `PRODUCT_QUANTITY` FROM `' . _DB_PREFIX_ . 'order_return_detail` WHERE `ID_ORDER_RETURN` = :p0 AND `ID_ORDER_DETAIL` = :p1 AND `ID_CUSTOMIZATION` = :p2';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key[0], PDO::PARAM_INT);

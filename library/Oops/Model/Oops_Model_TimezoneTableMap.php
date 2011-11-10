@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_timezone' table.
+ * This class defines the structure of the 'timezone' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_TimezoneTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_timezone');
+		$this->setName(_DB_PREFIX_ . 'timezone');
 		$this->setPhpName('Timezone');
 		$this->setClassname('Oops_Model_Timezone');
 		$this->setPackage('prestashop');

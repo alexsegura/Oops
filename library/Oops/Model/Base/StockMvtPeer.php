@@ -1,8 +1,19 @@
 <?php
 
 
+define('OOPS_MODEL_STOCKMVT_ID_STOCK_MVT', _DB_PREFIX_ . 'stock_mvt.ID_STOCK_MVT');
+define('OOPS_MODEL_STOCKMVT_ID_PRODUCT', _DB_PREFIX_ . 'stock_mvt.ID_PRODUCT');
+define('OOPS_MODEL_STOCKMVT_ID_PRODUCT_ATTRIBUTE', _DB_PREFIX_ . 'stock_mvt.ID_PRODUCT_ATTRIBUTE');
+define('OOPS_MODEL_STOCKMVT_ID_ORDER', _DB_PREFIX_ . 'stock_mvt.ID_ORDER');
+define('OOPS_MODEL_STOCKMVT_ID_STOCK_MVT_REASON', _DB_PREFIX_ . 'stock_mvt.ID_STOCK_MVT_REASON');
+define('OOPS_MODEL_STOCKMVT_ID_EMPLOYEE', _DB_PREFIX_ . 'stock_mvt.ID_EMPLOYEE');
+define('OOPS_MODEL_STOCKMVT_QUANTITY', _DB_PREFIX_ . 'stock_mvt.QUANTITY');
+define('OOPS_MODEL_STOCKMVT_DATE_ADD', _DB_PREFIX_ . 'stock_mvt.DATE_ADD');
+define('OOPS_MODEL_STOCKMVT_DATE_UPD', _DB_PREFIX_ . 'stock_mvt.DATE_UPD');
+define('OOPS_MODEL_STOCKMVT_TABLE_NAME', _DB_PREFIX_ . 'stock_mvt');
+
 /**
- * Base static class for performing query and update operations on the 'djland_stock_mvt' table.
+ * Base static class for performing query and update operations on the 'stock_mvt' table.
  *
  * 
  *
@@ -14,7 +25,7 @@ abstract class Oops_Model_Base_StockMvtPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_stock_mvt';
+	const TABLE_NAME = OOPS_MODEL_STOCKMVT_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_StockMvt';
@@ -35,31 +46,31 @@ abstract class Oops_Model_Base_StockMvtPeer {
 	const NUM_HYDRATE_COLUMNS = 9;
 
 	/** the column name for the ID_STOCK_MVT field */
-	const ID_STOCK_MVT = 'djland_stock_mvt.ID_STOCK_MVT';
+	const ID_STOCK_MVT = OOPS_MODEL_STOCKMVT_ID_STOCK_MVT;
 
 	/** the column name for the ID_PRODUCT field */
-	const ID_PRODUCT = 'djland_stock_mvt.ID_PRODUCT';
+	const ID_PRODUCT = OOPS_MODEL_STOCKMVT_ID_PRODUCT;
 
 	/** the column name for the ID_PRODUCT_ATTRIBUTE field */
-	const ID_PRODUCT_ATTRIBUTE = 'djland_stock_mvt.ID_PRODUCT_ATTRIBUTE';
+	const ID_PRODUCT_ATTRIBUTE = OOPS_MODEL_STOCKMVT_ID_PRODUCT_ATTRIBUTE;
 
 	/** the column name for the ID_ORDER field */
-	const ID_ORDER = 'djland_stock_mvt.ID_ORDER';
+	const ID_ORDER = OOPS_MODEL_STOCKMVT_ID_ORDER;
 
 	/** the column name for the ID_STOCK_MVT_REASON field */
-	const ID_STOCK_MVT_REASON = 'djland_stock_mvt.ID_STOCK_MVT_REASON';
+	const ID_STOCK_MVT_REASON = OOPS_MODEL_STOCKMVT_ID_STOCK_MVT_REASON;
 
 	/** the column name for the ID_EMPLOYEE field */
-	const ID_EMPLOYEE = 'djland_stock_mvt.ID_EMPLOYEE';
+	const ID_EMPLOYEE = OOPS_MODEL_STOCKMVT_ID_EMPLOYEE;
 
 	/** the column name for the QUANTITY field */
-	const QUANTITY = 'djland_stock_mvt.QUANTITY';
+	const QUANTITY = OOPS_MODEL_STOCKMVT_QUANTITY;
 
 	/** the column name for the DATE_ADD field */
-	const DATE_ADD = 'djland_stock_mvt.DATE_ADD';
+	const DATE_ADD = OOPS_MODEL_STOCKMVT_DATE_ADD;
 
 	/** the column name for the DATE_UPD field */
-	const DATE_UPD = 'djland_stock_mvt.DATE_UPD';
+	const DATE_UPD = OOPS_MODEL_STOCKMVT_DATE_UPD;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -379,7 +390,7 @@ abstract class Oops_Model_Base_StockMvtPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_stock_mvt
+	 * Method to invalidate the instance pool of all tables related to stock_mvt
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -833,7 +844,7 @@ abstract class Oops_Model_Base_StockMvtPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_stock_mvt table.
+	 * Deletes all rows from the stock_mvt table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

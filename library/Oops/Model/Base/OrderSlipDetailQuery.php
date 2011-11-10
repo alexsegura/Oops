@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_order_slip_detail' table.
+ * Base class that represents a query for the 'order_slip_detail' table.
  *
  * 
  *
@@ -116,7 +116,7 @@ abstract class Oops_Model_Base_OrderSlipDetailQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_ORDER_SLIP`, `ID_ORDER_DETAIL`, `PRODUCT_QUANTITY` FROM `djland_order_slip_detail` WHERE `ID_ORDER_SLIP` = :p0 AND `ID_ORDER_DETAIL` = :p1';
+		$sql = 'SELECT `ID_ORDER_SLIP`, `ID_ORDER_DETAIL`, `PRODUCT_QUANTITY` FROM `' . _DB_PREFIX_ . 'order_slip_detail` WHERE `ID_ORDER_SLIP` = :p0 AND `ID_ORDER_DETAIL` = :p1';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key[0], PDO::PARAM_INT);

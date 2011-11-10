@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_stock_mvt_reason_lang' table.
+ * Base class that represents a query for the 'stock_mvt_reason_lang' table.
  *
  * 
  *
@@ -116,7 +116,7 @@ abstract class Oops_Model_Base_StockMvtReasonLangQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_STOCK_MVT_REASON`, `ID_LANG`, `NAME` FROM `djland_stock_mvt_reason_lang` WHERE `ID_STOCK_MVT_REASON` = :p0 AND `ID_LANG` = :p1';
+		$sql = 'SELECT `ID_STOCK_MVT_REASON`, `ID_LANG`, `NAME` FROM `' . _DB_PREFIX_ . 'stock_mvt_reason_lang` WHERE `ID_STOCK_MVT_REASON` = :p0 AND `ID_LANG` = :p1';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key[0], PDO::PARAM_INT);

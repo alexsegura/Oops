@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_connections_source' table.
+ * This class defines the structure of the 'connections_source' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_ConnectionsSourceTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_connections_source');
+		$this->setName(_DB_PREFIX_ . 'connections_source');
 		$this->setPhpName('ConnectionsSource');
 		$this->setClassname('Oops_Model_ConnectionsSource');
 		$this->setPackage('prestashop');

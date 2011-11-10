@@ -1,8 +1,13 @@
 <?php
 
 
+define('OOPS_MODEL_QUICKACCESSLANG_ID_QUICK_ACCESS', _DB_PREFIX_ . 'quick_access_lang.ID_QUICK_ACCESS');
+define('OOPS_MODEL_QUICKACCESSLANG_ID_LANG', _DB_PREFIX_ . 'quick_access_lang.ID_LANG');
+define('OOPS_MODEL_QUICKACCESSLANG_NAME', _DB_PREFIX_ . 'quick_access_lang.NAME');
+define('OOPS_MODEL_QUICKACCESSLANG_TABLE_NAME', _DB_PREFIX_ . 'quick_access_lang');
+
 /**
- * Base static class for performing query and update operations on the 'djland_quick_access_lang' table.
+ * Base static class for performing query and update operations on the 'quick_access_lang' table.
  *
  * 
  *
@@ -14,7 +19,7 @@ abstract class Oops_Model_Base_QuickAccessLangPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_quick_access_lang';
+	const TABLE_NAME = OOPS_MODEL_QUICKACCESSLANG_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_QuickAccessLang';
@@ -35,13 +40,13 @@ abstract class Oops_Model_Base_QuickAccessLangPeer {
 	const NUM_HYDRATE_COLUMNS = 3;
 
 	/** the column name for the ID_QUICK_ACCESS field */
-	const ID_QUICK_ACCESS = 'djland_quick_access_lang.ID_QUICK_ACCESS';
+	const ID_QUICK_ACCESS = OOPS_MODEL_QUICKACCESSLANG_ID_QUICK_ACCESS;
 
 	/** the column name for the ID_LANG field */
-	const ID_LANG = 'djland_quick_access_lang.ID_LANG';
+	const ID_LANG = OOPS_MODEL_QUICKACCESSLANG_ID_LANG;
 
 	/** the column name for the NAME field */
-	const NAME = 'djland_quick_access_lang.NAME';
+	const NAME = OOPS_MODEL_QUICKACCESSLANG_NAME;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -349,7 +354,7 @@ abstract class Oops_Model_Base_QuickAccessLangPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_quick_access_lang
+	 * Method to invalidate the instance pool of all tables related to quick_access_lang
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -573,7 +578,7 @@ abstract class Oops_Model_Base_QuickAccessLangPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_quick_access_lang table.
+	 * Deletes all rows from the quick_access_lang table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

@@ -1,8 +1,14 @@
 <?php
 
 
+define('OOPS_MODEL_ALIAS_ID_ALIAS', _DB_PREFIX_ . 'alias.ID_ALIAS');
+define('OOPS_MODEL_ALIAS_ALIAS', _DB_PREFIX_ . 'alias.ALIAS');
+define('OOPS_MODEL_ALIAS_SEARCH', _DB_PREFIX_ . 'alias.SEARCH');
+define('OOPS_MODEL_ALIAS_ACTIVE', _DB_PREFIX_ . 'alias.ACTIVE');
+define('OOPS_MODEL_ALIAS_TABLE_NAME', _DB_PREFIX_ . 'alias');
+
 /**
- * Base static class for performing query and update operations on the 'djland_alias' table.
+ * Base static class for performing query and update operations on the 'alias' table.
  *
  * 
  *
@@ -14,7 +20,7 @@ abstract class Oops_Model_Base_AliasPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_alias';
+	const TABLE_NAME = OOPS_MODEL_ALIAS_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_Alias';
@@ -35,16 +41,16 @@ abstract class Oops_Model_Base_AliasPeer {
 	const NUM_HYDRATE_COLUMNS = 4;
 
 	/** the column name for the ID_ALIAS field */
-	const ID_ALIAS = 'djland_alias.ID_ALIAS';
+	const ID_ALIAS = OOPS_MODEL_ALIAS_ID_ALIAS;
 
 	/** the column name for the ALIAS field */
-	const ALIAS = 'djland_alias.ALIAS';
+	const ALIAS = OOPS_MODEL_ALIAS_ALIAS;
 
 	/** the column name for the SEARCH field */
-	const SEARCH = 'djland_alias.SEARCH';
+	const SEARCH = OOPS_MODEL_ALIAS_SEARCH;
 
 	/** the column name for the ACTIVE field */
-	const ACTIVE = 'djland_alias.ACTIVE';
+	const ACTIVE = OOPS_MODEL_ALIAS_ACTIVE;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -354,7 +360,7 @@ abstract class Oops_Model_Base_AliasPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_alias
+	 * Method to invalidate the instance pool of all tables related to alias
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -574,7 +580,7 @@ abstract class Oops_Model_Base_AliasPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_alias table.
+	 * Deletes all rows from the alias table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

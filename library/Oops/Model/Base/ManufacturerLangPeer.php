@@ -1,8 +1,17 @@
 <?php
 
 
+define('OOPS_MODEL_MANUFACTURERLANG_ID_MANUFACTURER', _DB_PREFIX_ . 'manufacturer_lang.ID_MANUFACTURER');
+define('OOPS_MODEL_MANUFACTURERLANG_ID_LANG', _DB_PREFIX_ . 'manufacturer_lang.ID_LANG');
+define('OOPS_MODEL_MANUFACTURERLANG_DESCRIPTION', _DB_PREFIX_ . 'manufacturer_lang.DESCRIPTION');
+define('OOPS_MODEL_MANUFACTURERLANG_SHORT_DESCRIPTION', _DB_PREFIX_ . 'manufacturer_lang.SHORT_DESCRIPTION');
+define('OOPS_MODEL_MANUFACTURERLANG_META_TITLE', _DB_PREFIX_ . 'manufacturer_lang.META_TITLE');
+define('OOPS_MODEL_MANUFACTURERLANG_META_KEYWORDS', _DB_PREFIX_ . 'manufacturer_lang.META_KEYWORDS');
+define('OOPS_MODEL_MANUFACTURERLANG_META_DESCRIPTION', _DB_PREFIX_ . 'manufacturer_lang.META_DESCRIPTION');
+define('OOPS_MODEL_MANUFACTURERLANG_TABLE_NAME', _DB_PREFIX_ . 'manufacturer_lang');
+
 /**
- * Base static class for performing query and update operations on the 'djland_manufacturer_lang' table.
+ * Base static class for performing query and update operations on the 'manufacturer_lang' table.
  *
  * 
  *
@@ -14,7 +23,7 @@ abstract class Oops_Model_Base_ManufacturerLangPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_manufacturer_lang';
+	const TABLE_NAME = OOPS_MODEL_MANUFACTURERLANG_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_ManufacturerLang';
@@ -35,25 +44,25 @@ abstract class Oops_Model_Base_ManufacturerLangPeer {
 	const NUM_HYDRATE_COLUMNS = 7;
 
 	/** the column name for the ID_MANUFACTURER field */
-	const ID_MANUFACTURER = 'djland_manufacturer_lang.ID_MANUFACTURER';
+	const ID_MANUFACTURER = OOPS_MODEL_MANUFACTURERLANG_ID_MANUFACTURER;
 
 	/** the column name for the ID_LANG field */
-	const ID_LANG = 'djland_manufacturer_lang.ID_LANG';
+	const ID_LANG = OOPS_MODEL_MANUFACTURERLANG_ID_LANG;
 
 	/** the column name for the DESCRIPTION field */
-	const DESCRIPTION = 'djland_manufacturer_lang.DESCRIPTION';
+	const DESCRIPTION = OOPS_MODEL_MANUFACTURERLANG_DESCRIPTION;
 
 	/** the column name for the SHORT_DESCRIPTION field */
-	const SHORT_DESCRIPTION = 'djland_manufacturer_lang.SHORT_DESCRIPTION';
+	const SHORT_DESCRIPTION = OOPS_MODEL_MANUFACTURERLANG_SHORT_DESCRIPTION;
 
 	/** the column name for the META_TITLE field */
-	const META_TITLE = 'djland_manufacturer_lang.META_TITLE';
+	const META_TITLE = OOPS_MODEL_MANUFACTURERLANG_META_TITLE;
 
 	/** the column name for the META_KEYWORDS field */
-	const META_KEYWORDS = 'djland_manufacturer_lang.META_KEYWORDS';
+	const META_KEYWORDS = OOPS_MODEL_MANUFACTURERLANG_META_KEYWORDS;
 
 	/** the column name for the META_DESCRIPTION field */
-	const META_DESCRIPTION = 'djland_manufacturer_lang.META_DESCRIPTION';
+	const META_DESCRIPTION = OOPS_MODEL_MANUFACTURERLANG_META_DESCRIPTION;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -369,7 +378,7 @@ abstract class Oops_Model_Base_ManufacturerLangPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_manufacturer_lang
+	 * Method to invalidate the instance pool of all tables related to manufacturer_lang
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -593,7 +602,7 @@ abstract class Oops_Model_Base_ManufacturerLangPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_manufacturer_lang table.
+	 * Deletes all rows from the manufacturer_lang table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

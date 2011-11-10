@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_attribute' table.
+ * Base class that represents a query for the 'attribute' table.
  *
  * 
  *
@@ -116,7 +116,7 @@ abstract class Oops_Model_Base_AttributeQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_ATTRIBUTE`, `ID_ATTRIBUTE_GROUP`, `COLOR` FROM `djland_attribute` WHERE `ID_ATTRIBUTE` = :p0';
+		$sql = 'SELECT `ID_ATTRIBUTE`, `ID_ATTRIBUTE_GROUP`, `COLOR` FROM `' . _DB_PREFIX_ . 'attribute` WHERE `ID_ATTRIBUTE` = :p0';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

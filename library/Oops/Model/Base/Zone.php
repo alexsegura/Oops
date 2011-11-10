@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_zone' table.
+ * Base class that represents a row from the 'zone' table.
  *
  * 
  *
@@ -442,7 +442,7 @@ abstract class Oops_Model_Base_Zone extends BaseObject  implements Persistent
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_zone` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'zone` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

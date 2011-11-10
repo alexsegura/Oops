@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_specific_price' table.
+ * Base class that represents a query for the 'specific_price' table.
  *
  * 
  *
@@ -152,7 +152,7 @@ abstract class Oops_Model_Base_SpecificPriceQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_SPECIFIC_PRICE`, `ID_PRODUCT`, `ID_SHOP`, `ID_CURRENCY`, `ID_COUNTRY`, `ID_GROUP`, `PRICE`, `FROM_QUANTITY`, `REDUCTION`, `REDUCTION_TYPE`, `FROM`, `TO` FROM `djland_specific_price` WHERE `ID_SPECIFIC_PRICE` = :p0';
+		$sql = 'SELECT `ID_SPECIFIC_PRICE`, `ID_PRODUCT`, `ID_SHOP`, `ID_CURRENCY`, `ID_COUNTRY`, `ID_GROUP`, `PRICE`, `FROM_QUANTITY`, `REDUCTION`, `REDUCTION_TYPE`, `FROM`, `TO` FROM `' . _DB_PREFIX_ . 'specific_price` WHERE `ID_SPECIFIC_PRICE` = :p0';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

@@ -1,8 +1,12 @@
 <?php
 
 
+define('OOPS_MODEL_ORDERMESSAGE_ID_ORDER_MESSAGE', _DB_PREFIX_ . 'order_message.ID_ORDER_MESSAGE');
+define('OOPS_MODEL_ORDERMESSAGE_DATE_ADD', _DB_PREFIX_ . 'order_message.DATE_ADD');
+define('OOPS_MODEL_ORDERMESSAGE_TABLE_NAME', _DB_PREFIX_ . 'order_message');
+
 /**
- * Base static class for performing query and update operations on the 'djland_order_message' table.
+ * Base static class for performing query and update operations on the 'order_message' table.
  *
  * 
  *
@@ -14,7 +18,7 @@ abstract class Oops_Model_Base_OrderMessagePeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_order_message';
+	const TABLE_NAME = OOPS_MODEL_ORDERMESSAGE_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_OrderMessage';
@@ -35,10 +39,10 @@ abstract class Oops_Model_Base_OrderMessagePeer {
 	const NUM_HYDRATE_COLUMNS = 2;
 
 	/** the column name for the ID_ORDER_MESSAGE field */
-	const ID_ORDER_MESSAGE = 'djland_order_message.ID_ORDER_MESSAGE';
+	const ID_ORDER_MESSAGE = OOPS_MODEL_ORDERMESSAGE_ID_ORDER_MESSAGE;
 
 	/** the column name for the DATE_ADD field */
-	const DATE_ADD = 'djland_order_message.DATE_ADD';
+	const DATE_ADD = OOPS_MODEL_ORDERMESSAGE_DATE_ADD;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -344,7 +348,7 @@ abstract class Oops_Model_Base_OrderMessagePeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_order_message
+	 * Method to invalidate the instance pool of all tables related to order_message
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -564,7 +568,7 @@ abstract class Oops_Model_Base_OrderMessagePeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_order_message table.
+	 * Deletes all rows from the order_message table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

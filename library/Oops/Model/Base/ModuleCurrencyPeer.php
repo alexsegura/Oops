@@ -1,8 +1,12 @@
 <?php
 
 
+define('OOPS_MODEL_MODULECURRENCY_ID_MODULE', _DB_PREFIX_ . 'module_currency.ID_MODULE');
+define('OOPS_MODEL_MODULECURRENCY_ID_CURRENCY', _DB_PREFIX_ . 'module_currency.ID_CURRENCY');
+define('OOPS_MODEL_MODULECURRENCY_TABLE_NAME', _DB_PREFIX_ . 'module_currency');
+
 /**
- * Base static class for performing query and update operations on the 'djland_module_currency' table.
+ * Base static class for performing query and update operations on the 'module_currency' table.
  *
  * 
  *
@@ -14,7 +18,7 @@ abstract class Oops_Model_Base_ModuleCurrencyPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_module_currency';
+	const TABLE_NAME = OOPS_MODEL_MODULECURRENCY_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_ModuleCurrency';
@@ -35,10 +39,10 @@ abstract class Oops_Model_Base_ModuleCurrencyPeer {
 	const NUM_HYDRATE_COLUMNS = 2;
 
 	/** the column name for the ID_MODULE field */
-	const ID_MODULE = 'djland_module_currency.ID_MODULE';
+	const ID_MODULE = OOPS_MODEL_MODULECURRENCY_ID_MODULE;
 
 	/** the column name for the ID_CURRENCY field */
-	const ID_CURRENCY = 'djland_module_currency.ID_CURRENCY';
+	const ID_CURRENCY = OOPS_MODEL_MODULECURRENCY_ID_CURRENCY;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -344,7 +348,7 @@ abstract class Oops_Model_Base_ModuleCurrencyPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_module_currency
+	 * Method to invalidate the instance pool of all tables related to module_currency
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -568,7 +572,7 @@ abstract class Oops_Model_Base_ModuleCurrencyPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_module_currency table.
+	 * Deletes all rows from the module_currency table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

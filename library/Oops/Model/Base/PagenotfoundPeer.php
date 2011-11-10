@@ -1,8 +1,14 @@
 <?php
 
 
+define('OOPS_MODEL_PAGENOTFOUND_ID_PAGENOTFOUND', _DB_PREFIX_ . 'pagenotfound.ID_PAGENOTFOUND');
+define('OOPS_MODEL_PAGENOTFOUND_REQUEST_URI', _DB_PREFIX_ . 'pagenotfound.REQUEST_URI');
+define('OOPS_MODEL_PAGENOTFOUND_HTTP_REFERER', _DB_PREFIX_ . 'pagenotfound.HTTP_REFERER');
+define('OOPS_MODEL_PAGENOTFOUND_DATE_ADD', _DB_PREFIX_ . 'pagenotfound.DATE_ADD');
+define('OOPS_MODEL_PAGENOTFOUND_TABLE_NAME', _DB_PREFIX_ . 'pagenotfound');
+
 /**
- * Base static class for performing query and update operations on the 'djland_pagenotfound' table.
+ * Base static class for performing query and update operations on the 'pagenotfound' table.
  *
  * 
  *
@@ -14,7 +20,7 @@ abstract class Oops_Model_Base_PagenotfoundPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_pagenotfound';
+	const TABLE_NAME = OOPS_MODEL_PAGENOTFOUND_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_Pagenotfound';
@@ -35,16 +41,16 @@ abstract class Oops_Model_Base_PagenotfoundPeer {
 	const NUM_HYDRATE_COLUMNS = 4;
 
 	/** the column name for the ID_PAGENOTFOUND field */
-	const ID_PAGENOTFOUND = 'djland_pagenotfound.ID_PAGENOTFOUND';
+	const ID_PAGENOTFOUND = OOPS_MODEL_PAGENOTFOUND_ID_PAGENOTFOUND;
 
 	/** the column name for the REQUEST_URI field */
-	const REQUEST_URI = 'djland_pagenotfound.REQUEST_URI';
+	const REQUEST_URI = OOPS_MODEL_PAGENOTFOUND_REQUEST_URI;
 
 	/** the column name for the HTTP_REFERER field */
-	const HTTP_REFERER = 'djland_pagenotfound.HTTP_REFERER';
+	const HTTP_REFERER = OOPS_MODEL_PAGENOTFOUND_HTTP_REFERER;
 
 	/** the column name for the DATE_ADD field */
-	const DATE_ADD = 'djland_pagenotfound.DATE_ADD';
+	const DATE_ADD = OOPS_MODEL_PAGENOTFOUND_DATE_ADD;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -354,7 +360,7 @@ abstract class Oops_Model_Base_PagenotfoundPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_pagenotfound
+	 * Method to invalidate the instance pool of all tables related to pagenotfound
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -574,7 +580,7 @@ abstract class Oops_Model_Base_PagenotfoundPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_pagenotfound table.
+	 * Deletes all rows from the pagenotfound table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

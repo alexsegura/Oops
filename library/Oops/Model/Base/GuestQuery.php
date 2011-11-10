@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_guest' table.
+ * Base class that represents a query for the 'guest' table.
  *
  * 
  *
@@ -164,7 +164,7 @@ abstract class Oops_Model_Base_GuestQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_GUEST`, `ID_OPERATING_SYSTEM`, `ID_WEB_BROWSER`, `ID_CUSTOMER`, `JAVASCRIPT`, `SCREEN_RESOLUTION_X`, `SCREEN_RESOLUTION_Y`, `SCREEN_COLOR`, `SUN_JAVA`, `ADOBE_FLASH`, `ADOBE_DIRECTOR`, `APPLE_QUICKTIME`, `REAL_PLAYER`, `WINDOWS_MEDIA`, `ACCEPT_LANGUAGE` FROM `djland_guest` WHERE `ID_GUEST` = :p0';
+		$sql = 'SELECT `ID_GUEST`, `ID_OPERATING_SYSTEM`, `ID_WEB_BROWSER`, `ID_CUSTOMER`, `JAVASCRIPT`, `SCREEN_RESOLUTION_X`, `SCREEN_RESOLUTION_Y`, `SCREEN_COLOR`, `SUN_JAVA`, `ADOBE_FLASH`, `ADOBE_DIRECTOR`, `APPLE_QUICKTIME`, `REAL_PLAYER`, `WINDOWS_MEDIA`, `ACCEPT_LANGUAGE` FROM `' . _DB_PREFIX_ . 'guest` WHERE `ID_GUEST` = :p0';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

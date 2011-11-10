@@ -1,8 +1,13 @@
 <?php
 
 
+define('OOPS_MODEL_COUNTYZIPCODE_ID_COUNTY', _DB_PREFIX_ . 'county_zip_code.ID_COUNTY');
+define('OOPS_MODEL_COUNTYZIPCODE_FROM_ZIP_CODE', _DB_PREFIX_ . 'county_zip_code.FROM_ZIP_CODE');
+define('OOPS_MODEL_COUNTYZIPCODE_TO_ZIP_CODE', _DB_PREFIX_ . 'county_zip_code.TO_ZIP_CODE');
+define('OOPS_MODEL_COUNTYZIPCODE_TABLE_NAME', _DB_PREFIX_ . 'county_zip_code');
+
 /**
- * Base static class for performing query and update operations on the 'djland_county_zip_code' table.
+ * Base static class for performing query and update operations on the 'county_zip_code' table.
  *
  * 
  *
@@ -14,7 +19,7 @@ abstract class Oops_Model_Base_CountyZipCodePeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_county_zip_code';
+	const TABLE_NAME = OOPS_MODEL_COUNTYZIPCODE_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_CountyZipCode';
@@ -35,13 +40,13 @@ abstract class Oops_Model_Base_CountyZipCodePeer {
 	const NUM_HYDRATE_COLUMNS = 3;
 
 	/** the column name for the ID_COUNTY field */
-	const ID_COUNTY = 'djland_county_zip_code.ID_COUNTY';
+	const ID_COUNTY = OOPS_MODEL_COUNTYZIPCODE_ID_COUNTY;
 
 	/** the column name for the FROM_ZIP_CODE field */
-	const FROM_ZIP_CODE = 'djland_county_zip_code.FROM_ZIP_CODE';
+	const FROM_ZIP_CODE = OOPS_MODEL_COUNTYZIPCODE_FROM_ZIP_CODE;
 
 	/** the column name for the TO_ZIP_CODE field */
-	const TO_ZIP_CODE = 'djland_county_zip_code.TO_ZIP_CODE';
+	const TO_ZIP_CODE = OOPS_MODEL_COUNTYZIPCODE_TO_ZIP_CODE;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -349,7 +354,7 @@ abstract class Oops_Model_Base_CountyZipCodePeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_county_zip_code
+	 * Method to invalidate the instance pool of all tables related to county_zip_code
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -581,7 +586,7 @@ abstract class Oops_Model_Base_CountyZipCodePeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_county_zip_code table.
+	 * Deletes all rows from the county_zip_code table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

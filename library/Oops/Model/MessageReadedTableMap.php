@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_message_readed' table.
+ * This class defines the structure of the 'message_readed' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_MessageReadedTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_message_readed');
+		$this->setName(_DB_PREFIX_ . 'message_readed');
 		$this->setPhpName('MessageReaded');
 		$this->setClassname('Oops_Model_MessageReaded');
 		$this->setPackage('prestashop');

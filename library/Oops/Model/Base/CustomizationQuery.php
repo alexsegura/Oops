@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_customization' table.
+ * Base class that represents a query for the 'customization' table.
  *
  * 
  *
@@ -132,7 +132,7 @@ abstract class Oops_Model_Base_CustomizationQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_CUSTOMIZATION`, `ID_PRODUCT_ATTRIBUTE`, `ID_CART`, `ID_PRODUCT`, `QUANTITY`, `QUANTITY_REFUNDED`, `QUANTITY_RETURNED` FROM `djland_customization` WHERE `ID_CUSTOMIZATION` = :p0 AND `ID_CART` = :p1 AND `ID_PRODUCT` = :p2';
+		$sql = 'SELECT `ID_CUSTOMIZATION`, `ID_PRODUCT_ATTRIBUTE`, `ID_CART`, `ID_PRODUCT`, `QUANTITY`, `QUANTITY_REFUNDED`, `QUANTITY_RETURNED` FROM `' . _DB_PREFIX_ . 'customization` WHERE `ID_CUSTOMIZATION` = :p0 AND `ID_CART` = :p1 AND `ID_PRODUCT` = :p2';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key[0], PDO::PARAM_INT);

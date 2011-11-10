@@ -1,8 +1,13 @@
 <?php
 
 
+define('OOPS_MODEL_QUICKACCESS_ID_QUICK_ACCESS', _DB_PREFIX_ . 'quick_access.ID_QUICK_ACCESS');
+define('OOPS_MODEL_QUICKACCESS_NEW_WINDOW', _DB_PREFIX_ . 'quick_access.NEW_WINDOW');
+define('OOPS_MODEL_QUICKACCESS_LINK', _DB_PREFIX_ . 'quick_access.LINK');
+define('OOPS_MODEL_QUICKACCESS_TABLE_NAME', _DB_PREFIX_ . 'quick_access');
+
 /**
- * Base static class for performing query and update operations on the 'djland_quick_access' table.
+ * Base static class for performing query and update operations on the 'quick_access' table.
  *
  * 
  *
@@ -14,7 +19,7 @@ abstract class Oops_Model_Base_QuickAccessPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_quick_access';
+	const TABLE_NAME = OOPS_MODEL_QUICKACCESS_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_QuickAccess';
@@ -35,13 +40,13 @@ abstract class Oops_Model_Base_QuickAccessPeer {
 	const NUM_HYDRATE_COLUMNS = 3;
 
 	/** the column name for the ID_QUICK_ACCESS field */
-	const ID_QUICK_ACCESS = 'djland_quick_access.ID_QUICK_ACCESS';
+	const ID_QUICK_ACCESS = OOPS_MODEL_QUICKACCESS_ID_QUICK_ACCESS;
 
 	/** the column name for the NEW_WINDOW field */
-	const NEW_WINDOW = 'djland_quick_access.NEW_WINDOW';
+	const NEW_WINDOW = OOPS_MODEL_QUICKACCESS_NEW_WINDOW;
 
 	/** the column name for the LINK field */
-	const LINK = 'djland_quick_access.LINK';
+	const LINK = OOPS_MODEL_QUICKACCESS_LINK;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -349,7 +354,7 @@ abstract class Oops_Model_Base_QuickAccessPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_quick_access
+	 * Method to invalidate the instance pool of all tables related to quick_access
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -569,7 +574,7 @@ abstract class Oops_Model_Base_QuickAccessPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_quick_access table.
+	 * Deletes all rows from the quick_access table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

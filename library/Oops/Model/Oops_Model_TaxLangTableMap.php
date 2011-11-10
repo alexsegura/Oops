@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_tax_lang' table.
+ * This class defines the structure of the 'tax_lang' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_TaxLangTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_tax_lang');
+		$this->setName(_DB_PREFIX_ . 'tax_lang');
 		$this->setPhpName('TaxLang');
 		$this->setClassname('Oops_Model_TaxLang');
 		$this->setPackage('prestashop');

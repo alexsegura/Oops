@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_page_viewed' table.
+ * Base class that represents a row from the 'page_viewed' table.
  *
  * 
  *
@@ -404,7 +404,7 @@ abstract class Oops_Model_Base_PageViewed extends BaseObject  implements Persist
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_page_viewed` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'page_viewed` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

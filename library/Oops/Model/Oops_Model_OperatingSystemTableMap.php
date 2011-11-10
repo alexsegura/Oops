@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_operating_system' table.
+ * This class defines the structure of the 'operating_system' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_OperatingSystemTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_operating_system');
+		$this->setName(_DB_PREFIX_ . 'operating_system');
 		$this->setPhpName('OperatingSystem');
 		$this->setClassname('Oops_Model_OperatingSystem');
 		$this->setPackage('prestashop');

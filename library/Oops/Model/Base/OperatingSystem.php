@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_operating_system' table.
+ * Base class that represents a row from the 'operating_system' table.
  *
  * 
  *
@@ -368,7 +368,7 @@ abstract class Oops_Model_Base_OperatingSystem extends BaseObject  implements Pe
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_operating_system` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'operating_system` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

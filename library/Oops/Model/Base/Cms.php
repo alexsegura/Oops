@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_cms' table.
+ * Base class that represents a row from the 'cms' table.
  *
  * 
  *
@@ -488,7 +488,7 @@ abstract class Oops_Model_Base_Cms extends BaseObject  implements Persistent
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_cms` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'cms` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

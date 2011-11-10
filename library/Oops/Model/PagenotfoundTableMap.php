@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_pagenotfound' table.
+ * This class defines the structure of the 'pagenotfound' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_PagenotfoundTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_pagenotfound');
+		$this->setName(_DB_PREFIX_ . 'pagenotfound');
 		$this->setPhpName('Pagenotfound');
 		$this->setClassname('Oops_Model_Pagenotfound');
 		$this->setPackage('prestashop');

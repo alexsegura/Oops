@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_attribute_group' table.
+ * Base class that represents a row from the 'attribute_group' table.
  *
  * 
  *
@@ -402,7 +402,7 @@ abstract class Oops_Model_Base_AttributeGroup extends BaseObject  implements Per
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_attribute_group` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'attribute_group` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

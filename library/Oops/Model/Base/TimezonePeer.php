@@ -1,8 +1,12 @@
 <?php
 
 
+define('OOPS_MODEL_TIMEZONE_ID_TIMEZONE', _DB_PREFIX_ . 'timezone.ID_TIMEZONE');
+define('OOPS_MODEL_TIMEZONE_NAME', _DB_PREFIX_ . 'timezone.NAME');
+define('OOPS_MODEL_TIMEZONE_TABLE_NAME', _DB_PREFIX_ . 'timezone');
+
 /**
- * Base static class for performing query and update operations on the 'djland_timezone' table.
+ * Base static class for performing query and update operations on the 'timezone' table.
  *
  * 
  *
@@ -14,7 +18,7 @@ abstract class Oops_Model_Base_TimezonePeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_timezone';
+	const TABLE_NAME = OOPS_MODEL_TIMEZONE_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_Timezone';
@@ -35,10 +39,10 @@ abstract class Oops_Model_Base_TimezonePeer {
 	const NUM_HYDRATE_COLUMNS = 2;
 
 	/** the column name for the ID_TIMEZONE field */
-	const ID_TIMEZONE = 'djland_timezone.ID_TIMEZONE';
+	const ID_TIMEZONE = OOPS_MODEL_TIMEZONE_ID_TIMEZONE;
 
 	/** the column name for the NAME field */
-	const NAME = 'djland_timezone.NAME';
+	const NAME = OOPS_MODEL_TIMEZONE_NAME;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -344,7 +348,7 @@ abstract class Oops_Model_Base_TimezonePeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_timezone
+	 * Method to invalidate the instance pool of all tables related to timezone
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -564,7 +568,7 @@ abstract class Oops_Model_Base_TimezonePeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_timezone table.
+	 * Deletes all rows from the timezone table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

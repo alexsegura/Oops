@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_customization_field' table.
+ * This class defines the structure of the 'customization_field' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_CustomizationFieldTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_customization_field');
+		$this->setName(_DB_PREFIX_ . 'customization_field');
 		$this->setPhpName('CustomizationField');
 		$this->setClassname('Oops_Model_CustomizationField');
 		$this->setPackage('prestashop');

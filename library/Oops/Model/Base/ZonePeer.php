@@ -1,8 +1,13 @@
 <?php
 
 
+define('OOPS_MODEL_ZONE_ID_ZONE', _DB_PREFIX_ . 'zone.ID_ZONE');
+define('OOPS_MODEL_ZONE_NAME', _DB_PREFIX_ . 'zone.NAME');
+define('OOPS_MODEL_ZONE_ACTIVE', _DB_PREFIX_ . 'zone.ACTIVE');
+define('OOPS_MODEL_ZONE_TABLE_NAME', _DB_PREFIX_ . 'zone');
+
 /**
- * Base static class for performing query and update operations on the 'djland_zone' table.
+ * Base static class for performing query and update operations on the 'zone' table.
  *
  * 
  *
@@ -14,7 +19,7 @@ abstract class Oops_Model_Base_ZonePeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_zone';
+	const TABLE_NAME = OOPS_MODEL_ZONE_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_Zone';
@@ -35,13 +40,13 @@ abstract class Oops_Model_Base_ZonePeer {
 	const NUM_HYDRATE_COLUMNS = 3;
 
 	/** the column name for the ID_ZONE field */
-	const ID_ZONE = 'djland_zone.ID_ZONE';
+	const ID_ZONE = OOPS_MODEL_ZONE_ID_ZONE;
 
 	/** the column name for the NAME field */
-	const NAME = 'djland_zone.NAME';
+	const NAME = OOPS_MODEL_ZONE_NAME;
 
 	/** the column name for the ACTIVE field */
-	const ACTIVE = 'djland_zone.ACTIVE';
+	const ACTIVE = OOPS_MODEL_ZONE_ACTIVE;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -349,7 +354,7 @@ abstract class Oops_Model_Base_ZonePeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_zone
+	 * Method to invalidate the instance pool of all tables related to zone
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -569,7 +574,7 @@ abstract class Oops_Model_Base_ZonePeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_zone table.
+	 * Deletes all rows from the zone table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

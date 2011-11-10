@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_country_lang' table.
+ * Base class that represents a query for the 'country_lang' table.
  *
  * 
  *
@@ -116,7 +116,7 @@ abstract class Oops_Model_Base_CountryLangQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_COUNTRY`, `ID_LANG`, `NAME` FROM `djland_country_lang` WHERE `ID_COUNTRY` = :p0';
+		$sql = 'SELECT `ID_COUNTRY`, `ID_LANG`, `NAME` FROM `' . _DB_PREFIX_ . 'country_lang` WHERE `ID_COUNTRY` = :p0';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

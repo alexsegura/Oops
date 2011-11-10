@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_profile' table.
+ * Base class that represents a row from the 'profile' table.
  *
  * 
  *
@@ -328,7 +328,7 @@ abstract class Oops_Model_Base_Profile extends BaseObject  implements Persistent
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_profile` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'profile` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

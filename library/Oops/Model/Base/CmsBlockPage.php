@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_cms_block_page' table.
+ * Base class that represents a row from the 'cms_block_page' table.
  *
  * 
  *
@@ -456,7 +456,7 @@ abstract class Oops_Model_Base_CmsBlockPage extends BaseObject  implements Persi
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_cms_block_page` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'cms_block_page` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

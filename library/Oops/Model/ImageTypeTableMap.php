@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_image_type' table.
+ * This class defines the structure of the 'image_type' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_ImageTypeTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_image_type');
+		$this->setName(_DB_PREFIX_ . 'image_type');
 		$this->setPhpName('ImageType');
 		$this->setClassname('Oops_Model_ImageType');
 		$this->setPackage('prestashop');

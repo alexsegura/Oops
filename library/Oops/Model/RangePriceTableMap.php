@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_range_price' table.
+ * This class defines the structure of the 'range_price' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_RangePriceTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_range_price');
+		$this->setName(_DB_PREFIX_ . 'range_price');
 		$this->setPhpName('RangePrice');
 		$this->setClassname('Oops_Model_RangePrice');
 		$this->setPackage('prestashop');

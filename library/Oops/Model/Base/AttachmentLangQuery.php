@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_attachment_lang' table.
+ * Base class that represents a query for the 'attachment_lang' table.
  *
  * 
  *
@@ -120,7 +120,7 @@ abstract class Oops_Model_Base_AttachmentLangQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_ATTACHMENT`, `ID_LANG`, `NAME`, `DESCRIPTION` FROM `djland_attachment_lang` WHERE `ID_ATTACHMENT` = :p0 AND `ID_LANG` = :p1';
+		$sql = 'SELECT `ID_ATTACHMENT`, `ID_LANG`, `NAME`, `DESCRIPTION` FROM `' . _DB_PREFIX_ . 'attachment_lang` WHERE `ID_ATTACHMENT` = :p0 AND `ID_LANG` = :p1';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key[0], PDO::PARAM_INT);

@@ -1,8 +1,11 @@
 <?php
 
 
+define('OOPS_MODEL_DISCOUNTTYPE_ID_DISCOUNT_TYPE', _DB_PREFIX_ . 'discount_type.ID_DISCOUNT_TYPE');
+define('OOPS_MODEL_DISCOUNTTYPE_TABLE_NAME', _DB_PREFIX_ . 'discount_type');
+
 /**
- * Base static class for performing query and update operations on the 'djland_discount_type' table.
+ * Base static class for performing query and update operations on the 'discount_type' table.
  *
  * 
  *
@@ -14,7 +17,7 @@ abstract class Oops_Model_Base_DiscountTypePeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_discount_type';
+	const TABLE_NAME = OOPS_MODEL_DISCOUNTTYPE_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_DiscountType';
@@ -35,7 +38,7 @@ abstract class Oops_Model_Base_DiscountTypePeer {
 	const NUM_HYDRATE_COLUMNS = 1;
 
 	/** the column name for the ID_DISCOUNT_TYPE field */
-	const ID_DISCOUNT_TYPE = 'djland_discount_type.ID_DISCOUNT_TYPE';
+	const ID_DISCOUNT_TYPE = OOPS_MODEL_DISCOUNTTYPE_ID_DISCOUNT_TYPE;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -339,7 +342,7 @@ abstract class Oops_Model_Base_DiscountTypePeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_discount_type
+	 * Method to invalidate the instance pool of all tables related to discount_type
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -559,7 +562,7 @@ abstract class Oops_Model_Base_DiscountTypePeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_discount_type table.
+	 * Deletes all rows from the discount_type table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

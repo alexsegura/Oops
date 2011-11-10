@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_attribute_lang' table.
+ * Base class that represents a row from the 'attribute_lang' table.
  *
  * 
  *
@@ -404,7 +404,7 @@ abstract class Oops_Model_Base_AttributeLang extends BaseObject  implements Pers
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_attribute_lang` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'attribute_lang` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

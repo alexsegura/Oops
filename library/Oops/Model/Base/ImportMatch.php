@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_import_match' table.
+ * Base class that represents a row from the 'import_match' table.
  *
  * 
  *
@@ -448,7 +448,7 @@ abstract class Oops_Model_Base_ImportMatch extends BaseObject  implements Persis
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_import_match` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'import_match` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

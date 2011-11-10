@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_attribute_impact' table.
+ * Base class that represents a query for the 'attribute_impact' table.
  *
  * 
  *
@@ -124,7 +124,7 @@ abstract class Oops_Model_Base_AttributeImpactQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_ATTRIBUTE_IMPACT`, `ID_PRODUCT`, `ID_ATTRIBUTE`, `WEIGHT`, `PRICE` FROM `djland_attribute_impact` WHERE `ID_ATTRIBUTE_IMPACT` = :p0';
+		$sql = 'SELECT `ID_ATTRIBUTE_IMPACT`, `ID_PRODUCT`, `ID_ATTRIBUTE`, `WEIGHT`, `PRICE` FROM `' . _DB_PREFIX_ . 'attribute_impact` WHERE `ID_ATTRIBUTE_IMPACT` = :p0';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

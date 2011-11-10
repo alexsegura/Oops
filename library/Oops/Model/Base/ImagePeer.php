@@ -1,8 +1,14 @@
 <?php
 
 
+define('OOPS_MODEL_IMAGE_ID_IMAGE', _DB_PREFIX_ . 'image.ID_IMAGE');
+define('OOPS_MODEL_IMAGE_ID_PRODUCT', _DB_PREFIX_ . 'image.ID_PRODUCT');
+define('OOPS_MODEL_IMAGE_POSITION', _DB_PREFIX_ . 'image.POSITION');
+define('OOPS_MODEL_IMAGE_COVER', _DB_PREFIX_ . 'image.COVER');
+define('OOPS_MODEL_IMAGE_TABLE_NAME', _DB_PREFIX_ . 'image');
+
 /**
- * Base static class for performing query and update operations on the 'djland_image' table.
+ * Base static class for performing query and update operations on the 'image' table.
  *
  * 
  *
@@ -14,7 +20,7 @@ abstract class Oops_Model_Base_ImagePeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_image';
+	const TABLE_NAME = OOPS_MODEL_IMAGE_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_Image';
@@ -35,16 +41,16 @@ abstract class Oops_Model_Base_ImagePeer {
 	const NUM_HYDRATE_COLUMNS = 4;
 
 	/** the column name for the ID_IMAGE field */
-	const ID_IMAGE = 'djland_image.ID_IMAGE';
+	const ID_IMAGE = OOPS_MODEL_IMAGE_ID_IMAGE;
 
 	/** the column name for the ID_PRODUCT field */
-	const ID_PRODUCT = 'djland_image.ID_PRODUCT';
+	const ID_PRODUCT = OOPS_MODEL_IMAGE_ID_PRODUCT;
 
 	/** the column name for the POSITION field */
-	const POSITION = 'djland_image.POSITION';
+	const POSITION = OOPS_MODEL_IMAGE_POSITION;
 
 	/** the column name for the COVER field */
-	const COVER = 'djland_image.COVER';
+	const COVER = OOPS_MODEL_IMAGE_COVER;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -354,7 +360,7 @@ abstract class Oops_Model_Base_ImagePeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_image
+	 * Method to invalidate the instance pool of all tables related to image
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -808,7 +814,7 @@ abstract class Oops_Model_Base_ImagePeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_image table.
+	 * Deletes all rows from the image table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

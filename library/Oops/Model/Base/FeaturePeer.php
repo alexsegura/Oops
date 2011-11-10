@@ -1,8 +1,11 @@
 <?php
 
 
+define('OOPS_MODEL_FEATURE_ID_FEATURE', _DB_PREFIX_ . 'feature.ID_FEATURE');
+define('OOPS_MODEL_FEATURE_TABLE_NAME', _DB_PREFIX_ . 'feature');
+
 /**
- * Base static class for performing query and update operations on the 'djland_feature' table.
+ * Base static class for performing query and update operations on the 'feature' table.
  *
  * 
  *
@@ -14,7 +17,7 @@ abstract class Oops_Model_Base_FeaturePeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_feature';
+	const TABLE_NAME = OOPS_MODEL_FEATURE_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_Feature';
@@ -35,7 +38,7 @@ abstract class Oops_Model_Base_FeaturePeer {
 	const NUM_HYDRATE_COLUMNS = 1;
 
 	/** the column name for the ID_FEATURE field */
-	const ID_FEATURE = 'djland_feature.ID_FEATURE';
+	const ID_FEATURE = OOPS_MODEL_FEATURE_ID_FEATURE;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -339,7 +342,7 @@ abstract class Oops_Model_Base_FeaturePeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_feature
+	 * Method to invalidate the instance pool of all tables related to feature
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -559,7 +562,7 @@ abstract class Oops_Model_Base_FeaturePeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_feature table.
+	 * Deletes all rows from the feature table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

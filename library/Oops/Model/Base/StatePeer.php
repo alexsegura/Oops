@@ -1,8 +1,17 @@
 <?php
 
 
+define('OOPS_MODEL_STATE_ID_STATE', _DB_PREFIX_ . 'state.ID_STATE');
+define('OOPS_MODEL_STATE_ID_COUNTRY', _DB_PREFIX_ . 'state.ID_COUNTRY');
+define('OOPS_MODEL_STATE_ID_ZONE', _DB_PREFIX_ . 'state.ID_ZONE');
+define('OOPS_MODEL_STATE_NAME', _DB_PREFIX_ . 'state.NAME');
+define('OOPS_MODEL_STATE_ISO_CODE', _DB_PREFIX_ . 'state.ISO_CODE');
+define('OOPS_MODEL_STATE_TAX_BEHAVIOR', _DB_PREFIX_ . 'state.TAX_BEHAVIOR');
+define('OOPS_MODEL_STATE_ACTIVE', _DB_PREFIX_ . 'state.ACTIVE');
+define('OOPS_MODEL_STATE_TABLE_NAME', _DB_PREFIX_ . 'state');
+
 /**
- * Base static class for performing query and update operations on the 'djland_state' table.
+ * Base static class for performing query and update operations on the 'state' table.
  *
  * 
  *
@@ -14,7 +23,7 @@ abstract class Oops_Model_Base_StatePeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_state';
+	const TABLE_NAME = OOPS_MODEL_STATE_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_State';
@@ -35,25 +44,25 @@ abstract class Oops_Model_Base_StatePeer {
 	const NUM_HYDRATE_COLUMNS = 7;
 
 	/** the column name for the ID_STATE field */
-	const ID_STATE = 'djland_state.ID_STATE';
+	const ID_STATE = OOPS_MODEL_STATE_ID_STATE;
 
 	/** the column name for the ID_COUNTRY field */
-	const ID_COUNTRY = 'djland_state.ID_COUNTRY';
+	const ID_COUNTRY = OOPS_MODEL_STATE_ID_COUNTRY;
 
 	/** the column name for the ID_ZONE field */
-	const ID_ZONE = 'djland_state.ID_ZONE';
+	const ID_ZONE = OOPS_MODEL_STATE_ID_ZONE;
 
 	/** the column name for the NAME field */
-	const NAME = 'djland_state.NAME';
+	const NAME = OOPS_MODEL_STATE_NAME;
 
 	/** the column name for the ISO_CODE field */
-	const ISO_CODE = 'djland_state.ISO_CODE';
+	const ISO_CODE = OOPS_MODEL_STATE_ISO_CODE;
 
 	/** the column name for the TAX_BEHAVIOR field */
-	const TAX_BEHAVIOR = 'djland_state.TAX_BEHAVIOR';
+	const TAX_BEHAVIOR = OOPS_MODEL_STATE_TAX_BEHAVIOR;
 
 	/** the column name for the ACTIVE field */
-	const ACTIVE = 'djland_state.ACTIVE';
+	const ACTIVE = OOPS_MODEL_STATE_ACTIVE;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -369,7 +378,7 @@ abstract class Oops_Model_Base_StatePeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_state
+	 * Method to invalidate the instance pool of all tables related to state
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -589,7 +598,7 @@ abstract class Oops_Model_Base_StatePeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_state table.
+	 * Deletes all rows from the state table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

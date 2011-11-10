@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_order_return_detail' table.
+ * This class defines the structure of the 'order_return_detail' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_OrderReturnDetailTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_order_return_detail');
+		$this->setName(_DB_PREFIX_ . 'order_return_detail');
 		$this->setPhpName('OrderReturnDetail');
 		$this->setClassname('Oops_Model_OrderReturnDetail');
 		$this->setPackage('prestashop');

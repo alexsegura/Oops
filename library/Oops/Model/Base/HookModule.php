@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_hook_module' table.
+ * Base class that represents a row from the 'hook_module' table.
  *
  * 
  *
@@ -404,7 +404,7 @@ abstract class Oops_Model_Base_HookModule extends BaseObject  implements Persist
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_hook_module` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'hook_module` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

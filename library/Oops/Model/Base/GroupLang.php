@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_group_lang' table.
+ * Base class that represents a row from the 'group_lang' table.
  *
  * 
  *
@@ -404,7 +404,7 @@ abstract class Oops_Model_Base_GroupLang extends BaseObject  implements Persiste
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_group_lang` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'group_lang` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

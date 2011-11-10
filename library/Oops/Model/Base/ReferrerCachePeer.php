@@ -1,8 +1,12 @@
 <?php
 
 
+define('OOPS_MODEL_REFERRERCACHE_ID_CONNECTIONS_SOURCE', _DB_PREFIX_ . 'referrer_cache.ID_CONNECTIONS_SOURCE');
+define('OOPS_MODEL_REFERRERCACHE_ID_REFERRER', _DB_PREFIX_ . 'referrer_cache.ID_REFERRER');
+define('OOPS_MODEL_REFERRERCACHE_TABLE_NAME', _DB_PREFIX_ . 'referrer_cache');
+
 /**
- * Base static class for performing query and update operations on the 'djland_referrer_cache' table.
+ * Base static class for performing query and update operations on the 'referrer_cache' table.
  *
  * 
  *
@@ -14,7 +18,7 @@ abstract class Oops_Model_Base_ReferrerCachePeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_referrer_cache';
+	const TABLE_NAME = OOPS_MODEL_REFERRERCACHE_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_ReferrerCache';
@@ -35,10 +39,10 @@ abstract class Oops_Model_Base_ReferrerCachePeer {
 	const NUM_HYDRATE_COLUMNS = 2;
 
 	/** the column name for the ID_CONNECTIONS_SOURCE field */
-	const ID_CONNECTIONS_SOURCE = 'djland_referrer_cache.ID_CONNECTIONS_SOURCE';
+	const ID_CONNECTIONS_SOURCE = OOPS_MODEL_REFERRERCACHE_ID_CONNECTIONS_SOURCE;
 
 	/** the column name for the ID_REFERRER field */
-	const ID_REFERRER = 'djland_referrer_cache.ID_REFERRER';
+	const ID_REFERRER = OOPS_MODEL_REFERRERCACHE_ID_REFERRER;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -344,7 +348,7 @@ abstract class Oops_Model_Base_ReferrerCachePeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_referrer_cache
+	 * Method to invalidate the instance pool of all tables related to referrer_cache
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -568,7 +572,7 @@ abstract class Oops_Model_Base_ReferrerCachePeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_referrer_cache table.
+	 * Deletes all rows from the referrer_cache table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

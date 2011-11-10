@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_carrier_group' table.
+ * Base class that represents a row from the 'carrier_group' table.
  *
  * 
  *
@@ -364,7 +364,7 @@ abstract class Oops_Model_Base_CarrierGroup extends BaseObject  implements Persi
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_carrier_group` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'carrier_group` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

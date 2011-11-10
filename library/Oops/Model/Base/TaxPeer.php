@@ -1,8 +1,13 @@
 <?php
 
 
+define('OOPS_MODEL_TAX_ID_TAX', _DB_PREFIX_ . 'tax.ID_TAX');
+define('OOPS_MODEL_TAX_RATE', _DB_PREFIX_ . 'tax.RATE');
+define('OOPS_MODEL_TAX_ACTIVE', _DB_PREFIX_ . 'tax.ACTIVE');
+define('OOPS_MODEL_TAX_TABLE_NAME', _DB_PREFIX_ . 'tax');
+
 /**
- * Base static class for performing query and update operations on the 'djland_tax' table.
+ * Base static class for performing query and update operations on the 'tax' table.
  *
  * 
  *
@@ -14,7 +19,7 @@ abstract class Oops_Model_Base_TaxPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_tax';
+	const TABLE_NAME = OOPS_MODEL_TAX_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_Tax';
@@ -35,13 +40,13 @@ abstract class Oops_Model_Base_TaxPeer {
 	const NUM_HYDRATE_COLUMNS = 3;
 
 	/** the column name for the ID_TAX field */
-	const ID_TAX = 'djland_tax.ID_TAX';
+	const ID_TAX = OOPS_MODEL_TAX_ID_TAX;
 
 	/** the column name for the RATE field */
-	const RATE = 'djland_tax.RATE';
+	const RATE = OOPS_MODEL_TAX_RATE;
 
 	/** the column name for the ACTIVE field */
-	const ACTIVE = 'djland_tax.ACTIVE';
+	const ACTIVE = OOPS_MODEL_TAX_ACTIVE;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -349,7 +354,7 @@ abstract class Oops_Model_Base_TaxPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_tax
+	 * Method to invalidate the instance pool of all tables related to tax
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -569,7 +574,7 @@ abstract class Oops_Model_Base_TaxPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_tax table.
+	 * Deletes all rows from the tax table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_accessory' table.
+ * This class defines the structure of the 'accessory' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_AccessoryTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_accessory');
+		$this->setName(_DB_PREFIX_ . 'accessory');
 		$this->setPhpName('Accessory');
 		$this->setClassname('Oops_Model_Accessory');
 		$this->setPackage('prestashop');

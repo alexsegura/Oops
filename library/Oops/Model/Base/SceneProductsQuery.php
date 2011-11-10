@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_scene_products' table.
+ * Base class that represents a query for the 'scene_products' table.
  *
  * 
  *
@@ -128,7 +128,7 @@ abstract class Oops_Model_Base_SceneProductsQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_SCENE`, `ID_PRODUCT`, `X_AXIS`, `Y_AXIS`, `ZONE_WIDTH`, `ZONE_HEIGHT` FROM `djland_scene_products` WHERE `ID_SCENE` = :p0 AND `ID_PRODUCT` = :p1 AND `X_AXIS` = :p2 AND `Y_AXIS` = :p3';
+		$sql = 'SELECT `ID_SCENE`, `ID_PRODUCT`, `X_AXIS`, `Y_AXIS`, `ZONE_WIDTH`, `ZONE_HEIGHT` FROM `' . _DB_PREFIX_ . 'scene_products` WHERE `ID_SCENE` = :p0 AND `ID_PRODUCT` = :p1 AND `X_AXIS` = :p2 AND `Y_AXIS` = :p3';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key[0], PDO::PARAM_INT);

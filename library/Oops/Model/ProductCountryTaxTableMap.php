@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_product_country_tax' table.
+ * This class defines the structure of the 'product_country_tax' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_ProductCountryTaxTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_product_country_tax');
+		$this->setName(_DB_PREFIX_ . 'product_country_tax');
 		$this->setPhpName('ProductCountryTax');
 		$this->setClassname('Oops_Model_ProductCountryTax');
 		$this->setPackage('prestashop');

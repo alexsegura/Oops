@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_product_tag' table.
+ * Base class that represents a query for the 'product_tag' table.
  *
  * 
  *
@@ -112,7 +112,7 @@ abstract class Oops_Model_Base_ProductTagQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_PRODUCT`, `ID_TAG` FROM `djland_product_tag` WHERE `ID_PRODUCT` = :p0 AND `ID_TAG` = :p1';
+		$sql = 'SELECT `ID_PRODUCT`, `ID_TAG` FROM `' . _DB_PREFIX_ . 'product_tag` WHERE `ID_PRODUCT` = :p0 AND `ID_TAG` = :p1';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key[0], PDO::PARAM_INT);

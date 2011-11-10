@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_configuration_lang' table.
+ * This class defines the structure of the 'configuration_lang' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_ConfigurationLangTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_configuration_lang');
+		$this->setName(_DB_PREFIX_ . 'configuration_lang');
 		$this->setPhpName('ConfigurationLang');
 		$this->setClassname('Oops_Model_ConfigurationLang');
 		$this->setPackage('prestashop');

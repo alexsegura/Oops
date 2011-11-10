@@ -1,8 +1,20 @@
 <?php
 
 
+define('OOPS_MODEL_PAYMENTCC_ID_PAYMENT_CC', _DB_PREFIX_ . 'payment_cc.ID_PAYMENT_CC');
+define('OOPS_MODEL_PAYMENTCC_ID_ORDER', _DB_PREFIX_ . 'payment_cc.ID_ORDER');
+define('OOPS_MODEL_PAYMENTCC_ID_CURRENCY', _DB_PREFIX_ . 'payment_cc.ID_CURRENCY');
+define('OOPS_MODEL_PAYMENTCC_AMOUNT', _DB_PREFIX_ . 'payment_cc.AMOUNT');
+define('OOPS_MODEL_PAYMENTCC_TRANSACTION_ID', _DB_PREFIX_ . 'payment_cc.TRANSACTION_ID');
+define('OOPS_MODEL_PAYMENTCC_CARD_NUMBER', _DB_PREFIX_ . 'payment_cc.CARD_NUMBER');
+define('OOPS_MODEL_PAYMENTCC_CARD_BRAND', _DB_PREFIX_ . 'payment_cc.CARD_BRAND');
+define('OOPS_MODEL_PAYMENTCC_CARD_EXPIRATION', _DB_PREFIX_ . 'payment_cc.CARD_EXPIRATION');
+define('OOPS_MODEL_PAYMENTCC_CARD_HOLDER', _DB_PREFIX_ . 'payment_cc.CARD_HOLDER');
+define('OOPS_MODEL_PAYMENTCC_DATE_ADD', _DB_PREFIX_ . 'payment_cc.DATE_ADD');
+define('OOPS_MODEL_PAYMENTCC_TABLE_NAME', _DB_PREFIX_ . 'payment_cc');
+
 /**
- * Base static class for performing query and update operations on the 'djland_payment_cc' table.
+ * Base static class for performing query and update operations on the 'payment_cc' table.
  *
  * 
  *
@@ -14,7 +26,7 @@ abstract class Oops_Model_Base_PaymentCcPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_payment_cc';
+	const TABLE_NAME = OOPS_MODEL_PAYMENTCC_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_PaymentCc';
@@ -35,34 +47,34 @@ abstract class Oops_Model_Base_PaymentCcPeer {
 	const NUM_HYDRATE_COLUMNS = 10;
 
 	/** the column name for the ID_PAYMENT_CC field */
-	const ID_PAYMENT_CC = 'djland_payment_cc.ID_PAYMENT_CC';
+	const ID_PAYMENT_CC = OOPS_MODEL_PAYMENTCC_ID_PAYMENT_CC;
 
 	/** the column name for the ID_ORDER field */
-	const ID_ORDER = 'djland_payment_cc.ID_ORDER';
+	const ID_ORDER = OOPS_MODEL_PAYMENTCC_ID_ORDER;
 
 	/** the column name for the ID_CURRENCY field */
-	const ID_CURRENCY = 'djland_payment_cc.ID_CURRENCY';
+	const ID_CURRENCY = OOPS_MODEL_PAYMENTCC_ID_CURRENCY;
 
 	/** the column name for the AMOUNT field */
-	const AMOUNT = 'djland_payment_cc.AMOUNT';
+	const AMOUNT = OOPS_MODEL_PAYMENTCC_AMOUNT;
 
 	/** the column name for the TRANSACTION_ID field */
-	const TRANSACTION_ID = 'djland_payment_cc.TRANSACTION_ID';
+	const TRANSACTION_ID = OOPS_MODEL_PAYMENTCC_TRANSACTION_ID;
 
 	/** the column name for the CARD_NUMBER field */
-	const CARD_NUMBER = 'djland_payment_cc.CARD_NUMBER';
+	const CARD_NUMBER = OOPS_MODEL_PAYMENTCC_CARD_NUMBER;
 
 	/** the column name for the CARD_BRAND field */
-	const CARD_BRAND = 'djland_payment_cc.CARD_BRAND';
+	const CARD_BRAND = OOPS_MODEL_PAYMENTCC_CARD_BRAND;
 
 	/** the column name for the CARD_EXPIRATION field */
-	const CARD_EXPIRATION = 'djland_payment_cc.CARD_EXPIRATION';
+	const CARD_EXPIRATION = OOPS_MODEL_PAYMENTCC_CARD_EXPIRATION;
 
 	/** the column name for the CARD_HOLDER field */
-	const CARD_HOLDER = 'djland_payment_cc.CARD_HOLDER';
+	const CARD_HOLDER = OOPS_MODEL_PAYMENTCC_CARD_HOLDER;
 
 	/** the column name for the DATE_ADD field */
-	const DATE_ADD = 'djland_payment_cc.DATE_ADD';
+	const DATE_ADD = OOPS_MODEL_PAYMENTCC_DATE_ADD;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -384,7 +396,7 @@ abstract class Oops_Model_Base_PaymentCcPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_payment_cc
+	 * Method to invalidate the instance pool of all tables related to payment_cc
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -604,7 +616,7 @@ abstract class Oops_Model_Base_PaymentCcPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_payment_cc table.
+	 * Deletes all rows from the payment_cc table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

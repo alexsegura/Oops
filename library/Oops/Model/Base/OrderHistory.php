@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_order_history' table.
+ * Base class that represents a row from the 'order_history' table.
  *
  * 
  *
@@ -518,7 +518,7 @@ abstract class Oops_Model_Base_OrderHistory extends BaseObject  implements Persi
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_order_history` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'order_history` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

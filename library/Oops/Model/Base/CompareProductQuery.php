@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_compare_product' table.
+ * Base class that represents a query for the 'compare_product' table.
  *
  * 
  *
@@ -128,7 +128,7 @@ abstract class Oops_Model_Base_CompareProductQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_COMPARE_PRODUCT`, `ID_PRODUCT`, `ID_GUEST`, `ID_CUSTOMER`, `DATE_ADD`, `DATE_UPD` FROM `djland_compare_product` WHERE `ID_COMPARE_PRODUCT` = :p0';
+		$sql = 'SELECT `ID_COMPARE_PRODUCT`, `ID_PRODUCT`, `ID_GUEST`, `ID_CUSTOMER`, `DATE_ADD`, `DATE_UPD` FROM `' . _DB_PREFIX_ . 'compare_product` WHERE `ID_COMPARE_PRODUCT` = :p0';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

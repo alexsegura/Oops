@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_category' table.
+ * Base class that represents a query for the 'category' table.
  *
  * 
  *
@@ -148,7 +148,7 @@ abstract class Oops_Model_Base_CategoryQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_CATEGORY`, `ID_PARENT`, `LEVEL_DEPTH`, `NLEFT`, `NRIGHT`, `ACTIVE`, `DATE_ADD`, `DATE_UPD`, `POSITION` FROM `djland_category` WHERE `ID_CATEGORY` = :p0';
+		$sql = 'SELECT `ID_CATEGORY`, `ID_PARENT`, `LEVEL_DEPTH`, `NLEFT`, `NRIGHT`, `ACTIVE`, `DATE_ADD`, `DATE_UPD`, `POSITION` FROM `' . _DB_PREFIX_ . 'category` WHERE `ID_CATEGORY` = :p0';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -717,7 +717,7 @@ abstract class Oops_Model_Base_CategoryQuery extends ModelCriteria
 
 	/**
 	 * Filter the query by a related Lang object
-	 * using the djland_category_lang table as cross reference
+	 * using the category_lang table as cross reference
 	 *
 	 * @param     Lang $lang the related object to use as filter
 	 * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
@@ -734,7 +734,7 @@ abstract class Oops_Model_Base_CategoryQuery extends ModelCriteria
 
 	/**
 	 * Filter the query by a related Product object
-	 * using the djland_category_product table as cross reference
+	 * using the category_product table as cross reference
 	 *
 	 * @param     Product $product the related object to use as filter
 	 * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
@@ -922,6 +922,61 @@ abstract class Oops_Model_Base_CategoryQuery extends ModelCriteria
 		return $this
 			->orderByBranch()
 			->find($con);
+	}
+
+	// i18n behavior
+	
+	/**
+	 * Adds a JOIN clause to the query using the i18n relation
+	 *
+	 * @param     string $locale Locale to use for the join condition, e.g. 'fr_FR'
+	 * @param     string $relationAlias optional alias for the relation
+	 * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'. Defaults to left join.
+	 *
+	 * @return    Oops_Model_CategoryQuery The current query, for fluid interface
+	 */
+	public function joinI18n($locale = '1', $relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+	{
+		$relationName = $relationAlias ? $relationAlias : 'CategoryLang';
+		return $this
+			->joinCategoryLang($relationAlias, $joinType)
+			->addJoinCondition($relationName, $relationName . '.IdLang = ?', $locale);
+	}
+	
+	/**
+	 * Adds a JOIN clause to the query and hydrates the related I18n object.
+	 * Shortcut for $c->joinI18n($locale)->with()
+	 *
+	 * @param     string $locale Locale to use for the join condition, e.g. 'fr_FR'
+	 * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'. Defaults to left join.
+	 *
+	 * @return    Oops_Model_CategoryQuery The current query, for fluid interface
+	 */
+	public function joinWithI18n($locale = '1', $joinType = Criteria::LEFT_JOIN)
+	{
+		$this
+			->joinI18n($locale, null, $joinType)
+			->with('CategoryLang');
+		$this->with['CategoryLang']->setIsWithOneToMany(false);
+		return $this;
+	}
+	
+	/**
+	 * Use the I18n relation query object
+	 *
+	 * @see       useQuery()
+	 *
+	 * @param     string $locale Locale to use for the join condition, e.g. 'fr_FR'
+	 * @param     string $relationAlias optional alias for the relation
+	 * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'. Defaults to left join.
+	 *
+	 * @return    Oops_Model_CategoryLangQuery A secondary query class using the current class as primary query
+	 */
+	public function useI18nQuery($locale = '1', $relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+	{
+		return $this
+			->joinI18n($locale, $relationAlias, $joinType)
+			->useQuery($relationAlias ? $relationAlias : 'CategoryLang', 'Oops_Model_CategoryLangQuery');
 	}
 
 } // Oops_Model_Base_CategoryQuery

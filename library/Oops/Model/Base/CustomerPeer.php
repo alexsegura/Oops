@@ -1,8 +1,30 @@
 <?php
 
 
+define('OOPS_MODEL_CUSTOMER_ID_CUSTOMER', _DB_PREFIX_ . 'customer.ID_CUSTOMER');
+define('OOPS_MODEL_CUSTOMER_ID_GENDER', _DB_PREFIX_ . 'customer.ID_GENDER');
+define('OOPS_MODEL_CUSTOMER_ID_DEFAULT_GROUP', _DB_PREFIX_ . 'customer.ID_DEFAULT_GROUP');
+define('OOPS_MODEL_CUSTOMER_FIRSTNAME', _DB_PREFIX_ . 'customer.FIRSTNAME');
+define('OOPS_MODEL_CUSTOMER_LASTNAME', _DB_PREFIX_ . 'customer.LASTNAME');
+define('OOPS_MODEL_CUSTOMER_EMAIL', _DB_PREFIX_ . 'customer.EMAIL');
+define('OOPS_MODEL_CUSTOMER_PASSWD', _DB_PREFIX_ . 'customer.PASSWD');
+define('OOPS_MODEL_CUSTOMER_LAST_PASSWD_GEN', _DB_PREFIX_ . 'customer.LAST_PASSWD_GEN');
+define('OOPS_MODEL_CUSTOMER_BIRTHDAY', _DB_PREFIX_ . 'customer.BIRTHDAY');
+define('OOPS_MODEL_CUSTOMER_NEWSLETTER', _DB_PREFIX_ . 'customer.NEWSLETTER');
+define('OOPS_MODEL_CUSTOMER_IP_REGISTRATION_NEWSLETTER', _DB_PREFIX_ . 'customer.IP_REGISTRATION_NEWSLETTER');
+define('OOPS_MODEL_CUSTOMER_NEWSLETTER_DATE_ADD', _DB_PREFIX_ . 'customer.NEWSLETTER_DATE_ADD');
+define('OOPS_MODEL_CUSTOMER_OPTIN', _DB_PREFIX_ . 'customer.OPTIN');
+define('OOPS_MODEL_CUSTOMER_SECURE_KEY', _DB_PREFIX_ . 'customer.SECURE_KEY');
+define('OOPS_MODEL_CUSTOMER_NOTE', _DB_PREFIX_ . 'customer.NOTE');
+define('OOPS_MODEL_CUSTOMER_ACTIVE', _DB_PREFIX_ . 'customer.ACTIVE');
+define('OOPS_MODEL_CUSTOMER_IS_GUEST', _DB_PREFIX_ . 'customer.IS_GUEST');
+define('OOPS_MODEL_CUSTOMER_DELETED', _DB_PREFIX_ . 'customer.DELETED');
+define('OOPS_MODEL_CUSTOMER_DATE_ADD', _DB_PREFIX_ . 'customer.DATE_ADD');
+define('OOPS_MODEL_CUSTOMER_DATE_UPD', _DB_PREFIX_ . 'customer.DATE_UPD');
+define('OOPS_MODEL_CUSTOMER_TABLE_NAME', _DB_PREFIX_ . 'customer');
+
 /**
- * Base static class for performing query and update operations on the 'djland_customer' table.
+ * Base static class for performing query and update operations on the 'customer' table.
  *
  * 
  *
@@ -14,7 +36,7 @@ abstract class Oops_Model_Base_CustomerPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_customer';
+	const TABLE_NAME = OOPS_MODEL_CUSTOMER_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_Customer';
@@ -35,64 +57,64 @@ abstract class Oops_Model_Base_CustomerPeer {
 	const NUM_HYDRATE_COLUMNS = 20;
 
 	/** the column name for the ID_CUSTOMER field */
-	const ID_CUSTOMER = 'djland_customer.ID_CUSTOMER';
+	const ID_CUSTOMER = OOPS_MODEL_CUSTOMER_ID_CUSTOMER;
 
 	/** the column name for the ID_GENDER field */
-	const ID_GENDER = 'djland_customer.ID_GENDER';
+	const ID_GENDER = OOPS_MODEL_CUSTOMER_ID_GENDER;
 
 	/** the column name for the ID_DEFAULT_GROUP field */
-	const ID_DEFAULT_GROUP = 'djland_customer.ID_DEFAULT_GROUP';
+	const ID_DEFAULT_GROUP = OOPS_MODEL_CUSTOMER_ID_DEFAULT_GROUP;
 
 	/** the column name for the FIRSTNAME field */
-	const FIRSTNAME = 'djland_customer.FIRSTNAME';
+	const FIRSTNAME = OOPS_MODEL_CUSTOMER_FIRSTNAME;
 
 	/** the column name for the LASTNAME field */
-	const LASTNAME = 'djland_customer.LASTNAME';
+	const LASTNAME = OOPS_MODEL_CUSTOMER_LASTNAME;
 
 	/** the column name for the EMAIL field */
-	const EMAIL = 'djland_customer.EMAIL';
+	const EMAIL = OOPS_MODEL_CUSTOMER_EMAIL;
 
 	/** the column name for the PASSWD field */
-	const PASSWD = 'djland_customer.PASSWD';
+	const PASSWD = OOPS_MODEL_CUSTOMER_PASSWD;
 
 	/** the column name for the LAST_PASSWD_GEN field */
-	const LAST_PASSWD_GEN = 'djland_customer.LAST_PASSWD_GEN';
+	const LAST_PASSWD_GEN = OOPS_MODEL_CUSTOMER_LAST_PASSWD_GEN;
 
 	/** the column name for the BIRTHDAY field */
-	const BIRTHDAY = 'djland_customer.BIRTHDAY';
+	const BIRTHDAY = OOPS_MODEL_CUSTOMER_BIRTHDAY;
 
 	/** the column name for the NEWSLETTER field */
-	const NEWSLETTER = 'djland_customer.NEWSLETTER';
+	const NEWSLETTER = OOPS_MODEL_CUSTOMER_NEWSLETTER;
 
 	/** the column name for the IP_REGISTRATION_NEWSLETTER field */
-	const IP_REGISTRATION_NEWSLETTER = 'djland_customer.IP_REGISTRATION_NEWSLETTER';
+	const IP_REGISTRATION_NEWSLETTER = OOPS_MODEL_CUSTOMER_IP_REGISTRATION_NEWSLETTER;
 
 	/** the column name for the NEWSLETTER_DATE_ADD field */
-	const NEWSLETTER_DATE_ADD = 'djland_customer.NEWSLETTER_DATE_ADD';
+	const NEWSLETTER_DATE_ADD = OOPS_MODEL_CUSTOMER_NEWSLETTER_DATE_ADD;
 
 	/** the column name for the OPTIN field */
-	const OPTIN = 'djland_customer.OPTIN';
+	const OPTIN = OOPS_MODEL_CUSTOMER_OPTIN;
 
 	/** the column name for the SECURE_KEY field */
-	const SECURE_KEY = 'djland_customer.SECURE_KEY';
+	const SECURE_KEY = OOPS_MODEL_CUSTOMER_SECURE_KEY;
 
 	/** the column name for the NOTE field */
-	const NOTE = 'djland_customer.NOTE';
+	const NOTE = OOPS_MODEL_CUSTOMER_NOTE;
 
 	/** the column name for the ACTIVE field */
-	const ACTIVE = 'djland_customer.ACTIVE';
+	const ACTIVE = OOPS_MODEL_CUSTOMER_ACTIVE;
 
 	/** the column name for the IS_GUEST field */
-	const IS_GUEST = 'djland_customer.IS_GUEST';
+	const IS_GUEST = OOPS_MODEL_CUSTOMER_IS_GUEST;
 
 	/** the column name for the DELETED field */
-	const DELETED = 'djland_customer.DELETED';
+	const DELETED = OOPS_MODEL_CUSTOMER_DELETED;
 
 	/** the column name for the DATE_ADD field */
-	const DATE_ADD = 'djland_customer.DATE_ADD';
+	const DATE_ADD = OOPS_MODEL_CUSTOMER_DATE_ADD;
 
 	/** the column name for the DATE_UPD field */
-	const DATE_UPD = 'djland_customer.DATE_UPD';
+	const DATE_UPD = OOPS_MODEL_CUSTOMER_DATE_UPD;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -434,7 +456,7 @@ abstract class Oops_Model_Base_CustomerPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_customer
+	 * Method to invalidate the instance pool of all tables related to customer
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -654,7 +676,7 @@ abstract class Oops_Model_Base_CustomerPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_customer table.
+	 * Deletes all rows from the customer table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

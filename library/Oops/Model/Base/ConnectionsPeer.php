@@ -1,8 +1,16 @@
 <?php
 
 
+define('OOPS_MODEL_CONNECTIONS_ID_CONNECTIONS', _DB_PREFIX_ . 'connections.ID_CONNECTIONS');
+define('OOPS_MODEL_CONNECTIONS_ID_GUEST', _DB_PREFIX_ . 'connections.ID_GUEST');
+define('OOPS_MODEL_CONNECTIONS_ID_PAGE', _DB_PREFIX_ . 'connections.ID_PAGE');
+define('OOPS_MODEL_CONNECTIONS_IP_ADDRESS', _DB_PREFIX_ . 'connections.IP_ADDRESS');
+define('OOPS_MODEL_CONNECTIONS_DATE_ADD', _DB_PREFIX_ . 'connections.DATE_ADD');
+define('OOPS_MODEL_CONNECTIONS_HTTP_REFERER', _DB_PREFIX_ . 'connections.HTTP_REFERER');
+define('OOPS_MODEL_CONNECTIONS_TABLE_NAME', _DB_PREFIX_ . 'connections');
+
 /**
- * Base static class for performing query and update operations on the 'djland_connections' table.
+ * Base static class for performing query and update operations on the 'connections' table.
  *
  * 
  *
@@ -14,7 +22,7 @@ abstract class Oops_Model_Base_ConnectionsPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_connections';
+	const TABLE_NAME = OOPS_MODEL_CONNECTIONS_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_Connections';
@@ -35,22 +43,22 @@ abstract class Oops_Model_Base_ConnectionsPeer {
 	const NUM_HYDRATE_COLUMNS = 6;
 
 	/** the column name for the ID_CONNECTIONS field */
-	const ID_CONNECTIONS = 'djland_connections.ID_CONNECTIONS';
+	const ID_CONNECTIONS = OOPS_MODEL_CONNECTIONS_ID_CONNECTIONS;
 
 	/** the column name for the ID_GUEST field */
-	const ID_GUEST = 'djland_connections.ID_GUEST';
+	const ID_GUEST = OOPS_MODEL_CONNECTIONS_ID_GUEST;
 
 	/** the column name for the ID_PAGE field */
-	const ID_PAGE = 'djland_connections.ID_PAGE';
+	const ID_PAGE = OOPS_MODEL_CONNECTIONS_ID_PAGE;
 
 	/** the column name for the IP_ADDRESS field */
-	const IP_ADDRESS = 'djland_connections.IP_ADDRESS';
+	const IP_ADDRESS = OOPS_MODEL_CONNECTIONS_IP_ADDRESS;
 
 	/** the column name for the DATE_ADD field */
-	const DATE_ADD = 'djland_connections.DATE_ADD';
+	const DATE_ADD = OOPS_MODEL_CONNECTIONS_DATE_ADD;
 
 	/** the column name for the HTTP_REFERER field */
-	const HTTP_REFERER = 'djland_connections.HTTP_REFERER';
+	const HTTP_REFERER = OOPS_MODEL_CONNECTIONS_HTTP_REFERER;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -364,7 +372,7 @@ abstract class Oops_Model_Base_ConnectionsPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_connections
+	 * Method to invalidate the instance pool of all tables related to connections
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -584,7 +592,7 @@ abstract class Oops_Model_Base_ConnectionsPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_connections table.
+	 * Deletes all rows from the connections table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

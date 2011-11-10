@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_contact' table.
+ * This class defines the structure of the 'contact' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_ContactTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_contact');
+		$this->setName(_DB_PREFIX_ . 'contact');
 		$this->setPhpName('Contact');
 		$this->setClassname('Oops_Model_Contact');
 		$this->setPackage('prestashop');

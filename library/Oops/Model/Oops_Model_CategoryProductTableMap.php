@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_category_product' table.
+ * This class defines the structure of the 'category_product' table.
  *
  *
  *
@@ -32,14 +32,14 @@ class Oops_Model_CategoryProductTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_category_product');
+		$this->setName(_DB_PREFIX_ . 'category_product');
 		$this->setPhpName('CategoryProduct');
 		$this->setClassname('Oops_Model_CategoryProduct');
 		$this->setPackage('prestashop');
 		$this->setUseIdGenerator(false);
 		// columns
-		$this->addForeignPrimaryKey('ID_CATEGORY', 'IdCategory', 'INTEGER' , 'djland_category', 'ID_CATEGORY', true, 10, null);
-		$this->addForeignPrimaryKey('ID_PRODUCT', 'IdProduct', 'INTEGER' , 'djland_product', 'ID_PRODUCT', true, 10, null);
+		$this->addForeignPrimaryKey('ID_CATEGORY', 'IdCategory', 'INTEGER' , 'category', 'ID_CATEGORY', true, 10, null);
+		$this->addForeignPrimaryKey('ID_PRODUCT', 'IdProduct', 'INTEGER' , 'product', 'ID_PRODUCT', true, 10, null);
 		$this->addColumn('POSITION', 'Position', 'INTEGER', true, 10, 0);
 		// validators
 	} // initialize()

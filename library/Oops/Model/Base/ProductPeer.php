@@ -1,8 +1,50 @@
 <?php
 
 
+define('OOPS_MODEL_PRODUCT_ID_PRODUCT', _DB_PREFIX_ . 'product.ID_PRODUCT');
+define('OOPS_MODEL_PRODUCT_ID_SUPPLIER', _DB_PREFIX_ . 'product.ID_SUPPLIER');
+define('OOPS_MODEL_PRODUCT_ID_MANUFACTURER', _DB_PREFIX_ . 'product.ID_MANUFACTURER');
+define('OOPS_MODEL_PRODUCT_ID_TAX_RULES_GROUP', _DB_PREFIX_ . 'product.ID_TAX_RULES_GROUP');
+define('OOPS_MODEL_PRODUCT_ID_CATEGORY_DEFAULT', _DB_PREFIX_ . 'product.ID_CATEGORY_DEFAULT');
+define('OOPS_MODEL_PRODUCT_ID_COLOR_DEFAULT', _DB_PREFIX_ . 'product.ID_COLOR_DEFAULT');
+define('OOPS_MODEL_PRODUCT_ON_SALE', _DB_PREFIX_ . 'product.ON_SALE');
+define('OOPS_MODEL_PRODUCT_ONLINE_ONLY', _DB_PREFIX_ . 'product.ONLINE_ONLY');
+define('OOPS_MODEL_PRODUCT_EAN13', _DB_PREFIX_ . 'product.EAN13');
+define('OOPS_MODEL_PRODUCT_UPC', _DB_PREFIX_ . 'product.UPC');
+define('OOPS_MODEL_PRODUCT_ECOTAX', _DB_PREFIX_ . 'product.ECOTAX');
+define('OOPS_MODEL_PRODUCT_QUANTITY', _DB_PREFIX_ . 'product.QUANTITY');
+define('OOPS_MODEL_PRODUCT_MINIMAL_QUANTITY', _DB_PREFIX_ . 'product.MINIMAL_QUANTITY');
+define('OOPS_MODEL_PRODUCT_PRICE', _DB_PREFIX_ . 'product.PRICE');
+define('OOPS_MODEL_PRODUCT_WHOLESALE_PRICE', _DB_PREFIX_ . 'product.WHOLESALE_PRICE');
+define('OOPS_MODEL_PRODUCT_UNITY', _DB_PREFIX_ . 'product.UNITY');
+define('OOPS_MODEL_PRODUCT_UNIT_PRICE_RATIO', _DB_PREFIX_ . 'product.UNIT_PRICE_RATIO');
+define('OOPS_MODEL_PRODUCT_ADDITIONAL_SHIPPING_COST', _DB_PREFIX_ . 'product.ADDITIONAL_SHIPPING_COST');
+define('OOPS_MODEL_PRODUCT_REFERENCE', _DB_PREFIX_ . 'product.REFERENCE');
+define('OOPS_MODEL_PRODUCT_SUPPLIER_REFERENCE', _DB_PREFIX_ . 'product.SUPPLIER_REFERENCE');
+define('OOPS_MODEL_PRODUCT_LOCATION', _DB_PREFIX_ . 'product.LOCATION');
+define('OOPS_MODEL_PRODUCT_WIDTH', _DB_PREFIX_ . 'product.WIDTH');
+define('OOPS_MODEL_PRODUCT_HEIGHT', _DB_PREFIX_ . 'product.HEIGHT');
+define('OOPS_MODEL_PRODUCT_DEPTH', _DB_PREFIX_ . 'product.DEPTH');
+define('OOPS_MODEL_PRODUCT_WEIGHT', _DB_PREFIX_ . 'product.WEIGHT');
+define('OOPS_MODEL_PRODUCT_OUT_OF_STOCK', _DB_PREFIX_ . 'product.OUT_OF_STOCK');
+define('OOPS_MODEL_PRODUCT_QUANTITY_DISCOUNT', _DB_PREFIX_ . 'product.QUANTITY_DISCOUNT');
+define('OOPS_MODEL_PRODUCT_CUSTOMIZABLE', _DB_PREFIX_ . 'product.CUSTOMIZABLE');
+define('OOPS_MODEL_PRODUCT_UPLOADABLE_FILES', _DB_PREFIX_ . 'product.UPLOADABLE_FILES');
+define('OOPS_MODEL_PRODUCT_TEXT_FIELDS', _DB_PREFIX_ . 'product.TEXT_FIELDS');
+define('OOPS_MODEL_PRODUCT_ACTIVE', _DB_PREFIX_ . 'product.ACTIVE');
+define('OOPS_MODEL_PRODUCT_AVAILABLE_FOR_ORDER', _DB_PREFIX_ . 'product.AVAILABLE_FOR_ORDER');
+define('OOPS_MODEL_PRODUCT_CONDITION', _DB_PREFIX_ . 'product.CONDITION');
+define('OOPS_MODEL_PRODUCT_SHOW_PRICE', _DB_PREFIX_ . 'product.SHOW_PRICE');
+define('OOPS_MODEL_PRODUCT_INDEXED', _DB_PREFIX_ . 'product.INDEXED');
+define('OOPS_MODEL_PRODUCT_CACHE_IS_PACK', _DB_PREFIX_ . 'product.CACHE_IS_PACK');
+define('OOPS_MODEL_PRODUCT_CACHE_HAS_ATTACHMENTS', _DB_PREFIX_ . 'product.CACHE_HAS_ATTACHMENTS');
+define('OOPS_MODEL_PRODUCT_CACHE_DEFAULT_ATTRIBUTE', _DB_PREFIX_ . 'product.CACHE_DEFAULT_ATTRIBUTE');
+define('OOPS_MODEL_PRODUCT_DATE_ADD', _DB_PREFIX_ . 'product.DATE_ADD');
+define('OOPS_MODEL_PRODUCT_DATE_UPD', _DB_PREFIX_ . 'product.DATE_UPD');
+define('OOPS_MODEL_PRODUCT_TABLE_NAME', _DB_PREFIX_ . 'product');
+
 /**
- * Base static class for performing query and update operations on the 'djland_product' table.
+ * Base static class for performing query and update operations on the 'product' table.
  *
  * 
  *
@@ -14,7 +56,7 @@ abstract class Oops_Model_Base_ProductPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_product';
+	const TABLE_NAME = OOPS_MODEL_PRODUCT_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_Product';
@@ -35,124 +77,124 @@ abstract class Oops_Model_Base_ProductPeer {
 	const NUM_HYDRATE_COLUMNS = 40;
 
 	/** the column name for the ID_PRODUCT field */
-	const ID_PRODUCT = 'djland_product.ID_PRODUCT';
+	const ID_PRODUCT = OOPS_MODEL_PRODUCT_ID_PRODUCT;
 
 	/** the column name for the ID_SUPPLIER field */
-	const ID_SUPPLIER = 'djland_product.ID_SUPPLIER';
+	const ID_SUPPLIER = OOPS_MODEL_PRODUCT_ID_SUPPLIER;
 
 	/** the column name for the ID_MANUFACTURER field */
-	const ID_MANUFACTURER = 'djland_product.ID_MANUFACTURER';
+	const ID_MANUFACTURER = OOPS_MODEL_PRODUCT_ID_MANUFACTURER;
 
 	/** the column name for the ID_TAX_RULES_GROUP field */
-	const ID_TAX_RULES_GROUP = 'djland_product.ID_TAX_RULES_GROUP';
+	const ID_TAX_RULES_GROUP = OOPS_MODEL_PRODUCT_ID_TAX_RULES_GROUP;
 
 	/** the column name for the ID_CATEGORY_DEFAULT field */
-	const ID_CATEGORY_DEFAULT = 'djland_product.ID_CATEGORY_DEFAULT';
+	const ID_CATEGORY_DEFAULT = OOPS_MODEL_PRODUCT_ID_CATEGORY_DEFAULT;
 
 	/** the column name for the ID_COLOR_DEFAULT field */
-	const ID_COLOR_DEFAULT = 'djland_product.ID_COLOR_DEFAULT';
+	const ID_COLOR_DEFAULT = OOPS_MODEL_PRODUCT_ID_COLOR_DEFAULT;
 
 	/** the column name for the ON_SALE field */
-	const ON_SALE = 'djland_product.ON_SALE';
+	const ON_SALE = OOPS_MODEL_PRODUCT_ON_SALE;
 
 	/** the column name for the ONLINE_ONLY field */
-	const ONLINE_ONLY = 'djland_product.ONLINE_ONLY';
+	const ONLINE_ONLY = OOPS_MODEL_PRODUCT_ONLINE_ONLY;
 
 	/** the column name for the EAN13 field */
-	const EAN13 = 'djland_product.EAN13';
+	const EAN13 = OOPS_MODEL_PRODUCT_EAN13;
 
 	/** the column name for the UPC field */
-	const UPC = 'djland_product.UPC';
+	const UPC = OOPS_MODEL_PRODUCT_UPC;
 
 	/** the column name for the ECOTAX field */
-	const ECOTAX = 'djland_product.ECOTAX';
+	const ECOTAX = OOPS_MODEL_PRODUCT_ECOTAX;
 
 	/** the column name for the QUANTITY field */
-	const QUANTITY = 'djland_product.QUANTITY';
+	const QUANTITY = OOPS_MODEL_PRODUCT_QUANTITY;
 
 	/** the column name for the MINIMAL_QUANTITY field */
-	const MINIMAL_QUANTITY = 'djland_product.MINIMAL_QUANTITY';
+	const MINIMAL_QUANTITY = OOPS_MODEL_PRODUCT_MINIMAL_QUANTITY;
 
 	/** the column name for the PRICE field */
-	const PRICE = 'djland_product.PRICE';
+	const PRICE = OOPS_MODEL_PRODUCT_PRICE;
 
 	/** the column name for the WHOLESALE_PRICE field */
-	const WHOLESALE_PRICE = 'djland_product.WHOLESALE_PRICE';
+	const WHOLESALE_PRICE = OOPS_MODEL_PRODUCT_WHOLESALE_PRICE;
 
 	/** the column name for the UNITY field */
-	const UNITY = 'djland_product.UNITY';
+	const UNITY = OOPS_MODEL_PRODUCT_UNITY;
 
 	/** the column name for the UNIT_PRICE_RATIO field */
-	const UNIT_PRICE_RATIO = 'djland_product.UNIT_PRICE_RATIO';
+	const UNIT_PRICE_RATIO = OOPS_MODEL_PRODUCT_UNIT_PRICE_RATIO;
 
 	/** the column name for the ADDITIONAL_SHIPPING_COST field */
-	const ADDITIONAL_SHIPPING_COST = 'djland_product.ADDITIONAL_SHIPPING_COST';
+	const ADDITIONAL_SHIPPING_COST = OOPS_MODEL_PRODUCT_ADDITIONAL_SHIPPING_COST;
 
 	/** the column name for the REFERENCE field */
-	const REFERENCE = 'djland_product.REFERENCE';
+	const REFERENCE = OOPS_MODEL_PRODUCT_REFERENCE;
 
 	/** the column name for the SUPPLIER_REFERENCE field */
-	const SUPPLIER_REFERENCE = 'djland_product.SUPPLIER_REFERENCE';
+	const SUPPLIER_REFERENCE = OOPS_MODEL_PRODUCT_SUPPLIER_REFERENCE;
 
 	/** the column name for the LOCATION field */
-	const LOCATION = 'djland_product.LOCATION';
+	const LOCATION = OOPS_MODEL_PRODUCT_LOCATION;
 
 	/** the column name for the WIDTH field */
-	const WIDTH = 'djland_product.WIDTH';
+	const WIDTH = OOPS_MODEL_PRODUCT_WIDTH;
 
 	/** the column name for the HEIGHT field */
-	const HEIGHT = 'djland_product.HEIGHT';
+	const HEIGHT = OOPS_MODEL_PRODUCT_HEIGHT;
 
 	/** the column name for the DEPTH field */
-	const DEPTH = 'djland_product.DEPTH';
+	const DEPTH = OOPS_MODEL_PRODUCT_DEPTH;
 
 	/** the column name for the WEIGHT field */
-	const WEIGHT = 'djland_product.WEIGHT';
+	const WEIGHT = OOPS_MODEL_PRODUCT_WEIGHT;
 
 	/** the column name for the OUT_OF_STOCK field */
-	const OUT_OF_STOCK = 'djland_product.OUT_OF_STOCK';
+	const OUT_OF_STOCK = OOPS_MODEL_PRODUCT_OUT_OF_STOCK;
 
 	/** the column name for the QUANTITY_DISCOUNT field */
-	const QUANTITY_DISCOUNT = 'djland_product.QUANTITY_DISCOUNT';
+	const QUANTITY_DISCOUNT = OOPS_MODEL_PRODUCT_QUANTITY_DISCOUNT;
 
 	/** the column name for the CUSTOMIZABLE field */
-	const CUSTOMIZABLE = 'djland_product.CUSTOMIZABLE';
+	const CUSTOMIZABLE = OOPS_MODEL_PRODUCT_CUSTOMIZABLE;
 
 	/** the column name for the UPLOADABLE_FILES field */
-	const UPLOADABLE_FILES = 'djland_product.UPLOADABLE_FILES';
+	const UPLOADABLE_FILES = OOPS_MODEL_PRODUCT_UPLOADABLE_FILES;
 
 	/** the column name for the TEXT_FIELDS field */
-	const TEXT_FIELDS = 'djland_product.TEXT_FIELDS';
+	const TEXT_FIELDS = OOPS_MODEL_PRODUCT_TEXT_FIELDS;
 
 	/** the column name for the ACTIVE field */
-	const ACTIVE = 'djland_product.ACTIVE';
+	const ACTIVE = OOPS_MODEL_PRODUCT_ACTIVE;
 
 	/** the column name for the AVAILABLE_FOR_ORDER field */
-	const AVAILABLE_FOR_ORDER = 'djland_product.AVAILABLE_FOR_ORDER';
+	const AVAILABLE_FOR_ORDER = OOPS_MODEL_PRODUCT_AVAILABLE_FOR_ORDER;
 
 	/** the column name for the CONDITION field */
-	const CONDITION = 'djland_product.CONDITION';
+	const CONDITION = OOPS_MODEL_PRODUCT_CONDITION;
 
 	/** the column name for the SHOW_PRICE field */
-	const SHOW_PRICE = 'djland_product.SHOW_PRICE';
+	const SHOW_PRICE = OOPS_MODEL_PRODUCT_SHOW_PRICE;
 
 	/** the column name for the INDEXED field */
-	const INDEXED = 'djland_product.INDEXED';
+	const INDEXED = OOPS_MODEL_PRODUCT_INDEXED;
 
 	/** the column name for the CACHE_IS_PACK field */
-	const CACHE_IS_PACK = 'djland_product.CACHE_IS_PACK';
+	const CACHE_IS_PACK = OOPS_MODEL_PRODUCT_CACHE_IS_PACK;
 
 	/** the column name for the CACHE_HAS_ATTACHMENTS field */
-	const CACHE_HAS_ATTACHMENTS = 'djland_product.CACHE_HAS_ATTACHMENTS';
+	const CACHE_HAS_ATTACHMENTS = OOPS_MODEL_PRODUCT_CACHE_HAS_ATTACHMENTS;
 
 	/** the column name for the CACHE_DEFAULT_ATTRIBUTE field */
-	const CACHE_DEFAULT_ATTRIBUTE = 'djland_product.CACHE_DEFAULT_ATTRIBUTE';
+	const CACHE_DEFAULT_ATTRIBUTE = OOPS_MODEL_PRODUCT_CACHE_DEFAULT_ATTRIBUTE;
 
 	/** the column name for the DATE_ADD field */
-	const DATE_ADD = 'djland_product.DATE_ADD';
+	const DATE_ADD = OOPS_MODEL_PRODUCT_DATE_ADD;
 
 	/** the column name for the DATE_UPD field */
-	const DATE_UPD = 'djland_product.DATE_UPD';
+	const DATE_UPD = OOPS_MODEL_PRODUCT_DATE_UPD;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -166,6 +208,13 @@ abstract class Oops_Model_Base_ProductPeer {
 	public static $instances = array();
 
 
+	// i18n behavior
+	
+	/**
+	 * The default locale to use for translations
+	 * @var        string
+	 */
+	const DEFAULT_LOCALE = 'en_EN';
 	/**
 	 * holds an array of fieldnames
 	 *
@@ -534,7 +583,7 @@ abstract class Oops_Model_Base_ProductPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_product
+	 * Method to invalidate the instance pool of all tables related to product
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -754,7 +803,7 @@ abstract class Oops_Model_Base_ProductPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_product table.
+	 * Deletes all rows from the product table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

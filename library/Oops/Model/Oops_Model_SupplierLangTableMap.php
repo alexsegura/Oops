@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_supplier_lang' table.
+ * This class defines the structure of the 'supplier_lang' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_SupplierLangTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_supplier_lang');
+		$this->setName(_DB_PREFIX_ . 'supplier_lang');
 		$this->setPhpName('SupplierLang');
 		$this->setClassname('Oops_Model_SupplierLang');
 		$this->setPackage('prestashop');

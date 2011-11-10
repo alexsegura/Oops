@@ -1,8 +1,12 @@
 <?php
 
 
+define('OOPS_MODEL_ATTRIBUTEGROUP_ID_ATTRIBUTE_GROUP', _DB_PREFIX_ . 'attribute_group.ID_ATTRIBUTE_GROUP');
+define('OOPS_MODEL_ATTRIBUTEGROUP_IS_COLOR_GROUP', _DB_PREFIX_ . 'attribute_group.IS_COLOR_GROUP');
+define('OOPS_MODEL_ATTRIBUTEGROUP_TABLE_NAME', _DB_PREFIX_ . 'attribute_group');
+
 /**
- * Base static class for performing query and update operations on the 'djland_attribute_group' table.
+ * Base static class for performing query and update operations on the 'attribute_group' table.
  *
  * 
  *
@@ -14,7 +18,7 @@ abstract class Oops_Model_Base_AttributeGroupPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_attribute_group';
+	const TABLE_NAME = OOPS_MODEL_ATTRIBUTEGROUP_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_AttributeGroup';
@@ -35,10 +39,10 @@ abstract class Oops_Model_Base_AttributeGroupPeer {
 	const NUM_HYDRATE_COLUMNS = 2;
 
 	/** the column name for the ID_ATTRIBUTE_GROUP field */
-	const ID_ATTRIBUTE_GROUP = 'djland_attribute_group.ID_ATTRIBUTE_GROUP';
+	const ID_ATTRIBUTE_GROUP = OOPS_MODEL_ATTRIBUTEGROUP_ID_ATTRIBUTE_GROUP;
 
 	/** the column name for the IS_COLOR_GROUP field */
-	const IS_COLOR_GROUP = 'djland_attribute_group.IS_COLOR_GROUP';
+	const IS_COLOR_GROUP = OOPS_MODEL_ATTRIBUTEGROUP_IS_COLOR_GROUP;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -344,7 +348,7 @@ abstract class Oops_Model_Base_AttributeGroupPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_attribute_group
+	 * Method to invalidate the instance pool of all tables related to attribute_group
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -564,7 +568,7 @@ abstract class Oops_Model_Base_AttributeGroupPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_attribute_group table.
+	 * Deletes all rows from the attribute_group table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_page_viewed' table.
+ * This class defines the structure of the 'page_viewed' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_PageViewedTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_page_viewed');
+		$this->setName(_DB_PREFIX_ . 'page_viewed');
 		$this->setPhpName('PageViewed');
 		$this->setClassname('Oops_Model_PageViewed');
 		$this->setPackage('prestashop');

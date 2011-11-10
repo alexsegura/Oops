@@ -1,8 +1,13 @@
 <?php
 
 
+define('OOPS_MODEL_SEARCHWORD_ID_WORD', _DB_PREFIX_ . 'search_word.ID_WORD');
+define('OOPS_MODEL_SEARCHWORD_ID_LANG', _DB_PREFIX_ . 'search_word.ID_LANG');
+define('OOPS_MODEL_SEARCHWORD_WORD', _DB_PREFIX_ . 'search_word.WORD');
+define('OOPS_MODEL_SEARCHWORD_TABLE_NAME', _DB_PREFIX_ . 'search_word');
+
 /**
- * Base static class for performing query and update operations on the 'djland_search_word' table.
+ * Base static class for performing query and update operations on the 'search_word' table.
  *
  * 
  *
@@ -14,7 +19,7 @@ abstract class Oops_Model_Base_SearchWordPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_search_word';
+	const TABLE_NAME = OOPS_MODEL_SEARCHWORD_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_SearchWord';
@@ -35,13 +40,13 @@ abstract class Oops_Model_Base_SearchWordPeer {
 	const NUM_HYDRATE_COLUMNS = 3;
 
 	/** the column name for the ID_WORD field */
-	const ID_WORD = 'djland_search_word.ID_WORD';
+	const ID_WORD = OOPS_MODEL_SEARCHWORD_ID_WORD;
 
 	/** the column name for the ID_LANG field */
-	const ID_LANG = 'djland_search_word.ID_LANG';
+	const ID_LANG = OOPS_MODEL_SEARCHWORD_ID_LANG;
 
 	/** the column name for the WORD field */
-	const WORD = 'djland_search_word.WORD';
+	const WORD = OOPS_MODEL_SEARCHWORD_WORD;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -349,7 +354,7 @@ abstract class Oops_Model_Base_SearchWordPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_search_word
+	 * Method to invalidate the instance pool of all tables related to search_word
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -569,7 +574,7 @@ abstract class Oops_Model_Base_SearchWordPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_search_word table.
+	 * Deletes all rows from the search_word table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

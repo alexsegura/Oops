@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_range_weight' table.
+ * Base class that represents a query for the 'range_weight' table.
  *
  * 
  *
@@ -120,7 +120,7 @@ abstract class Oops_Model_Base_RangeWeightQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_RANGE_WEIGHT`, `ID_CARRIER`, `DELIMITER1`, `DELIMITER2` FROM `djland_range_weight` WHERE `ID_RANGE_WEIGHT` = :p0';
+		$sql = 'SELECT `ID_RANGE_WEIGHT`, `ID_CARRIER`, `DELIMITER1`, `DELIMITER2` FROM `' . _DB_PREFIX_ . 'range_weight` WHERE `ID_RANGE_WEIGHT` = :p0';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

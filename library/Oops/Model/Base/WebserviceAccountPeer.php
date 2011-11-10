@@ -1,8 +1,17 @@
 <?php
 
 
+define('OOPS_MODEL_WEBSERVICEACCOUNT_ID_WEBSERVICE_ACCOUNT', _DB_PREFIX_ . 'webservice_account.ID_WEBSERVICE_ACCOUNT');
+define('OOPS_MODEL_WEBSERVICEACCOUNT_KEY', _DB_PREFIX_ . 'webservice_account.KEY');
+define('OOPS_MODEL_WEBSERVICEACCOUNT_DESCRIPTION', _DB_PREFIX_ . 'webservice_account.DESCRIPTION');
+define('OOPS_MODEL_WEBSERVICEACCOUNT_CLASS_NAME', _DB_PREFIX_ . 'webservice_account.CLASS_NAME');
+define('OOPS_MODEL_WEBSERVICEACCOUNT_IS_MODULE', _DB_PREFIX_ . 'webservice_account.IS_MODULE');
+define('OOPS_MODEL_WEBSERVICEACCOUNT_MODULE_NAME', _DB_PREFIX_ . 'webservice_account.MODULE_NAME');
+define('OOPS_MODEL_WEBSERVICEACCOUNT_ACTIVE', _DB_PREFIX_ . 'webservice_account.ACTIVE');
+define('OOPS_MODEL_WEBSERVICEACCOUNT_TABLE_NAME', _DB_PREFIX_ . 'webservice_account');
+
 /**
- * Base static class for performing query and update operations on the 'djland_webservice_account' table.
+ * Base static class for performing query and update operations on the 'webservice_account' table.
  *
  * 
  *
@@ -14,7 +23,7 @@ abstract class Oops_Model_Base_WebserviceAccountPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_webservice_account';
+	const TABLE_NAME = OOPS_MODEL_WEBSERVICEACCOUNT_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_WebserviceAccount';
@@ -35,25 +44,25 @@ abstract class Oops_Model_Base_WebserviceAccountPeer {
 	const NUM_HYDRATE_COLUMNS = 7;
 
 	/** the column name for the ID_WEBSERVICE_ACCOUNT field */
-	const ID_WEBSERVICE_ACCOUNT = 'djland_webservice_account.ID_WEBSERVICE_ACCOUNT';
+	const ID_WEBSERVICE_ACCOUNT = OOPS_MODEL_WEBSERVICEACCOUNT_ID_WEBSERVICE_ACCOUNT;
 
 	/** the column name for the KEY field */
-	const KEY = 'djland_webservice_account.KEY';
+	const KEY = OOPS_MODEL_WEBSERVICEACCOUNT_KEY;
 
 	/** the column name for the DESCRIPTION field */
-	const DESCRIPTION = 'djland_webservice_account.DESCRIPTION';
+	const DESCRIPTION = OOPS_MODEL_WEBSERVICEACCOUNT_DESCRIPTION;
 
 	/** the column name for the CLASS_NAME field */
-	const CLASS_NAME = 'djland_webservice_account.CLASS_NAME';
+	const CLASS_NAME = OOPS_MODEL_WEBSERVICEACCOUNT_CLASS_NAME;
 
 	/** the column name for the IS_MODULE field */
-	const IS_MODULE = 'djland_webservice_account.IS_MODULE';
+	const IS_MODULE = OOPS_MODEL_WEBSERVICEACCOUNT_IS_MODULE;
 
 	/** the column name for the MODULE_NAME field */
-	const MODULE_NAME = 'djland_webservice_account.MODULE_NAME';
+	const MODULE_NAME = OOPS_MODEL_WEBSERVICEACCOUNT_MODULE_NAME;
 
 	/** the column name for the ACTIVE field */
-	const ACTIVE = 'djland_webservice_account.ACTIVE';
+	const ACTIVE = OOPS_MODEL_WEBSERVICEACCOUNT_ACTIVE;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -369,7 +378,7 @@ abstract class Oops_Model_Base_WebserviceAccountPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_webservice_account
+	 * Method to invalidate the instance pool of all tables related to webservice_account
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -589,7 +598,7 @@ abstract class Oops_Model_Base_WebserviceAccountPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_webservice_account table.
+	 * Deletes all rows from the webservice_account table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

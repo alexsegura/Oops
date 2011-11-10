@@ -1,8 +1,14 @@
 <?php
 
 
+define('OOPS_MODEL_ATTACHMENT_ID_ATTACHMENT', _DB_PREFIX_ . 'attachment.ID_ATTACHMENT');
+define('OOPS_MODEL_ATTACHMENT_FILE', _DB_PREFIX_ . 'attachment.FILE');
+define('OOPS_MODEL_ATTACHMENT_FILE_NAME', _DB_PREFIX_ . 'attachment.FILE_NAME');
+define('OOPS_MODEL_ATTACHMENT_MIME', _DB_PREFIX_ . 'attachment.MIME');
+define('OOPS_MODEL_ATTACHMENT_TABLE_NAME', _DB_PREFIX_ . 'attachment');
+
 /**
- * Base static class for performing query and update operations on the 'djland_attachment' table.
+ * Base static class for performing query and update operations on the 'attachment' table.
  *
  * 
  *
@@ -14,7 +20,7 @@ abstract class Oops_Model_Base_AttachmentPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_attachment';
+	const TABLE_NAME = OOPS_MODEL_ATTACHMENT_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_Attachment';
@@ -35,16 +41,16 @@ abstract class Oops_Model_Base_AttachmentPeer {
 	const NUM_HYDRATE_COLUMNS = 4;
 
 	/** the column name for the ID_ATTACHMENT field */
-	const ID_ATTACHMENT = 'djland_attachment.ID_ATTACHMENT';
+	const ID_ATTACHMENT = OOPS_MODEL_ATTACHMENT_ID_ATTACHMENT;
 
 	/** the column name for the FILE field */
-	const FILE = 'djland_attachment.FILE';
+	const FILE = OOPS_MODEL_ATTACHMENT_FILE;
 
 	/** the column name for the FILE_NAME field */
-	const FILE_NAME = 'djland_attachment.FILE_NAME';
+	const FILE_NAME = OOPS_MODEL_ATTACHMENT_FILE_NAME;
 
 	/** the column name for the MIME field */
-	const MIME = 'djland_attachment.MIME';
+	const MIME = OOPS_MODEL_ATTACHMENT_MIME;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -354,7 +360,7 @@ abstract class Oops_Model_Base_AttachmentPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_attachment
+	 * Method to invalidate the instance pool of all tables related to attachment
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -574,7 +580,7 @@ abstract class Oops_Model_Base_AttachmentPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_attachment table.
+	 * Deletes all rows from the attachment table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

@@ -1,8 +1,15 @@
 <?php
 
 
+define('OOPS_MODEL_CARTPRODUCT_ID_CART', _DB_PREFIX_ . 'cart_product.ID_CART');
+define('OOPS_MODEL_CARTPRODUCT_ID_PRODUCT', _DB_PREFIX_ . 'cart_product.ID_PRODUCT');
+define('OOPS_MODEL_CARTPRODUCT_ID_PRODUCT_ATTRIBUTE', _DB_PREFIX_ . 'cart_product.ID_PRODUCT_ATTRIBUTE');
+define('OOPS_MODEL_CARTPRODUCT_QUANTITY', _DB_PREFIX_ . 'cart_product.QUANTITY');
+define('OOPS_MODEL_CARTPRODUCT_DATE_ADD', _DB_PREFIX_ . 'cart_product.DATE_ADD');
+define('OOPS_MODEL_CARTPRODUCT_TABLE_NAME', _DB_PREFIX_ . 'cart_product');
+
 /**
- * Base static class for performing query and update operations on the 'djland_cart_product' table.
+ * Base static class for performing query and update operations on the 'cart_product' table.
  *
  * 
  *
@@ -14,7 +21,7 @@ abstract class Oops_Model_Base_CartProductPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_cart_product';
+	const TABLE_NAME = OOPS_MODEL_CARTPRODUCT_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_CartProduct';
@@ -35,19 +42,19 @@ abstract class Oops_Model_Base_CartProductPeer {
 	const NUM_HYDRATE_COLUMNS = 5;
 
 	/** the column name for the ID_CART field */
-	const ID_CART = 'djland_cart_product.ID_CART';
+	const ID_CART = OOPS_MODEL_CARTPRODUCT_ID_CART;
 
 	/** the column name for the ID_PRODUCT field */
-	const ID_PRODUCT = 'djland_cart_product.ID_PRODUCT';
+	const ID_PRODUCT = OOPS_MODEL_CARTPRODUCT_ID_PRODUCT;
 
 	/** the column name for the ID_PRODUCT_ATTRIBUTE field */
-	const ID_PRODUCT_ATTRIBUTE = 'djland_cart_product.ID_PRODUCT_ATTRIBUTE';
+	const ID_PRODUCT_ATTRIBUTE = OOPS_MODEL_CARTPRODUCT_ID_PRODUCT_ATTRIBUTE;
 
 	/** the column name for the QUANTITY field */
-	const QUANTITY = 'djland_cart_product.QUANTITY';
+	const QUANTITY = OOPS_MODEL_CARTPRODUCT_QUANTITY;
 
 	/** the column name for the DATE_ADD field */
-	const DATE_ADD = 'djland_cart_product.DATE_ADD';
+	const DATE_ADD = OOPS_MODEL_CARTPRODUCT_DATE_ADD;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -359,7 +366,7 @@ abstract class Oops_Model_Base_CartProductPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_cart_product
+	 * Method to invalidate the instance pool of all tables related to cart_product
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -575,7 +582,7 @@ abstract class Oops_Model_Base_CartProductPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_cart_product table.
+	 * Deletes all rows from the cart_product table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

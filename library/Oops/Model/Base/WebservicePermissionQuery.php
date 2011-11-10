@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_webservice_permission' table.
+ * Base class that represents a query for the 'webservice_permission' table.
  *
  * 
  *
@@ -120,7 +120,7 @@ abstract class Oops_Model_Base_WebservicePermissionQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_WEBSERVICE_PERMISSION`, `RESOURCE`, `METHOD`, `ID_WEBSERVICE_ACCOUNT` FROM `djland_webservice_permission` WHERE `ID_WEBSERVICE_PERMISSION` = :p0';
+		$sql = 'SELECT `ID_WEBSERVICE_PERMISSION`, `RESOURCE`, `METHOD`, `ID_WEBSERVICE_ACCOUNT` FROM `' . _DB_PREFIX_ . 'webservice_permission` WHERE `ID_WEBSERVICE_PERMISSION` = :p0';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

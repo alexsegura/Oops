@@ -1,8 +1,25 @@
 <?php
 
 
+define('OOPS_MODEL_PRODUCTATTRIBUTE_ID_PRODUCT_ATTRIBUTE', _DB_PREFIX_ . 'product_attribute.ID_PRODUCT_ATTRIBUTE');
+define('OOPS_MODEL_PRODUCTATTRIBUTE_ID_PRODUCT', _DB_PREFIX_ . 'product_attribute.ID_PRODUCT');
+define('OOPS_MODEL_PRODUCTATTRIBUTE_REFERENCE', _DB_PREFIX_ . 'product_attribute.REFERENCE');
+define('OOPS_MODEL_PRODUCTATTRIBUTE_SUPPLIER_REFERENCE', _DB_PREFIX_ . 'product_attribute.SUPPLIER_REFERENCE');
+define('OOPS_MODEL_PRODUCTATTRIBUTE_LOCATION', _DB_PREFIX_ . 'product_attribute.LOCATION');
+define('OOPS_MODEL_PRODUCTATTRIBUTE_EAN13', _DB_PREFIX_ . 'product_attribute.EAN13');
+define('OOPS_MODEL_PRODUCTATTRIBUTE_UPC', _DB_PREFIX_ . 'product_attribute.UPC');
+define('OOPS_MODEL_PRODUCTATTRIBUTE_WHOLESALE_PRICE', _DB_PREFIX_ . 'product_attribute.WHOLESALE_PRICE');
+define('OOPS_MODEL_PRODUCTATTRIBUTE_PRICE', _DB_PREFIX_ . 'product_attribute.PRICE');
+define('OOPS_MODEL_PRODUCTATTRIBUTE_ECOTAX', _DB_PREFIX_ . 'product_attribute.ECOTAX');
+define('OOPS_MODEL_PRODUCTATTRIBUTE_QUANTITY', _DB_PREFIX_ . 'product_attribute.QUANTITY');
+define('OOPS_MODEL_PRODUCTATTRIBUTE_WEIGHT', _DB_PREFIX_ . 'product_attribute.WEIGHT');
+define('OOPS_MODEL_PRODUCTATTRIBUTE_UNIT_PRICE_IMPACT', _DB_PREFIX_ . 'product_attribute.UNIT_PRICE_IMPACT');
+define('OOPS_MODEL_PRODUCTATTRIBUTE_DEFAULT_ON', _DB_PREFIX_ . 'product_attribute.DEFAULT_ON');
+define('OOPS_MODEL_PRODUCTATTRIBUTE_MINIMAL_QUANTITY', _DB_PREFIX_ . 'product_attribute.MINIMAL_QUANTITY');
+define('OOPS_MODEL_PRODUCTATTRIBUTE_TABLE_NAME', _DB_PREFIX_ . 'product_attribute');
+
 /**
- * Base static class for performing query and update operations on the 'djland_product_attribute' table.
+ * Base static class for performing query and update operations on the 'product_attribute' table.
  *
  * 
  *
@@ -14,7 +31,7 @@ abstract class Oops_Model_Base_ProductAttributePeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_product_attribute';
+	const TABLE_NAME = OOPS_MODEL_PRODUCTATTRIBUTE_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_ProductAttribute';
@@ -35,49 +52,49 @@ abstract class Oops_Model_Base_ProductAttributePeer {
 	const NUM_HYDRATE_COLUMNS = 15;
 
 	/** the column name for the ID_PRODUCT_ATTRIBUTE field */
-	const ID_PRODUCT_ATTRIBUTE = 'djland_product_attribute.ID_PRODUCT_ATTRIBUTE';
+	const ID_PRODUCT_ATTRIBUTE = OOPS_MODEL_PRODUCTATTRIBUTE_ID_PRODUCT_ATTRIBUTE;
 
 	/** the column name for the ID_PRODUCT field */
-	const ID_PRODUCT = 'djland_product_attribute.ID_PRODUCT';
+	const ID_PRODUCT = OOPS_MODEL_PRODUCTATTRIBUTE_ID_PRODUCT;
 
 	/** the column name for the REFERENCE field */
-	const REFERENCE = 'djland_product_attribute.REFERENCE';
+	const REFERENCE = OOPS_MODEL_PRODUCTATTRIBUTE_REFERENCE;
 
 	/** the column name for the SUPPLIER_REFERENCE field */
-	const SUPPLIER_REFERENCE = 'djland_product_attribute.SUPPLIER_REFERENCE';
+	const SUPPLIER_REFERENCE = OOPS_MODEL_PRODUCTATTRIBUTE_SUPPLIER_REFERENCE;
 
 	/** the column name for the LOCATION field */
-	const LOCATION = 'djland_product_attribute.LOCATION';
+	const LOCATION = OOPS_MODEL_PRODUCTATTRIBUTE_LOCATION;
 
 	/** the column name for the EAN13 field */
-	const EAN13 = 'djland_product_attribute.EAN13';
+	const EAN13 = OOPS_MODEL_PRODUCTATTRIBUTE_EAN13;
 
 	/** the column name for the UPC field */
-	const UPC = 'djland_product_attribute.UPC';
+	const UPC = OOPS_MODEL_PRODUCTATTRIBUTE_UPC;
 
 	/** the column name for the WHOLESALE_PRICE field */
-	const WHOLESALE_PRICE = 'djland_product_attribute.WHOLESALE_PRICE';
+	const WHOLESALE_PRICE = OOPS_MODEL_PRODUCTATTRIBUTE_WHOLESALE_PRICE;
 
 	/** the column name for the PRICE field */
-	const PRICE = 'djland_product_attribute.PRICE';
+	const PRICE = OOPS_MODEL_PRODUCTATTRIBUTE_PRICE;
 
 	/** the column name for the ECOTAX field */
-	const ECOTAX = 'djland_product_attribute.ECOTAX';
+	const ECOTAX = OOPS_MODEL_PRODUCTATTRIBUTE_ECOTAX;
 
 	/** the column name for the QUANTITY field */
-	const QUANTITY = 'djland_product_attribute.QUANTITY';
+	const QUANTITY = OOPS_MODEL_PRODUCTATTRIBUTE_QUANTITY;
 
 	/** the column name for the WEIGHT field */
-	const WEIGHT = 'djland_product_attribute.WEIGHT';
+	const WEIGHT = OOPS_MODEL_PRODUCTATTRIBUTE_WEIGHT;
 
 	/** the column name for the UNIT_PRICE_IMPACT field */
-	const UNIT_PRICE_IMPACT = 'djland_product_attribute.UNIT_PRICE_IMPACT';
+	const UNIT_PRICE_IMPACT = OOPS_MODEL_PRODUCTATTRIBUTE_UNIT_PRICE_IMPACT;
 
 	/** the column name for the DEFAULT_ON field */
-	const DEFAULT_ON = 'djland_product_attribute.DEFAULT_ON';
+	const DEFAULT_ON = OOPS_MODEL_PRODUCTATTRIBUTE_DEFAULT_ON;
 
 	/** the column name for the MINIMAL_QUANTITY field */
-	const MINIMAL_QUANTITY = 'djland_product_attribute.MINIMAL_QUANTITY';
+	const MINIMAL_QUANTITY = OOPS_MODEL_PRODUCTATTRIBUTE_MINIMAL_QUANTITY;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -409,7 +426,7 @@ abstract class Oops_Model_Base_ProductAttributePeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_product_attribute
+	 * Method to invalidate the instance pool of all tables related to product_attribute
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -629,7 +646,7 @@ abstract class Oops_Model_Base_ProductAttributePeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_product_attribute table.
+	 * Deletes all rows from the product_attribute table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_order_message_lang' table.
+ * Base class that represents a row from the 'order_message_lang' table.
  *
  * 
  *
@@ -444,7 +444,7 @@ abstract class Oops_Model_Base_OrderMessageLang extends BaseObject  implements P
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_order_message_lang` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'order_message_lang` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

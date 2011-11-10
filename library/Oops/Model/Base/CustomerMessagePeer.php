@@ -1,8 +1,18 @@
 <?php
 
 
+define('OOPS_MODEL_CUSTOMERMESSAGE_ID_CUSTOMER_MESSAGE', _DB_PREFIX_ . 'customer_message.ID_CUSTOMER_MESSAGE');
+define('OOPS_MODEL_CUSTOMERMESSAGE_ID_CUSTOMER_THREAD', _DB_PREFIX_ . 'customer_message.ID_CUSTOMER_THREAD');
+define('OOPS_MODEL_CUSTOMERMESSAGE_ID_EMPLOYEE', _DB_PREFIX_ . 'customer_message.ID_EMPLOYEE');
+define('OOPS_MODEL_CUSTOMERMESSAGE_MESSAGE', _DB_PREFIX_ . 'customer_message.MESSAGE');
+define('OOPS_MODEL_CUSTOMERMESSAGE_FILE_NAME', _DB_PREFIX_ . 'customer_message.FILE_NAME');
+define('OOPS_MODEL_CUSTOMERMESSAGE_IP_ADDRESS', _DB_PREFIX_ . 'customer_message.IP_ADDRESS');
+define('OOPS_MODEL_CUSTOMERMESSAGE_USER_AGENT', _DB_PREFIX_ . 'customer_message.USER_AGENT');
+define('OOPS_MODEL_CUSTOMERMESSAGE_DATE_ADD', _DB_PREFIX_ . 'customer_message.DATE_ADD');
+define('OOPS_MODEL_CUSTOMERMESSAGE_TABLE_NAME', _DB_PREFIX_ . 'customer_message');
+
 /**
- * Base static class for performing query and update operations on the 'djland_customer_message' table.
+ * Base static class for performing query and update operations on the 'customer_message' table.
  *
  * 
  *
@@ -14,7 +24,7 @@ abstract class Oops_Model_Base_CustomerMessagePeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_customer_message';
+	const TABLE_NAME = OOPS_MODEL_CUSTOMERMESSAGE_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_CustomerMessage';
@@ -35,28 +45,28 @@ abstract class Oops_Model_Base_CustomerMessagePeer {
 	const NUM_HYDRATE_COLUMNS = 8;
 
 	/** the column name for the ID_CUSTOMER_MESSAGE field */
-	const ID_CUSTOMER_MESSAGE = 'djland_customer_message.ID_CUSTOMER_MESSAGE';
+	const ID_CUSTOMER_MESSAGE = OOPS_MODEL_CUSTOMERMESSAGE_ID_CUSTOMER_MESSAGE;
 
 	/** the column name for the ID_CUSTOMER_THREAD field */
-	const ID_CUSTOMER_THREAD = 'djland_customer_message.ID_CUSTOMER_THREAD';
+	const ID_CUSTOMER_THREAD = OOPS_MODEL_CUSTOMERMESSAGE_ID_CUSTOMER_THREAD;
 
 	/** the column name for the ID_EMPLOYEE field */
-	const ID_EMPLOYEE = 'djland_customer_message.ID_EMPLOYEE';
+	const ID_EMPLOYEE = OOPS_MODEL_CUSTOMERMESSAGE_ID_EMPLOYEE;
 
 	/** the column name for the MESSAGE field */
-	const MESSAGE = 'djland_customer_message.MESSAGE';
+	const MESSAGE = OOPS_MODEL_CUSTOMERMESSAGE_MESSAGE;
 
 	/** the column name for the FILE_NAME field */
-	const FILE_NAME = 'djland_customer_message.FILE_NAME';
+	const FILE_NAME = OOPS_MODEL_CUSTOMERMESSAGE_FILE_NAME;
 
 	/** the column name for the IP_ADDRESS field */
-	const IP_ADDRESS = 'djland_customer_message.IP_ADDRESS';
+	const IP_ADDRESS = OOPS_MODEL_CUSTOMERMESSAGE_IP_ADDRESS;
 
 	/** the column name for the USER_AGENT field */
-	const USER_AGENT = 'djland_customer_message.USER_AGENT';
+	const USER_AGENT = OOPS_MODEL_CUSTOMERMESSAGE_USER_AGENT;
 
 	/** the column name for the DATE_ADD field */
-	const DATE_ADD = 'djland_customer_message.DATE_ADD';
+	const DATE_ADD = OOPS_MODEL_CUSTOMERMESSAGE_DATE_ADD;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -374,7 +384,7 @@ abstract class Oops_Model_Base_CustomerMessagePeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_customer_message
+	 * Method to invalidate the instance pool of all tables related to customer_message
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -594,7 +604,7 @@ abstract class Oops_Model_Base_CustomerMessagePeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_customer_message table.
+	 * Deletes all rows from the customer_message table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

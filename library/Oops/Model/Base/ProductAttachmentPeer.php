@@ -1,8 +1,12 @@
 <?php
 
 
+define('OOPS_MODEL_PRODUCTATTACHMENT_ID_PRODUCT', _DB_PREFIX_ . 'product_attachment.ID_PRODUCT');
+define('OOPS_MODEL_PRODUCTATTACHMENT_ID_ATTACHMENT', _DB_PREFIX_ . 'product_attachment.ID_ATTACHMENT');
+define('OOPS_MODEL_PRODUCTATTACHMENT_TABLE_NAME', _DB_PREFIX_ . 'product_attachment');
+
 /**
- * Base static class for performing query and update operations on the 'djland_product_attachment' table.
+ * Base static class for performing query and update operations on the 'product_attachment' table.
  *
  * 
  *
@@ -14,7 +18,7 @@ abstract class Oops_Model_Base_ProductAttachmentPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_product_attachment';
+	const TABLE_NAME = OOPS_MODEL_PRODUCTATTACHMENT_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_ProductAttachment';
@@ -35,10 +39,10 @@ abstract class Oops_Model_Base_ProductAttachmentPeer {
 	const NUM_HYDRATE_COLUMNS = 2;
 
 	/** the column name for the ID_PRODUCT field */
-	const ID_PRODUCT = 'djland_product_attachment.ID_PRODUCT';
+	const ID_PRODUCT = OOPS_MODEL_PRODUCTATTACHMENT_ID_PRODUCT;
 
 	/** the column name for the ID_ATTACHMENT field */
-	const ID_ATTACHMENT = 'djland_product_attachment.ID_ATTACHMENT';
+	const ID_ATTACHMENT = OOPS_MODEL_PRODUCTATTACHMENT_ID_ATTACHMENT;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -344,7 +348,7 @@ abstract class Oops_Model_Base_ProductAttachmentPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_product_attachment
+	 * Method to invalidate the instance pool of all tables related to product_attachment
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -568,7 +572,7 @@ abstract class Oops_Model_Base_ProductAttachmentPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_product_attachment table.
+	 * Deletes all rows from the product_attachment table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

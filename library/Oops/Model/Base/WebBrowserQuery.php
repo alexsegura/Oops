@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_web_browser' table.
+ * Base class that represents a query for the 'web_browser' table.
  *
  * 
  *
@@ -112,7 +112,7 @@ abstract class Oops_Model_Base_WebBrowserQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_WEB_BROWSER`, `NAME` FROM `djland_web_browser` WHERE `ID_WEB_BROWSER` = :p0';
+		$sql = 'SELECT `ID_WEB_BROWSER`, `NAME` FROM `' . _DB_PREFIX_ . 'web_browser` WHERE `ID_WEB_BROWSER` = :p0';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

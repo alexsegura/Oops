@@ -1,8 +1,21 @@
 <?php
 
 
+define('OOPS_MODEL_CUSTOMERTHREAD_ID_CUSTOMER_THREAD', _DB_PREFIX_ . 'customer_thread.ID_CUSTOMER_THREAD');
+define('OOPS_MODEL_CUSTOMERTHREAD_ID_LANG', _DB_PREFIX_ . 'customer_thread.ID_LANG');
+define('OOPS_MODEL_CUSTOMERTHREAD_ID_CONTACT', _DB_PREFIX_ . 'customer_thread.ID_CONTACT');
+define('OOPS_MODEL_CUSTOMERTHREAD_ID_CUSTOMER', _DB_PREFIX_ . 'customer_thread.ID_CUSTOMER');
+define('OOPS_MODEL_CUSTOMERTHREAD_ID_ORDER', _DB_PREFIX_ . 'customer_thread.ID_ORDER');
+define('OOPS_MODEL_CUSTOMERTHREAD_ID_PRODUCT', _DB_PREFIX_ . 'customer_thread.ID_PRODUCT');
+define('OOPS_MODEL_CUSTOMERTHREAD_STATUS', _DB_PREFIX_ . 'customer_thread.STATUS');
+define('OOPS_MODEL_CUSTOMERTHREAD_EMAIL', _DB_PREFIX_ . 'customer_thread.EMAIL');
+define('OOPS_MODEL_CUSTOMERTHREAD_TOKEN', _DB_PREFIX_ . 'customer_thread.TOKEN');
+define('OOPS_MODEL_CUSTOMERTHREAD_DATE_ADD', _DB_PREFIX_ . 'customer_thread.DATE_ADD');
+define('OOPS_MODEL_CUSTOMERTHREAD_DATE_UPD', _DB_PREFIX_ . 'customer_thread.DATE_UPD');
+define('OOPS_MODEL_CUSTOMERTHREAD_TABLE_NAME', _DB_PREFIX_ . 'customer_thread');
+
 /**
- * Base static class for performing query and update operations on the 'djland_customer_thread' table.
+ * Base static class for performing query and update operations on the 'customer_thread' table.
  *
  * 
  *
@@ -14,7 +27,7 @@ abstract class Oops_Model_Base_CustomerThreadPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_customer_thread';
+	const TABLE_NAME = OOPS_MODEL_CUSTOMERTHREAD_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_CustomerThread';
@@ -35,37 +48,37 @@ abstract class Oops_Model_Base_CustomerThreadPeer {
 	const NUM_HYDRATE_COLUMNS = 11;
 
 	/** the column name for the ID_CUSTOMER_THREAD field */
-	const ID_CUSTOMER_THREAD = 'djland_customer_thread.ID_CUSTOMER_THREAD';
+	const ID_CUSTOMER_THREAD = OOPS_MODEL_CUSTOMERTHREAD_ID_CUSTOMER_THREAD;
 
 	/** the column name for the ID_LANG field */
-	const ID_LANG = 'djland_customer_thread.ID_LANG';
+	const ID_LANG = OOPS_MODEL_CUSTOMERTHREAD_ID_LANG;
 
 	/** the column name for the ID_CONTACT field */
-	const ID_CONTACT = 'djland_customer_thread.ID_CONTACT';
+	const ID_CONTACT = OOPS_MODEL_CUSTOMERTHREAD_ID_CONTACT;
 
 	/** the column name for the ID_CUSTOMER field */
-	const ID_CUSTOMER = 'djland_customer_thread.ID_CUSTOMER';
+	const ID_CUSTOMER = OOPS_MODEL_CUSTOMERTHREAD_ID_CUSTOMER;
 
 	/** the column name for the ID_ORDER field */
-	const ID_ORDER = 'djland_customer_thread.ID_ORDER';
+	const ID_ORDER = OOPS_MODEL_CUSTOMERTHREAD_ID_ORDER;
 
 	/** the column name for the ID_PRODUCT field */
-	const ID_PRODUCT = 'djland_customer_thread.ID_PRODUCT';
+	const ID_PRODUCT = OOPS_MODEL_CUSTOMERTHREAD_ID_PRODUCT;
 
 	/** the column name for the STATUS field */
-	const STATUS = 'djland_customer_thread.STATUS';
+	const STATUS = OOPS_MODEL_CUSTOMERTHREAD_STATUS;
 
 	/** the column name for the EMAIL field */
-	const EMAIL = 'djland_customer_thread.EMAIL';
+	const EMAIL = OOPS_MODEL_CUSTOMERTHREAD_EMAIL;
 
 	/** the column name for the TOKEN field */
-	const TOKEN = 'djland_customer_thread.TOKEN';
+	const TOKEN = OOPS_MODEL_CUSTOMERTHREAD_TOKEN;
 
 	/** the column name for the DATE_ADD field */
-	const DATE_ADD = 'djland_customer_thread.DATE_ADD';
+	const DATE_ADD = OOPS_MODEL_CUSTOMERTHREAD_DATE_ADD;
 
 	/** the column name for the DATE_UPD field */
-	const DATE_UPD = 'djland_customer_thread.DATE_UPD';
+	const DATE_UPD = OOPS_MODEL_CUSTOMERTHREAD_DATE_UPD;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -389,7 +402,7 @@ abstract class Oops_Model_Base_CustomerThreadPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_customer_thread
+	 * Method to invalidate the instance pool of all tables related to customer_thread
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -609,7 +622,7 @@ abstract class Oops_Model_Base_CustomerThreadPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_customer_thread table.
+	 * Deletes all rows from the customer_thread table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

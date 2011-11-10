@@ -1,8 +1,13 @@
 <?php
 
 
+define('OOPS_MODEL_TAXLANG_ID_TAX', _DB_PREFIX_ . 'tax_lang.ID_TAX');
+define('OOPS_MODEL_TAXLANG_ID_LANG', _DB_PREFIX_ . 'tax_lang.ID_LANG');
+define('OOPS_MODEL_TAXLANG_NAME', _DB_PREFIX_ . 'tax_lang.NAME');
+define('OOPS_MODEL_TAXLANG_TABLE_NAME', _DB_PREFIX_ . 'tax_lang');
+
 /**
- * Base static class for performing query and update operations on the 'djland_tax_lang' table.
+ * Base static class for performing query and update operations on the 'tax_lang' table.
  *
  * 
  *
@@ -14,7 +19,7 @@ abstract class Oops_Model_Base_TaxLangPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_tax_lang';
+	const TABLE_NAME = OOPS_MODEL_TAXLANG_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_TaxLang';
@@ -35,13 +40,13 @@ abstract class Oops_Model_Base_TaxLangPeer {
 	const NUM_HYDRATE_COLUMNS = 3;
 
 	/** the column name for the ID_TAX field */
-	const ID_TAX = 'djland_tax_lang.ID_TAX';
+	const ID_TAX = OOPS_MODEL_TAXLANG_ID_TAX;
 
 	/** the column name for the ID_LANG field */
-	const ID_LANG = 'djland_tax_lang.ID_LANG';
+	const ID_LANG = OOPS_MODEL_TAXLANG_ID_LANG;
 
 	/** the column name for the NAME field */
-	const NAME = 'djland_tax_lang.NAME';
+	const NAME = OOPS_MODEL_TAXLANG_NAME;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -349,7 +354,7 @@ abstract class Oops_Model_Base_TaxLangPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_tax_lang
+	 * Method to invalidate the instance pool of all tables related to tax_lang
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -565,7 +570,7 @@ abstract class Oops_Model_Base_TaxLangPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_tax_lang table.
+	 * Deletes all rows from the tax_lang table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

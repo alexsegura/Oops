@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_discount_type' table.
+ * This class defines the structure of the 'discount_type' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_DiscountTypeTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_discount_type');
+		$this->setName(_DB_PREFIX_ . 'discount_type');
 		$this->setPhpName('DiscountType');
 		$this->setClassname('Oops_Model_DiscountType');
 		$this->setPackage('prestashop');

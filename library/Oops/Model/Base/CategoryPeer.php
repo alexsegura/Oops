@@ -1,8 +1,19 @@
 <?php
 
 
+define('OOPS_MODEL_CATEGORY_ID_CATEGORY', _DB_PREFIX_ . 'category.ID_CATEGORY');
+define('OOPS_MODEL_CATEGORY_ID_PARENT', _DB_PREFIX_ . 'category.ID_PARENT');
+define('OOPS_MODEL_CATEGORY_LEVEL_DEPTH', _DB_PREFIX_ . 'category.LEVEL_DEPTH');
+define('OOPS_MODEL_CATEGORY_NLEFT', _DB_PREFIX_ . 'category.NLEFT');
+define('OOPS_MODEL_CATEGORY_NRIGHT', _DB_PREFIX_ . 'category.NRIGHT');
+define('OOPS_MODEL_CATEGORY_ACTIVE', _DB_PREFIX_ . 'category.ACTIVE');
+define('OOPS_MODEL_CATEGORY_DATE_ADD', _DB_PREFIX_ . 'category.DATE_ADD');
+define('OOPS_MODEL_CATEGORY_DATE_UPD', _DB_PREFIX_ . 'category.DATE_UPD');
+define('OOPS_MODEL_CATEGORY_POSITION', _DB_PREFIX_ . 'category.POSITION');
+define('OOPS_MODEL_CATEGORY_TABLE_NAME', _DB_PREFIX_ . 'category');
+
 /**
- * Base static class for performing query and update operations on the 'djland_category' table.
+ * Base static class for performing query and update operations on the 'category' table.
  *
  * 
  *
@@ -14,7 +25,7 @@ abstract class Oops_Model_Base_CategoryPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_category';
+	const TABLE_NAME = OOPS_MODEL_CATEGORY_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_Category';
@@ -35,31 +46,31 @@ abstract class Oops_Model_Base_CategoryPeer {
 	const NUM_HYDRATE_COLUMNS = 9;
 
 	/** the column name for the ID_CATEGORY field */
-	const ID_CATEGORY = 'djland_category.ID_CATEGORY';
+	const ID_CATEGORY = OOPS_MODEL_CATEGORY_ID_CATEGORY;
 
 	/** the column name for the ID_PARENT field */
-	const ID_PARENT = 'djland_category.ID_PARENT';
+	const ID_PARENT = OOPS_MODEL_CATEGORY_ID_PARENT;
 
 	/** the column name for the LEVEL_DEPTH field */
-	const LEVEL_DEPTH = 'djland_category.LEVEL_DEPTH';
+	const LEVEL_DEPTH = OOPS_MODEL_CATEGORY_LEVEL_DEPTH;
 
 	/** the column name for the NLEFT field */
-	const NLEFT = 'djland_category.NLEFT';
+	const NLEFT = OOPS_MODEL_CATEGORY_NLEFT;
 
 	/** the column name for the NRIGHT field */
-	const NRIGHT = 'djland_category.NRIGHT';
+	const NRIGHT = OOPS_MODEL_CATEGORY_NRIGHT;
 
 	/** the column name for the ACTIVE field */
-	const ACTIVE = 'djland_category.ACTIVE';
+	const ACTIVE = OOPS_MODEL_CATEGORY_ACTIVE;
 
 	/** the column name for the DATE_ADD field */
-	const DATE_ADD = 'djland_category.DATE_ADD';
+	const DATE_ADD = OOPS_MODEL_CATEGORY_DATE_ADD;
 
 	/** the column name for the DATE_UPD field */
-	const DATE_UPD = 'djland_category.DATE_UPD';
+	const DATE_UPD = OOPS_MODEL_CATEGORY_DATE_UPD;
 
 	/** the column name for the POSITION field */
-	const POSITION = 'djland_category.POSITION';
+	const POSITION = OOPS_MODEL_CATEGORY_POSITION;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -73,22 +84,29 @@ abstract class Oops_Model_Base_CategoryPeer {
 	public static $instances = array();
 
 
+	// i18n behavior
+	
+	/**
+	 * The default locale to use for translations
+	 * @var        string
+	 */
+	const DEFAULT_LOCALE = '1';
 	// nested_set behavior
 	
 	/**
 	 * Left column for the set
 	 */
-	const LEFT_COL = 'djland_category.NLEFT';
+	const LEFT_COL = OOPS_MODEL_CATEGORY_NLEFT;
 	
 	/**
 	 * Right column for the set
 	 */
-	const RIGHT_COL = 'djland_category.NRIGHT';
+	const RIGHT_COL = OOPS_MODEL_CATEGORY_NRIGHT;
 	
 	/**
 	 * Level column for the set
 	 */
-	const LEVEL_COL = 'djland_category.LEVEL_DEPTH';
+	const LEVEL_COL = OOPS_MODEL_CATEGORY_LEVEL_DEPTH;
 
 	/**
 	 * holds an array of fieldnames
@@ -396,7 +414,7 @@ abstract class Oops_Model_Base_CategoryPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_category
+	 * Method to invalidate the instance pool of all tables related to category
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -616,7 +634,7 @@ abstract class Oops_Model_Base_CategoryPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_category table.
+	 * Deletes all rows from the category table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

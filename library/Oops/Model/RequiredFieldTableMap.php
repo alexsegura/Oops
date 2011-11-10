@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_required_field' table.
+ * This class defines the structure of the 'required_field' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_RequiredFieldTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_required_field');
+		$this->setName(_DB_PREFIX_ . 'required_field');
 		$this->setPhpName('RequiredField');
 		$this->setClassname('Oops_Model_RequiredField');
 		$this->setPackage('prestashop');

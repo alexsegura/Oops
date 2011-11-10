@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_log' table.
+ * Base class that represents a row from the 'log' table.
  *
  * 
  *
@@ -676,7 +676,7 @@ abstract class Oops_Model_Base_Log extends BaseObject  implements Persistent
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_log` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'log` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

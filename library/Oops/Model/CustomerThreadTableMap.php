@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_customer_thread' table.
+ * This class defines the structure of the 'customer_thread' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_CustomerThreadTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_customer_thread');
+		$this->setName(_DB_PREFIX_ . 'customer_thread');
 		$this->setPhpName('CustomerThread');
 		$this->setClassname('Oops_Model_CustomerThread');
 		$this->setPackage('prestashop');

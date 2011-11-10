@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_product_lang' table.
+ * Base class that represents a row from the 'product_lang' table.
  *
  * 
  *
@@ -769,7 +769,7 @@ abstract class Oops_Model_Base_ProductLang extends BaseObject  implements Persis
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_product_lang` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'product_lang` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

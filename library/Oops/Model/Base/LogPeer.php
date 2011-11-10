@@ -1,8 +1,18 @@
 <?php
 
 
+define('OOPS_MODEL_LOG_ID_LOG', _DB_PREFIX_ . 'log.ID_LOG');
+define('OOPS_MODEL_LOG_SEVERITY', _DB_PREFIX_ . 'log.SEVERITY');
+define('OOPS_MODEL_LOG_ERROR_CODE', _DB_PREFIX_ . 'log.ERROR_CODE');
+define('OOPS_MODEL_LOG_MESSAGE', _DB_PREFIX_ . 'log.MESSAGE');
+define('OOPS_MODEL_LOG_OBJECT_TYPE', _DB_PREFIX_ . 'log.OBJECT_TYPE');
+define('OOPS_MODEL_LOG_OBJECT_ID', _DB_PREFIX_ . 'log.OBJECT_ID');
+define('OOPS_MODEL_LOG_DATE_ADD', _DB_PREFIX_ . 'log.DATE_ADD');
+define('OOPS_MODEL_LOG_DATE_UPD', _DB_PREFIX_ . 'log.DATE_UPD');
+define('OOPS_MODEL_LOG_TABLE_NAME', _DB_PREFIX_ . 'log');
+
 /**
- * Base static class for performing query and update operations on the 'djland_log' table.
+ * Base static class for performing query and update operations on the 'log' table.
  *
  * 
  *
@@ -14,7 +24,7 @@ abstract class Oops_Model_Base_LogPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_log';
+	const TABLE_NAME = OOPS_MODEL_LOG_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_Log';
@@ -35,28 +45,28 @@ abstract class Oops_Model_Base_LogPeer {
 	const NUM_HYDRATE_COLUMNS = 8;
 
 	/** the column name for the ID_LOG field */
-	const ID_LOG = 'djland_log.ID_LOG';
+	const ID_LOG = OOPS_MODEL_LOG_ID_LOG;
 
 	/** the column name for the SEVERITY field */
-	const SEVERITY = 'djland_log.SEVERITY';
+	const SEVERITY = OOPS_MODEL_LOG_SEVERITY;
 
 	/** the column name for the ERROR_CODE field */
-	const ERROR_CODE = 'djland_log.ERROR_CODE';
+	const ERROR_CODE = OOPS_MODEL_LOG_ERROR_CODE;
 
 	/** the column name for the MESSAGE field */
-	const MESSAGE = 'djland_log.MESSAGE';
+	const MESSAGE = OOPS_MODEL_LOG_MESSAGE;
 
 	/** the column name for the OBJECT_TYPE field */
-	const OBJECT_TYPE = 'djland_log.OBJECT_TYPE';
+	const OBJECT_TYPE = OOPS_MODEL_LOG_OBJECT_TYPE;
 
 	/** the column name for the OBJECT_ID field */
-	const OBJECT_ID = 'djland_log.OBJECT_ID';
+	const OBJECT_ID = OOPS_MODEL_LOG_OBJECT_ID;
 
 	/** the column name for the DATE_ADD field */
-	const DATE_ADD = 'djland_log.DATE_ADD';
+	const DATE_ADD = OOPS_MODEL_LOG_DATE_ADD;
 
 	/** the column name for the DATE_UPD field */
-	const DATE_UPD = 'djland_log.DATE_UPD';
+	const DATE_UPD = OOPS_MODEL_LOG_DATE_UPD;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -374,7 +384,7 @@ abstract class Oops_Model_Base_LogPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_log
+	 * Method to invalidate the instance pool of all tables related to log
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -594,7 +604,7 @@ abstract class Oops_Model_Base_LogPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_log table.
+	 * Deletes all rows from the log table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

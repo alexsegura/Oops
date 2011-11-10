@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_date_range' table.
+ * This class defines the structure of the 'date_range' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_DateRangeTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_date_range');
+		$this->setName(_DB_PREFIX_ . 'date_range');
 		$this->setPhpName('DateRange');
 		$this->setClassname('Oops_Model_DateRange');
 		$this->setPackage('prestashop');

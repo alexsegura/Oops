@@ -1,8 +1,14 @@
 <?php
 
 
+define('OOPS_MODEL_ORDERMESSAGELANG_ID_ORDER_MESSAGE', _DB_PREFIX_ . 'order_message_lang.ID_ORDER_MESSAGE');
+define('OOPS_MODEL_ORDERMESSAGELANG_ID_LANG', _DB_PREFIX_ . 'order_message_lang.ID_LANG');
+define('OOPS_MODEL_ORDERMESSAGELANG_NAME', _DB_PREFIX_ . 'order_message_lang.NAME');
+define('OOPS_MODEL_ORDERMESSAGELANG_MESSAGE', _DB_PREFIX_ . 'order_message_lang.MESSAGE');
+define('OOPS_MODEL_ORDERMESSAGELANG_TABLE_NAME', _DB_PREFIX_ . 'order_message_lang');
+
 /**
- * Base static class for performing query and update operations on the 'djland_order_message_lang' table.
+ * Base static class for performing query and update operations on the 'order_message_lang' table.
  *
  * 
  *
@@ -14,7 +20,7 @@ abstract class Oops_Model_Base_OrderMessageLangPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_order_message_lang';
+	const TABLE_NAME = OOPS_MODEL_ORDERMESSAGELANG_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_OrderMessageLang';
@@ -35,16 +41,16 @@ abstract class Oops_Model_Base_OrderMessageLangPeer {
 	const NUM_HYDRATE_COLUMNS = 4;
 
 	/** the column name for the ID_ORDER_MESSAGE field */
-	const ID_ORDER_MESSAGE = 'djland_order_message_lang.ID_ORDER_MESSAGE';
+	const ID_ORDER_MESSAGE = OOPS_MODEL_ORDERMESSAGELANG_ID_ORDER_MESSAGE;
 
 	/** the column name for the ID_LANG field */
-	const ID_LANG = 'djland_order_message_lang.ID_LANG';
+	const ID_LANG = OOPS_MODEL_ORDERMESSAGELANG_ID_LANG;
 
 	/** the column name for the NAME field */
-	const NAME = 'djland_order_message_lang.NAME';
+	const NAME = OOPS_MODEL_ORDERMESSAGELANG_NAME;
 
 	/** the column name for the MESSAGE field */
-	const MESSAGE = 'djland_order_message_lang.MESSAGE';
+	const MESSAGE = OOPS_MODEL_ORDERMESSAGELANG_MESSAGE;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -354,7 +360,7 @@ abstract class Oops_Model_Base_OrderMessageLangPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_order_message_lang
+	 * Method to invalidate the instance pool of all tables related to order_message_lang
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -578,7 +584,7 @@ abstract class Oops_Model_Base_OrderMessageLangPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_order_message_lang table.
+	 * Deletes all rows from the order_message_lang table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

@@ -1,8 +1,14 @@
 <?php
 
 
+define('OOPS_MODEL_CUSTOMIZEDDATA_ID_CUSTOMIZATION', _DB_PREFIX_ . 'customized_data.ID_CUSTOMIZATION');
+define('OOPS_MODEL_CUSTOMIZEDDATA_TYPE', _DB_PREFIX_ . 'customized_data.TYPE');
+define('OOPS_MODEL_CUSTOMIZEDDATA_INDEX', _DB_PREFIX_ . 'customized_data.INDEX');
+define('OOPS_MODEL_CUSTOMIZEDDATA_VALUE', _DB_PREFIX_ . 'customized_data.VALUE');
+define('OOPS_MODEL_CUSTOMIZEDDATA_TABLE_NAME', _DB_PREFIX_ . 'customized_data');
+
 /**
- * Base static class for performing query and update operations on the 'djland_customized_data' table.
+ * Base static class for performing query and update operations on the 'customized_data' table.
  *
  * 
  *
@@ -14,7 +20,7 @@ abstract class Oops_Model_Base_CustomizedDataPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_customized_data';
+	const TABLE_NAME = OOPS_MODEL_CUSTOMIZEDDATA_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_CustomizedData';
@@ -35,16 +41,16 @@ abstract class Oops_Model_Base_CustomizedDataPeer {
 	const NUM_HYDRATE_COLUMNS = 4;
 
 	/** the column name for the ID_CUSTOMIZATION field */
-	const ID_CUSTOMIZATION = 'djland_customized_data.ID_CUSTOMIZATION';
+	const ID_CUSTOMIZATION = OOPS_MODEL_CUSTOMIZEDDATA_ID_CUSTOMIZATION;
 
 	/** the column name for the TYPE field */
-	const TYPE = 'djland_customized_data.TYPE';
+	const TYPE = OOPS_MODEL_CUSTOMIZEDDATA_TYPE;
 
 	/** the column name for the INDEX field */
-	const INDEX = 'djland_customized_data.INDEX';
+	const INDEX = OOPS_MODEL_CUSTOMIZEDDATA_INDEX;
 
 	/** the column name for the VALUE field */
-	const VALUE = 'djland_customized_data.VALUE';
+	const VALUE = OOPS_MODEL_CUSTOMIZEDDATA_VALUE;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -354,7 +360,7 @@ abstract class Oops_Model_Base_CustomizedDataPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_customized_data
+	 * Method to invalidate the instance pool of all tables related to customized_data
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -586,7 +592,7 @@ abstract class Oops_Model_Base_CustomizedDataPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_customized_data table.
+	 * Deletes all rows from the customized_data table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

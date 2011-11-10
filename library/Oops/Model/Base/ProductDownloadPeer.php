@@ -1,8 +1,19 @@
 <?php
 
 
+define('OOPS_MODEL_PRODUCTDOWNLOAD_ID_PRODUCT_DOWNLOAD', _DB_PREFIX_ . 'product_download.ID_PRODUCT_DOWNLOAD');
+define('OOPS_MODEL_PRODUCTDOWNLOAD_ID_PRODUCT', _DB_PREFIX_ . 'product_download.ID_PRODUCT');
+define('OOPS_MODEL_PRODUCTDOWNLOAD_DISPLAY_FILENAME', _DB_PREFIX_ . 'product_download.DISPLAY_FILENAME');
+define('OOPS_MODEL_PRODUCTDOWNLOAD_PHYSICALLY_FILENAME', _DB_PREFIX_ . 'product_download.PHYSICALLY_FILENAME');
+define('OOPS_MODEL_PRODUCTDOWNLOAD_DATE_DEPOSIT', _DB_PREFIX_ . 'product_download.DATE_DEPOSIT');
+define('OOPS_MODEL_PRODUCTDOWNLOAD_DATE_EXPIRATION', _DB_PREFIX_ . 'product_download.DATE_EXPIRATION');
+define('OOPS_MODEL_PRODUCTDOWNLOAD_NB_DAYS_ACCESSIBLE', _DB_PREFIX_ . 'product_download.NB_DAYS_ACCESSIBLE');
+define('OOPS_MODEL_PRODUCTDOWNLOAD_NB_DOWNLOADABLE', _DB_PREFIX_ . 'product_download.NB_DOWNLOADABLE');
+define('OOPS_MODEL_PRODUCTDOWNLOAD_ACTIVE', _DB_PREFIX_ . 'product_download.ACTIVE');
+define('OOPS_MODEL_PRODUCTDOWNLOAD_TABLE_NAME', _DB_PREFIX_ . 'product_download');
+
 /**
- * Base static class for performing query and update operations on the 'djland_product_download' table.
+ * Base static class for performing query and update operations on the 'product_download' table.
  *
  * 
  *
@@ -14,7 +25,7 @@ abstract class Oops_Model_Base_ProductDownloadPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_product_download';
+	const TABLE_NAME = OOPS_MODEL_PRODUCTDOWNLOAD_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_ProductDownload';
@@ -35,31 +46,31 @@ abstract class Oops_Model_Base_ProductDownloadPeer {
 	const NUM_HYDRATE_COLUMNS = 9;
 
 	/** the column name for the ID_PRODUCT_DOWNLOAD field */
-	const ID_PRODUCT_DOWNLOAD = 'djland_product_download.ID_PRODUCT_DOWNLOAD';
+	const ID_PRODUCT_DOWNLOAD = OOPS_MODEL_PRODUCTDOWNLOAD_ID_PRODUCT_DOWNLOAD;
 
 	/** the column name for the ID_PRODUCT field */
-	const ID_PRODUCT = 'djland_product_download.ID_PRODUCT';
+	const ID_PRODUCT = OOPS_MODEL_PRODUCTDOWNLOAD_ID_PRODUCT;
 
 	/** the column name for the DISPLAY_FILENAME field */
-	const DISPLAY_FILENAME = 'djland_product_download.DISPLAY_FILENAME';
+	const DISPLAY_FILENAME = OOPS_MODEL_PRODUCTDOWNLOAD_DISPLAY_FILENAME;
 
 	/** the column name for the PHYSICALLY_FILENAME field */
-	const PHYSICALLY_FILENAME = 'djland_product_download.PHYSICALLY_FILENAME';
+	const PHYSICALLY_FILENAME = OOPS_MODEL_PRODUCTDOWNLOAD_PHYSICALLY_FILENAME;
 
 	/** the column name for the DATE_DEPOSIT field */
-	const DATE_DEPOSIT = 'djland_product_download.DATE_DEPOSIT';
+	const DATE_DEPOSIT = OOPS_MODEL_PRODUCTDOWNLOAD_DATE_DEPOSIT;
 
 	/** the column name for the DATE_EXPIRATION field */
-	const DATE_EXPIRATION = 'djland_product_download.DATE_EXPIRATION';
+	const DATE_EXPIRATION = OOPS_MODEL_PRODUCTDOWNLOAD_DATE_EXPIRATION;
 
 	/** the column name for the NB_DAYS_ACCESSIBLE field */
-	const NB_DAYS_ACCESSIBLE = 'djland_product_download.NB_DAYS_ACCESSIBLE';
+	const NB_DAYS_ACCESSIBLE = OOPS_MODEL_PRODUCTDOWNLOAD_NB_DAYS_ACCESSIBLE;
 
 	/** the column name for the NB_DOWNLOADABLE field */
-	const NB_DOWNLOADABLE = 'djland_product_download.NB_DOWNLOADABLE';
+	const NB_DOWNLOADABLE = OOPS_MODEL_PRODUCTDOWNLOAD_NB_DOWNLOADABLE;
 
 	/** the column name for the ACTIVE field */
-	const ACTIVE = 'djland_product_download.ACTIVE';
+	const ACTIVE = OOPS_MODEL_PRODUCTDOWNLOAD_ACTIVE;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -379,7 +390,7 @@ abstract class Oops_Model_Base_ProductDownloadPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_product_download
+	 * Method to invalidate the instance pool of all tables related to product_download
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -599,7 +610,7 @@ abstract class Oops_Model_Base_ProductDownloadPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_product_download table.
+	 * Deletes all rows from the product_download table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

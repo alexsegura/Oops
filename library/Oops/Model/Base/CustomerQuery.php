@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_customer' table.
+ * Base class that represents a query for the 'customer' table.
  *
  * 
  *
@@ -184,7 +184,7 @@ abstract class Oops_Model_Base_CustomerQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_CUSTOMER`, `ID_GENDER`, `ID_DEFAULT_GROUP`, `FIRSTNAME`, `LASTNAME`, `EMAIL`, `PASSWD`, `LAST_PASSWD_GEN`, `BIRTHDAY`, `NEWSLETTER`, `IP_REGISTRATION_NEWSLETTER`, `NEWSLETTER_DATE_ADD`, `OPTIN`, `SECURE_KEY`, `NOTE`, `ACTIVE`, `IS_GUEST`, `DELETED`, `DATE_ADD`, `DATE_UPD` FROM `djland_customer` WHERE `ID_CUSTOMER` = :p0';
+		$sql = 'SELECT `ID_CUSTOMER`, `ID_GENDER`, `ID_DEFAULT_GROUP`, `FIRSTNAME`, `LASTNAME`, `EMAIL`, `PASSWD`, `LAST_PASSWD_GEN`, `BIRTHDAY`, `NEWSLETTER`, `IP_REGISTRATION_NEWSLETTER`, `NEWSLETTER_DATE_ADD`, `OPTIN`, `SECURE_KEY`, `NOTE`, `ACTIVE`, `IS_GUEST`, `DELETED`, `DATE_ADD`, `DATE_UPD` FROM `' . _DB_PREFIX_ . 'customer` WHERE `ID_CUSTOMER` = :p0';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

@@ -1,8 +1,13 @@
 <?php
 
 
+define('OOPS_MODEL_MESSAGEREADED_ID_MESSAGE', _DB_PREFIX_ . 'message_readed.ID_MESSAGE');
+define('OOPS_MODEL_MESSAGEREADED_ID_EMPLOYEE', _DB_PREFIX_ . 'message_readed.ID_EMPLOYEE');
+define('OOPS_MODEL_MESSAGEREADED_DATE_ADD', _DB_PREFIX_ . 'message_readed.DATE_ADD');
+define('OOPS_MODEL_MESSAGEREADED_TABLE_NAME', _DB_PREFIX_ . 'message_readed');
+
 /**
- * Base static class for performing query and update operations on the 'djland_message_readed' table.
+ * Base static class for performing query and update operations on the 'message_readed' table.
  *
  * 
  *
@@ -14,7 +19,7 @@ abstract class Oops_Model_Base_MessageReadedPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_message_readed';
+	const TABLE_NAME = OOPS_MODEL_MESSAGEREADED_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_MessageReaded';
@@ -35,13 +40,13 @@ abstract class Oops_Model_Base_MessageReadedPeer {
 	const NUM_HYDRATE_COLUMNS = 3;
 
 	/** the column name for the ID_MESSAGE field */
-	const ID_MESSAGE = 'djland_message_readed.ID_MESSAGE';
+	const ID_MESSAGE = OOPS_MODEL_MESSAGEREADED_ID_MESSAGE;
 
 	/** the column name for the ID_EMPLOYEE field */
-	const ID_EMPLOYEE = 'djland_message_readed.ID_EMPLOYEE';
+	const ID_EMPLOYEE = OOPS_MODEL_MESSAGEREADED_ID_EMPLOYEE;
 
 	/** the column name for the DATE_ADD field */
-	const DATE_ADD = 'djland_message_readed.DATE_ADD';
+	const DATE_ADD = OOPS_MODEL_MESSAGEREADED_DATE_ADD;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -349,7 +354,7 @@ abstract class Oops_Model_Base_MessageReadedPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_message_readed
+	 * Method to invalidate the instance pool of all tables related to message_readed
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -573,7 +578,7 @@ abstract class Oops_Model_Base_MessageReadedPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_message_readed table.
+	 * Deletes all rows from the message_readed table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

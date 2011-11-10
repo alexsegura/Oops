@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_editorial' table.
+ * This class defines the structure of the 'editorial' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_EditorialTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_editorial');
+		$this->setName(_DB_PREFIX_ . 'editorial');
 		$this->setPhpName('Editorial');
 		$this->setClassname('Oops_Model_Editorial');
 		$this->setPackage('prestashop');

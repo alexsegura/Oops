@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_feature_value' table.
+ * Base class that represents a row from the 'feature_value' table.
  *
  * 
  *
@@ -408,7 +408,7 @@ abstract class Oops_Model_Base_FeatureValue extends BaseObject  implements Persi
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_feature_value` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'feature_value` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

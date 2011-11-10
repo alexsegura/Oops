@@ -1,8 +1,15 @@
 <?php
 
 
+define('OOPS_MODEL_GROUP_ID_GROUP', _DB_PREFIX_ . 'group.ID_GROUP');
+define('OOPS_MODEL_GROUP_REDUCTION', _DB_PREFIX_ . 'group.REDUCTION');
+define('OOPS_MODEL_GROUP_PRICE_DISPLAY_METHOD', _DB_PREFIX_ . 'group.PRICE_DISPLAY_METHOD');
+define('OOPS_MODEL_GROUP_DATE_ADD', _DB_PREFIX_ . 'group.DATE_ADD');
+define('OOPS_MODEL_GROUP_DATE_UPD', _DB_PREFIX_ . 'group.DATE_UPD');
+define('OOPS_MODEL_GROUP_TABLE_NAME', _DB_PREFIX_ . 'group');
+
 /**
- * Base static class for performing query and update operations on the 'djland_group' table.
+ * Base static class for performing query and update operations on the 'group' table.
  *
  * 
  *
@@ -14,7 +21,7 @@ abstract class Oops_Model_Base_GroupPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_group';
+	const TABLE_NAME = OOPS_MODEL_GROUP_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_Group';
@@ -35,19 +42,19 @@ abstract class Oops_Model_Base_GroupPeer {
 	const NUM_HYDRATE_COLUMNS = 5;
 
 	/** the column name for the ID_GROUP field */
-	const ID_GROUP = 'djland_group.ID_GROUP';
+	const ID_GROUP = OOPS_MODEL_GROUP_ID_GROUP;
 
 	/** the column name for the REDUCTION field */
-	const REDUCTION = 'djland_group.REDUCTION';
+	const REDUCTION = OOPS_MODEL_GROUP_REDUCTION;
 
 	/** the column name for the PRICE_DISPLAY_METHOD field */
-	const PRICE_DISPLAY_METHOD = 'djland_group.PRICE_DISPLAY_METHOD';
+	const PRICE_DISPLAY_METHOD = OOPS_MODEL_GROUP_PRICE_DISPLAY_METHOD;
 
 	/** the column name for the DATE_ADD field */
-	const DATE_ADD = 'djland_group.DATE_ADD';
+	const DATE_ADD = OOPS_MODEL_GROUP_DATE_ADD;
 
 	/** the column name for the DATE_UPD field */
-	const DATE_UPD = 'djland_group.DATE_UPD';
+	const DATE_UPD = OOPS_MODEL_GROUP_DATE_UPD;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -359,7 +366,7 @@ abstract class Oops_Model_Base_GroupPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_group
+	 * Method to invalidate the instance pool of all tables related to group
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -579,7 +586,7 @@ abstract class Oops_Model_Base_GroupPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_group table.
+	 * Deletes all rows from the group table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

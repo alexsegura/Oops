@@ -1,8 +1,13 @@
 <?php
 
 
+define('OOPS_MODEL_REQUIREDFIELD_ID_REQUIRED_FIELD', _DB_PREFIX_ . 'required_field.ID_REQUIRED_FIELD');
+define('OOPS_MODEL_REQUIREDFIELD_OBJECT_NAME', _DB_PREFIX_ . 'required_field.OBJECT_NAME');
+define('OOPS_MODEL_REQUIREDFIELD_FIELD_NAME', _DB_PREFIX_ . 'required_field.FIELD_NAME');
+define('OOPS_MODEL_REQUIREDFIELD_TABLE_NAME', _DB_PREFIX_ . 'required_field');
+
 /**
- * Base static class for performing query and update operations on the 'djland_required_field' table.
+ * Base static class for performing query and update operations on the 'required_field' table.
  *
  * 
  *
@@ -14,7 +19,7 @@ abstract class Oops_Model_Base_RequiredFieldPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_required_field';
+	const TABLE_NAME = OOPS_MODEL_REQUIREDFIELD_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_RequiredField';
@@ -35,13 +40,13 @@ abstract class Oops_Model_Base_RequiredFieldPeer {
 	const NUM_HYDRATE_COLUMNS = 3;
 
 	/** the column name for the ID_REQUIRED_FIELD field */
-	const ID_REQUIRED_FIELD = 'djland_required_field.ID_REQUIRED_FIELD';
+	const ID_REQUIRED_FIELD = OOPS_MODEL_REQUIREDFIELD_ID_REQUIRED_FIELD;
 
 	/** the column name for the OBJECT_NAME field */
-	const OBJECT_NAME = 'djland_required_field.OBJECT_NAME';
+	const OBJECT_NAME = OOPS_MODEL_REQUIREDFIELD_OBJECT_NAME;
 
 	/** the column name for the FIELD_NAME field */
-	const FIELD_NAME = 'djland_required_field.FIELD_NAME';
+	const FIELD_NAME = OOPS_MODEL_REQUIREDFIELD_FIELD_NAME;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -349,7 +354,7 @@ abstract class Oops_Model_Base_RequiredFieldPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_required_field
+	 * Method to invalidate the instance pool of all tables related to required_field
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -569,7 +574,7 @@ abstract class Oops_Model_Base_RequiredFieldPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_required_field table.
+	 * Deletes all rows from the required_field table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

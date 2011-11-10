@@ -1,8 +1,14 @@
 <?php
 
 
+define('OOPS_MODEL_IMPORTMATCH_ID_IMPORT_MATCH', _DB_PREFIX_ . 'import_match.ID_IMPORT_MATCH');
+define('OOPS_MODEL_IMPORTMATCH_NAME', _DB_PREFIX_ . 'import_match.NAME');
+define('OOPS_MODEL_IMPORTMATCH_MATCH', _DB_PREFIX_ . 'import_match.MATCH');
+define('OOPS_MODEL_IMPORTMATCH_SKIP', _DB_PREFIX_ . 'import_match.SKIP');
+define('OOPS_MODEL_IMPORTMATCH_TABLE_NAME', _DB_PREFIX_ . 'import_match');
+
 /**
- * Base static class for performing query and update operations on the 'djland_import_match' table.
+ * Base static class for performing query and update operations on the 'import_match' table.
  *
  * 
  *
@@ -14,7 +20,7 @@ abstract class Oops_Model_Base_ImportMatchPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_import_match';
+	const TABLE_NAME = OOPS_MODEL_IMPORTMATCH_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_ImportMatch';
@@ -35,16 +41,16 @@ abstract class Oops_Model_Base_ImportMatchPeer {
 	const NUM_HYDRATE_COLUMNS = 4;
 
 	/** the column name for the ID_IMPORT_MATCH field */
-	const ID_IMPORT_MATCH = 'djland_import_match.ID_IMPORT_MATCH';
+	const ID_IMPORT_MATCH = OOPS_MODEL_IMPORTMATCH_ID_IMPORT_MATCH;
 
 	/** the column name for the NAME field */
-	const NAME = 'djland_import_match.NAME';
+	const NAME = OOPS_MODEL_IMPORTMATCH_NAME;
 
 	/** the column name for the MATCH field */
-	const MATCH = 'djland_import_match.MATCH';
+	const MATCH = OOPS_MODEL_IMPORTMATCH_MATCH;
 
 	/** the column name for the SKIP field */
-	const SKIP = 'djland_import_match.SKIP';
+	const SKIP = OOPS_MODEL_IMPORTMATCH_SKIP;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -354,7 +360,7 @@ abstract class Oops_Model_Base_ImportMatchPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_import_match
+	 * Method to invalidate the instance pool of all tables related to import_match
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -574,7 +580,7 @@ abstract class Oops_Model_Base_ImportMatchPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_import_match table.
+	 * Deletes all rows from the import_match table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

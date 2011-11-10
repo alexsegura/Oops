@@ -1,8 +1,12 @@
 <?php
 
 
+define('OOPS_MODEL_PRODUCTATTRIBUTEIMAGE_ID_PRODUCT_ATTRIBUTE', _DB_PREFIX_ . 'product_attribute_image.ID_PRODUCT_ATTRIBUTE');
+define('OOPS_MODEL_PRODUCTATTRIBUTEIMAGE_ID_IMAGE', _DB_PREFIX_ . 'product_attribute_image.ID_IMAGE');
+define('OOPS_MODEL_PRODUCTATTRIBUTEIMAGE_TABLE_NAME', _DB_PREFIX_ . 'product_attribute_image');
+
 /**
- * Base static class for performing query and update operations on the 'djland_product_attribute_image' table.
+ * Base static class for performing query and update operations on the 'product_attribute_image' table.
  *
  * 
  *
@@ -14,7 +18,7 @@ abstract class Oops_Model_Base_ProductAttributeImagePeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_product_attribute_image';
+	const TABLE_NAME = OOPS_MODEL_PRODUCTATTRIBUTEIMAGE_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_ProductAttributeImage';
@@ -35,10 +39,10 @@ abstract class Oops_Model_Base_ProductAttributeImagePeer {
 	const NUM_HYDRATE_COLUMNS = 2;
 
 	/** the column name for the ID_PRODUCT_ATTRIBUTE field */
-	const ID_PRODUCT_ATTRIBUTE = 'djland_product_attribute_image.ID_PRODUCT_ATTRIBUTE';
+	const ID_PRODUCT_ATTRIBUTE = OOPS_MODEL_PRODUCTATTRIBUTEIMAGE_ID_PRODUCT_ATTRIBUTE;
 
 	/** the column name for the ID_IMAGE field */
-	const ID_IMAGE = 'djland_product_attribute_image.ID_IMAGE';
+	const ID_IMAGE = OOPS_MODEL_PRODUCTATTRIBUTEIMAGE_ID_IMAGE;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -344,7 +348,7 @@ abstract class Oops_Model_Base_ProductAttributeImagePeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_product_attribute_image
+	 * Method to invalidate the instance pool of all tables related to product_attribute_image
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -568,7 +572,7 @@ abstract class Oops_Model_Base_ProductAttributeImagePeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_product_attribute_image table.
+	 * Deletes all rows from the product_attribute_image table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

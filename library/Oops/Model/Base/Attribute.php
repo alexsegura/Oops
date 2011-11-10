@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_attribute' table.
+ * Base class that represents a row from the 'attribute' table.
  *
  * 
  *
@@ -408,7 +408,7 @@ abstract class Oops_Model_Base_Attribute extends BaseObject  implements Persiste
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_attribute` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'attribute` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

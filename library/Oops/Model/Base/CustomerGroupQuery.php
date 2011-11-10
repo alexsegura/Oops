@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_customer_group' table.
+ * Base class that represents a query for the 'customer_group' table.
  *
  * 
  *
@@ -112,7 +112,7 @@ abstract class Oops_Model_Base_CustomerGroupQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_CUSTOMER`, `ID_GROUP` FROM `djland_customer_group` WHERE `ID_CUSTOMER` = :p0 AND `ID_GROUP` = :p1';
+		$sql = 'SELECT `ID_CUSTOMER`, `ID_GROUP` FROM `' . _DB_PREFIX_ . 'customer_group` WHERE `ID_CUSTOMER` = :p0 AND `ID_GROUP` = :p1';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key[0], PDO::PARAM_INT);

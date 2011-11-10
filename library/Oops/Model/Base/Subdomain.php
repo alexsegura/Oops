@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_subdomain' table.
+ * Base class that represents a row from the 'subdomain' table.
  *
  * 
  *
@@ -368,7 +368,7 @@ abstract class Oops_Model_Base_Subdomain extends BaseObject  implements Persiste
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_subdomain` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'subdomain` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

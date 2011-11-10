@@ -1,8 +1,14 @@
 <?php
 
 
+define('OOPS_MODEL_PRODUCTSALE_ID_PRODUCT', _DB_PREFIX_ . 'product_sale.ID_PRODUCT');
+define('OOPS_MODEL_PRODUCTSALE_QUANTITY', _DB_PREFIX_ . 'product_sale.QUANTITY');
+define('OOPS_MODEL_PRODUCTSALE_SALE_NBR', _DB_PREFIX_ . 'product_sale.SALE_NBR');
+define('OOPS_MODEL_PRODUCTSALE_DATE_UPD', _DB_PREFIX_ . 'product_sale.DATE_UPD');
+define('OOPS_MODEL_PRODUCTSALE_TABLE_NAME', _DB_PREFIX_ . 'product_sale');
+
 /**
- * Base static class for performing query and update operations on the 'djland_product_sale' table.
+ * Base static class for performing query and update operations on the 'product_sale' table.
  *
  * 
  *
@@ -14,7 +20,7 @@ abstract class Oops_Model_Base_ProductSalePeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_product_sale';
+	const TABLE_NAME = OOPS_MODEL_PRODUCTSALE_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_ProductSale';
@@ -35,16 +41,16 @@ abstract class Oops_Model_Base_ProductSalePeer {
 	const NUM_HYDRATE_COLUMNS = 4;
 
 	/** the column name for the ID_PRODUCT field */
-	const ID_PRODUCT = 'djland_product_sale.ID_PRODUCT';
+	const ID_PRODUCT = OOPS_MODEL_PRODUCTSALE_ID_PRODUCT;
 
 	/** the column name for the QUANTITY field */
-	const QUANTITY = 'djland_product_sale.QUANTITY';
+	const QUANTITY = OOPS_MODEL_PRODUCTSALE_QUANTITY;
 
 	/** the column name for the SALE_NBR field */
-	const SALE_NBR = 'djland_product_sale.SALE_NBR';
+	const SALE_NBR = OOPS_MODEL_PRODUCTSALE_SALE_NBR;
 
 	/** the column name for the DATE_UPD field */
-	const DATE_UPD = 'djland_product_sale.DATE_UPD';
+	const DATE_UPD = OOPS_MODEL_PRODUCTSALE_DATE_UPD;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -354,7 +360,7 @@ abstract class Oops_Model_Base_ProductSalePeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_product_sale
+	 * Method to invalidate the instance pool of all tables related to product_sale
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -570,7 +576,7 @@ abstract class Oops_Model_Base_ProductSalePeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_product_sale table.
+	 * Deletes all rows from the product_sale table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

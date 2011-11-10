@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_alias' table.
+ * Base class that represents a row from the 'alias' table.
  *
  * 
  *
@@ -482,7 +482,7 @@ abstract class Oops_Model_Base_Alias extends BaseObject  implements Persistent
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_alias` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'alias` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

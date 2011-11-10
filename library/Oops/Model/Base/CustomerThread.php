@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_customer_thread' table.
+ * Base class that represents a row from the 'customer_thread' table.
  *
  * 
  *
@@ -814,7 +814,7 @@ abstract class Oops_Model_Base_CustomerThread extends BaseObject  implements Per
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_customer_thread` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'customer_thread` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

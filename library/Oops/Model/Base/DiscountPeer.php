@@ -1,8 +1,29 @@
 <?php
 
 
+define('OOPS_MODEL_DISCOUNT_ID_DISCOUNT', _DB_PREFIX_ . 'discount.ID_DISCOUNT');
+define('OOPS_MODEL_DISCOUNT_ID_DISCOUNT_TYPE', _DB_PREFIX_ . 'discount.ID_DISCOUNT_TYPE');
+define('OOPS_MODEL_DISCOUNT_BEHAVIOR_NOT_EXHAUSTED', _DB_PREFIX_ . 'discount.BEHAVIOR_NOT_EXHAUSTED');
+define('OOPS_MODEL_DISCOUNT_ID_CUSTOMER', _DB_PREFIX_ . 'discount.ID_CUSTOMER');
+define('OOPS_MODEL_DISCOUNT_ID_GROUP', _DB_PREFIX_ . 'discount.ID_GROUP');
+define('OOPS_MODEL_DISCOUNT_ID_CURRENCY', _DB_PREFIX_ . 'discount.ID_CURRENCY');
+define('OOPS_MODEL_DISCOUNT_NAME', _DB_PREFIX_ . 'discount.NAME');
+define('OOPS_MODEL_DISCOUNT_VALUE', _DB_PREFIX_ . 'discount.VALUE');
+define('OOPS_MODEL_DISCOUNT_QUANTITY', _DB_PREFIX_ . 'discount.QUANTITY');
+define('OOPS_MODEL_DISCOUNT_QUANTITY_PER_USER', _DB_PREFIX_ . 'discount.QUANTITY_PER_USER');
+define('OOPS_MODEL_DISCOUNT_CUMULABLE', _DB_PREFIX_ . 'discount.CUMULABLE');
+define('OOPS_MODEL_DISCOUNT_CUMULABLE_REDUCTION', _DB_PREFIX_ . 'discount.CUMULABLE_REDUCTION');
+define('OOPS_MODEL_DISCOUNT_DATE_FROM', _DB_PREFIX_ . 'discount.DATE_FROM');
+define('OOPS_MODEL_DISCOUNT_DATE_TO', _DB_PREFIX_ . 'discount.DATE_TO');
+define('OOPS_MODEL_DISCOUNT_MINIMAL', _DB_PREFIX_ . 'discount.MINIMAL');
+define('OOPS_MODEL_DISCOUNT_ACTIVE', _DB_PREFIX_ . 'discount.ACTIVE');
+define('OOPS_MODEL_DISCOUNT_CART_DISPLAY', _DB_PREFIX_ . 'discount.CART_DISPLAY');
+define('OOPS_MODEL_DISCOUNT_DATE_ADD', _DB_PREFIX_ . 'discount.DATE_ADD');
+define('OOPS_MODEL_DISCOUNT_DATE_UPD', _DB_PREFIX_ . 'discount.DATE_UPD');
+define('OOPS_MODEL_DISCOUNT_TABLE_NAME', _DB_PREFIX_ . 'discount');
+
 /**
- * Base static class for performing query and update operations on the 'djland_discount' table.
+ * Base static class for performing query and update operations on the 'discount' table.
  *
  * 
  *
@@ -14,7 +35,7 @@ abstract class Oops_Model_Base_DiscountPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_discount';
+	const TABLE_NAME = OOPS_MODEL_DISCOUNT_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_Discount';
@@ -35,61 +56,61 @@ abstract class Oops_Model_Base_DiscountPeer {
 	const NUM_HYDRATE_COLUMNS = 19;
 
 	/** the column name for the ID_DISCOUNT field */
-	const ID_DISCOUNT = 'djland_discount.ID_DISCOUNT';
+	const ID_DISCOUNT = OOPS_MODEL_DISCOUNT_ID_DISCOUNT;
 
 	/** the column name for the ID_DISCOUNT_TYPE field */
-	const ID_DISCOUNT_TYPE = 'djland_discount.ID_DISCOUNT_TYPE';
+	const ID_DISCOUNT_TYPE = OOPS_MODEL_DISCOUNT_ID_DISCOUNT_TYPE;
 
 	/** the column name for the BEHAVIOR_NOT_EXHAUSTED field */
-	const BEHAVIOR_NOT_EXHAUSTED = 'djland_discount.BEHAVIOR_NOT_EXHAUSTED';
+	const BEHAVIOR_NOT_EXHAUSTED = OOPS_MODEL_DISCOUNT_BEHAVIOR_NOT_EXHAUSTED;
 
 	/** the column name for the ID_CUSTOMER field */
-	const ID_CUSTOMER = 'djland_discount.ID_CUSTOMER';
+	const ID_CUSTOMER = OOPS_MODEL_DISCOUNT_ID_CUSTOMER;
 
 	/** the column name for the ID_GROUP field */
-	const ID_GROUP = 'djland_discount.ID_GROUP';
+	const ID_GROUP = OOPS_MODEL_DISCOUNT_ID_GROUP;
 
 	/** the column name for the ID_CURRENCY field */
-	const ID_CURRENCY = 'djland_discount.ID_CURRENCY';
+	const ID_CURRENCY = OOPS_MODEL_DISCOUNT_ID_CURRENCY;
 
 	/** the column name for the NAME field */
-	const NAME = 'djland_discount.NAME';
+	const NAME = OOPS_MODEL_DISCOUNT_NAME;
 
 	/** the column name for the VALUE field */
-	const VALUE = 'djland_discount.VALUE';
+	const VALUE = OOPS_MODEL_DISCOUNT_VALUE;
 
 	/** the column name for the QUANTITY field */
-	const QUANTITY = 'djland_discount.QUANTITY';
+	const QUANTITY = OOPS_MODEL_DISCOUNT_QUANTITY;
 
 	/** the column name for the QUANTITY_PER_USER field */
-	const QUANTITY_PER_USER = 'djland_discount.QUANTITY_PER_USER';
+	const QUANTITY_PER_USER = OOPS_MODEL_DISCOUNT_QUANTITY_PER_USER;
 
 	/** the column name for the CUMULABLE field */
-	const CUMULABLE = 'djland_discount.CUMULABLE';
+	const CUMULABLE = OOPS_MODEL_DISCOUNT_CUMULABLE;
 
 	/** the column name for the CUMULABLE_REDUCTION field */
-	const CUMULABLE_REDUCTION = 'djland_discount.CUMULABLE_REDUCTION';
+	const CUMULABLE_REDUCTION = OOPS_MODEL_DISCOUNT_CUMULABLE_REDUCTION;
 
 	/** the column name for the DATE_FROM field */
-	const DATE_FROM = 'djland_discount.DATE_FROM';
+	const DATE_FROM = OOPS_MODEL_DISCOUNT_DATE_FROM;
 
 	/** the column name for the DATE_TO field */
-	const DATE_TO = 'djland_discount.DATE_TO';
+	const DATE_TO = OOPS_MODEL_DISCOUNT_DATE_TO;
 
 	/** the column name for the MINIMAL field */
-	const MINIMAL = 'djland_discount.MINIMAL';
+	const MINIMAL = OOPS_MODEL_DISCOUNT_MINIMAL;
 
 	/** the column name for the ACTIVE field */
-	const ACTIVE = 'djland_discount.ACTIVE';
+	const ACTIVE = OOPS_MODEL_DISCOUNT_ACTIVE;
 
 	/** the column name for the CART_DISPLAY field */
-	const CART_DISPLAY = 'djland_discount.CART_DISPLAY';
+	const CART_DISPLAY = OOPS_MODEL_DISCOUNT_CART_DISPLAY;
 
 	/** the column name for the DATE_ADD field */
-	const DATE_ADD = 'djland_discount.DATE_ADD';
+	const DATE_ADD = OOPS_MODEL_DISCOUNT_DATE_ADD;
 
 	/** the column name for the DATE_UPD field */
-	const DATE_UPD = 'djland_discount.DATE_UPD';
+	const DATE_UPD = OOPS_MODEL_DISCOUNT_DATE_UPD;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -429,7 +450,7 @@ abstract class Oops_Model_Base_DiscountPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_discount
+	 * Method to invalidate the instance pool of all tables related to discount
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -649,7 +670,7 @@ abstract class Oops_Model_Base_DiscountPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_discount table.
+	 * Deletes all rows from the discount table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

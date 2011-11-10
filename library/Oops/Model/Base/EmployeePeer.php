@@ -1,8 +1,24 @@
 <?php
 
 
+define('OOPS_MODEL_EMPLOYEE_ID_EMPLOYEE', _DB_PREFIX_ . 'employee.ID_EMPLOYEE');
+define('OOPS_MODEL_EMPLOYEE_ID_PROFILE', _DB_PREFIX_ . 'employee.ID_PROFILE');
+define('OOPS_MODEL_EMPLOYEE_ID_LANG', _DB_PREFIX_ . 'employee.ID_LANG');
+define('OOPS_MODEL_EMPLOYEE_LASTNAME', _DB_PREFIX_ . 'employee.LASTNAME');
+define('OOPS_MODEL_EMPLOYEE_FIRSTNAME', _DB_PREFIX_ . 'employee.FIRSTNAME');
+define('OOPS_MODEL_EMPLOYEE_EMAIL', _DB_PREFIX_ . 'employee.EMAIL');
+define('OOPS_MODEL_EMPLOYEE_PASSWD', _DB_PREFIX_ . 'employee.PASSWD');
+define('OOPS_MODEL_EMPLOYEE_LAST_PASSWD_GEN', _DB_PREFIX_ . 'employee.LAST_PASSWD_GEN');
+define('OOPS_MODEL_EMPLOYEE_STATS_DATE_FROM', _DB_PREFIX_ . 'employee.STATS_DATE_FROM');
+define('OOPS_MODEL_EMPLOYEE_STATS_DATE_TO', _DB_PREFIX_ . 'employee.STATS_DATE_TO');
+define('OOPS_MODEL_EMPLOYEE_BO_COLOR', _DB_PREFIX_ . 'employee.BO_COLOR');
+define('OOPS_MODEL_EMPLOYEE_BO_THEME', _DB_PREFIX_ . 'employee.BO_THEME');
+define('OOPS_MODEL_EMPLOYEE_BO_UIMODE', _DB_PREFIX_ . 'employee.BO_UIMODE');
+define('OOPS_MODEL_EMPLOYEE_ACTIVE', _DB_PREFIX_ . 'employee.ACTIVE');
+define('OOPS_MODEL_EMPLOYEE_TABLE_NAME', _DB_PREFIX_ . 'employee');
+
 /**
- * Base static class for performing query and update operations on the 'djland_employee' table.
+ * Base static class for performing query and update operations on the 'employee' table.
  *
  * 
  *
@@ -14,7 +30,7 @@ abstract class Oops_Model_Base_EmployeePeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_employee';
+	const TABLE_NAME = OOPS_MODEL_EMPLOYEE_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_Employee';
@@ -35,46 +51,46 @@ abstract class Oops_Model_Base_EmployeePeer {
 	const NUM_HYDRATE_COLUMNS = 14;
 
 	/** the column name for the ID_EMPLOYEE field */
-	const ID_EMPLOYEE = 'djland_employee.ID_EMPLOYEE';
+	const ID_EMPLOYEE = OOPS_MODEL_EMPLOYEE_ID_EMPLOYEE;
 
 	/** the column name for the ID_PROFILE field */
-	const ID_PROFILE = 'djland_employee.ID_PROFILE';
+	const ID_PROFILE = OOPS_MODEL_EMPLOYEE_ID_PROFILE;
 
 	/** the column name for the ID_LANG field */
-	const ID_LANG = 'djland_employee.ID_LANG';
+	const ID_LANG = OOPS_MODEL_EMPLOYEE_ID_LANG;
 
 	/** the column name for the LASTNAME field */
-	const LASTNAME = 'djland_employee.LASTNAME';
+	const LASTNAME = OOPS_MODEL_EMPLOYEE_LASTNAME;
 
 	/** the column name for the FIRSTNAME field */
-	const FIRSTNAME = 'djland_employee.FIRSTNAME';
+	const FIRSTNAME = OOPS_MODEL_EMPLOYEE_FIRSTNAME;
 
 	/** the column name for the EMAIL field */
-	const EMAIL = 'djland_employee.EMAIL';
+	const EMAIL = OOPS_MODEL_EMPLOYEE_EMAIL;
 
 	/** the column name for the PASSWD field */
-	const PASSWD = 'djland_employee.PASSWD';
+	const PASSWD = OOPS_MODEL_EMPLOYEE_PASSWD;
 
 	/** the column name for the LAST_PASSWD_GEN field */
-	const LAST_PASSWD_GEN = 'djland_employee.LAST_PASSWD_GEN';
+	const LAST_PASSWD_GEN = OOPS_MODEL_EMPLOYEE_LAST_PASSWD_GEN;
 
 	/** the column name for the STATS_DATE_FROM field */
-	const STATS_DATE_FROM = 'djland_employee.STATS_DATE_FROM';
+	const STATS_DATE_FROM = OOPS_MODEL_EMPLOYEE_STATS_DATE_FROM;
 
 	/** the column name for the STATS_DATE_TO field */
-	const STATS_DATE_TO = 'djland_employee.STATS_DATE_TO';
+	const STATS_DATE_TO = OOPS_MODEL_EMPLOYEE_STATS_DATE_TO;
 
 	/** the column name for the BO_COLOR field */
-	const BO_COLOR = 'djland_employee.BO_COLOR';
+	const BO_COLOR = OOPS_MODEL_EMPLOYEE_BO_COLOR;
 
 	/** the column name for the BO_THEME field */
-	const BO_THEME = 'djland_employee.BO_THEME';
+	const BO_THEME = OOPS_MODEL_EMPLOYEE_BO_THEME;
 
 	/** the column name for the BO_UIMODE field */
-	const BO_UIMODE = 'djland_employee.BO_UIMODE';
+	const BO_UIMODE = OOPS_MODEL_EMPLOYEE_BO_UIMODE;
 
 	/** the column name for the ACTIVE field */
-	const ACTIVE = 'djland_employee.ACTIVE';
+	const ACTIVE = OOPS_MODEL_EMPLOYEE_ACTIVE;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -404,7 +420,7 @@ abstract class Oops_Model_Base_EmployeePeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_employee
+	 * Method to invalidate the instance pool of all tables related to employee
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -624,7 +640,7 @@ abstract class Oops_Model_Base_EmployeePeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_employee table.
+	 * Deletes all rows from the employee table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

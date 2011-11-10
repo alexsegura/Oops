@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_customization_field_lang' table.
+ * Base class that represents a query for the 'customization_field_lang' table.
  *
  * 
  *
@@ -116,7 +116,7 @@ abstract class Oops_Model_Base_CustomizationFieldLangQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_CUSTOMIZATION_FIELD`, `ID_LANG`, `NAME` FROM `djland_customization_field_lang` WHERE `ID_CUSTOMIZATION_FIELD` = :p0 AND `ID_LANG` = :p1';
+		$sql = 'SELECT `ID_CUSTOMIZATION_FIELD`, `ID_LANG`, `NAME` FROM `' . _DB_PREFIX_ . 'customization_field_lang` WHERE `ID_CUSTOMIZATION_FIELD` = :p0 AND `ID_LANG` = :p1';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key[0], PDO::PARAM_INT);

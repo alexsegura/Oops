@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_help_access' table.
+ * This class defines the structure of the 'help_access' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_HelpAccessTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_help_access');
+		$this->setName(_DB_PREFIX_ . 'help_access');
 		$this->setPhpName('HelpAccess');
 		$this->setClassname('Oops_Model_HelpAccess');
 		$this->setPackage('prestashop');

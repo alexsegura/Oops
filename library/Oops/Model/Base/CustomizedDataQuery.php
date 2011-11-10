@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_customized_data' table.
+ * Base class that represents a query for the 'customized_data' table.
  *
  * 
  *
@@ -120,7 +120,7 @@ abstract class Oops_Model_Base_CustomizedDataQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_CUSTOMIZATION`, `TYPE`, `INDEX`, `VALUE` FROM `djland_customized_data` WHERE `ID_CUSTOMIZATION` = :p0 AND `TYPE` = :p1 AND `INDEX` = :p2';
+		$sql = 'SELECT `ID_CUSTOMIZATION`, `TYPE`, `INDEX`, `VALUE` FROM `' . _DB_PREFIX_ . 'customized_data` WHERE `ID_CUSTOMIZATION` = :p0 AND `TYPE` = :p1 AND `INDEX` = :p2';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key[0], PDO::PARAM_INT);

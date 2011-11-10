@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_county_zip_code' table.
+ * Base class that represents a row from the 'county_zip_code' table.
  *
  * 
  *
@@ -404,7 +404,7 @@ abstract class Oops_Model_Base_CountyZipCode extends BaseObject  implements Pers
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_county_zip_code` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'county_zip_code` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_product_attribute' table.
+ * Base class that represents a query for the 'product_attribute' table.
  *
  * 
  *
@@ -164,7 +164,7 @@ abstract class Oops_Model_Base_ProductAttributeQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_PRODUCT_ATTRIBUTE`, `ID_PRODUCT`, `REFERENCE`, `SUPPLIER_REFERENCE`, `LOCATION`, `EAN13`, `UPC`, `WHOLESALE_PRICE`, `PRICE`, `ECOTAX`, `QUANTITY`, `WEIGHT`, `UNIT_PRICE_IMPACT`, `DEFAULT_ON`, `MINIMAL_QUANTITY` FROM `djland_product_attribute` WHERE `ID_PRODUCT_ATTRIBUTE` = :p0';
+		$sql = 'SELECT `ID_PRODUCT_ATTRIBUTE`, `ID_PRODUCT`, `REFERENCE`, `SUPPLIER_REFERENCE`, `LOCATION`, `EAN13`, `UPC`, `WHOLESALE_PRICE`, `PRICE`, `ECOTAX`, `QUANTITY`, `WEIGHT`, `UNIT_PRICE_IMPACT`, `DEFAULT_ON`, `MINIMAL_QUANTITY` FROM `' . _DB_PREFIX_ . 'product_attribute` WHERE `ID_PRODUCT_ATTRIBUTE` = :p0';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

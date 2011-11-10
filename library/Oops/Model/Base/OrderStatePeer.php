@@ -1,8 +1,18 @@
 <?php
 
 
+define('OOPS_MODEL_ORDERSTATE_ID_ORDER_STATE', _DB_PREFIX_ . 'order_state.ID_ORDER_STATE');
+define('OOPS_MODEL_ORDERSTATE_INVOICE', _DB_PREFIX_ . 'order_state.INVOICE');
+define('OOPS_MODEL_ORDERSTATE_SEND_EMAIL', _DB_PREFIX_ . 'order_state.SEND_EMAIL');
+define('OOPS_MODEL_ORDERSTATE_COLOR', _DB_PREFIX_ . 'order_state.COLOR');
+define('OOPS_MODEL_ORDERSTATE_UNREMOVABLE', _DB_PREFIX_ . 'order_state.UNREMOVABLE');
+define('OOPS_MODEL_ORDERSTATE_HIDDEN', _DB_PREFIX_ . 'order_state.HIDDEN');
+define('OOPS_MODEL_ORDERSTATE_LOGABLE', _DB_PREFIX_ . 'order_state.LOGABLE');
+define('OOPS_MODEL_ORDERSTATE_DELIVERY', _DB_PREFIX_ . 'order_state.DELIVERY');
+define('OOPS_MODEL_ORDERSTATE_TABLE_NAME', _DB_PREFIX_ . 'order_state');
+
 /**
- * Base static class for performing query and update operations on the 'djland_order_state' table.
+ * Base static class for performing query and update operations on the 'order_state' table.
  *
  * 
  *
@@ -14,7 +24,7 @@ abstract class Oops_Model_Base_OrderStatePeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_order_state';
+	const TABLE_NAME = OOPS_MODEL_ORDERSTATE_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_OrderState';
@@ -35,28 +45,28 @@ abstract class Oops_Model_Base_OrderStatePeer {
 	const NUM_HYDRATE_COLUMNS = 8;
 
 	/** the column name for the ID_ORDER_STATE field */
-	const ID_ORDER_STATE = 'djland_order_state.ID_ORDER_STATE';
+	const ID_ORDER_STATE = OOPS_MODEL_ORDERSTATE_ID_ORDER_STATE;
 
 	/** the column name for the INVOICE field */
-	const INVOICE = 'djland_order_state.INVOICE';
+	const INVOICE = OOPS_MODEL_ORDERSTATE_INVOICE;
 
 	/** the column name for the SEND_EMAIL field */
-	const SEND_EMAIL = 'djland_order_state.SEND_EMAIL';
+	const SEND_EMAIL = OOPS_MODEL_ORDERSTATE_SEND_EMAIL;
 
 	/** the column name for the COLOR field */
-	const COLOR = 'djland_order_state.COLOR';
+	const COLOR = OOPS_MODEL_ORDERSTATE_COLOR;
 
 	/** the column name for the UNREMOVABLE field */
-	const UNREMOVABLE = 'djland_order_state.UNREMOVABLE';
+	const UNREMOVABLE = OOPS_MODEL_ORDERSTATE_UNREMOVABLE;
 
 	/** the column name for the HIDDEN field */
-	const HIDDEN = 'djland_order_state.HIDDEN';
+	const HIDDEN = OOPS_MODEL_ORDERSTATE_HIDDEN;
 
 	/** the column name for the LOGABLE field */
-	const LOGABLE = 'djland_order_state.LOGABLE';
+	const LOGABLE = OOPS_MODEL_ORDERSTATE_LOGABLE;
 
 	/** the column name for the DELIVERY field */
-	const DELIVERY = 'djland_order_state.DELIVERY';
+	const DELIVERY = OOPS_MODEL_ORDERSTATE_DELIVERY;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -374,7 +384,7 @@ abstract class Oops_Model_Base_OrderStatePeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_order_state
+	 * Method to invalidate the instance pool of all tables related to order_state
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -594,7 +604,7 @@ abstract class Oops_Model_Base_OrderStatePeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_order_state table.
+	 * Deletes all rows from the order_state table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

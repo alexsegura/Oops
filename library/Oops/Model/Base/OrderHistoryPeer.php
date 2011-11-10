@@ -1,8 +1,15 @@
 <?php
 
 
+define('OOPS_MODEL_ORDERHISTORY_ID_ORDER_HISTORY', _DB_PREFIX_ . 'order_history.ID_ORDER_HISTORY');
+define('OOPS_MODEL_ORDERHISTORY_ID_EMPLOYEE', _DB_PREFIX_ . 'order_history.ID_EMPLOYEE');
+define('OOPS_MODEL_ORDERHISTORY_ID_ORDER', _DB_PREFIX_ . 'order_history.ID_ORDER');
+define('OOPS_MODEL_ORDERHISTORY_ID_ORDER_STATE', _DB_PREFIX_ . 'order_history.ID_ORDER_STATE');
+define('OOPS_MODEL_ORDERHISTORY_DATE_ADD', _DB_PREFIX_ . 'order_history.DATE_ADD');
+define('OOPS_MODEL_ORDERHISTORY_TABLE_NAME', _DB_PREFIX_ . 'order_history');
+
 /**
- * Base static class for performing query and update operations on the 'djland_order_history' table.
+ * Base static class for performing query and update operations on the 'order_history' table.
  *
  * 
  *
@@ -14,7 +21,7 @@ abstract class Oops_Model_Base_OrderHistoryPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_order_history';
+	const TABLE_NAME = OOPS_MODEL_ORDERHISTORY_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_OrderHistory';
@@ -35,19 +42,19 @@ abstract class Oops_Model_Base_OrderHistoryPeer {
 	const NUM_HYDRATE_COLUMNS = 5;
 
 	/** the column name for the ID_ORDER_HISTORY field */
-	const ID_ORDER_HISTORY = 'djland_order_history.ID_ORDER_HISTORY';
+	const ID_ORDER_HISTORY = OOPS_MODEL_ORDERHISTORY_ID_ORDER_HISTORY;
 
 	/** the column name for the ID_EMPLOYEE field */
-	const ID_EMPLOYEE = 'djland_order_history.ID_EMPLOYEE';
+	const ID_EMPLOYEE = OOPS_MODEL_ORDERHISTORY_ID_EMPLOYEE;
 
 	/** the column name for the ID_ORDER field */
-	const ID_ORDER = 'djland_order_history.ID_ORDER';
+	const ID_ORDER = OOPS_MODEL_ORDERHISTORY_ID_ORDER;
 
 	/** the column name for the ID_ORDER_STATE field */
-	const ID_ORDER_STATE = 'djland_order_history.ID_ORDER_STATE';
+	const ID_ORDER_STATE = OOPS_MODEL_ORDERHISTORY_ID_ORDER_STATE;
 
 	/** the column name for the DATE_ADD field */
-	const DATE_ADD = 'djland_order_history.DATE_ADD';
+	const DATE_ADD = OOPS_MODEL_ORDERHISTORY_DATE_ADD;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -359,7 +366,7 @@ abstract class Oops_Model_Base_OrderHistoryPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_order_history
+	 * Method to invalidate the instance pool of all tables related to order_history
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -579,7 +586,7 @@ abstract class Oops_Model_Base_OrderHistoryPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_order_history table.
+	 * Deletes all rows from the order_history table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

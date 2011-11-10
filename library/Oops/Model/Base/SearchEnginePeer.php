@@ -1,8 +1,13 @@
 <?php
 
 
+define('OOPS_MODEL_SEARCHENGINE_ID_SEARCH_ENGINE', _DB_PREFIX_ . 'search_engine.ID_SEARCH_ENGINE');
+define('OOPS_MODEL_SEARCHENGINE_SERVER', _DB_PREFIX_ . 'search_engine.SERVER');
+define('OOPS_MODEL_SEARCHENGINE_GETVAR', _DB_PREFIX_ . 'search_engine.GETVAR');
+define('OOPS_MODEL_SEARCHENGINE_TABLE_NAME', _DB_PREFIX_ . 'search_engine');
+
 /**
- * Base static class for performing query and update operations on the 'djland_search_engine' table.
+ * Base static class for performing query and update operations on the 'search_engine' table.
  *
  * 
  *
@@ -14,7 +19,7 @@ abstract class Oops_Model_Base_SearchEnginePeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_search_engine';
+	const TABLE_NAME = OOPS_MODEL_SEARCHENGINE_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_SearchEngine';
@@ -35,13 +40,13 @@ abstract class Oops_Model_Base_SearchEnginePeer {
 	const NUM_HYDRATE_COLUMNS = 3;
 
 	/** the column name for the ID_SEARCH_ENGINE field */
-	const ID_SEARCH_ENGINE = 'djland_search_engine.ID_SEARCH_ENGINE';
+	const ID_SEARCH_ENGINE = OOPS_MODEL_SEARCHENGINE_ID_SEARCH_ENGINE;
 
 	/** the column name for the SERVER field */
-	const SERVER = 'djland_search_engine.SERVER';
+	const SERVER = OOPS_MODEL_SEARCHENGINE_SERVER;
 
 	/** the column name for the GETVAR field */
-	const GETVAR = 'djland_search_engine.GETVAR';
+	const GETVAR = OOPS_MODEL_SEARCHENGINE_GETVAR;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -349,7 +354,7 @@ abstract class Oops_Model_Base_SearchEnginePeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_search_engine
+	 * Method to invalidate the instance pool of all tables related to search_engine
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -569,7 +574,7 @@ abstract class Oops_Model_Base_SearchEnginePeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_search_engine table.
+	 * Deletes all rows from the search_engine table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_attachment' table.
+ * This class defines the structure of the 'attachment' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_AttachmentTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_attachment');
+		$this->setName(_DB_PREFIX_ . 'attachment');
 		$this->setPhpName('Attachment');
 		$this->setClassname('Oops_Model_Attachment');
 		$this->setPackage('prestashop');

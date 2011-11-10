@@ -1,8 +1,13 @@
 <?php
 
 
+define('OOPS_MODEL_STOCKMVTREASONLANG_ID_STOCK_MVT_REASON', _DB_PREFIX_ . 'stock_mvt_reason_lang.ID_STOCK_MVT_REASON');
+define('OOPS_MODEL_STOCKMVTREASONLANG_ID_LANG', _DB_PREFIX_ . 'stock_mvt_reason_lang.ID_LANG');
+define('OOPS_MODEL_STOCKMVTREASONLANG_NAME', _DB_PREFIX_ . 'stock_mvt_reason_lang.NAME');
+define('OOPS_MODEL_STOCKMVTREASONLANG_TABLE_NAME', _DB_PREFIX_ . 'stock_mvt_reason_lang');
+
 /**
- * Base static class for performing query and update operations on the 'djland_stock_mvt_reason_lang' table.
+ * Base static class for performing query and update operations on the 'stock_mvt_reason_lang' table.
  *
  * 
  *
@@ -14,7 +19,7 @@ abstract class Oops_Model_Base_StockMvtReasonLangPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_stock_mvt_reason_lang';
+	const TABLE_NAME = OOPS_MODEL_STOCKMVTREASONLANG_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_StockMvtReasonLang';
@@ -35,13 +40,13 @@ abstract class Oops_Model_Base_StockMvtReasonLangPeer {
 	const NUM_HYDRATE_COLUMNS = 3;
 
 	/** the column name for the ID_STOCK_MVT_REASON field */
-	const ID_STOCK_MVT_REASON = 'djland_stock_mvt_reason_lang.ID_STOCK_MVT_REASON';
+	const ID_STOCK_MVT_REASON = OOPS_MODEL_STOCKMVTREASONLANG_ID_STOCK_MVT_REASON;
 
 	/** the column name for the ID_LANG field */
-	const ID_LANG = 'djland_stock_mvt_reason_lang.ID_LANG';
+	const ID_LANG = OOPS_MODEL_STOCKMVTREASONLANG_ID_LANG;
 
 	/** the column name for the NAME field */
-	const NAME = 'djland_stock_mvt_reason_lang.NAME';
+	const NAME = OOPS_MODEL_STOCKMVTREASONLANG_NAME;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -349,7 +354,7 @@ abstract class Oops_Model_Base_StockMvtReasonLangPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_stock_mvt_reason_lang
+	 * Method to invalidate the instance pool of all tables related to stock_mvt_reason_lang
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -573,7 +578,7 @@ abstract class Oops_Model_Base_StockMvtReasonLangPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_stock_mvt_reason_lang table.
+	 * Deletes all rows from the stock_mvt_reason_lang table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

@@ -1,8 +1,16 @@
 <?php
 
 
+define('OOPS_MODEL_SCENEPRODUCTS_ID_SCENE', _DB_PREFIX_ . 'scene_products.ID_SCENE');
+define('OOPS_MODEL_SCENEPRODUCTS_ID_PRODUCT', _DB_PREFIX_ . 'scene_products.ID_PRODUCT');
+define('OOPS_MODEL_SCENEPRODUCTS_X_AXIS', _DB_PREFIX_ . 'scene_products.X_AXIS');
+define('OOPS_MODEL_SCENEPRODUCTS_Y_AXIS', _DB_PREFIX_ . 'scene_products.Y_AXIS');
+define('OOPS_MODEL_SCENEPRODUCTS_ZONE_WIDTH', _DB_PREFIX_ . 'scene_products.ZONE_WIDTH');
+define('OOPS_MODEL_SCENEPRODUCTS_ZONE_HEIGHT', _DB_PREFIX_ . 'scene_products.ZONE_HEIGHT');
+define('OOPS_MODEL_SCENEPRODUCTS_TABLE_NAME', _DB_PREFIX_ . 'scene_products');
+
 /**
- * Base static class for performing query and update operations on the 'djland_scene_products' table.
+ * Base static class for performing query and update operations on the 'scene_products' table.
  *
  * 
  *
@@ -14,7 +22,7 @@ abstract class Oops_Model_Base_SceneProductsPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_scene_products';
+	const TABLE_NAME = OOPS_MODEL_SCENEPRODUCTS_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_SceneProducts';
@@ -35,22 +43,22 @@ abstract class Oops_Model_Base_SceneProductsPeer {
 	const NUM_HYDRATE_COLUMNS = 6;
 
 	/** the column name for the ID_SCENE field */
-	const ID_SCENE = 'djland_scene_products.ID_SCENE';
+	const ID_SCENE = OOPS_MODEL_SCENEPRODUCTS_ID_SCENE;
 
 	/** the column name for the ID_PRODUCT field */
-	const ID_PRODUCT = 'djland_scene_products.ID_PRODUCT';
+	const ID_PRODUCT = OOPS_MODEL_SCENEPRODUCTS_ID_PRODUCT;
 
 	/** the column name for the X_AXIS field */
-	const X_AXIS = 'djland_scene_products.X_AXIS';
+	const X_AXIS = OOPS_MODEL_SCENEPRODUCTS_X_AXIS;
 
 	/** the column name for the Y_AXIS field */
-	const Y_AXIS = 'djland_scene_products.Y_AXIS';
+	const Y_AXIS = OOPS_MODEL_SCENEPRODUCTS_Y_AXIS;
 
 	/** the column name for the ZONE_WIDTH field */
-	const ZONE_WIDTH = 'djland_scene_products.ZONE_WIDTH';
+	const ZONE_WIDTH = OOPS_MODEL_SCENEPRODUCTS_ZONE_WIDTH;
 
 	/** the column name for the ZONE_HEIGHT field */
-	const ZONE_HEIGHT = 'djland_scene_products.ZONE_HEIGHT';
+	const ZONE_HEIGHT = OOPS_MODEL_SCENEPRODUCTS_ZONE_HEIGHT;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -364,7 +372,7 @@ abstract class Oops_Model_Base_SceneProductsPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_scene_products
+	 * Method to invalidate the instance pool of all tables related to scene_products
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -604,7 +612,7 @@ abstract class Oops_Model_Base_SceneProductsPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_scene_products table.
+	 * Deletes all rows from the scene_products table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

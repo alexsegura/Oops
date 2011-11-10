@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_address_format' table.
+ * Base class that represents a row from the 'address_format' table.
  *
  * 
  *
@@ -390,7 +390,7 @@ abstract class Oops_Model_Base_AddressFormat extends BaseObject  implements Pers
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_address_format` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'address_format` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

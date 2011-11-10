@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_discount' table.
+ * Base class that represents a query for the 'discount' table.
  *
  * 
  *
@@ -180,7 +180,7 @@ abstract class Oops_Model_Base_DiscountQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_DISCOUNT`, `ID_DISCOUNT_TYPE`, `BEHAVIOR_NOT_EXHAUSTED`, `ID_CUSTOMER`, `ID_GROUP`, `ID_CURRENCY`, `NAME`, `VALUE`, `QUANTITY`, `QUANTITY_PER_USER`, `CUMULABLE`, `CUMULABLE_REDUCTION`, `DATE_FROM`, `DATE_TO`, `MINIMAL`, `ACTIVE`, `CART_DISPLAY`, `DATE_ADD`, `DATE_UPD` FROM `djland_discount` WHERE `ID_DISCOUNT` = :p0';
+		$sql = 'SELECT `ID_DISCOUNT`, `ID_DISCOUNT_TYPE`, `BEHAVIOR_NOT_EXHAUSTED`, `ID_CUSTOMER`, `ID_GROUP`, `ID_CURRENCY`, `NAME`, `VALUE`, `QUANTITY`, `QUANTITY_PER_USER`, `CUMULABLE`, `CUMULABLE_REDUCTION`, `DATE_FROM`, `DATE_TO`, `MINIMAL`, `ACTIVE`, `CART_DISPLAY`, `DATE_ADD`, `DATE_UPD` FROM `' . _DB_PREFIX_ . 'discount` WHERE `ID_DISCOUNT` = :p0';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

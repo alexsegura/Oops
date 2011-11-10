@@ -1,8 +1,33 @@
 <?php
 
 
+define('OOPS_MODEL_ADDRESS_ID_ADDRESS', _DB_PREFIX_ . 'address.ID_ADDRESS');
+define('OOPS_MODEL_ADDRESS_ID_COUNTRY', _DB_PREFIX_ . 'address.ID_COUNTRY');
+define('OOPS_MODEL_ADDRESS_ID_STATE', _DB_PREFIX_ . 'address.ID_STATE');
+define('OOPS_MODEL_ADDRESS_ID_CUSTOMER', _DB_PREFIX_ . 'address.ID_CUSTOMER');
+define('OOPS_MODEL_ADDRESS_ID_MANUFACTURER', _DB_PREFIX_ . 'address.ID_MANUFACTURER');
+define('OOPS_MODEL_ADDRESS_ID_SUPPLIER', _DB_PREFIX_ . 'address.ID_SUPPLIER');
+define('OOPS_MODEL_ADDRESS_ALIAS', _DB_PREFIX_ . 'address.ALIAS');
+define('OOPS_MODEL_ADDRESS_COMPANY', _DB_PREFIX_ . 'address.COMPANY');
+define('OOPS_MODEL_ADDRESS_LASTNAME', _DB_PREFIX_ . 'address.LASTNAME');
+define('OOPS_MODEL_ADDRESS_FIRSTNAME', _DB_PREFIX_ . 'address.FIRSTNAME');
+define('OOPS_MODEL_ADDRESS_ADDRESS1', _DB_PREFIX_ . 'address.ADDRESS1');
+define('OOPS_MODEL_ADDRESS_ADDRESS2', _DB_PREFIX_ . 'address.ADDRESS2');
+define('OOPS_MODEL_ADDRESS_POSTCODE', _DB_PREFIX_ . 'address.POSTCODE');
+define('OOPS_MODEL_ADDRESS_CITY', _DB_PREFIX_ . 'address.CITY');
+define('OOPS_MODEL_ADDRESS_OTHER', _DB_PREFIX_ . 'address.OTHER');
+define('OOPS_MODEL_ADDRESS_PHONE', _DB_PREFIX_ . 'address.PHONE');
+define('OOPS_MODEL_ADDRESS_PHONE_MOBILE', _DB_PREFIX_ . 'address.PHONE_MOBILE');
+define('OOPS_MODEL_ADDRESS_VAT_NUMBER', _DB_PREFIX_ . 'address.VAT_NUMBER');
+define('OOPS_MODEL_ADDRESS_DNI', _DB_PREFIX_ . 'address.DNI');
+define('OOPS_MODEL_ADDRESS_DATE_ADD', _DB_PREFIX_ . 'address.DATE_ADD');
+define('OOPS_MODEL_ADDRESS_DATE_UPD', _DB_PREFIX_ . 'address.DATE_UPD');
+define('OOPS_MODEL_ADDRESS_ACTIVE', _DB_PREFIX_ . 'address.ACTIVE');
+define('OOPS_MODEL_ADDRESS_DELETED', _DB_PREFIX_ . 'address.DELETED');
+define('OOPS_MODEL_ADDRESS_TABLE_NAME', _DB_PREFIX_ . 'address');
+
 /**
- * Base static class for performing query and update operations on the 'djland_address' table.
+ * Base static class for performing query and update operations on the 'address' table.
  *
  * 
  *
@@ -14,7 +39,7 @@ abstract class Oops_Model_Base_AddressPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_address';
+	const TABLE_NAME = OOPS_MODEL_ADDRESS_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_Address';
@@ -35,73 +60,73 @@ abstract class Oops_Model_Base_AddressPeer {
 	const NUM_HYDRATE_COLUMNS = 23;
 
 	/** the column name for the ID_ADDRESS field */
-	const ID_ADDRESS = 'djland_address.ID_ADDRESS';
+	const ID_ADDRESS = OOPS_MODEL_ADDRESS_ID_ADDRESS;
 
 	/** the column name for the ID_COUNTRY field */
-	const ID_COUNTRY = 'djland_address.ID_COUNTRY';
+	const ID_COUNTRY = OOPS_MODEL_ADDRESS_ID_COUNTRY;
 
 	/** the column name for the ID_STATE field */
-	const ID_STATE = 'djland_address.ID_STATE';
+	const ID_STATE = OOPS_MODEL_ADDRESS_ID_STATE;
 
 	/** the column name for the ID_CUSTOMER field */
-	const ID_CUSTOMER = 'djland_address.ID_CUSTOMER';
+	const ID_CUSTOMER = OOPS_MODEL_ADDRESS_ID_CUSTOMER;
 
 	/** the column name for the ID_MANUFACTURER field */
-	const ID_MANUFACTURER = 'djland_address.ID_MANUFACTURER';
+	const ID_MANUFACTURER = OOPS_MODEL_ADDRESS_ID_MANUFACTURER;
 
 	/** the column name for the ID_SUPPLIER field */
-	const ID_SUPPLIER = 'djland_address.ID_SUPPLIER';
+	const ID_SUPPLIER = OOPS_MODEL_ADDRESS_ID_SUPPLIER;
 
 	/** the column name for the ALIAS field */
-	const ALIAS = 'djland_address.ALIAS';
+	const ALIAS = OOPS_MODEL_ADDRESS_ALIAS;
 
 	/** the column name for the COMPANY field */
-	const COMPANY = 'djland_address.COMPANY';
+	const COMPANY = OOPS_MODEL_ADDRESS_COMPANY;
 
 	/** the column name for the LASTNAME field */
-	const LASTNAME = 'djland_address.LASTNAME';
+	const LASTNAME = OOPS_MODEL_ADDRESS_LASTNAME;
 
 	/** the column name for the FIRSTNAME field */
-	const FIRSTNAME = 'djland_address.FIRSTNAME';
+	const FIRSTNAME = OOPS_MODEL_ADDRESS_FIRSTNAME;
 
 	/** the column name for the ADDRESS1 field */
-	const ADDRESS1 = 'djland_address.ADDRESS1';
+	const ADDRESS1 = OOPS_MODEL_ADDRESS_ADDRESS1;
 
 	/** the column name for the ADDRESS2 field */
-	const ADDRESS2 = 'djland_address.ADDRESS2';
+	const ADDRESS2 = OOPS_MODEL_ADDRESS_ADDRESS2;
 
 	/** the column name for the POSTCODE field */
-	const POSTCODE = 'djland_address.POSTCODE';
+	const POSTCODE = OOPS_MODEL_ADDRESS_POSTCODE;
 
 	/** the column name for the CITY field */
-	const CITY = 'djland_address.CITY';
+	const CITY = OOPS_MODEL_ADDRESS_CITY;
 
 	/** the column name for the OTHER field */
-	const OTHER = 'djland_address.OTHER';
+	const OTHER = OOPS_MODEL_ADDRESS_OTHER;
 
 	/** the column name for the PHONE field */
-	const PHONE = 'djland_address.PHONE';
+	const PHONE = OOPS_MODEL_ADDRESS_PHONE;
 
 	/** the column name for the PHONE_MOBILE field */
-	const PHONE_MOBILE = 'djland_address.PHONE_MOBILE';
+	const PHONE_MOBILE = OOPS_MODEL_ADDRESS_PHONE_MOBILE;
 
 	/** the column name for the VAT_NUMBER field */
-	const VAT_NUMBER = 'djland_address.VAT_NUMBER';
+	const VAT_NUMBER = OOPS_MODEL_ADDRESS_VAT_NUMBER;
 
 	/** the column name for the DNI field */
-	const DNI = 'djland_address.DNI';
+	const DNI = OOPS_MODEL_ADDRESS_DNI;
 
 	/** the column name for the DATE_ADD field */
-	const DATE_ADD = 'djland_address.DATE_ADD';
+	const DATE_ADD = OOPS_MODEL_ADDRESS_DATE_ADD;
 
 	/** the column name for the DATE_UPD field */
-	const DATE_UPD = 'djland_address.DATE_UPD';
+	const DATE_UPD = OOPS_MODEL_ADDRESS_DATE_UPD;
 
 	/** the column name for the ACTIVE field */
-	const ACTIVE = 'djland_address.ACTIVE';
+	const ACTIVE = OOPS_MODEL_ADDRESS_ACTIVE;
 
 	/** the column name for the DELETED field */
-	const DELETED = 'djland_address.DELETED';
+	const DELETED = OOPS_MODEL_ADDRESS_DELETED;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -449,7 +474,7 @@ abstract class Oops_Model_Base_AddressPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_address
+	 * Method to invalidate the instance pool of all tables related to address
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -669,7 +694,7 @@ abstract class Oops_Model_Base_AddressPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_address table.
+	 * Deletes all rows from the address table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

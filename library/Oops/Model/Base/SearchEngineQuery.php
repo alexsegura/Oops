@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_search_engine' table.
+ * Base class that represents a query for the 'search_engine' table.
  *
  * 
  *
@@ -116,7 +116,7 @@ abstract class Oops_Model_Base_SearchEngineQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_SEARCH_ENGINE`, `SERVER`, `GETVAR` FROM `djland_search_engine` WHERE `ID_SEARCH_ENGINE` = :p0';
+		$sql = 'SELECT `ID_SEARCH_ENGINE`, `SERVER`, `GETVAR` FROM `' . _DB_PREFIX_ . 'search_engine` WHERE `ID_SEARCH_ENGINE` = :p0';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

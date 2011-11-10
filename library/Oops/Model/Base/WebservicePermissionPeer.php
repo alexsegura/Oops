@@ -1,8 +1,14 @@
 <?php
 
 
+define('OOPS_MODEL_WEBSERVICEPERMISSION_ID_WEBSERVICE_PERMISSION', _DB_PREFIX_ . 'webservice_permission.ID_WEBSERVICE_PERMISSION');
+define('OOPS_MODEL_WEBSERVICEPERMISSION_RESOURCE', _DB_PREFIX_ . 'webservice_permission.RESOURCE');
+define('OOPS_MODEL_WEBSERVICEPERMISSION_METHOD', _DB_PREFIX_ . 'webservice_permission.METHOD');
+define('OOPS_MODEL_WEBSERVICEPERMISSION_ID_WEBSERVICE_ACCOUNT', _DB_PREFIX_ . 'webservice_permission.ID_WEBSERVICE_ACCOUNT');
+define('OOPS_MODEL_WEBSERVICEPERMISSION_TABLE_NAME', _DB_PREFIX_ . 'webservice_permission');
+
 /**
- * Base static class for performing query and update operations on the 'djland_webservice_permission' table.
+ * Base static class for performing query and update operations on the 'webservice_permission' table.
  *
  * 
  *
@@ -14,7 +20,7 @@ abstract class Oops_Model_Base_WebservicePermissionPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_webservice_permission';
+	const TABLE_NAME = OOPS_MODEL_WEBSERVICEPERMISSION_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_WebservicePermission';
@@ -35,16 +41,16 @@ abstract class Oops_Model_Base_WebservicePermissionPeer {
 	const NUM_HYDRATE_COLUMNS = 4;
 
 	/** the column name for the ID_WEBSERVICE_PERMISSION field */
-	const ID_WEBSERVICE_PERMISSION = 'djland_webservice_permission.ID_WEBSERVICE_PERMISSION';
+	const ID_WEBSERVICE_PERMISSION = OOPS_MODEL_WEBSERVICEPERMISSION_ID_WEBSERVICE_PERMISSION;
 
 	/** the column name for the RESOURCE field */
-	const RESOURCE = 'djland_webservice_permission.RESOURCE';
+	const RESOURCE = OOPS_MODEL_WEBSERVICEPERMISSION_RESOURCE;
 
 	/** the column name for the METHOD field */
-	const METHOD = 'djland_webservice_permission.METHOD';
+	const METHOD = OOPS_MODEL_WEBSERVICEPERMISSION_METHOD;
 
 	/** the column name for the ID_WEBSERVICE_ACCOUNT field */
-	const ID_WEBSERVICE_ACCOUNT = 'djland_webservice_permission.ID_WEBSERVICE_ACCOUNT';
+	const ID_WEBSERVICE_ACCOUNT = OOPS_MODEL_WEBSERVICEPERMISSION_ID_WEBSERVICE_ACCOUNT;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -354,7 +360,7 @@ abstract class Oops_Model_Base_WebservicePermissionPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_webservice_permission
+	 * Method to invalidate the instance pool of all tables related to webservice_permission
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -574,7 +580,7 @@ abstract class Oops_Model_Base_WebservicePermissionPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_webservice_permission table.
+	 * Deletes all rows from the webservice_permission table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

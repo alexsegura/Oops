@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_hook_module' table.
+ * This class defines the structure of the 'hook_module' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_HookModuleTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_hook_module');
+		$this->setName(_DB_PREFIX_ . 'hook_module');
 		$this->setPhpName('HookModule');
 		$this->setClassname('Oops_Model_HookModule');
 		$this->setPackage('prestashop');

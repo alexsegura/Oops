@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_tab' table.
+ * Base class that represents a query for the 'tab' table.
  *
  * 
  *
@@ -124,7 +124,7 @@ abstract class Oops_Model_Base_TabQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_TAB`, `ID_PARENT`, `CLASS_NAME`, `MODULE`, `POSITION` FROM `djland_tab` WHERE `ID_TAB` = :p0';
+		$sql = 'SELECT `ID_TAB`, `ID_PARENT`, `CLASS_NAME`, `MODULE`, `POSITION` FROM `' . _DB_PREFIX_ . 'tab` WHERE `ID_TAB` = :p0';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

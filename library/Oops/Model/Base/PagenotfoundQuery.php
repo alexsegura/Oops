@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_pagenotfound' table.
+ * Base class that represents a query for the 'pagenotfound' table.
  *
  * 
  *
@@ -120,7 +120,7 @@ abstract class Oops_Model_Base_PagenotfoundQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_PAGENOTFOUND`, `REQUEST_URI`, `HTTP_REFERER`, `DATE_ADD` FROM `djland_pagenotfound` WHERE `ID_PAGENOTFOUND` = :p0';
+		$sql = 'SELECT `ID_PAGENOTFOUND`, `REQUEST_URI`, `HTTP_REFERER`, `DATE_ADD` FROM `' . _DB_PREFIX_ . 'pagenotfound` WHERE `ID_PAGENOTFOUND` = :p0';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

@@ -1,8 +1,13 @@
 <?php
 
 
+define('OOPS_MODEL_PRODUCTCOUNTRYTAX_ID_PRODUCT', _DB_PREFIX_ . 'product_country_tax.ID_PRODUCT');
+define('OOPS_MODEL_PRODUCTCOUNTRYTAX_ID_COUNTRY', _DB_PREFIX_ . 'product_country_tax.ID_COUNTRY');
+define('OOPS_MODEL_PRODUCTCOUNTRYTAX_ID_TAX', _DB_PREFIX_ . 'product_country_tax.ID_TAX');
+define('OOPS_MODEL_PRODUCTCOUNTRYTAX_TABLE_NAME', _DB_PREFIX_ . 'product_country_tax');
+
 /**
- * Base static class for performing query and update operations on the 'djland_product_country_tax' table.
+ * Base static class for performing query and update operations on the 'product_country_tax' table.
  *
  * 
  *
@@ -14,7 +19,7 @@ abstract class Oops_Model_Base_ProductCountryTaxPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_product_country_tax';
+	const TABLE_NAME = OOPS_MODEL_PRODUCTCOUNTRYTAX_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_ProductCountryTax';
@@ -35,13 +40,13 @@ abstract class Oops_Model_Base_ProductCountryTaxPeer {
 	const NUM_HYDRATE_COLUMNS = 3;
 
 	/** the column name for the ID_PRODUCT field */
-	const ID_PRODUCT = 'djland_product_country_tax.ID_PRODUCT';
+	const ID_PRODUCT = OOPS_MODEL_PRODUCTCOUNTRYTAX_ID_PRODUCT;
 
 	/** the column name for the ID_COUNTRY field */
-	const ID_COUNTRY = 'djland_product_country_tax.ID_COUNTRY';
+	const ID_COUNTRY = OOPS_MODEL_PRODUCTCOUNTRYTAX_ID_COUNTRY;
 
 	/** the column name for the ID_TAX field */
-	const ID_TAX = 'djland_product_country_tax.ID_TAX';
+	const ID_TAX = OOPS_MODEL_PRODUCTCOUNTRYTAX_ID_TAX;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -349,7 +354,7 @@ abstract class Oops_Model_Base_ProductCountryTaxPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_product_country_tax
+	 * Method to invalidate the instance pool of all tables related to product_country_tax
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -565,7 +570,7 @@ abstract class Oops_Model_Base_ProductCountryTaxPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_product_country_tax table.
+	 * Deletes all rows from the product_country_tax table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

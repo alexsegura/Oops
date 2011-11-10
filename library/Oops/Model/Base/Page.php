@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_page' table.
+ * Base class that represents a row from the 'page' table.
  *
  * 
  *
@@ -408,7 +408,7 @@ abstract class Oops_Model_Base_Page extends BaseObject  implements Persistent
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_page` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'page` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

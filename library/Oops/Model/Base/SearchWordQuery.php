@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_search_word' table.
+ * Base class that represents a query for the 'search_word' table.
  *
  * 
  *
@@ -116,7 +116,7 @@ abstract class Oops_Model_Base_SearchWordQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_WORD`, `ID_LANG`, `WORD` FROM `djland_search_word` WHERE `ID_WORD` = :p0';
+		$sql = 'SELECT `ID_WORD`, `ID_LANG`, `WORD` FROM `' . _DB_PREFIX_ . 'search_word` WHERE `ID_WORD` = :p0';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

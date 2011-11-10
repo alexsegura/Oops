@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_referrer' table.
+ * Base class that represents a row from the 'referrer' table.
  *
  * 
  *
@@ -1276,7 +1276,7 @@ abstract class Oops_Model_Base_Referrer extends BaseObject  implements Persisten
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_referrer` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'referrer` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

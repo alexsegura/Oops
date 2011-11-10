@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_page_viewed' table.
+ * Base class that represents a query for the 'page_viewed' table.
  *
  * 
  *
@@ -116,7 +116,7 @@ abstract class Oops_Model_Base_PageViewedQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_PAGE`, `ID_DATE_RANGE`, `COUNTER` FROM `djland_page_viewed` WHERE `ID_PAGE` = :p0 AND `ID_DATE_RANGE` = :p1';
+		$sql = 'SELECT `ID_PAGE`, `ID_DATE_RANGE`, `COUNTER` FROM `' . _DB_PREFIX_ . 'page_viewed` WHERE `ID_PAGE` = :p0 AND `ID_DATE_RANGE` = :p1';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key[0], PDO::PARAM_INT);

@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_module_currency' table.
+ * Base class that represents a row from the 'module_currency' table.
  *
  * 
  *
@@ -364,7 +364,7 @@ abstract class Oops_Model_Base_ModuleCurrency extends BaseObject  implements Per
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_module_currency` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'module_currency` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

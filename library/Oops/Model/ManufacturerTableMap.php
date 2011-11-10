@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_manufacturer' table.
+ * This class defines the structure of the 'manufacturer' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_ManufacturerTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_manufacturer');
+		$this->setName(_DB_PREFIX_ . 'manufacturer');
 		$this->setPhpName('Manufacturer');
 		$this->setClassname('Oops_Model_Manufacturer');
 		$this->setPackage('prestashop');

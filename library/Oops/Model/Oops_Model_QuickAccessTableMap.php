@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_quick_access' table.
+ * This class defines the structure of the 'quick_access' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_QuickAccessTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_quick_access');
+		$this->setName(_DB_PREFIX_ . 'quick_access');
 		$this->setPhpName('QuickAccess');
 		$this->setClassname('Oops_Model_QuickAccess');
 		$this->setPackage('prestashop');

@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_search_index' table.
+ * This class defines the structure of the 'search_index' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_SearchIndexTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_search_index');
+		$this->setName(_DB_PREFIX_ . 'search_index');
 		$this->setPhpName('SearchIndex');
 		$this->setClassname('Oops_Model_SearchIndex');
 		$this->setPackage('prestashop');

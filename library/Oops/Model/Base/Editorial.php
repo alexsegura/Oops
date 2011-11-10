@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_editorial' table.
+ * Base class that represents a row from the 'editorial' table.
  *
  * 
  *
@@ -368,7 +368,7 @@ abstract class Oops_Model_Base_Editorial extends BaseObject  implements Persiste
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_editorial` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'editorial` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

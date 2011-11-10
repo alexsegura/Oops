@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_product_attribute' table.
+ * This class defines the structure of the 'product_attribute' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_ProductAttributeTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_product_attribute');
+		$this->setName(_DB_PREFIX_ . 'product_attribute');
 		$this->setPhpName('ProductAttribute');
 		$this->setClassname('Oops_Model_ProductAttribute');
 		$this->setPackage('prestashop');

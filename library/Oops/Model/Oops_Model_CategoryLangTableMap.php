@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_category_lang' table.
+ * This class defines the structure of the 'category_lang' table.
  *
  *
  *
@@ -32,14 +32,14 @@ class Oops_Model_CategoryLangTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_category_lang');
+		$this->setName(_DB_PREFIX_ . 'category_lang');
 		$this->setPhpName('CategoryLang');
 		$this->setClassname('Oops_Model_CategoryLang');
 		$this->setPackage('prestashop');
 		$this->setUseIdGenerator(false);
 		// columns
-		$this->addForeignPrimaryKey('ID_CATEGORY', 'IdCategory', 'INTEGER' , 'djland_category', 'ID_CATEGORY', true, 10, null);
-		$this->addForeignPrimaryKey('ID_LANG', 'IdLang', 'INTEGER' , 'djland_lang', 'ID_LANG', true, 10, null);
+		$this->addForeignPrimaryKey('ID_CATEGORY', 'IdCategory', 'INTEGER' , 'category', 'ID_CATEGORY', true, 10, null);
+		$this->addForeignPrimaryKey('ID_LANG', 'IdLang', 'INTEGER' , 'lang', 'ID_LANG', true, 10, null);
 		$this->addColumn('NAME', 'Name', 'VARCHAR', true, 128, null);
 		$this->addColumn('DESCRIPTION', 'Description', 'LONGVARCHAR', false, null, null);
 		$this->addColumn('LINK_REWRITE', 'LinkRewrite', 'VARCHAR', true, 128, null);

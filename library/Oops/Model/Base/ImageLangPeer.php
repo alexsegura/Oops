@@ -1,8 +1,13 @@
 <?php
 
 
+define('OOPS_MODEL_IMAGELANG_ID_IMAGE', _DB_PREFIX_ . 'image_lang.ID_IMAGE');
+define('OOPS_MODEL_IMAGELANG_ID_LANG', _DB_PREFIX_ . 'image_lang.ID_LANG');
+define('OOPS_MODEL_IMAGELANG_LEGEND', _DB_PREFIX_ . 'image_lang.LEGEND');
+define('OOPS_MODEL_IMAGELANG_TABLE_NAME', _DB_PREFIX_ . 'image_lang');
+
 /**
- * Base static class for performing query and update operations on the 'djland_image_lang' table.
+ * Base static class for performing query and update operations on the 'image_lang' table.
  *
  * 
  *
@@ -14,7 +19,7 @@ abstract class Oops_Model_Base_ImageLangPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_image_lang';
+	const TABLE_NAME = OOPS_MODEL_IMAGELANG_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_ImageLang';
@@ -35,13 +40,13 @@ abstract class Oops_Model_Base_ImageLangPeer {
 	const NUM_HYDRATE_COLUMNS = 3;
 
 	/** the column name for the ID_IMAGE field */
-	const ID_IMAGE = 'djland_image_lang.ID_IMAGE';
+	const ID_IMAGE = OOPS_MODEL_IMAGELANG_ID_IMAGE;
 
 	/** the column name for the ID_LANG field */
-	const ID_LANG = 'djland_image_lang.ID_LANG';
+	const ID_LANG = OOPS_MODEL_IMAGELANG_ID_LANG;
 
 	/** the column name for the LEGEND field */
-	const LEGEND = 'djland_image_lang.LEGEND';
+	const LEGEND = OOPS_MODEL_IMAGELANG_LEGEND;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -349,7 +354,7 @@ abstract class Oops_Model_Base_ImageLangPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_image_lang
+	 * Method to invalidate the instance pool of all tables related to image_lang
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -565,7 +570,7 @@ abstract class Oops_Model_Base_ImageLangPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_image_lang table.
+	 * Deletes all rows from the image_lang table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

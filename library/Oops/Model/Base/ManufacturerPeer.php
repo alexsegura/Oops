@@ -1,8 +1,15 @@
 <?php
 
 
+define('OOPS_MODEL_MANUFACTURER_ID_MANUFACTURER', _DB_PREFIX_ . 'manufacturer.ID_MANUFACTURER');
+define('OOPS_MODEL_MANUFACTURER_NAME', _DB_PREFIX_ . 'manufacturer.NAME');
+define('OOPS_MODEL_MANUFACTURER_DATE_ADD', _DB_PREFIX_ . 'manufacturer.DATE_ADD');
+define('OOPS_MODEL_MANUFACTURER_DATE_UPD', _DB_PREFIX_ . 'manufacturer.DATE_UPD');
+define('OOPS_MODEL_MANUFACTURER_ACTIVE', _DB_PREFIX_ . 'manufacturer.ACTIVE');
+define('OOPS_MODEL_MANUFACTURER_TABLE_NAME', _DB_PREFIX_ . 'manufacturer');
+
 /**
- * Base static class for performing query and update operations on the 'djland_manufacturer' table.
+ * Base static class for performing query and update operations on the 'manufacturer' table.
  *
  * 
  *
@@ -14,7 +21,7 @@ abstract class Oops_Model_Base_ManufacturerPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_manufacturer';
+	const TABLE_NAME = OOPS_MODEL_MANUFACTURER_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_Manufacturer';
@@ -35,19 +42,19 @@ abstract class Oops_Model_Base_ManufacturerPeer {
 	const NUM_HYDRATE_COLUMNS = 5;
 
 	/** the column name for the ID_MANUFACTURER field */
-	const ID_MANUFACTURER = 'djland_manufacturer.ID_MANUFACTURER';
+	const ID_MANUFACTURER = OOPS_MODEL_MANUFACTURER_ID_MANUFACTURER;
 
 	/** the column name for the NAME field */
-	const NAME = 'djland_manufacturer.NAME';
+	const NAME = OOPS_MODEL_MANUFACTURER_NAME;
 
 	/** the column name for the DATE_ADD field */
-	const DATE_ADD = 'djland_manufacturer.DATE_ADD';
+	const DATE_ADD = OOPS_MODEL_MANUFACTURER_DATE_ADD;
 
 	/** the column name for the DATE_UPD field */
-	const DATE_UPD = 'djland_manufacturer.DATE_UPD';
+	const DATE_UPD = OOPS_MODEL_MANUFACTURER_DATE_UPD;
 
 	/** the column name for the ACTIVE field */
-	const ACTIVE = 'djland_manufacturer.ACTIVE';
+	const ACTIVE = OOPS_MODEL_MANUFACTURER_ACTIVE;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -359,7 +366,7 @@ abstract class Oops_Model_Base_ManufacturerPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_manufacturer
+	 * Method to invalidate the instance pool of all tables related to manufacturer
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -579,7 +586,7 @@ abstract class Oops_Model_Base_ManufacturerPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_manufacturer table.
+	 * Deletes all rows from the manufacturer table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

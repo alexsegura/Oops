@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_product_download' table.
+ * This class defines the structure of the 'product_download' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_ProductDownloadTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_product_download');
+		$this->setName(_DB_PREFIX_ . 'product_download');
 		$this->setPhpName('ProductDownload');
 		$this->setClassname('Oops_Model_ProductDownload');
 		$this->setPackage('prestashop');

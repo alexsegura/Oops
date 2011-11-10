@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_carrier_zone' table.
+ * This class defines the structure of the 'carrier_zone' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_CarrierZoneTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_carrier_zone');
+		$this->setName(_DB_PREFIX_ . 'carrier_zone');
 		$this->setPhpName('CarrierZone');
 		$this->setClassname('Oops_Model_CarrierZone');
 		$this->setPackage('prestashop');

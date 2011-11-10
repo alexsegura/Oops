@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_specific_price' table.
+ * This class defines the structure of the 'specific_price' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_SpecificPriceTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_specific_price');
+		$this->setName(_DB_PREFIX_ . 'specific_price');
 		$this->setPhpName('SpecificPrice');
 		$this->setClassname('Oops_Model_SpecificPrice');
 		$this->setPackage('prestashop');

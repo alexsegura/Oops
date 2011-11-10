@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_customer' table.
+ * This class defines the structure of the 'customer' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_CustomerTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_customer');
+		$this->setName(_DB_PREFIX_ . 'customer');
 		$this->setPhpName('Customer');
 		$this->setClassname('Oops_Model_Customer');
 		$this->setPackage('prestashop');

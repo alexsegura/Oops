@@ -1,8 +1,13 @@
 <?php
 
 
+define('OOPS_MODEL_SEARCHINDEX_ID_PRODUCT', _DB_PREFIX_ . 'search_index.ID_PRODUCT');
+define('OOPS_MODEL_SEARCHINDEX_ID_WORD', _DB_PREFIX_ . 'search_index.ID_WORD');
+define('OOPS_MODEL_SEARCHINDEX_WEIGHT', _DB_PREFIX_ . 'search_index.WEIGHT');
+define('OOPS_MODEL_SEARCHINDEX_TABLE_NAME', _DB_PREFIX_ . 'search_index');
+
 /**
- * Base static class for performing query and update operations on the 'djland_search_index' table.
+ * Base static class for performing query and update operations on the 'search_index' table.
  *
  * 
  *
@@ -14,7 +19,7 @@ abstract class Oops_Model_Base_SearchIndexPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_search_index';
+	const TABLE_NAME = OOPS_MODEL_SEARCHINDEX_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_SearchIndex';
@@ -35,13 +40,13 @@ abstract class Oops_Model_Base_SearchIndexPeer {
 	const NUM_HYDRATE_COLUMNS = 3;
 
 	/** the column name for the ID_PRODUCT field */
-	const ID_PRODUCT = 'djland_search_index.ID_PRODUCT';
+	const ID_PRODUCT = OOPS_MODEL_SEARCHINDEX_ID_PRODUCT;
 
 	/** the column name for the ID_WORD field */
-	const ID_WORD = 'djland_search_index.ID_WORD';
+	const ID_WORD = OOPS_MODEL_SEARCHINDEX_ID_WORD;
 
 	/** the column name for the WEIGHT field */
-	const WEIGHT = 'djland_search_index.WEIGHT';
+	const WEIGHT = OOPS_MODEL_SEARCHINDEX_WEIGHT;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -349,7 +354,7 @@ abstract class Oops_Model_Base_SearchIndexPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_search_index
+	 * Method to invalidate the instance pool of all tables related to search_index
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -573,7 +578,7 @@ abstract class Oops_Model_Base_SearchIndexPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_search_index table.
+	 * Deletes all rows from the search_index table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

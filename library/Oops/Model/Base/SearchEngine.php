@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_search_engine' table.
+ * Base class that represents a row from the 'search_engine' table.
  *
  * 
  *
@@ -408,7 +408,7 @@ abstract class Oops_Model_Base_SearchEngine extends BaseObject  implements Persi
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_search_engine` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'search_engine` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

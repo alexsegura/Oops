@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_product_sale' table.
+ * Base class that represents a row from the 'product_sale' table.
  *
  * 
  *
@@ -506,7 +506,7 @@ abstract class Oops_Model_Base_ProductSale extends BaseObject  implements Persis
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_product_sale` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'product_sale` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

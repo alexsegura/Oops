@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_product_lang' table.
+ * Base class that represents a query for the 'product_lang' table.
  *
  * 
  *
@@ -156,7 +156,7 @@ abstract class Oops_Model_Base_ProductLangQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_PRODUCT`, `ID_LANG`, `DESCRIPTION`, `DESCRIPTION_SHORT`, `LINK_REWRITE`, `META_DESCRIPTION`, `META_KEYWORDS`, `META_TITLE`, `NAME`, `AVAILABLE_NOW`, `AVAILABLE_LATER` FROM `djland_product_lang` WHERE `ID_PRODUCT` = :p0 AND `ID_LANG` = :p1';
+		$sql = 'SELECT `ID_PRODUCT`, `ID_LANG`, `DESCRIPTION`, `DESCRIPTION_SHORT`, `LINK_REWRITE`, `META_DESCRIPTION`, `META_KEYWORDS`, `META_TITLE`, `NAME`, `AVAILABLE_NOW`, `AVAILABLE_LATER` FROM `' . _DB_PREFIX_ . 'product_lang` WHERE `ID_PRODUCT` = :p0 AND `ID_LANG` = :p1';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key[0], PDO::PARAM_INT);

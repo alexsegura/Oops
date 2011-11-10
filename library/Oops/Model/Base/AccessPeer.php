@@ -1,8 +1,16 @@
 <?php
 
 
+define('OOPS_MODEL_ACCESS_ID_PROFILE', _DB_PREFIX_ . 'access.ID_PROFILE');
+define('OOPS_MODEL_ACCESS_ID_TAB', _DB_PREFIX_ . 'access.ID_TAB');
+define('OOPS_MODEL_ACCESS_VIEW', _DB_PREFIX_ . 'access.VIEW');
+define('OOPS_MODEL_ACCESS_ADD', _DB_PREFIX_ . 'access.ADD');
+define('OOPS_MODEL_ACCESS_EDIT', _DB_PREFIX_ . 'access.EDIT');
+define('OOPS_MODEL_ACCESS_DELETE', _DB_PREFIX_ . 'access.DELETE');
+define('OOPS_MODEL_ACCESS_TABLE_NAME', _DB_PREFIX_ . 'access');
+
 /**
- * Base static class for performing query and update operations on the 'djland_access' table.
+ * Base static class for performing query and update operations on the 'access' table.
  *
  * 
  *
@@ -14,7 +22,7 @@ abstract class Oops_Model_Base_AccessPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_access';
+	const TABLE_NAME = OOPS_MODEL_ACCESS_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_Access';
@@ -35,22 +43,22 @@ abstract class Oops_Model_Base_AccessPeer {
 	const NUM_HYDRATE_COLUMNS = 6;
 
 	/** the column name for the ID_PROFILE field */
-	const ID_PROFILE = 'djland_access.ID_PROFILE';
+	const ID_PROFILE = OOPS_MODEL_ACCESS_ID_PROFILE;
 
 	/** the column name for the ID_TAB field */
-	const ID_TAB = 'djland_access.ID_TAB';
+	const ID_TAB = OOPS_MODEL_ACCESS_ID_TAB;
 
 	/** the column name for the VIEW field */
-	const VIEW = 'djland_access.VIEW';
+	const VIEW = OOPS_MODEL_ACCESS_VIEW;
 
 	/** the column name for the ADD field */
-	const ADD = 'djland_access.ADD';
+	const ADD = OOPS_MODEL_ACCESS_ADD;
 
 	/** the column name for the EDIT field */
-	const EDIT = 'djland_access.EDIT';
+	const EDIT = OOPS_MODEL_ACCESS_EDIT;
 
 	/** the column name for the DELETE field */
-	const DELETE = 'djland_access.DELETE';
+	const DELETE = OOPS_MODEL_ACCESS_DELETE;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -364,7 +372,7 @@ abstract class Oops_Model_Base_AccessPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_access
+	 * Method to invalidate the instance pool of all tables related to access
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -588,7 +596,7 @@ abstract class Oops_Model_Base_AccessPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_access table.
+	 * Deletes all rows from the access table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

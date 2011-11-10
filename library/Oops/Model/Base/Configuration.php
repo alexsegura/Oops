@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_configuration' table.
+ * Base class that represents a row from the 'configuration' table.
  *
  * 
  *
@@ -548,7 +548,7 @@ abstract class Oops_Model_Base_Configuration extends BaseObject  implements Pers
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_configuration` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'configuration` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

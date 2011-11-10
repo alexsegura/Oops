@@ -1,8 +1,14 @@
 <?php
 
 
+define('OOPS_MODEL_CONNECTIONSPAGE_ID_CONNECTIONS', _DB_PREFIX_ . 'connections_page.ID_CONNECTIONS');
+define('OOPS_MODEL_CONNECTIONSPAGE_ID_PAGE', _DB_PREFIX_ . 'connections_page.ID_PAGE');
+define('OOPS_MODEL_CONNECTIONSPAGE_TIME_START', _DB_PREFIX_ . 'connections_page.TIME_START');
+define('OOPS_MODEL_CONNECTIONSPAGE_TIME_END', _DB_PREFIX_ . 'connections_page.TIME_END');
+define('OOPS_MODEL_CONNECTIONSPAGE_TABLE_NAME', _DB_PREFIX_ . 'connections_page');
+
 /**
- * Base static class for performing query and update operations on the 'djland_connections_page' table.
+ * Base static class for performing query and update operations on the 'connections_page' table.
  *
  * 
  *
@@ -14,7 +20,7 @@ abstract class Oops_Model_Base_ConnectionsPagePeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_connections_page';
+	const TABLE_NAME = OOPS_MODEL_CONNECTIONSPAGE_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_ConnectionsPage';
@@ -35,16 +41,16 @@ abstract class Oops_Model_Base_ConnectionsPagePeer {
 	const NUM_HYDRATE_COLUMNS = 4;
 
 	/** the column name for the ID_CONNECTIONS field */
-	const ID_CONNECTIONS = 'djland_connections_page.ID_CONNECTIONS';
+	const ID_CONNECTIONS = OOPS_MODEL_CONNECTIONSPAGE_ID_CONNECTIONS;
 
 	/** the column name for the ID_PAGE field */
-	const ID_PAGE = 'djland_connections_page.ID_PAGE';
+	const ID_PAGE = OOPS_MODEL_CONNECTIONSPAGE_ID_PAGE;
 
 	/** the column name for the TIME_START field */
-	const TIME_START = 'djland_connections_page.TIME_START';
+	const TIME_START = OOPS_MODEL_CONNECTIONSPAGE_TIME_START;
 
 	/** the column name for the TIME_END field */
-	const TIME_END = 'djland_connections_page.TIME_END';
+	const TIME_END = OOPS_MODEL_CONNECTIONSPAGE_TIME_END;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -354,7 +360,7 @@ abstract class Oops_Model_Base_ConnectionsPagePeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_connections_page
+	 * Method to invalidate the instance pool of all tables related to connections_page
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -586,7 +592,7 @@ abstract class Oops_Model_Base_ConnectionsPagePeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_connections_page table.
+	 * Deletes all rows from the connections_page table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

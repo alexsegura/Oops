@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_product_country_tax' table.
+ * Base class that represents a query for the 'product_country_tax' table.
  *
  * 
  *
@@ -116,7 +116,7 @@ abstract class Oops_Model_Base_ProductCountryTaxQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_PRODUCT`, `ID_COUNTRY`, `ID_TAX` FROM `djland_product_country_tax` WHERE `ID_PRODUCT` = :p0';
+		$sql = 'SELECT `ID_PRODUCT`, `ID_COUNTRY`, `ID_TAX` FROM `' . _DB_PREFIX_ . 'product_country_tax` WHERE `ID_PRODUCT` = :p0';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

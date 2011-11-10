@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_feature_value_lang' table.
+ * Base class that represents a query for the 'feature_value_lang' table.
  *
  * 
  *
@@ -116,7 +116,7 @@ abstract class Oops_Model_Base_FeatureValueLangQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_FEATURE_VALUE`, `ID_LANG`, `VALUE` FROM `djland_feature_value_lang` WHERE `ID_FEATURE_VALUE` = :p0 AND `ID_LANG` = :p1';
+		$sql = 'SELECT `ID_FEATURE_VALUE`, `ID_LANG`, `VALUE` FROM `' . _DB_PREFIX_ . 'feature_value_lang` WHERE `ID_FEATURE_VALUE` = :p0 AND `ID_LANG` = :p1';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key[0], PDO::PARAM_INT);

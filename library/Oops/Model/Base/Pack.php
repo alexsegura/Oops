@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_pack' table.
+ * Base class that represents a row from the 'pack' table.
  *
  * 
  *
@@ -430,7 +430,7 @@ abstract class Oops_Model_Base_Pack extends BaseObject  implements Persistent
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_pack` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'pack` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

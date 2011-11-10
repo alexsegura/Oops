@@ -1,8 +1,13 @@
 <?php
 
 
+define('OOPS_MODEL_SPECIFICPRICEPRIORITY_ID_SPECIFIC_PRICE_PRIORITY', _DB_PREFIX_ . 'specific_price_priority.ID_SPECIFIC_PRICE_PRIORITY');
+define('OOPS_MODEL_SPECIFICPRICEPRIORITY_ID_PRODUCT', _DB_PREFIX_ . 'specific_price_priority.ID_PRODUCT');
+define('OOPS_MODEL_SPECIFICPRICEPRIORITY_PRIORITY', _DB_PREFIX_ . 'specific_price_priority.PRIORITY');
+define('OOPS_MODEL_SPECIFICPRICEPRIORITY_TABLE_NAME', _DB_PREFIX_ . 'specific_price_priority');
+
 /**
- * Base static class for performing query and update operations on the 'djland_specific_price_priority' table.
+ * Base static class for performing query and update operations on the 'specific_price_priority' table.
  *
  * 
  *
@@ -14,7 +19,7 @@ abstract class Oops_Model_Base_SpecificPricePriorityPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_specific_price_priority';
+	const TABLE_NAME = OOPS_MODEL_SPECIFICPRICEPRIORITY_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_SpecificPricePriority';
@@ -35,13 +40,13 @@ abstract class Oops_Model_Base_SpecificPricePriorityPeer {
 	const NUM_HYDRATE_COLUMNS = 3;
 
 	/** the column name for the ID_SPECIFIC_PRICE_PRIORITY field */
-	const ID_SPECIFIC_PRICE_PRIORITY = 'djland_specific_price_priority.ID_SPECIFIC_PRICE_PRIORITY';
+	const ID_SPECIFIC_PRICE_PRIORITY = OOPS_MODEL_SPECIFICPRICEPRIORITY_ID_SPECIFIC_PRICE_PRIORITY;
 
 	/** the column name for the ID_PRODUCT field */
-	const ID_PRODUCT = 'djland_specific_price_priority.ID_PRODUCT';
+	const ID_PRODUCT = OOPS_MODEL_SPECIFICPRICEPRIORITY_ID_PRODUCT;
 
 	/** the column name for the PRIORITY field */
-	const PRIORITY = 'djland_specific_price_priority.PRIORITY';
+	const PRIORITY = OOPS_MODEL_SPECIFICPRICEPRIORITY_PRIORITY;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -349,7 +354,7 @@ abstract class Oops_Model_Base_SpecificPricePriorityPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_specific_price_priority
+	 * Method to invalidate the instance pool of all tables related to specific_price_priority
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -577,7 +582,7 @@ abstract class Oops_Model_Base_SpecificPricePriorityPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_specific_price_priority table.
+	 * Deletes all rows from the specific_price_priority table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

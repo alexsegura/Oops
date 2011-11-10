@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_image_type' table.
+ * Base class that represents a query for the 'image_type' table.
  *
  * 
  *
@@ -144,7 +144,7 @@ abstract class Oops_Model_Base_ImageTypeQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_IMAGE_TYPE`, `NAME`, `WIDTH`, `HEIGHT`, `PRODUCTS`, `CATEGORIES`, `MANUFACTURERS`, `SUPPLIERS`, `SCENES`, `STORES` FROM `djland_image_type` WHERE `ID_IMAGE_TYPE` = :p0';
+		$sql = 'SELECT `ID_IMAGE_TYPE`, `NAME`, `WIDTH`, `HEIGHT`, `PRODUCTS`, `CATEGORIES`, `MANUFACTURERS`, `SUPPLIERS`, `SCENES`, `STORES` FROM `' . _DB_PREFIX_ . 'image_type` WHERE `ID_IMAGE_TYPE` = :p0';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

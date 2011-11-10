@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_import_match' table.
+ * Base class that represents a query for the 'import_match' table.
  *
  * 
  *
@@ -120,7 +120,7 @@ abstract class Oops_Model_Base_ImportMatchQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_IMPORT_MATCH`, `NAME`, `MATCH`, `SKIP` FROM `djland_import_match` WHERE `ID_IMPORT_MATCH` = :p0';
+		$sql = 'SELECT `ID_IMPORT_MATCH`, `NAME`, `MATCH`, `SKIP` FROM `' . _DB_PREFIX_ . 'import_match` WHERE `ID_IMPORT_MATCH` = :p0';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

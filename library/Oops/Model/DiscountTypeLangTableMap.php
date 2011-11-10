@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_discount_type_lang' table.
+ * This class defines the structure of the 'discount_type_lang' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_DiscountTypeLangTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_discount_type_lang');
+		$this->setName(_DB_PREFIX_ . 'discount_type_lang');
 		$this->setPhpName('DiscountTypeLang');
 		$this->setClassname('Oops_Model_DiscountTypeLang');
 		$this->setPackage('prestashop');

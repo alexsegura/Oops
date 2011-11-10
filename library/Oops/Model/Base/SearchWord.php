@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_search_word' table.
+ * Base class that represents a row from the 'search_word' table.
  *
  * 
  *
@@ -408,7 +408,7 @@ abstract class Oops_Model_Base_SearchWord extends BaseObject  implements Persist
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_search_word` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'search_word` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

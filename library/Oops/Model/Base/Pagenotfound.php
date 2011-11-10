@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_pagenotfound' table.
+ * Base class that represents a row from the 'pagenotfound' table.
  *
  * 
  *
@@ -478,7 +478,7 @@ abstract class Oops_Model_Base_Pagenotfound extends BaseObject  implements Persi
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_pagenotfound` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'pagenotfound` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

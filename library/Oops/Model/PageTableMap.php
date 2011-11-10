@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_page' table.
+ * This class defines the structure of the 'page' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_PageTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_page');
+		$this->setName(_DB_PREFIX_ . 'page');
 		$this->setPhpName('Page');
 		$this->setClassname('Oops_Model_Page');
 		$this->setPackage('prestashop');

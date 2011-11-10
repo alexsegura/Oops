@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_delivery' table.
+ * Base class that represents a query for the 'delivery' table.
  *
  * 
  *
@@ -128,7 +128,7 @@ abstract class Oops_Model_Base_DeliveryQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_DELIVERY`, `ID_CARRIER`, `ID_RANGE_PRICE`, `ID_RANGE_WEIGHT`, `ID_ZONE`, `PRICE` FROM `djland_delivery` WHERE `ID_DELIVERY` = :p0';
+		$sql = 'SELECT `ID_DELIVERY`, `ID_CARRIER`, `ID_RANGE_PRICE`, `ID_RANGE_WEIGHT`, `ID_ZONE`, `PRICE` FROM `' . _DB_PREFIX_ . 'delivery` WHERE `ID_DELIVERY` = :p0';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

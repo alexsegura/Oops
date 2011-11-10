@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_pack' table.
+ * This class defines the structure of the 'pack' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_PackTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_pack');
+		$this->setName(_DB_PREFIX_ . 'pack');
 		$this->setPhpName('Pack');
 		$this->setClassname('Oops_Model_Pack');
 		$this->setPackage('prestashop');

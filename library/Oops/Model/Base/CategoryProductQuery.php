@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_category_product' table.
+ * Base class that represents a query for the 'category_product' table.
  *
  * 
  *
@@ -124,7 +124,7 @@ abstract class Oops_Model_Base_CategoryProductQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_CATEGORY`, `ID_PRODUCT`, `POSITION` FROM `djland_category_product` WHERE `ID_CATEGORY` = :p0 AND `ID_PRODUCT` = :p1';
+		$sql = 'SELECT `ID_CATEGORY`, `ID_PRODUCT`, `POSITION` FROM `' . _DB_PREFIX_ . 'category_product` WHERE `ID_CATEGORY` = :p0 AND `ID_PRODUCT` = :p1';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key[0], PDO::PARAM_INT);

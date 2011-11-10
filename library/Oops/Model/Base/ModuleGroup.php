@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_module_group' table.
+ * Base class that represents a row from the 'module_group' table.
  *
  * 
  *
@@ -364,7 +364,7 @@ abstract class Oops_Model_Base_ModuleGroup extends BaseObject  implements Persis
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_module_group` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'module_group` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

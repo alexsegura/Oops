@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_feature_value_lang' table.
+ * This class defines the structure of the 'feature_value_lang' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_FeatureValueLangTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_feature_value_lang');
+		$this->setName(_DB_PREFIX_ . 'feature_value_lang');
 		$this->setPhpName('FeatureValueLang');
 		$this->setClassname('Oops_Model_FeatureValueLang');
 		$this->setPackage('prestashop');

@@ -1,8 +1,13 @@
 <?php
 
 
+define('OOPS_MODEL_FEATUREPRODUCT_ID_FEATURE', _DB_PREFIX_ . 'feature_product.ID_FEATURE');
+define('OOPS_MODEL_FEATUREPRODUCT_ID_PRODUCT', _DB_PREFIX_ . 'feature_product.ID_PRODUCT');
+define('OOPS_MODEL_FEATUREPRODUCT_ID_FEATURE_VALUE', _DB_PREFIX_ . 'feature_product.ID_FEATURE_VALUE');
+define('OOPS_MODEL_FEATUREPRODUCT_TABLE_NAME', _DB_PREFIX_ . 'feature_product');
+
 /**
- * Base static class for performing query and update operations on the 'djland_feature_product' table.
+ * Base static class for performing query and update operations on the 'feature_product' table.
  *
  * 
  *
@@ -14,7 +19,7 @@ abstract class Oops_Model_Base_FeatureProductPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_feature_product';
+	const TABLE_NAME = OOPS_MODEL_FEATUREPRODUCT_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_FeatureProduct';
@@ -35,13 +40,13 @@ abstract class Oops_Model_Base_FeatureProductPeer {
 	const NUM_HYDRATE_COLUMNS = 3;
 
 	/** the column name for the ID_FEATURE field */
-	const ID_FEATURE = 'djland_feature_product.ID_FEATURE';
+	const ID_FEATURE = OOPS_MODEL_FEATUREPRODUCT_ID_FEATURE;
 
 	/** the column name for the ID_PRODUCT field */
-	const ID_PRODUCT = 'djland_feature_product.ID_PRODUCT';
+	const ID_PRODUCT = OOPS_MODEL_FEATUREPRODUCT_ID_PRODUCT;
 
 	/** the column name for the ID_FEATURE_VALUE field */
-	const ID_FEATURE_VALUE = 'djland_feature_product.ID_FEATURE_VALUE';
+	const ID_FEATURE_VALUE = OOPS_MODEL_FEATUREPRODUCT_ID_FEATURE_VALUE;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -349,7 +354,7 @@ abstract class Oops_Model_Base_FeatureProductPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_feature_product
+	 * Method to invalidate the instance pool of all tables related to feature_product
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -573,7 +578,7 @@ abstract class Oops_Model_Base_FeatureProductPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_feature_product table.
+	 * Deletes all rows from the feature_product table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

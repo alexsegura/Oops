@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_discount_type_lang' table.
+ * Base class that represents a row from the 'discount_type_lang' table.
  *
  * 
  *
@@ -404,7 +404,7 @@ abstract class Oops_Model_Base_DiscountTypeLang extends BaseObject  implements P
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_discount_type_lang` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'discount_type_lang` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

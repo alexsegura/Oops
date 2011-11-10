@@ -1,8 +1,12 @@
 <?php
 
 
+define('OOPS_MODEL_ORDERRETURNSTATE_ID_ORDER_RETURN_STATE', _DB_PREFIX_ . 'order_return_state.ID_ORDER_RETURN_STATE');
+define('OOPS_MODEL_ORDERRETURNSTATE_COLOR', _DB_PREFIX_ . 'order_return_state.COLOR');
+define('OOPS_MODEL_ORDERRETURNSTATE_TABLE_NAME', _DB_PREFIX_ . 'order_return_state');
+
 /**
- * Base static class for performing query and update operations on the 'djland_order_return_state' table.
+ * Base static class for performing query and update operations on the 'order_return_state' table.
  *
  * 
  *
@@ -14,7 +18,7 @@ abstract class Oops_Model_Base_OrderReturnStatePeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_order_return_state';
+	const TABLE_NAME = OOPS_MODEL_ORDERRETURNSTATE_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_OrderReturnState';
@@ -35,10 +39,10 @@ abstract class Oops_Model_Base_OrderReturnStatePeer {
 	const NUM_HYDRATE_COLUMNS = 2;
 
 	/** the column name for the ID_ORDER_RETURN_STATE field */
-	const ID_ORDER_RETURN_STATE = 'djland_order_return_state.ID_ORDER_RETURN_STATE';
+	const ID_ORDER_RETURN_STATE = OOPS_MODEL_ORDERRETURNSTATE_ID_ORDER_RETURN_STATE;
 
 	/** the column name for the COLOR field */
-	const COLOR = 'djland_order_return_state.COLOR';
+	const COLOR = OOPS_MODEL_ORDERRETURNSTATE_COLOR;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -344,7 +348,7 @@ abstract class Oops_Model_Base_OrderReturnStatePeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_order_return_state
+	 * Method to invalidate the instance pool of all tables related to order_return_state
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -564,7 +568,7 @@ abstract class Oops_Model_Base_OrderReturnStatePeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_order_return_state table.
+	 * Deletes all rows from the order_return_state table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

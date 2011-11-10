@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_range_price' table.
+ * Base class that represents a row from the 'range_price' table.
  *
  * 
  *
@@ -448,7 +448,7 @@ abstract class Oops_Model_Base_RangePrice extends BaseObject  implements Persist
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_range_price` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'range_price` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_group_lang' table.
+ * Base class that represents a query for the 'group_lang' table.
  *
  * 
  *
@@ -116,7 +116,7 @@ abstract class Oops_Model_Base_GroupLangQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_GROUP`, `ID_LANG`, `NAME` FROM `djland_group_lang` WHERE `ID_GROUP` = :p0';
+		$sql = 'SELECT `ID_GROUP`, `ID_LANG`, `NAME` FROM `' . _DB_PREFIX_ . 'group_lang` WHERE `ID_GROUP` = :p0';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

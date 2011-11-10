@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_payment_cc' table.
+ * This class defines the structure of the 'payment_cc' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_PaymentCcTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_payment_cc');
+		$this->setName(_DB_PREFIX_ . 'payment_cc');
 		$this->setPhpName('PaymentCc');
 		$this->setClassname('Oops_Model_PaymentCc');
 		$this->setPackage('prestashop');

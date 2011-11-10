@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_memcached_servers' table.
+ * Base class that represents a query for the 'memcached_servers' table.
  *
  * 
  *
@@ -120,7 +120,7 @@ abstract class Oops_Model_Base_MemcachedServersQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_MEMCACHED_SERVER`, `IP`, `PORT`, `WEIGHT` FROM `djland_memcached_servers` WHERE `ID_MEMCACHED_SERVER` = :p0';
+		$sql = 'SELECT `ID_MEMCACHED_SERVER`, `IP`, `PORT`, `WEIGHT` FROM `' . _DB_PREFIX_ . 'memcached_servers` WHERE `ID_MEMCACHED_SERVER` = :p0';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

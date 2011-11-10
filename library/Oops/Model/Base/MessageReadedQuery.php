@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_message_readed' table.
+ * Base class that represents a query for the 'message_readed' table.
  *
  * 
  *
@@ -116,7 +116,7 @@ abstract class Oops_Model_Base_MessageReadedQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_MESSAGE`, `ID_EMPLOYEE`, `DATE_ADD` FROM `djland_message_readed` WHERE `ID_MESSAGE` = :p0 AND `ID_EMPLOYEE` = :p1';
+		$sql = 'SELECT `ID_MESSAGE`, `ID_EMPLOYEE`, `DATE_ADD` FROM `' . _DB_PREFIX_ . 'message_readed` WHERE `ID_MESSAGE` = :p0 AND `ID_EMPLOYEE` = :p1';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key[0], PDO::PARAM_INT);

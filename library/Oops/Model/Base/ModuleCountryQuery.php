@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_module_country' table.
+ * Base class that represents a query for the 'module_country' table.
  *
  * 
  *
@@ -112,7 +112,7 @@ abstract class Oops_Model_Base_ModuleCountryQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_MODULE`, `ID_COUNTRY` FROM `djland_module_country` WHERE `ID_MODULE` = :p0 AND `ID_COUNTRY` = :p1';
+		$sql = 'SELECT `ID_MODULE`, `ID_COUNTRY` FROM `' . _DB_PREFIX_ . 'module_country` WHERE `ID_MODULE` = :p0 AND `ID_COUNTRY` = :p1';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key[0], PDO::PARAM_INT);

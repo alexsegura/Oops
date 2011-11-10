@@ -1,8 +1,12 @@
 <?php
 
 
+define('OOPS_MODEL_META_ID_META', _DB_PREFIX_ . 'meta.ID_META');
+define('OOPS_MODEL_META_PAGE', _DB_PREFIX_ . 'meta.PAGE');
+define('OOPS_MODEL_META_TABLE_NAME', _DB_PREFIX_ . 'meta');
+
 /**
- * Base static class for performing query and update operations on the 'djland_meta' table.
+ * Base static class for performing query and update operations on the 'meta' table.
  *
  * 
  *
@@ -14,7 +18,7 @@ abstract class Oops_Model_Base_MetaPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_meta';
+	const TABLE_NAME = OOPS_MODEL_META_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_Meta';
@@ -35,10 +39,10 @@ abstract class Oops_Model_Base_MetaPeer {
 	const NUM_HYDRATE_COLUMNS = 2;
 
 	/** the column name for the ID_META field */
-	const ID_META = 'djland_meta.ID_META';
+	const ID_META = OOPS_MODEL_META_ID_META;
 
 	/** the column name for the PAGE field */
-	const PAGE = 'djland_meta.PAGE';
+	const PAGE = OOPS_MODEL_META_PAGE;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -344,7 +348,7 @@ abstract class Oops_Model_Base_MetaPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_meta
+	 * Method to invalidate the instance pool of all tables related to meta
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -564,7 +568,7 @@ abstract class Oops_Model_Base_MetaPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_meta table.
+	 * Deletes all rows from the meta table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

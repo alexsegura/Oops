@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_carrier_lang' table.
+ * This class defines the structure of the 'carrier_lang' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_CarrierLangTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_carrier_lang');
+		$this->setName(_DB_PREFIX_ . 'carrier_lang');
 		$this->setPhpName('CarrierLang');
 		$this->setClassname('Oops_Model_CarrierLang');
 		$this->setPackage('prestashop');

@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_range_weight' table.
+ * This class defines the structure of the 'range_weight' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_RangeWeightTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_range_weight');
+		$this->setName(_DB_PREFIX_ . 'range_weight');
 		$this->setPhpName('RangeWeight');
 		$this->setClassname('Oops_Model_RangeWeight');
 		$this->setPackage('prestashop');

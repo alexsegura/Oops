@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_profile' table.
+ * This class defines the structure of the 'profile' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_ProfileTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_profile');
+		$this->setName(_DB_PREFIX_ . 'profile');
 		$this->setPhpName('Profile');
 		$this->setClassname('Oops_Model_Profile');
 		$this->setPackage('prestashop');

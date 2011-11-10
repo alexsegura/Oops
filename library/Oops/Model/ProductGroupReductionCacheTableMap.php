@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_product_group_reduction_cache' table.
+ * This class defines the structure of the 'product_group_reduction_cache' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_ProductGroupReductionCacheTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_product_group_reduction_cache');
+		$this->setName(_DB_PREFIX_ . 'product_group_reduction_cache');
 		$this->setPhpName('ProductGroupReductionCache');
 		$this->setClassname('Oops_Model_ProductGroupReductionCache');
 		$this->setPackage('prestashop');

@@ -1,8 +1,14 @@
 <?php
 
 
+define('OOPS_MODEL_HOOKMODULEEXCEPTIONS_ID_HOOK_MODULE_EXCEPTIONS', _DB_PREFIX_ . 'hook_module_exceptions.ID_HOOK_MODULE_EXCEPTIONS');
+define('OOPS_MODEL_HOOKMODULEEXCEPTIONS_ID_MODULE', _DB_PREFIX_ . 'hook_module_exceptions.ID_MODULE');
+define('OOPS_MODEL_HOOKMODULEEXCEPTIONS_ID_HOOK', _DB_PREFIX_ . 'hook_module_exceptions.ID_HOOK');
+define('OOPS_MODEL_HOOKMODULEEXCEPTIONS_FILE_NAME', _DB_PREFIX_ . 'hook_module_exceptions.FILE_NAME');
+define('OOPS_MODEL_HOOKMODULEEXCEPTIONS_TABLE_NAME', _DB_PREFIX_ . 'hook_module_exceptions');
+
 /**
- * Base static class for performing query and update operations on the 'djland_hook_module_exceptions' table.
+ * Base static class for performing query and update operations on the 'hook_module_exceptions' table.
  *
  * 
  *
@@ -14,7 +20,7 @@ abstract class Oops_Model_Base_HookModuleExceptionsPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_hook_module_exceptions';
+	const TABLE_NAME = OOPS_MODEL_HOOKMODULEEXCEPTIONS_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_HookModuleExceptions';
@@ -35,16 +41,16 @@ abstract class Oops_Model_Base_HookModuleExceptionsPeer {
 	const NUM_HYDRATE_COLUMNS = 4;
 
 	/** the column name for the ID_HOOK_MODULE_EXCEPTIONS field */
-	const ID_HOOK_MODULE_EXCEPTIONS = 'djland_hook_module_exceptions.ID_HOOK_MODULE_EXCEPTIONS';
+	const ID_HOOK_MODULE_EXCEPTIONS = OOPS_MODEL_HOOKMODULEEXCEPTIONS_ID_HOOK_MODULE_EXCEPTIONS;
 
 	/** the column name for the ID_MODULE field */
-	const ID_MODULE = 'djland_hook_module_exceptions.ID_MODULE';
+	const ID_MODULE = OOPS_MODEL_HOOKMODULEEXCEPTIONS_ID_MODULE;
 
 	/** the column name for the ID_HOOK field */
-	const ID_HOOK = 'djland_hook_module_exceptions.ID_HOOK';
+	const ID_HOOK = OOPS_MODEL_HOOKMODULEEXCEPTIONS_ID_HOOK;
 
 	/** the column name for the FILE_NAME field */
-	const FILE_NAME = 'djland_hook_module_exceptions.FILE_NAME';
+	const FILE_NAME = OOPS_MODEL_HOOKMODULEEXCEPTIONS_FILE_NAME;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -354,7 +360,7 @@ abstract class Oops_Model_Base_HookModuleExceptionsPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_hook_module_exceptions
+	 * Method to invalidate the instance pool of all tables related to hook_module_exceptions
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -574,7 +580,7 @@ abstract class Oops_Model_Base_HookModuleExceptionsPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_hook_module_exceptions table.
+	 * Deletes all rows from the hook_module_exceptions table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

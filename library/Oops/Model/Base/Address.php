@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_address' table.
+ * Base class that represents a row from the 'address' table.
  *
  * 
  *
@@ -1334,7 +1334,7 @@ abstract class Oops_Model_Base_Address extends BaseObject  implements Persistent
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_address` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'address` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_module' table.
+ * Base class that represents a row from the 'module' table.
  *
  * 
  *
@@ -442,7 +442,7 @@ abstract class Oops_Model_Base_Module extends BaseObject  implements Persistent
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_module` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'module` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_sekeyword' table.
+ * Base class that represents a row from the 'sekeyword' table.
  *
  * 
  *
@@ -438,7 +438,7 @@ abstract class Oops_Model_Base_Sekeyword extends BaseObject  implements Persiste
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_sekeyword` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'sekeyword` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

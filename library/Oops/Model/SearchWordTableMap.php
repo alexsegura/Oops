@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_search_word' table.
+ * This class defines the structure of the 'search_word' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_SearchWordTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_search_word');
+		$this->setName(_DB_PREFIX_ . 'search_word');
 		$this->setPhpName('SearchWord');
 		$this->setClassname('Oops_Model_SearchWord');
 		$this->setPackage('prestashop');

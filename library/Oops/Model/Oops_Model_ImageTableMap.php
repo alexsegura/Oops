@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_image' table.
+ * This class defines the structure of the 'image' table.
  *
  *
  *
@@ -32,14 +32,14 @@ class Oops_Model_ImageTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_image');
+		$this->setName(_DB_PREFIX_ . 'image');
 		$this->setPhpName('Image');
 		$this->setClassname('Oops_Model_Image');
 		$this->setPackage('prestashop');
 		$this->setUseIdGenerator(true);
 		// columns
 		$this->addPrimaryKey('ID_IMAGE', 'IdImage', 'INTEGER', true, 10, null);
-		$this->addForeignKey('ID_PRODUCT', 'IdProduct', 'INTEGER', 'djland_product', 'ID_PRODUCT', true, 10, null);
+		$this->addForeignKey('ID_PRODUCT', 'IdProduct', 'INTEGER', 'product', 'ID_PRODUCT', true, 10, null);
 		$this->addColumn('POSITION', 'Position', 'SMALLINT', true, 2, 0);
 		$this->addColumn('COVER', 'Cover', 'BOOLEAN', true, 1, false);
 		// validators

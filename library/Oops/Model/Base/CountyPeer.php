@@ -1,8 +1,14 @@
 <?php
 
 
+define('OOPS_MODEL_COUNTY_ID_COUNTY', _DB_PREFIX_ . 'county.ID_COUNTY');
+define('OOPS_MODEL_COUNTY_NAME', _DB_PREFIX_ . 'county.NAME');
+define('OOPS_MODEL_COUNTY_ID_STATE', _DB_PREFIX_ . 'county.ID_STATE');
+define('OOPS_MODEL_COUNTY_ACTIVE', _DB_PREFIX_ . 'county.ACTIVE');
+define('OOPS_MODEL_COUNTY_TABLE_NAME', _DB_PREFIX_ . 'county');
+
 /**
- * Base static class for performing query and update operations on the 'djland_county' table.
+ * Base static class for performing query and update operations on the 'county' table.
  *
  * 
  *
@@ -14,7 +20,7 @@ abstract class Oops_Model_Base_CountyPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_county';
+	const TABLE_NAME = OOPS_MODEL_COUNTY_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_County';
@@ -35,16 +41,16 @@ abstract class Oops_Model_Base_CountyPeer {
 	const NUM_HYDRATE_COLUMNS = 4;
 
 	/** the column name for the ID_COUNTY field */
-	const ID_COUNTY = 'djland_county.ID_COUNTY';
+	const ID_COUNTY = OOPS_MODEL_COUNTY_ID_COUNTY;
 
 	/** the column name for the NAME field */
-	const NAME = 'djland_county.NAME';
+	const NAME = OOPS_MODEL_COUNTY_NAME;
 
 	/** the column name for the ID_STATE field */
-	const ID_STATE = 'djland_county.ID_STATE';
+	const ID_STATE = OOPS_MODEL_COUNTY_ID_STATE;
 
 	/** the column name for the ACTIVE field */
-	const ACTIVE = 'djland_county.ACTIVE';
+	const ACTIVE = OOPS_MODEL_COUNTY_ACTIVE;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -354,7 +360,7 @@ abstract class Oops_Model_Base_CountyPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_county
+	 * Method to invalidate the instance pool of all tables related to county
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -574,7 +580,7 @@ abstract class Oops_Model_Base_CountyPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_county table.
+	 * Deletes all rows from the county table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

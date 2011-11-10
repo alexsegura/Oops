@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_discount_type_lang' table.
+ * Base class that represents a query for the 'discount_type_lang' table.
  *
  * 
  *
@@ -116,7 +116,7 @@ abstract class Oops_Model_Base_DiscountTypeLangQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_DISCOUNT_TYPE`, `ID_LANG`, `NAME` FROM `djland_discount_type_lang` WHERE `ID_DISCOUNT_TYPE` = :p0 AND `ID_LANG` = :p1';
+		$sql = 'SELECT `ID_DISCOUNT_TYPE`, `ID_LANG`, `NAME` FROM `' . _DB_PREFIX_ . 'discount_type_lang` WHERE `ID_DISCOUNT_TYPE` = :p0 AND `ID_LANG` = :p1';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key[0], PDO::PARAM_INT);

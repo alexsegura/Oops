@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_attachment_lang' table.
+ * This class defines the structure of the 'attachment_lang' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_AttachmentLangTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_attachment_lang');
+		$this->setName(_DB_PREFIX_ . 'attachment_lang');
 		$this->setPhpName('AttachmentLang');
 		$this->setClassname('Oops_Model_AttachmentLang');
 		$this->setPackage('prestashop');

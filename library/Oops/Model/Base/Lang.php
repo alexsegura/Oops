@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_lang' table.
+ * Base class that represents a row from the 'lang' table.
  *
  * 
  *
@@ -655,7 +655,7 @@ abstract class Oops_Model_Base_Lang extends BaseObject  implements Persistent
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_lang` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'lang` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);
@@ -1512,7 +1512,7 @@ abstract class Oops_Model_Base_Lang extends BaseObject  implements Persistent
 
 	/**
 	 * Gets a collection of Oops_Model_Category objects related by a many-to-many relationship
-	 * to the current object by way of the djland_category_lang cross-reference table.
+	 * to the current object by way of the category_lang cross-reference table.
 	 *
 	 * If the $criteria is not null, it is used to always fetch the results from the database.
 	 * Otherwise the results are fetched from the database the first time, then cached.
@@ -1546,7 +1546,7 @@ abstract class Oops_Model_Base_Lang extends BaseObject  implements Persistent
 
 	/**
 	 * Sets a collection of Oops_Model_Category objects related by a many-to-many relationship
-	 * to the current object by way of the djland_category_lang cross-reference table.
+	 * to the current object by way of the category_lang cross-reference table.
 	 * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
 	 * and new objects from the given Propel collection.
 	 *
@@ -1577,7 +1577,7 @@ abstract class Oops_Model_Base_Lang extends BaseObject  implements Persistent
 
 	/**
 	 * Gets the number of Oops_Model_Category objects related by a many-to-many relationship
-	 * to the current object by way of the djland_category_lang cross-reference table.
+	 * to the current object by way of the category_lang cross-reference table.
 	 *
 	 * @param      Criteria $criteria Optional query object to filter the query
 	 * @param      boolean $distinct Set to true to force count distinct
@@ -1606,7 +1606,7 @@ abstract class Oops_Model_Base_Lang extends BaseObject  implements Persistent
 
 	/**
 	 * Associate a Oops_Model_Category object to this object
-	 * through the djland_category_lang cross reference table.
+	 * through the category_lang cross reference table.
 	 *
 	 * @param      Oops_Model_Category $category The Oops_Model_CategoryLang object to relate
 	 * @return     void

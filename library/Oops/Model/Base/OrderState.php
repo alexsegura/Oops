@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_order_state' table.
+ * Base class that represents a row from the 'order_state' table.
  *
  * 
  *
@@ -706,7 +706,7 @@ abstract class Oops_Model_Base_OrderState extends BaseObject  implements Persist
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_order_state` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'order_state` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

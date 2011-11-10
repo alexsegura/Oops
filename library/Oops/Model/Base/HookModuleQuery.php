@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_hook_module' table.
+ * Base class that represents a query for the 'hook_module' table.
  *
  * 
  *
@@ -116,7 +116,7 @@ abstract class Oops_Model_Base_HookModuleQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_MODULE`, `ID_HOOK`, `POSITION` FROM `djland_hook_module` WHERE `ID_MODULE` = :p0 AND `ID_HOOK` = :p1';
+		$sql = 'SELECT `ID_MODULE`, `ID_HOOK`, `POSITION` FROM `' . _DB_PREFIX_ . 'hook_module` WHERE `ID_MODULE` = :p0 AND `ID_HOOK` = :p1';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key[0], PDO::PARAM_INT);

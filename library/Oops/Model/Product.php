@@ -18,32 +18,23 @@ class Oops_Model_Product extends Oops_Model_Base_Product {
 	public function __get($name) {
 		if ($name == 'name') {
 			return $this->getName();
+		} else if ($name == 'description') {
+			return $this->getDescription();
 		}
 	}
 	
-	
-	public function getName($lang = null) {
+	public function setLocale($locale = 'en_EN') {
 		
-		if ($lang == null) {
-			$lang = new Oops_Model_Lang();
-			$lang->setIdLang(2);
+		$localeObj = new Zend_Locale($locale);
+		$languages = Language :: getLanguages(false);
+		foreach ($languages as $language) {
+			if ($language['iso_code'] == $localeObj->getLanguage()) {
+				$this->currentLocale = $language['id_lang'];
+				break;
+			}
 		}
 		
-		$productLangQuery = Oops_Model_ProductLangQuery :: create()->filterByLang($lang);
-		return $this->getProductLangs($productLangQuery)->get(0)->getName();
-		
-	}
-	
-	public function getLinkRewrite($lang = null) {
-		
-		if ($lang == null) {
-			$lang = new Oops_Model_Lang();
-			$lang->setIdLang(2);
-		}
-		
-		$productLangQuery = Oops_Model_ProductLangQuery :: create()->filterByLang($lang);
-		return $this->getProductLangs($productLangQuery)->get(0)->getLinkRewrite();
-		
+		return $this;
 	}
 	
 } // Oops_Model_Product

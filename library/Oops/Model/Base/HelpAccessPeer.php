@@ -1,8 +1,13 @@
 <?php
 
 
+define('OOPS_MODEL_HELPACCESS_ID_HELP_ACCESS', _DB_PREFIX_ . 'help_access.ID_HELP_ACCESS');
+define('OOPS_MODEL_HELPACCESS_LABEL', _DB_PREFIX_ . 'help_access.LABEL');
+define('OOPS_MODEL_HELPACCESS_VERSION', _DB_PREFIX_ . 'help_access.VERSION');
+define('OOPS_MODEL_HELPACCESS_TABLE_NAME', _DB_PREFIX_ . 'help_access');
+
 /**
- * Base static class for performing query and update operations on the 'djland_help_access' table.
+ * Base static class for performing query and update operations on the 'help_access' table.
  *
  * 
  *
@@ -14,7 +19,7 @@ abstract class Oops_Model_Base_HelpAccessPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_help_access';
+	const TABLE_NAME = OOPS_MODEL_HELPACCESS_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_HelpAccess';
@@ -35,13 +40,13 @@ abstract class Oops_Model_Base_HelpAccessPeer {
 	const NUM_HYDRATE_COLUMNS = 3;
 
 	/** the column name for the ID_HELP_ACCESS field */
-	const ID_HELP_ACCESS = 'djland_help_access.ID_HELP_ACCESS';
+	const ID_HELP_ACCESS = OOPS_MODEL_HELPACCESS_ID_HELP_ACCESS;
 
 	/** the column name for the LABEL field */
-	const LABEL = 'djland_help_access.LABEL';
+	const LABEL = OOPS_MODEL_HELPACCESS_LABEL;
 
 	/** the column name for the VERSION field */
-	const VERSION = 'djland_help_access.VERSION';
+	const VERSION = OOPS_MODEL_HELPACCESS_VERSION;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -349,7 +354,7 @@ abstract class Oops_Model_Base_HelpAccessPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_help_access
+	 * Method to invalidate the instance pool of all tables related to help_access
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -569,7 +574,7 @@ abstract class Oops_Model_Base_HelpAccessPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_help_access table.
+	 * Deletes all rows from the help_access table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

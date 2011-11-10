@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_order_return_state' table.
+ * This class defines the structure of the 'order_return_state' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_OrderReturnStateTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_order_return_state');
+		$this->setName(_DB_PREFIX_ . 'order_return_state');
 		$this->setPhpName('OrderReturnState');
 		$this->setClassname('Oops_Model_OrderReturnState');
 		$this->setPackage('prestashop');

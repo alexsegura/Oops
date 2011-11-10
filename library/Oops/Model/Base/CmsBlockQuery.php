@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_cms_block' table.
+ * Base class that represents a query for the 'cms_block' table.
  *
  * 
  *
@@ -128,7 +128,7 @@ abstract class Oops_Model_Base_CmsBlockQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_CMS_BLOCK`, `ID_CMS_CATEGORY`, `NAME`, `LOCATION`, `POSITION`, `DISPLAY_STORE` FROM `djland_cms_block` WHERE `ID_CMS_BLOCK` = :p0';
+		$sql = 'SELECT `ID_CMS_BLOCK`, `ID_CMS_CATEGORY`, `NAME`, `LOCATION`, `POSITION`, `DISPLAY_STORE` FROM `' . _DB_PREFIX_ . 'cms_block` WHERE `ID_CMS_BLOCK` = :p0';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

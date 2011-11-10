@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_referrer_cache' table.
+ * Base class that represents a query for the 'referrer_cache' table.
  *
  * 
  *
@@ -112,7 +112,7 @@ abstract class Oops_Model_Base_ReferrerCacheQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_CONNECTIONS_SOURCE`, `ID_REFERRER` FROM `djland_referrer_cache` WHERE `ID_CONNECTIONS_SOURCE` = :p0 AND `ID_REFERRER` = :p1';
+		$sql = 'SELECT `ID_CONNECTIONS_SOURCE`, `ID_REFERRER` FROM `' . _DB_PREFIX_ . 'referrer_cache` WHERE `ID_CONNECTIONS_SOURCE` = :p0 AND `ID_REFERRER` = :p1';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key[0], PDO::PARAM_INT);

@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_statssearch' table.
+ * This class defines the structure of the 'statssearch' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_StatssearchTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_statssearch');
+		$this->setName(_DB_PREFIX_ . 'statssearch');
 		$this->setPhpName('Statssearch');
 		$this->setClassname('Oops_Model_Statssearch');
 		$this->setPackage('prestashop');

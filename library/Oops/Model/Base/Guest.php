@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_guest' table.
+ * Base class that represents a row from the 'guest' table.
  *
  * 
  *
@@ -970,7 +970,7 @@ abstract class Oops_Model_Base_Guest extends BaseObject  implements Persistent
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_guest` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'guest` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

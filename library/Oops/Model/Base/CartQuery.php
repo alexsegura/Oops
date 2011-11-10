@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_cart' table.
+ * Base class that represents a query for the 'cart' table.
  *
  * 
  *
@@ -160,7 +160,7 @@ abstract class Oops_Model_Base_CartQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_CART`, `ID_CARRIER`, `ID_LANG`, `ID_ADDRESS_DELIVERY`, `ID_ADDRESS_INVOICE`, `ID_CURRENCY`, `ID_CUSTOMER`, `ID_GUEST`, `SECURE_KEY`, `RECYCLABLE`, `GIFT`, `GIFT_MESSAGE`, `DATE_ADD`, `DATE_UPD` FROM `djland_cart` WHERE `ID_CART` = :p0';
+		$sql = 'SELECT `ID_CART`, `ID_CARRIER`, `ID_LANG`, `ID_ADDRESS_DELIVERY`, `ID_ADDRESS_INVOICE`, `ID_CURRENCY`, `ID_CUSTOMER`, `ID_GUEST`, `SECURE_KEY`, `RECYCLABLE`, `GIFT`, `GIFT_MESSAGE`, `DATE_ADD`, `DATE_UPD` FROM `' . _DB_PREFIX_ . 'cart` WHERE `ID_CART` = :p0';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

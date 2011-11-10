@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_group_reduction' table.
+ * Base class that represents a query for the 'group_reduction' table.
  *
  * 
  *
@@ -120,7 +120,7 @@ abstract class Oops_Model_Base_GroupReductionQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_GROUP_REDUCTION`, `ID_GROUP`, `ID_CATEGORY`, `REDUCTION` FROM `djland_group_reduction` WHERE `ID_GROUP_REDUCTION` = :p0';
+		$sql = 'SELECT `ID_GROUP_REDUCTION`, `ID_GROUP`, `ID_CATEGORY`, `REDUCTION` FROM `' . _DB_PREFIX_ . 'group_reduction` WHERE `ID_GROUP_REDUCTION` = :p0';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

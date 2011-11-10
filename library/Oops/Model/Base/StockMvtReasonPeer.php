@@ -1,8 +1,14 @@
 <?php
 
 
+define('OOPS_MODEL_STOCKMVTREASON_ID_STOCK_MVT_REASON', _DB_PREFIX_ . 'stock_mvt_reason.ID_STOCK_MVT_REASON');
+define('OOPS_MODEL_STOCKMVTREASON_SIGN', _DB_PREFIX_ . 'stock_mvt_reason.SIGN');
+define('OOPS_MODEL_STOCKMVTREASON_DATE_ADD', _DB_PREFIX_ . 'stock_mvt_reason.DATE_ADD');
+define('OOPS_MODEL_STOCKMVTREASON_DATE_UPD', _DB_PREFIX_ . 'stock_mvt_reason.DATE_UPD');
+define('OOPS_MODEL_STOCKMVTREASON_TABLE_NAME', _DB_PREFIX_ . 'stock_mvt_reason');
+
 /**
- * Base static class for performing query and update operations on the 'djland_stock_mvt_reason' table.
+ * Base static class for performing query and update operations on the 'stock_mvt_reason' table.
  *
  * 
  *
@@ -14,7 +20,7 @@ abstract class Oops_Model_Base_StockMvtReasonPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_stock_mvt_reason';
+	const TABLE_NAME = OOPS_MODEL_STOCKMVTREASON_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_StockMvtReason';
@@ -35,16 +41,16 @@ abstract class Oops_Model_Base_StockMvtReasonPeer {
 	const NUM_HYDRATE_COLUMNS = 4;
 
 	/** the column name for the ID_STOCK_MVT_REASON field */
-	const ID_STOCK_MVT_REASON = 'djland_stock_mvt_reason.ID_STOCK_MVT_REASON';
+	const ID_STOCK_MVT_REASON = OOPS_MODEL_STOCKMVTREASON_ID_STOCK_MVT_REASON;
 
 	/** the column name for the SIGN field */
-	const SIGN = 'djland_stock_mvt_reason.SIGN';
+	const SIGN = OOPS_MODEL_STOCKMVTREASON_SIGN;
 
 	/** the column name for the DATE_ADD field */
-	const DATE_ADD = 'djland_stock_mvt_reason.DATE_ADD';
+	const DATE_ADD = OOPS_MODEL_STOCKMVTREASON_DATE_ADD;
 
 	/** the column name for the DATE_UPD field */
-	const DATE_UPD = 'djland_stock_mvt_reason.DATE_UPD';
+	const DATE_UPD = OOPS_MODEL_STOCKMVTREASON_DATE_UPD;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -354,7 +360,7 @@ abstract class Oops_Model_Base_StockMvtReasonPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_stock_mvt_reason
+	 * Method to invalidate the instance pool of all tables related to stock_mvt_reason
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -816,7 +822,7 @@ abstract class Oops_Model_Base_StockMvtReasonPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_stock_mvt_reason table.
+	 * Deletes all rows from the stock_mvt_reason table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

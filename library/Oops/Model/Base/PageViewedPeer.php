@@ -1,8 +1,13 @@
 <?php
 
 
+define('OOPS_MODEL_PAGEVIEWED_ID_PAGE', _DB_PREFIX_ . 'page_viewed.ID_PAGE');
+define('OOPS_MODEL_PAGEVIEWED_ID_DATE_RANGE', _DB_PREFIX_ . 'page_viewed.ID_DATE_RANGE');
+define('OOPS_MODEL_PAGEVIEWED_COUNTER', _DB_PREFIX_ . 'page_viewed.COUNTER');
+define('OOPS_MODEL_PAGEVIEWED_TABLE_NAME', _DB_PREFIX_ . 'page_viewed');
+
 /**
- * Base static class for performing query and update operations on the 'djland_page_viewed' table.
+ * Base static class for performing query and update operations on the 'page_viewed' table.
  *
  * 
  *
@@ -14,7 +19,7 @@ abstract class Oops_Model_Base_PageViewedPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_page_viewed';
+	const TABLE_NAME = OOPS_MODEL_PAGEVIEWED_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_PageViewed';
@@ -35,13 +40,13 @@ abstract class Oops_Model_Base_PageViewedPeer {
 	const NUM_HYDRATE_COLUMNS = 3;
 
 	/** the column name for the ID_PAGE field */
-	const ID_PAGE = 'djland_page_viewed.ID_PAGE';
+	const ID_PAGE = OOPS_MODEL_PAGEVIEWED_ID_PAGE;
 
 	/** the column name for the ID_DATE_RANGE field */
-	const ID_DATE_RANGE = 'djland_page_viewed.ID_DATE_RANGE';
+	const ID_DATE_RANGE = OOPS_MODEL_PAGEVIEWED_ID_DATE_RANGE;
 
 	/** the column name for the COUNTER field */
-	const COUNTER = 'djland_page_viewed.COUNTER';
+	const COUNTER = OOPS_MODEL_PAGEVIEWED_COUNTER;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -349,7 +354,7 @@ abstract class Oops_Model_Base_PageViewedPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_page_viewed
+	 * Method to invalidate the instance pool of all tables related to page_viewed
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -573,7 +578,7 @@ abstract class Oops_Model_Base_PageViewedPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_page_viewed table.
+	 * Deletes all rows from the page_viewed table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

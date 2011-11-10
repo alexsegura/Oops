@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_import_match' table.
+ * This class defines the structure of the 'import_match' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_ImportMatchTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_import_match');
+		$this->setName(_DB_PREFIX_ . 'import_match');
 		$this->setPhpName('ImportMatch');
 		$this->setClassname('Oops_Model_ImportMatch');
 		$this->setPackage('prestashop');

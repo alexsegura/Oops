@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_message' table.
+ * Base class that represents a query for the 'message' table.
  *
  * 
  *
@@ -136,7 +136,7 @@ abstract class Oops_Model_Base_MessageQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_MESSAGE`, `ID_CART`, `ID_CUSTOMER`, `ID_EMPLOYEE`, `ID_ORDER`, `MESSAGE`, `PRIVATE`, `DATE_ADD` FROM `djland_message` WHERE `ID_MESSAGE` = :p0';
+		$sql = 'SELECT `ID_MESSAGE`, `ID_CART`, `ID_CUSTOMER`, `ID_EMPLOYEE`, `ID_ORDER`, `MESSAGE`, `PRIVATE`, `DATE_ADD` FROM `' . _DB_PREFIX_ . 'message` WHERE `ID_MESSAGE` = :p0';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

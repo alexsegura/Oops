@@ -1,8 +1,13 @@
 <?php
 
 
+define('OOPS_MODEL_ORDERSLIPDETAIL_ID_ORDER_SLIP', _DB_PREFIX_ . 'order_slip_detail.ID_ORDER_SLIP');
+define('OOPS_MODEL_ORDERSLIPDETAIL_ID_ORDER_DETAIL', _DB_PREFIX_ . 'order_slip_detail.ID_ORDER_DETAIL');
+define('OOPS_MODEL_ORDERSLIPDETAIL_PRODUCT_QUANTITY', _DB_PREFIX_ . 'order_slip_detail.PRODUCT_QUANTITY');
+define('OOPS_MODEL_ORDERSLIPDETAIL_TABLE_NAME', _DB_PREFIX_ . 'order_slip_detail');
+
 /**
- * Base static class for performing query and update operations on the 'djland_order_slip_detail' table.
+ * Base static class for performing query and update operations on the 'order_slip_detail' table.
  *
  * 
  *
@@ -14,7 +19,7 @@ abstract class Oops_Model_Base_OrderSlipDetailPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_order_slip_detail';
+	const TABLE_NAME = OOPS_MODEL_ORDERSLIPDETAIL_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_OrderSlipDetail';
@@ -35,13 +40,13 @@ abstract class Oops_Model_Base_OrderSlipDetailPeer {
 	const NUM_HYDRATE_COLUMNS = 3;
 
 	/** the column name for the ID_ORDER_SLIP field */
-	const ID_ORDER_SLIP = 'djland_order_slip_detail.ID_ORDER_SLIP';
+	const ID_ORDER_SLIP = OOPS_MODEL_ORDERSLIPDETAIL_ID_ORDER_SLIP;
 
 	/** the column name for the ID_ORDER_DETAIL field */
-	const ID_ORDER_DETAIL = 'djland_order_slip_detail.ID_ORDER_DETAIL';
+	const ID_ORDER_DETAIL = OOPS_MODEL_ORDERSLIPDETAIL_ID_ORDER_DETAIL;
 
 	/** the column name for the PRODUCT_QUANTITY field */
-	const PRODUCT_QUANTITY = 'djland_order_slip_detail.PRODUCT_QUANTITY';
+	const PRODUCT_QUANTITY = OOPS_MODEL_ORDERSLIPDETAIL_PRODUCT_QUANTITY;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -349,7 +354,7 @@ abstract class Oops_Model_Base_OrderSlipDetailPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_order_slip_detail
+	 * Method to invalidate the instance pool of all tables related to order_slip_detail
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -573,7 +578,7 @@ abstract class Oops_Model_Base_OrderSlipDetailPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_order_slip_detail table.
+	 * Deletes all rows from the order_slip_detail table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_tax_rule' table.
+ * This class defines the structure of the 'tax_rule' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_TaxRuleTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_tax_rule');
+		$this->setName(_DB_PREFIX_ . 'tax_rule');
 		$this->setPhpName('TaxRule');
 		$this->setClassname('Oops_Model_TaxRule');
 		$this->setPackage('prestashop');

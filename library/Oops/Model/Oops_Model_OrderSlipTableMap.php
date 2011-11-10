@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_order_slip' table.
+ * This class defines the structure of the 'order_slip' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_OrderSlipTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_order_slip');
+		$this->setName(_DB_PREFIX_ . 'order_slip');
 		$this->setPhpName('OrderSlip');
 		$this->setClassname('Oops_Model_OrderSlip');
 		$this->setPackage('prestashop');

@@ -1,8 +1,14 @@
 <?php
 
 
+define('OOPS_MODEL_RANGEWEIGHT_ID_RANGE_WEIGHT', _DB_PREFIX_ . 'range_weight.ID_RANGE_WEIGHT');
+define('OOPS_MODEL_RANGEWEIGHT_ID_CARRIER', _DB_PREFIX_ . 'range_weight.ID_CARRIER');
+define('OOPS_MODEL_RANGEWEIGHT_DELIMITER1', _DB_PREFIX_ . 'range_weight.DELIMITER1');
+define('OOPS_MODEL_RANGEWEIGHT_DELIMITER2', _DB_PREFIX_ . 'range_weight.DELIMITER2');
+define('OOPS_MODEL_RANGEWEIGHT_TABLE_NAME', _DB_PREFIX_ . 'range_weight');
+
 /**
- * Base static class for performing query and update operations on the 'djland_range_weight' table.
+ * Base static class for performing query and update operations on the 'range_weight' table.
  *
  * 
  *
@@ -14,7 +20,7 @@ abstract class Oops_Model_Base_RangeWeightPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_range_weight';
+	const TABLE_NAME = OOPS_MODEL_RANGEWEIGHT_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_RangeWeight';
@@ -35,16 +41,16 @@ abstract class Oops_Model_Base_RangeWeightPeer {
 	const NUM_HYDRATE_COLUMNS = 4;
 
 	/** the column name for the ID_RANGE_WEIGHT field */
-	const ID_RANGE_WEIGHT = 'djland_range_weight.ID_RANGE_WEIGHT';
+	const ID_RANGE_WEIGHT = OOPS_MODEL_RANGEWEIGHT_ID_RANGE_WEIGHT;
 
 	/** the column name for the ID_CARRIER field */
-	const ID_CARRIER = 'djland_range_weight.ID_CARRIER';
+	const ID_CARRIER = OOPS_MODEL_RANGEWEIGHT_ID_CARRIER;
 
 	/** the column name for the DELIMITER1 field */
-	const DELIMITER1 = 'djland_range_weight.DELIMITER1';
+	const DELIMITER1 = OOPS_MODEL_RANGEWEIGHT_DELIMITER1;
 
 	/** the column name for the DELIMITER2 field */
-	const DELIMITER2 = 'djland_range_weight.DELIMITER2';
+	const DELIMITER2 = OOPS_MODEL_RANGEWEIGHT_DELIMITER2;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -354,7 +360,7 @@ abstract class Oops_Model_Base_RangeWeightPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_range_weight
+	 * Method to invalidate the instance pool of all tables related to range_weight
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -574,7 +580,7 @@ abstract class Oops_Model_Base_RangeWeightPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_range_weight table.
+	 * Deletes all rows from the range_weight table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_attachment' table.
+ * Base class that represents a row from the 'attachment' table.
  *
  * 
  *
@@ -448,7 +448,7 @@ abstract class Oops_Model_Base_Attachment extends BaseObject  implements Persist
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_attachment` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'attachment` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

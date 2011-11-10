@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_customer' table.
+ * Base class that represents a row from the 'customer' table.
  *
  * 
  *
@@ -1341,7 +1341,7 @@ abstract class Oops_Model_Base_Customer extends BaseObject  implements Persisten
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_customer` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'customer` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_configuration_lang' table.
+ * Base class that represents a query for the 'configuration_lang' table.
  *
  * 
  *
@@ -120,7 +120,7 @@ abstract class Oops_Model_Base_ConfigurationLangQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_CONFIGURATION`, `ID_LANG`, `VALUE`, `DATE_UPD` FROM `djland_configuration_lang` WHERE `ID_CONFIGURATION` = :p0 AND `ID_LANG` = :p1';
+		$sql = 'SELECT `ID_CONFIGURATION`, `ID_LANG`, `VALUE`, `DATE_UPD` FROM `' . _DB_PREFIX_ . 'configuration_lang` WHERE `ID_CONFIGURATION` = :p0 AND `ID_LANG` = :p1';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key[0], PDO::PARAM_INT);

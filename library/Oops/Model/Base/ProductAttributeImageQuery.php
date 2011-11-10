@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_product_attribute_image' table.
+ * Base class that represents a query for the 'product_attribute_image' table.
  *
  * 
  *
@@ -112,7 +112,7 @@ abstract class Oops_Model_Base_ProductAttributeImageQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_PRODUCT_ATTRIBUTE`, `ID_IMAGE` FROM `djland_product_attribute_image` WHERE `ID_PRODUCT_ATTRIBUTE` = :p0 AND `ID_IMAGE` = :p1';
+		$sql = 'SELECT `ID_PRODUCT_ATTRIBUTE`, `ID_IMAGE` FROM `' . _DB_PREFIX_ . 'product_attribute_image` WHERE `ID_PRODUCT_ATTRIBUTE` = :p0 AND `ID_IMAGE` = :p1';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key[0], PDO::PARAM_INT);

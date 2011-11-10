@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_attribute_group_lang' table.
+ * Base class that represents a query for the 'attribute_group_lang' table.
  *
  * 
  *
@@ -120,7 +120,7 @@ abstract class Oops_Model_Base_AttributeGroupLangQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_ATTRIBUTE_GROUP`, `ID_LANG`, `NAME`, `PUBLIC_NAME` FROM `djland_attribute_group_lang` WHERE `ID_ATTRIBUTE_GROUP` = :p0 AND `ID_LANG` = :p1';
+		$sql = 'SELECT `ID_ATTRIBUTE_GROUP`, `ID_LANG`, `NAME`, `PUBLIC_NAME` FROM `' . _DB_PREFIX_ . 'attribute_group_lang` WHERE `ID_ATTRIBUTE_GROUP` = :p0 AND `ID_LANG` = :p1';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key[0], PDO::PARAM_INT);

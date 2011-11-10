@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_tax_lang' table.
+ * Base class that represents a query for the 'tax_lang' table.
  *
  * 
  *
@@ -116,7 +116,7 @@ abstract class Oops_Model_Base_TaxLangQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_TAX`, `ID_LANG`, `NAME` FROM `djland_tax_lang` WHERE `ID_TAX` = :p0';
+		$sql = 'SELECT `ID_TAX`, `ID_LANG`, `NAME` FROM `' . _DB_PREFIX_ . 'tax_lang` WHERE `ID_TAX` = :p0';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

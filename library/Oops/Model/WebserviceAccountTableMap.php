@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_webservice_account' table.
+ * This class defines the structure of the 'webservice_account' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_WebserviceAccountTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_webservice_account');
+		$this->setName(_DB_PREFIX_ . 'webservice_account');
 		$this->setPhpName('WebserviceAccount');
 		$this->setClassname('Oops_Model_WebserviceAccount');
 		$this->setPackage('prestashop');

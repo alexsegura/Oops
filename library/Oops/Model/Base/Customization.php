@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_customization' table.
+ * Base class that represents a row from the 'customization' table.
  *
  * 
  *
@@ -606,7 +606,7 @@ abstract class Oops_Model_Base_Customization extends BaseObject  implements Pers
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_customization` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'customization` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

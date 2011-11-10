@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_meta' table.
+ * This class defines the structure of the 'meta' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_MetaTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_meta');
+		$this->setName(_DB_PREFIX_ . 'meta');
 		$this->setPhpName('Meta');
 		$this->setClassname('Oops_Model_Meta');
 		$this->setPackage('prestashop');

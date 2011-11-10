@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_hook_module_exceptions' table.
+ * This class defines the structure of the 'hook_module_exceptions' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_HookModuleExceptionsTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_hook_module_exceptions');
+		$this->setName(_DB_PREFIX_ . 'hook_module_exceptions');
 		$this->setPhpName('HookModuleExceptions');
 		$this->setClassname('Oops_Model_HookModuleExceptions');
 		$this->setPackage('prestashop');

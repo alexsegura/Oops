@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_manufacturer' table.
+ * Base class that represents a row from the 'manufacturer' table.
  *
  * 
  *
@@ -582,7 +582,7 @@ abstract class Oops_Model_Base_Manufacturer extends BaseObject  implements Persi
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_manufacturer` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'manufacturer` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_connections_source' table.
+ * Base class that represents a row from the 'connections_source' table.
  *
  * 
  *
@@ -558,7 +558,7 @@ abstract class Oops_Model_Base_ConnectionsSource extends BaseObject  implements 
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_connections_source` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'connections_source` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

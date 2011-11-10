@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_customization_field_lang' table.
+ * Base class that represents a row from the 'customization_field_lang' table.
  *
  * 
  *
@@ -404,7 +404,7 @@ abstract class Oops_Model_Base_CustomizationFieldLang extends BaseObject  implem
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_customization_field_lang` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'customization_field_lang` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

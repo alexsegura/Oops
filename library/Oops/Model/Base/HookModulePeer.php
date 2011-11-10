@@ -1,8 +1,13 @@
 <?php
 
 
+define('OOPS_MODEL_HOOKMODULE_ID_MODULE', _DB_PREFIX_ . 'hook_module.ID_MODULE');
+define('OOPS_MODEL_HOOKMODULE_ID_HOOK', _DB_PREFIX_ . 'hook_module.ID_HOOK');
+define('OOPS_MODEL_HOOKMODULE_POSITION', _DB_PREFIX_ . 'hook_module.POSITION');
+define('OOPS_MODEL_HOOKMODULE_TABLE_NAME', _DB_PREFIX_ . 'hook_module');
+
 /**
- * Base static class for performing query and update operations on the 'djland_hook_module' table.
+ * Base static class for performing query and update operations on the 'hook_module' table.
  *
  * 
  *
@@ -14,7 +19,7 @@ abstract class Oops_Model_Base_HookModulePeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_hook_module';
+	const TABLE_NAME = OOPS_MODEL_HOOKMODULE_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_HookModule';
@@ -35,13 +40,13 @@ abstract class Oops_Model_Base_HookModulePeer {
 	const NUM_HYDRATE_COLUMNS = 3;
 
 	/** the column name for the ID_MODULE field */
-	const ID_MODULE = 'djland_hook_module.ID_MODULE';
+	const ID_MODULE = OOPS_MODEL_HOOKMODULE_ID_MODULE;
 
 	/** the column name for the ID_HOOK field */
-	const ID_HOOK = 'djland_hook_module.ID_HOOK';
+	const ID_HOOK = OOPS_MODEL_HOOKMODULE_ID_HOOK;
 
 	/** the column name for the POSITION field */
-	const POSITION = 'djland_hook_module.POSITION';
+	const POSITION = OOPS_MODEL_HOOKMODULE_POSITION;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -349,7 +354,7 @@ abstract class Oops_Model_Base_HookModulePeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_hook_module
+	 * Method to invalidate the instance pool of all tables related to hook_module
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -573,7 +578,7 @@ abstract class Oops_Model_Base_HookModulePeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_hook_module table.
+	 * Deletes all rows from the hook_module table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

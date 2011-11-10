@@ -1,8 +1,20 @@
 <?php
 
 
+define('OOPS_MODEL_IMAGETYPE_ID_IMAGE_TYPE', _DB_PREFIX_ . 'image_type.ID_IMAGE_TYPE');
+define('OOPS_MODEL_IMAGETYPE_NAME', _DB_PREFIX_ . 'image_type.NAME');
+define('OOPS_MODEL_IMAGETYPE_WIDTH', _DB_PREFIX_ . 'image_type.WIDTH');
+define('OOPS_MODEL_IMAGETYPE_HEIGHT', _DB_PREFIX_ . 'image_type.HEIGHT');
+define('OOPS_MODEL_IMAGETYPE_PRODUCTS', _DB_PREFIX_ . 'image_type.PRODUCTS');
+define('OOPS_MODEL_IMAGETYPE_CATEGORIES', _DB_PREFIX_ . 'image_type.CATEGORIES');
+define('OOPS_MODEL_IMAGETYPE_MANUFACTURERS', _DB_PREFIX_ . 'image_type.MANUFACTURERS');
+define('OOPS_MODEL_IMAGETYPE_SUPPLIERS', _DB_PREFIX_ . 'image_type.SUPPLIERS');
+define('OOPS_MODEL_IMAGETYPE_SCENES', _DB_PREFIX_ . 'image_type.SCENES');
+define('OOPS_MODEL_IMAGETYPE_STORES', _DB_PREFIX_ . 'image_type.STORES');
+define('OOPS_MODEL_IMAGETYPE_TABLE_NAME', _DB_PREFIX_ . 'image_type');
+
 /**
- * Base static class for performing query and update operations on the 'djland_image_type' table.
+ * Base static class for performing query and update operations on the 'image_type' table.
  *
  * 
  *
@@ -14,7 +26,7 @@ abstract class Oops_Model_Base_ImageTypePeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_image_type';
+	const TABLE_NAME = OOPS_MODEL_IMAGETYPE_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_ImageType';
@@ -35,34 +47,34 @@ abstract class Oops_Model_Base_ImageTypePeer {
 	const NUM_HYDRATE_COLUMNS = 10;
 
 	/** the column name for the ID_IMAGE_TYPE field */
-	const ID_IMAGE_TYPE = 'djland_image_type.ID_IMAGE_TYPE';
+	const ID_IMAGE_TYPE = OOPS_MODEL_IMAGETYPE_ID_IMAGE_TYPE;
 
 	/** the column name for the NAME field */
-	const NAME = 'djland_image_type.NAME';
+	const NAME = OOPS_MODEL_IMAGETYPE_NAME;
 
 	/** the column name for the WIDTH field */
-	const WIDTH = 'djland_image_type.WIDTH';
+	const WIDTH = OOPS_MODEL_IMAGETYPE_WIDTH;
 
 	/** the column name for the HEIGHT field */
-	const HEIGHT = 'djland_image_type.HEIGHT';
+	const HEIGHT = OOPS_MODEL_IMAGETYPE_HEIGHT;
 
 	/** the column name for the PRODUCTS field */
-	const PRODUCTS = 'djland_image_type.PRODUCTS';
+	const PRODUCTS = OOPS_MODEL_IMAGETYPE_PRODUCTS;
 
 	/** the column name for the CATEGORIES field */
-	const CATEGORIES = 'djland_image_type.CATEGORIES';
+	const CATEGORIES = OOPS_MODEL_IMAGETYPE_CATEGORIES;
 
 	/** the column name for the MANUFACTURERS field */
-	const MANUFACTURERS = 'djland_image_type.MANUFACTURERS';
+	const MANUFACTURERS = OOPS_MODEL_IMAGETYPE_MANUFACTURERS;
 
 	/** the column name for the SUPPLIERS field */
-	const SUPPLIERS = 'djland_image_type.SUPPLIERS';
+	const SUPPLIERS = OOPS_MODEL_IMAGETYPE_SUPPLIERS;
 
 	/** the column name for the SCENES field */
-	const SCENES = 'djland_image_type.SCENES';
+	const SCENES = OOPS_MODEL_IMAGETYPE_SCENES;
 
 	/** the column name for the STORES field */
-	const STORES = 'djland_image_type.STORES';
+	const STORES = OOPS_MODEL_IMAGETYPE_STORES;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -384,7 +396,7 @@ abstract class Oops_Model_Base_ImageTypePeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_image_type
+	 * Method to invalidate the instance pool of all tables related to image_type
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -604,7 +616,7 @@ abstract class Oops_Model_Base_ImageTypePeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_image_type table.
+	 * Deletes all rows from the image_type table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

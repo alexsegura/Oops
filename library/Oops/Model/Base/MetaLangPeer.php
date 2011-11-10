@@ -1,8 +1,16 @@
 <?php
 
 
+define('OOPS_MODEL_METALANG_ID_META', _DB_PREFIX_ . 'meta_lang.ID_META');
+define('OOPS_MODEL_METALANG_ID_LANG', _DB_PREFIX_ . 'meta_lang.ID_LANG');
+define('OOPS_MODEL_METALANG_TITLE', _DB_PREFIX_ . 'meta_lang.TITLE');
+define('OOPS_MODEL_METALANG_DESCRIPTION', _DB_PREFIX_ . 'meta_lang.DESCRIPTION');
+define('OOPS_MODEL_METALANG_KEYWORDS', _DB_PREFIX_ . 'meta_lang.KEYWORDS');
+define('OOPS_MODEL_METALANG_URL_REWRITE', _DB_PREFIX_ . 'meta_lang.URL_REWRITE');
+define('OOPS_MODEL_METALANG_TABLE_NAME', _DB_PREFIX_ . 'meta_lang');
+
 /**
- * Base static class for performing query and update operations on the 'djland_meta_lang' table.
+ * Base static class for performing query and update operations on the 'meta_lang' table.
  *
  * 
  *
@@ -14,7 +22,7 @@ abstract class Oops_Model_Base_MetaLangPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_meta_lang';
+	const TABLE_NAME = OOPS_MODEL_METALANG_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_MetaLang';
@@ -35,22 +43,22 @@ abstract class Oops_Model_Base_MetaLangPeer {
 	const NUM_HYDRATE_COLUMNS = 6;
 
 	/** the column name for the ID_META field */
-	const ID_META = 'djland_meta_lang.ID_META';
+	const ID_META = OOPS_MODEL_METALANG_ID_META;
 
 	/** the column name for the ID_LANG field */
-	const ID_LANG = 'djland_meta_lang.ID_LANG';
+	const ID_LANG = OOPS_MODEL_METALANG_ID_LANG;
 
 	/** the column name for the TITLE field */
-	const TITLE = 'djland_meta_lang.TITLE';
+	const TITLE = OOPS_MODEL_METALANG_TITLE;
 
 	/** the column name for the DESCRIPTION field */
-	const DESCRIPTION = 'djland_meta_lang.DESCRIPTION';
+	const DESCRIPTION = OOPS_MODEL_METALANG_DESCRIPTION;
 
 	/** the column name for the KEYWORDS field */
-	const KEYWORDS = 'djland_meta_lang.KEYWORDS';
+	const KEYWORDS = OOPS_MODEL_METALANG_KEYWORDS;
 
 	/** the column name for the URL_REWRITE field */
-	const URL_REWRITE = 'djland_meta_lang.URL_REWRITE';
+	const URL_REWRITE = OOPS_MODEL_METALANG_URL_REWRITE;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -364,7 +372,7 @@ abstract class Oops_Model_Base_MetaLangPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_meta_lang
+	 * Method to invalidate the instance pool of all tables related to meta_lang
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -588,7 +596,7 @@ abstract class Oops_Model_Base_MetaLangPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_meta_lang table.
+	 * Deletes all rows from the meta_lang table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

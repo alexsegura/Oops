@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_address_format' table.
+ * This class defines the structure of the 'address_format' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_AddressFormatTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_address_format');
+		$this->setName(_DB_PREFIX_ . 'address_format');
 		$this->setPhpName('AddressFormat');
 		$this->setClassname('Oops_Model_AddressFormat');
 		$this->setPackage('prestashop');

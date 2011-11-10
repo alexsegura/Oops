@@ -1,8 +1,24 @@
 <?php
 
 
+define('OOPS_MODEL_CART_ID_CART', _DB_PREFIX_ . 'cart.ID_CART');
+define('OOPS_MODEL_CART_ID_CARRIER', _DB_PREFIX_ . 'cart.ID_CARRIER');
+define('OOPS_MODEL_CART_ID_LANG', _DB_PREFIX_ . 'cart.ID_LANG');
+define('OOPS_MODEL_CART_ID_ADDRESS_DELIVERY', _DB_PREFIX_ . 'cart.ID_ADDRESS_DELIVERY');
+define('OOPS_MODEL_CART_ID_ADDRESS_INVOICE', _DB_PREFIX_ . 'cart.ID_ADDRESS_INVOICE');
+define('OOPS_MODEL_CART_ID_CURRENCY', _DB_PREFIX_ . 'cart.ID_CURRENCY');
+define('OOPS_MODEL_CART_ID_CUSTOMER', _DB_PREFIX_ . 'cart.ID_CUSTOMER');
+define('OOPS_MODEL_CART_ID_GUEST', _DB_PREFIX_ . 'cart.ID_GUEST');
+define('OOPS_MODEL_CART_SECURE_KEY', _DB_PREFIX_ . 'cart.SECURE_KEY');
+define('OOPS_MODEL_CART_RECYCLABLE', _DB_PREFIX_ . 'cart.RECYCLABLE');
+define('OOPS_MODEL_CART_GIFT', _DB_PREFIX_ . 'cart.GIFT');
+define('OOPS_MODEL_CART_GIFT_MESSAGE', _DB_PREFIX_ . 'cart.GIFT_MESSAGE');
+define('OOPS_MODEL_CART_DATE_ADD', _DB_PREFIX_ . 'cart.DATE_ADD');
+define('OOPS_MODEL_CART_DATE_UPD', _DB_PREFIX_ . 'cart.DATE_UPD');
+define('OOPS_MODEL_CART_TABLE_NAME', _DB_PREFIX_ . 'cart');
+
 /**
- * Base static class for performing query and update operations on the 'djland_cart' table.
+ * Base static class for performing query and update operations on the 'cart' table.
  *
  * 
  *
@@ -14,7 +30,7 @@ abstract class Oops_Model_Base_CartPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_cart';
+	const TABLE_NAME = OOPS_MODEL_CART_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_Cart';
@@ -35,46 +51,46 @@ abstract class Oops_Model_Base_CartPeer {
 	const NUM_HYDRATE_COLUMNS = 14;
 
 	/** the column name for the ID_CART field */
-	const ID_CART = 'djland_cart.ID_CART';
+	const ID_CART = OOPS_MODEL_CART_ID_CART;
 
 	/** the column name for the ID_CARRIER field */
-	const ID_CARRIER = 'djland_cart.ID_CARRIER';
+	const ID_CARRIER = OOPS_MODEL_CART_ID_CARRIER;
 
 	/** the column name for the ID_LANG field */
-	const ID_LANG = 'djland_cart.ID_LANG';
+	const ID_LANG = OOPS_MODEL_CART_ID_LANG;
 
 	/** the column name for the ID_ADDRESS_DELIVERY field */
-	const ID_ADDRESS_DELIVERY = 'djland_cart.ID_ADDRESS_DELIVERY';
+	const ID_ADDRESS_DELIVERY = OOPS_MODEL_CART_ID_ADDRESS_DELIVERY;
 
 	/** the column name for the ID_ADDRESS_INVOICE field */
-	const ID_ADDRESS_INVOICE = 'djland_cart.ID_ADDRESS_INVOICE';
+	const ID_ADDRESS_INVOICE = OOPS_MODEL_CART_ID_ADDRESS_INVOICE;
 
 	/** the column name for the ID_CURRENCY field */
-	const ID_CURRENCY = 'djland_cart.ID_CURRENCY';
+	const ID_CURRENCY = OOPS_MODEL_CART_ID_CURRENCY;
 
 	/** the column name for the ID_CUSTOMER field */
-	const ID_CUSTOMER = 'djland_cart.ID_CUSTOMER';
+	const ID_CUSTOMER = OOPS_MODEL_CART_ID_CUSTOMER;
 
 	/** the column name for the ID_GUEST field */
-	const ID_GUEST = 'djland_cart.ID_GUEST';
+	const ID_GUEST = OOPS_MODEL_CART_ID_GUEST;
 
 	/** the column name for the SECURE_KEY field */
-	const SECURE_KEY = 'djland_cart.SECURE_KEY';
+	const SECURE_KEY = OOPS_MODEL_CART_SECURE_KEY;
 
 	/** the column name for the RECYCLABLE field */
-	const RECYCLABLE = 'djland_cart.RECYCLABLE';
+	const RECYCLABLE = OOPS_MODEL_CART_RECYCLABLE;
 
 	/** the column name for the GIFT field */
-	const GIFT = 'djland_cart.GIFT';
+	const GIFT = OOPS_MODEL_CART_GIFT;
 
 	/** the column name for the GIFT_MESSAGE field */
-	const GIFT_MESSAGE = 'djland_cart.GIFT_MESSAGE';
+	const GIFT_MESSAGE = OOPS_MODEL_CART_GIFT_MESSAGE;
 
 	/** the column name for the DATE_ADD field */
-	const DATE_ADD = 'djland_cart.DATE_ADD';
+	const DATE_ADD = OOPS_MODEL_CART_DATE_ADD;
 
 	/** the column name for the DATE_UPD field */
-	const DATE_UPD = 'djland_cart.DATE_UPD';
+	const DATE_UPD = OOPS_MODEL_CART_DATE_UPD;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -404,7 +420,7 @@ abstract class Oops_Model_Base_CartPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_cart
+	 * Method to invalidate the instance pool of all tables related to cart
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -624,7 +640,7 @@ abstract class Oops_Model_Base_CartPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_cart table.
+	 * Deletes all rows from the cart table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

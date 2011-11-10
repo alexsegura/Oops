@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_memcached_servers' table.
+ * Base class that represents a row from the 'memcached_servers' table.
  *
  * 
  *
@@ -448,7 +448,7 @@ abstract class Oops_Model_Base_MemcachedServers extends BaseObject  implements P
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_memcached_servers` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'memcached_servers` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

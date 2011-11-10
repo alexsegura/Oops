@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_subdomain' table.
+ * Base class that represents a query for the 'subdomain' table.
  *
  * 
  *
@@ -112,7 +112,7 @@ abstract class Oops_Model_Base_SubdomainQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_SUBDOMAIN`, `NAME` FROM `djland_subdomain` WHERE `ID_SUBDOMAIN` = :p0';
+		$sql = 'SELECT `ID_SUBDOMAIN`, `NAME` FROM `' . _DB_PREFIX_ . 'subdomain` WHERE `ID_SUBDOMAIN` = :p0';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

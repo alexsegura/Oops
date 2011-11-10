@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_search_index' table.
+ * Base class that represents a query for the 'search_index' table.
  *
  * 
  *
@@ -116,7 +116,7 @@ abstract class Oops_Model_Base_SearchIndexQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_PRODUCT`, `ID_WORD`, `WEIGHT` FROM `djland_search_index` WHERE `ID_PRODUCT` = :p0 AND `ID_WORD` = :p1';
+		$sql = 'SELECT `ID_PRODUCT`, `ID_WORD`, `WEIGHT` FROM `' . _DB_PREFIX_ . 'search_index` WHERE `ID_PRODUCT` = :p0 AND `ID_WORD` = :p1';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key[0], PDO::PARAM_INT);

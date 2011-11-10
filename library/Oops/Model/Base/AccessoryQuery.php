@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_accessory' table.
+ * Base class that represents a query for the 'accessory' table.
  *
  * 
  *
@@ -112,7 +112,7 @@ abstract class Oops_Model_Base_AccessoryQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_PRODUCT_1`, `ID_PRODUCT_2` FROM `djland_accessory` WHERE `ID_PRODUCT_1` = :p0';
+		$sql = 'SELECT `ID_PRODUCT_1`, `ID_PRODUCT_2` FROM `' . _DB_PREFIX_ . 'accessory` WHERE `ID_PRODUCT_1` = :p0';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

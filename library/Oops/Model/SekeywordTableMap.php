@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_sekeyword' table.
+ * This class defines the structure of the 'sekeyword' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_SekeywordTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_sekeyword');
+		$this->setName(_DB_PREFIX_ . 'sekeyword');
 		$this->setPhpName('Sekeyword');
 		$this->setClassname('Oops_Model_Sekeyword');
 		$this->setPackage('prestashop');

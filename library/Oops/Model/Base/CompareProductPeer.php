@@ -1,8 +1,16 @@
 <?php
 
 
+define('OOPS_MODEL_COMPAREPRODUCT_ID_COMPARE_PRODUCT', _DB_PREFIX_ . 'compare_product.ID_COMPARE_PRODUCT');
+define('OOPS_MODEL_COMPAREPRODUCT_ID_PRODUCT', _DB_PREFIX_ . 'compare_product.ID_PRODUCT');
+define('OOPS_MODEL_COMPAREPRODUCT_ID_GUEST', _DB_PREFIX_ . 'compare_product.ID_GUEST');
+define('OOPS_MODEL_COMPAREPRODUCT_ID_CUSTOMER', _DB_PREFIX_ . 'compare_product.ID_CUSTOMER');
+define('OOPS_MODEL_COMPAREPRODUCT_DATE_ADD', _DB_PREFIX_ . 'compare_product.DATE_ADD');
+define('OOPS_MODEL_COMPAREPRODUCT_DATE_UPD', _DB_PREFIX_ . 'compare_product.DATE_UPD');
+define('OOPS_MODEL_COMPAREPRODUCT_TABLE_NAME', _DB_PREFIX_ . 'compare_product');
+
 /**
- * Base static class for performing query and update operations on the 'djland_compare_product' table.
+ * Base static class for performing query and update operations on the 'compare_product' table.
  *
  * 
  *
@@ -14,7 +22,7 @@ abstract class Oops_Model_Base_CompareProductPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_compare_product';
+	const TABLE_NAME = OOPS_MODEL_COMPAREPRODUCT_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_CompareProduct';
@@ -35,22 +43,22 @@ abstract class Oops_Model_Base_CompareProductPeer {
 	const NUM_HYDRATE_COLUMNS = 6;
 
 	/** the column name for the ID_COMPARE_PRODUCT field */
-	const ID_COMPARE_PRODUCT = 'djland_compare_product.ID_COMPARE_PRODUCT';
+	const ID_COMPARE_PRODUCT = OOPS_MODEL_COMPAREPRODUCT_ID_COMPARE_PRODUCT;
 
 	/** the column name for the ID_PRODUCT field */
-	const ID_PRODUCT = 'djland_compare_product.ID_PRODUCT';
+	const ID_PRODUCT = OOPS_MODEL_COMPAREPRODUCT_ID_PRODUCT;
 
 	/** the column name for the ID_GUEST field */
-	const ID_GUEST = 'djland_compare_product.ID_GUEST';
+	const ID_GUEST = OOPS_MODEL_COMPAREPRODUCT_ID_GUEST;
 
 	/** the column name for the ID_CUSTOMER field */
-	const ID_CUSTOMER = 'djland_compare_product.ID_CUSTOMER';
+	const ID_CUSTOMER = OOPS_MODEL_COMPAREPRODUCT_ID_CUSTOMER;
 
 	/** the column name for the DATE_ADD field */
-	const DATE_ADD = 'djland_compare_product.DATE_ADD';
+	const DATE_ADD = OOPS_MODEL_COMPAREPRODUCT_DATE_ADD;
 
 	/** the column name for the DATE_UPD field */
-	const DATE_UPD = 'djland_compare_product.DATE_UPD';
+	const DATE_UPD = OOPS_MODEL_COMPAREPRODUCT_DATE_UPD;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -364,7 +372,7 @@ abstract class Oops_Model_Base_CompareProductPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_compare_product
+	 * Method to invalidate the instance pool of all tables related to compare_product
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -584,7 +592,7 @@ abstract class Oops_Model_Base_CompareProductPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_compare_product table.
+	 * Deletes all rows from the compare_product table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

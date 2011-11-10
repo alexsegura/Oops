@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_county_zip_code' table.
+ * Base class that represents a query for the 'county_zip_code' table.
  *
  * 
  *
@@ -116,7 +116,7 @@ abstract class Oops_Model_Base_CountyZipCodeQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_COUNTY`, `FROM_ZIP_CODE`, `TO_ZIP_CODE` FROM `djland_county_zip_code` WHERE `ID_COUNTY` = :p0 AND `FROM_ZIP_CODE` = :p1 AND `TO_ZIP_CODE` = :p2';
+		$sql = 'SELECT `ID_COUNTY`, `FROM_ZIP_CODE`, `TO_ZIP_CODE` FROM `' . _DB_PREFIX_ . 'county_zip_code` WHERE `ID_COUNTY` = :p0 AND `FROM_ZIP_CODE` = :p1 AND `TO_ZIP_CODE` = :p2';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key[0], PDO::PARAM_INT);

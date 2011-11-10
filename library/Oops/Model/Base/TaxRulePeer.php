@@ -1,8 +1,18 @@
 <?php
 
 
+define('OOPS_MODEL_TAXRULE_ID_TAX_RULE', _DB_PREFIX_ . 'tax_rule.ID_TAX_RULE');
+define('OOPS_MODEL_TAXRULE_ID_TAX_RULES_GROUP', _DB_PREFIX_ . 'tax_rule.ID_TAX_RULES_GROUP');
+define('OOPS_MODEL_TAXRULE_ID_COUNTRY', _DB_PREFIX_ . 'tax_rule.ID_COUNTRY');
+define('OOPS_MODEL_TAXRULE_ID_STATE', _DB_PREFIX_ . 'tax_rule.ID_STATE');
+define('OOPS_MODEL_TAXRULE_ID_COUNTY', _DB_PREFIX_ . 'tax_rule.ID_COUNTY');
+define('OOPS_MODEL_TAXRULE_ID_TAX', _DB_PREFIX_ . 'tax_rule.ID_TAX');
+define('OOPS_MODEL_TAXRULE_STATE_BEHAVIOR', _DB_PREFIX_ . 'tax_rule.STATE_BEHAVIOR');
+define('OOPS_MODEL_TAXRULE_COUNTY_BEHAVIOR', _DB_PREFIX_ . 'tax_rule.COUNTY_BEHAVIOR');
+define('OOPS_MODEL_TAXRULE_TABLE_NAME', _DB_PREFIX_ . 'tax_rule');
+
 /**
- * Base static class for performing query and update operations on the 'djland_tax_rule' table.
+ * Base static class for performing query and update operations on the 'tax_rule' table.
  *
  * 
  *
@@ -14,7 +24,7 @@ abstract class Oops_Model_Base_TaxRulePeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_tax_rule';
+	const TABLE_NAME = OOPS_MODEL_TAXRULE_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_TaxRule';
@@ -35,28 +45,28 @@ abstract class Oops_Model_Base_TaxRulePeer {
 	const NUM_HYDRATE_COLUMNS = 8;
 
 	/** the column name for the ID_TAX_RULE field */
-	const ID_TAX_RULE = 'djland_tax_rule.ID_TAX_RULE';
+	const ID_TAX_RULE = OOPS_MODEL_TAXRULE_ID_TAX_RULE;
 
 	/** the column name for the ID_TAX_RULES_GROUP field */
-	const ID_TAX_RULES_GROUP = 'djland_tax_rule.ID_TAX_RULES_GROUP';
+	const ID_TAX_RULES_GROUP = OOPS_MODEL_TAXRULE_ID_TAX_RULES_GROUP;
 
 	/** the column name for the ID_COUNTRY field */
-	const ID_COUNTRY = 'djland_tax_rule.ID_COUNTRY';
+	const ID_COUNTRY = OOPS_MODEL_TAXRULE_ID_COUNTRY;
 
 	/** the column name for the ID_STATE field */
-	const ID_STATE = 'djland_tax_rule.ID_STATE';
+	const ID_STATE = OOPS_MODEL_TAXRULE_ID_STATE;
 
 	/** the column name for the ID_COUNTY field */
-	const ID_COUNTY = 'djland_tax_rule.ID_COUNTY';
+	const ID_COUNTY = OOPS_MODEL_TAXRULE_ID_COUNTY;
 
 	/** the column name for the ID_TAX field */
-	const ID_TAX = 'djland_tax_rule.ID_TAX';
+	const ID_TAX = OOPS_MODEL_TAXRULE_ID_TAX;
 
 	/** the column name for the STATE_BEHAVIOR field */
-	const STATE_BEHAVIOR = 'djland_tax_rule.STATE_BEHAVIOR';
+	const STATE_BEHAVIOR = OOPS_MODEL_TAXRULE_STATE_BEHAVIOR;
 
 	/** the column name for the COUNTY_BEHAVIOR field */
-	const COUNTY_BEHAVIOR = 'djland_tax_rule.COUNTY_BEHAVIOR';
+	const COUNTY_BEHAVIOR = OOPS_MODEL_TAXRULE_COUNTY_BEHAVIOR;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -374,7 +384,7 @@ abstract class Oops_Model_Base_TaxRulePeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_tax_rule
+	 * Method to invalidate the instance pool of all tables related to tax_rule
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -594,7 +604,7 @@ abstract class Oops_Model_Base_TaxRulePeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_tax_rule table.
+	 * Deletes all rows from the tax_rule table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

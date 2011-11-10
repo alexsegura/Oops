@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_module_country' table.
+ * Base class that represents a row from the 'module_country' table.
  *
  * 
  *
@@ -364,7 +364,7 @@ abstract class Oops_Model_Base_ModuleCountry extends BaseObject  implements Pers
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_module_country` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'module_country` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

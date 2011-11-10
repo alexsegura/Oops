@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_pack' table.
+ * Base class that represents a query for the 'pack' table.
  *
  * 
  *
@@ -116,7 +116,7 @@ abstract class Oops_Model_Base_PackQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_PRODUCT_PACK`, `ID_PRODUCT_ITEM`, `QUANTITY` FROM `djland_pack` WHERE `ID_PRODUCT_PACK` = :p0 AND `ID_PRODUCT_ITEM` = :p1';
+		$sql = 'SELECT `ID_PRODUCT_PACK`, `ID_PRODUCT_ITEM`, `QUANTITY` FROM `' . _DB_PREFIX_ . 'pack` WHERE `ID_PRODUCT_PACK` = :p0 AND `ID_PRODUCT_ITEM` = :p1';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key[0], PDO::PARAM_INT);

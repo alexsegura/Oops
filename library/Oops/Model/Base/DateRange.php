@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_date_range' table.
+ * Base class that represents a row from the 'date_range' table.
  *
  * 
  *
@@ -468,7 +468,7 @@ abstract class Oops_Model_Base_DateRange extends BaseObject  implements Persiste
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_date_range` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'date_range` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

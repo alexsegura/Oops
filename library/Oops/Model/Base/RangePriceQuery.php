@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_range_price' table.
+ * Base class that represents a query for the 'range_price' table.
  *
  * 
  *
@@ -120,7 +120,7 @@ abstract class Oops_Model_Base_RangePriceQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_RANGE_PRICE`, `ID_CARRIER`, `DELIMITER1`, `DELIMITER2` FROM `djland_range_price` WHERE `ID_RANGE_PRICE` = :p0';
+		$sql = 'SELECT `ID_RANGE_PRICE`, `ID_CARRIER`, `DELIMITER1`, `DELIMITER2` FROM `' . _DB_PREFIX_ . 'range_price` WHERE `ID_RANGE_PRICE` = :p0';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

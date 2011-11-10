@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_group' table.
+ * This class defines the structure of the 'group' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_GroupTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_group');
+		$this->setName(_DB_PREFIX_ . 'group');
 		$this->setPhpName('Group');
 		$this->setClassname('Oops_Model_Group');
 		$this->setPackage('prestashop');

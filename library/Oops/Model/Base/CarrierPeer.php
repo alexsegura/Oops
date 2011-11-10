@@ -1,8 +1,24 @@
 <?php
 
 
+define('OOPS_MODEL_CARRIER_ID_CARRIER', _DB_PREFIX_ . 'carrier.ID_CARRIER');
+define('OOPS_MODEL_CARRIER_ID_TAX_RULES_GROUP', _DB_PREFIX_ . 'carrier.ID_TAX_RULES_GROUP');
+define('OOPS_MODEL_CARRIER_NAME', _DB_PREFIX_ . 'carrier.NAME');
+define('OOPS_MODEL_CARRIER_URL', _DB_PREFIX_ . 'carrier.URL');
+define('OOPS_MODEL_CARRIER_ACTIVE', _DB_PREFIX_ . 'carrier.ACTIVE');
+define('OOPS_MODEL_CARRIER_DELETED', _DB_PREFIX_ . 'carrier.DELETED');
+define('OOPS_MODEL_CARRIER_SHIPPING_HANDLING', _DB_PREFIX_ . 'carrier.SHIPPING_HANDLING');
+define('OOPS_MODEL_CARRIER_RANGE_BEHAVIOR', _DB_PREFIX_ . 'carrier.RANGE_BEHAVIOR');
+define('OOPS_MODEL_CARRIER_IS_MODULE', _DB_PREFIX_ . 'carrier.IS_MODULE');
+define('OOPS_MODEL_CARRIER_IS_FREE', _DB_PREFIX_ . 'carrier.IS_FREE');
+define('OOPS_MODEL_CARRIER_SHIPPING_EXTERNAL', _DB_PREFIX_ . 'carrier.SHIPPING_EXTERNAL');
+define('OOPS_MODEL_CARRIER_NEED_RANGE', _DB_PREFIX_ . 'carrier.NEED_RANGE');
+define('OOPS_MODEL_CARRIER_EXTERNAL_MODULE_NAME', _DB_PREFIX_ . 'carrier.EXTERNAL_MODULE_NAME');
+define('OOPS_MODEL_CARRIER_SHIPPING_METHOD', _DB_PREFIX_ . 'carrier.SHIPPING_METHOD');
+define('OOPS_MODEL_CARRIER_TABLE_NAME', _DB_PREFIX_ . 'carrier');
+
 /**
- * Base static class for performing query and update operations on the 'djland_carrier' table.
+ * Base static class for performing query and update operations on the 'carrier' table.
  *
  * 
  *
@@ -14,7 +30,7 @@ abstract class Oops_Model_Base_CarrierPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_carrier';
+	const TABLE_NAME = OOPS_MODEL_CARRIER_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_Carrier';
@@ -35,46 +51,46 @@ abstract class Oops_Model_Base_CarrierPeer {
 	const NUM_HYDRATE_COLUMNS = 14;
 
 	/** the column name for the ID_CARRIER field */
-	const ID_CARRIER = 'djland_carrier.ID_CARRIER';
+	const ID_CARRIER = OOPS_MODEL_CARRIER_ID_CARRIER;
 
 	/** the column name for the ID_TAX_RULES_GROUP field */
-	const ID_TAX_RULES_GROUP = 'djland_carrier.ID_TAX_RULES_GROUP';
+	const ID_TAX_RULES_GROUP = OOPS_MODEL_CARRIER_ID_TAX_RULES_GROUP;
 
 	/** the column name for the NAME field */
-	const NAME = 'djland_carrier.NAME';
+	const NAME = OOPS_MODEL_CARRIER_NAME;
 
 	/** the column name for the URL field */
-	const URL = 'djland_carrier.URL';
+	const URL = OOPS_MODEL_CARRIER_URL;
 
 	/** the column name for the ACTIVE field */
-	const ACTIVE = 'djland_carrier.ACTIVE';
+	const ACTIVE = OOPS_MODEL_CARRIER_ACTIVE;
 
 	/** the column name for the DELETED field */
-	const DELETED = 'djland_carrier.DELETED';
+	const DELETED = OOPS_MODEL_CARRIER_DELETED;
 
 	/** the column name for the SHIPPING_HANDLING field */
-	const SHIPPING_HANDLING = 'djland_carrier.SHIPPING_HANDLING';
+	const SHIPPING_HANDLING = OOPS_MODEL_CARRIER_SHIPPING_HANDLING;
 
 	/** the column name for the RANGE_BEHAVIOR field */
-	const RANGE_BEHAVIOR = 'djland_carrier.RANGE_BEHAVIOR';
+	const RANGE_BEHAVIOR = OOPS_MODEL_CARRIER_RANGE_BEHAVIOR;
 
 	/** the column name for the IS_MODULE field */
-	const IS_MODULE = 'djland_carrier.IS_MODULE';
+	const IS_MODULE = OOPS_MODEL_CARRIER_IS_MODULE;
 
 	/** the column name for the IS_FREE field */
-	const IS_FREE = 'djland_carrier.IS_FREE';
+	const IS_FREE = OOPS_MODEL_CARRIER_IS_FREE;
 
 	/** the column name for the SHIPPING_EXTERNAL field */
-	const SHIPPING_EXTERNAL = 'djland_carrier.SHIPPING_EXTERNAL';
+	const SHIPPING_EXTERNAL = OOPS_MODEL_CARRIER_SHIPPING_EXTERNAL;
 
 	/** the column name for the NEED_RANGE field */
-	const NEED_RANGE = 'djland_carrier.NEED_RANGE';
+	const NEED_RANGE = OOPS_MODEL_CARRIER_NEED_RANGE;
 
 	/** the column name for the EXTERNAL_MODULE_NAME field */
-	const EXTERNAL_MODULE_NAME = 'djland_carrier.EXTERNAL_MODULE_NAME';
+	const EXTERNAL_MODULE_NAME = OOPS_MODEL_CARRIER_EXTERNAL_MODULE_NAME;
 
 	/** the column name for the SHIPPING_METHOD field */
-	const SHIPPING_METHOD = 'djland_carrier.SHIPPING_METHOD';
+	const SHIPPING_METHOD = OOPS_MODEL_CARRIER_SHIPPING_METHOD;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -404,7 +420,7 @@ abstract class Oops_Model_Base_CarrierPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_carrier
+	 * Method to invalidate the instance pool of all tables related to carrier
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -624,7 +640,7 @@ abstract class Oops_Model_Base_CarrierPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_carrier table.
+	 * Deletes all rows from the carrier table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

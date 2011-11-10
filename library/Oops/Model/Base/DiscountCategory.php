@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_discount_category' table.
+ * Base class that represents a row from the 'discount_category' table.
  *
  * 
  *
@@ -364,7 +364,7 @@ abstract class Oops_Model_Base_DiscountCategory extends BaseObject  implements P
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_discount_category` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'discount_category` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

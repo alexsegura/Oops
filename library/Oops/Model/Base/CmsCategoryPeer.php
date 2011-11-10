@@ -1,8 +1,17 @@
 <?php
 
 
+define('OOPS_MODEL_CMSCATEGORY_ID_CMS_CATEGORY', _DB_PREFIX_ . 'cms_category.ID_CMS_CATEGORY');
+define('OOPS_MODEL_CMSCATEGORY_ID_PARENT', _DB_PREFIX_ . 'cms_category.ID_PARENT');
+define('OOPS_MODEL_CMSCATEGORY_LEVEL_DEPTH', _DB_PREFIX_ . 'cms_category.LEVEL_DEPTH');
+define('OOPS_MODEL_CMSCATEGORY_ACTIVE', _DB_PREFIX_ . 'cms_category.ACTIVE');
+define('OOPS_MODEL_CMSCATEGORY_DATE_ADD', _DB_PREFIX_ . 'cms_category.DATE_ADD');
+define('OOPS_MODEL_CMSCATEGORY_DATE_UPD', _DB_PREFIX_ . 'cms_category.DATE_UPD');
+define('OOPS_MODEL_CMSCATEGORY_POSITION', _DB_PREFIX_ . 'cms_category.POSITION');
+define('OOPS_MODEL_CMSCATEGORY_TABLE_NAME', _DB_PREFIX_ . 'cms_category');
+
 /**
- * Base static class for performing query and update operations on the 'djland_cms_category' table.
+ * Base static class for performing query and update operations on the 'cms_category' table.
  *
  * 
  *
@@ -14,7 +23,7 @@ abstract class Oops_Model_Base_CmsCategoryPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_cms_category';
+	const TABLE_NAME = OOPS_MODEL_CMSCATEGORY_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_CmsCategory';
@@ -35,25 +44,25 @@ abstract class Oops_Model_Base_CmsCategoryPeer {
 	const NUM_HYDRATE_COLUMNS = 7;
 
 	/** the column name for the ID_CMS_CATEGORY field */
-	const ID_CMS_CATEGORY = 'djland_cms_category.ID_CMS_CATEGORY';
+	const ID_CMS_CATEGORY = OOPS_MODEL_CMSCATEGORY_ID_CMS_CATEGORY;
 
 	/** the column name for the ID_PARENT field */
-	const ID_PARENT = 'djland_cms_category.ID_PARENT';
+	const ID_PARENT = OOPS_MODEL_CMSCATEGORY_ID_PARENT;
 
 	/** the column name for the LEVEL_DEPTH field */
-	const LEVEL_DEPTH = 'djland_cms_category.LEVEL_DEPTH';
+	const LEVEL_DEPTH = OOPS_MODEL_CMSCATEGORY_LEVEL_DEPTH;
 
 	/** the column name for the ACTIVE field */
-	const ACTIVE = 'djland_cms_category.ACTIVE';
+	const ACTIVE = OOPS_MODEL_CMSCATEGORY_ACTIVE;
 
 	/** the column name for the DATE_ADD field */
-	const DATE_ADD = 'djland_cms_category.DATE_ADD';
+	const DATE_ADD = OOPS_MODEL_CMSCATEGORY_DATE_ADD;
 
 	/** the column name for the DATE_UPD field */
-	const DATE_UPD = 'djland_cms_category.DATE_UPD';
+	const DATE_UPD = OOPS_MODEL_CMSCATEGORY_DATE_UPD;
 
 	/** the column name for the POSITION field */
-	const POSITION = 'djland_cms_category.POSITION';
+	const POSITION = OOPS_MODEL_CMSCATEGORY_POSITION;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -369,7 +378,7 @@ abstract class Oops_Model_Base_CmsCategoryPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_cms_category
+	 * Method to invalidate the instance pool of all tables related to cms_category
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -589,7 +598,7 @@ abstract class Oops_Model_Base_CmsCategoryPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_cms_category table.
+	 * Deletes all rows from the cms_category table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

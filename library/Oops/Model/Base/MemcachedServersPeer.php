@@ -1,8 +1,14 @@
 <?php
 
 
+define('OOPS_MODEL_MEMCACHEDSERVERS_ID_MEMCACHED_SERVER', _DB_PREFIX_ . 'memcached_servers.ID_MEMCACHED_SERVER');
+define('OOPS_MODEL_MEMCACHEDSERVERS_IP', _DB_PREFIX_ . 'memcached_servers.IP');
+define('OOPS_MODEL_MEMCACHEDSERVERS_PORT', _DB_PREFIX_ . 'memcached_servers.PORT');
+define('OOPS_MODEL_MEMCACHEDSERVERS_WEIGHT', _DB_PREFIX_ . 'memcached_servers.WEIGHT');
+define('OOPS_MODEL_MEMCACHEDSERVERS_TABLE_NAME', _DB_PREFIX_ . 'memcached_servers');
+
 /**
- * Base static class for performing query and update operations on the 'djland_memcached_servers' table.
+ * Base static class for performing query and update operations on the 'memcached_servers' table.
  *
  * 
  *
@@ -14,7 +20,7 @@ abstract class Oops_Model_Base_MemcachedServersPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_memcached_servers';
+	const TABLE_NAME = OOPS_MODEL_MEMCACHEDSERVERS_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_MemcachedServers';
@@ -35,16 +41,16 @@ abstract class Oops_Model_Base_MemcachedServersPeer {
 	const NUM_HYDRATE_COLUMNS = 4;
 
 	/** the column name for the ID_MEMCACHED_SERVER field */
-	const ID_MEMCACHED_SERVER = 'djland_memcached_servers.ID_MEMCACHED_SERVER';
+	const ID_MEMCACHED_SERVER = OOPS_MODEL_MEMCACHEDSERVERS_ID_MEMCACHED_SERVER;
 
 	/** the column name for the IP field */
-	const IP = 'djland_memcached_servers.IP';
+	const IP = OOPS_MODEL_MEMCACHEDSERVERS_IP;
 
 	/** the column name for the PORT field */
-	const PORT = 'djland_memcached_servers.PORT';
+	const PORT = OOPS_MODEL_MEMCACHEDSERVERS_PORT;
 
 	/** the column name for the WEIGHT field */
-	const WEIGHT = 'djland_memcached_servers.WEIGHT';
+	const WEIGHT = OOPS_MODEL_MEMCACHEDSERVERS_WEIGHT;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -354,7 +360,7 @@ abstract class Oops_Model_Base_MemcachedServersPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_memcached_servers
+	 * Method to invalidate the instance pool of all tables related to memcached_servers
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -574,7 +580,7 @@ abstract class Oops_Model_Base_MemcachedServersPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_memcached_servers table.
+	 * Deletes all rows from the memcached_servers table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

@@ -1,8 +1,12 @@
 <?php
 
 
+define('OOPS_MODEL_CARRIERGROUP_ID_CARRIER', _DB_PREFIX_ . 'carrier_group.ID_CARRIER');
+define('OOPS_MODEL_CARRIERGROUP_ID_GROUP', _DB_PREFIX_ . 'carrier_group.ID_GROUP');
+define('OOPS_MODEL_CARRIERGROUP_TABLE_NAME', _DB_PREFIX_ . 'carrier_group');
+
 /**
- * Base static class for performing query and update operations on the 'djland_carrier_group' table.
+ * Base static class for performing query and update operations on the 'carrier_group' table.
  *
  * 
  *
@@ -14,7 +18,7 @@ abstract class Oops_Model_Base_CarrierGroupPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_carrier_group';
+	const TABLE_NAME = OOPS_MODEL_CARRIERGROUP_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_CarrierGroup';
@@ -35,10 +39,10 @@ abstract class Oops_Model_Base_CarrierGroupPeer {
 	const NUM_HYDRATE_COLUMNS = 2;
 
 	/** the column name for the ID_CARRIER field */
-	const ID_CARRIER = 'djland_carrier_group.ID_CARRIER';
+	const ID_CARRIER = OOPS_MODEL_CARRIERGROUP_ID_CARRIER;
 
 	/** the column name for the ID_GROUP field */
-	const ID_GROUP = 'djland_carrier_group.ID_GROUP';
+	const ID_GROUP = OOPS_MODEL_CARRIERGROUP_ID_GROUP;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -344,7 +348,7 @@ abstract class Oops_Model_Base_CarrierGroupPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_carrier_group
+	 * Method to invalidate the instance pool of all tables related to carrier_group
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -560,7 +564,7 @@ abstract class Oops_Model_Base_CarrierGroupPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_carrier_group table.
+	 * Deletes all rows from the carrier_group table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

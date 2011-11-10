@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_compare_product' table.
+ * This class defines the structure of the 'compare_product' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_CompareProductTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_compare_product');
+		$this->setName(_DB_PREFIX_ . 'compare_product');
 		$this->setPhpName('CompareProduct');
 		$this->setClassname('Oops_Model_CompareProduct');
 		$this->setPackage('prestashop');

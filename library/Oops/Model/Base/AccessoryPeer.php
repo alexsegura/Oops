@@ -1,8 +1,12 @@
 <?php
 
 
+define('OOPS_MODEL_ACCESSORY_ID_PRODUCT_1', _DB_PREFIX_ . 'accessory.ID_PRODUCT_1');
+define('OOPS_MODEL_ACCESSORY_ID_PRODUCT_2', _DB_PREFIX_ . 'accessory.ID_PRODUCT_2');
+define('OOPS_MODEL_ACCESSORY_TABLE_NAME', _DB_PREFIX_ . 'accessory');
+
 /**
- * Base static class for performing query and update operations on the 'djland_accessory' table.
+ * Base static class for performing query and update operations on the 'accessory' table.
  *
  * 
  *
@@ -14,7 +18,7 @@ abstract class Oops_Model_Base_AccessoryPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_accessory';
+	const TABLE_NAME = OOPS_MODEL_ACCESSORY_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_Accessory';
@@ -35,10 +39,10 @@ abstract class Oops_Model_Base_AccessoryPeer {
 	const NUM_HYDRATE_COLUMNS = 2;
 
 	/** the column name for the ID_PRODUCT_1 field */
-	const ID_PRODUCT_1 = 'djland_accessory.ID_PRODUCT_1';
+	const ID_PRODUCT_1 = OOPS_MODEL_ACCESSORY_ID_PRODUCT_1;
 
 	/** the column name for the ID_PRODUCT_2 field */
-	const ID_PRODUCT_2 = 'djland_accessory.ID_PRODUCT_2';
+	const ID_PRODUCT_2 = OOPS_MODEL_ACCESSORY_ID_PRODUCT_2;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -344,7 +348,7 @@ abstract class Oops_Model_Base_AccessoryPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_accessory
+	 * Method to invalidate the instance pool of all tables related to accessory
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -560,7 +564,7 @@ abstract class Oops_Model_Base_AccessoryPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_accessory table.
+	 * Deletes all rows from the accessory table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

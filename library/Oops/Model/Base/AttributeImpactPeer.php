@@ -1,8 +1,15 @@
 <?php
 
 
+define('OOPS_MODEL_ATTRIBUTEIMPACT_ID_ATTRIBUTE_IMPACT', _DB_PREFIX_ . 'attribute_impact.ID_ATTRIBUTE_IMPACT');
+define('OOPS_MODEL_ATTRIBUTEIMPACT_ID_PRODUCT', _DB_PREFIX_ . 'attribute_impact.ID_PRODUCT');
+define('OOPS_MODEL_ATTRIBUTEIMPACT_ID_ATTRIBUTE', _DB_PREFIX_ . 'attribute_impact.ID_ATTRIBUTE');
+define('OOPS_MODEL_ATTRIBUTEIMPACT_WEIGHT', _DB_PREFIX_ . 'attribute_impact.WEIGHT');
+define('OOPS_MODEL_ATTRIBUTEIMPACT_PRICE', _DB_PREFIX_ . 'attribute_impact.PRICE');
+define('OOPS_MODEL_ATTRIBUTEIMPACT_TABLE_NAME', _DB_PREFIX_ . 'attribute_impact');
+
 /**
- * Base static class for performing query and update operations on the 'djland_attribute_impact' table.
+ * Base static class for performing query and update operations on the 'attribute_impact' table.
  *
  * 
  *
@@ -14,7 +21,7 @@ abstract class Oops_Model_Base_AttributeImpactPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_attribute_impact';
+	const TABLE_NAME = OOPS_MODEL_ATTRIBUTEIMPACT_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_AttributeImpact';
@@ -35,19 +42,19 @@ abstract class Oops_Model_Base_AttributeImpactPeer {
 	const NUM_HYDRATE_COLUMNS = 5;
 
 	/** the column name for the ID_ATTRIBUTE_IMPACT field */
-	const ID_ATTRIBUTE_IMPACT = 'djland_attribute_impact.ID_ATTRIBUTE_IMPACT';
+	const ID_ATTRIBUTE_IMPACT = OOPS_MODEL_ATTRIBUTEIMPACT_ID_ATTRIBUTE_IMPACT;
 
 	/** the column name for the ID_PRODUCT field */
-	const ID_PRODUCT = 'djland_attribute_impact.ID_PRODUCT';
+	const ID_PRODUCT = OOPS_MODEL_ATTRIBUTEIMPACT_ID_PRODUCT;
 
 	/** the column name for the ID_ATTRIBUTE field */
-	const ID_ATTRIBUTE = 'djland_attribute_impact.ID_ATTRIBUTE';
+	const ID_ATTRIBUTE = OOPS_MODEL_ATTRIBUTEIMPACT_ID_ATTRIBUTE;
 
 	/** the column name for the WEIGHT field */
-	const WEIGHT = 'djland_attribute_impact.WEIGHT';
+	const WEIGHT = OOPS_MODEL_ATTRIBUTEIMPACT_WEIGHT;
 
 	/** the column name for the PRICE field */
-	const PRICE = 'djland_attribute_impact.PRICE';
+	const PRICE = OOPS_MODEL_ATTRIBUTEIMPACT_PRICE;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -359,7 +366,7 @@ abstract class Oops_Model_Base_AttributeImpactPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_attribute_impact
+	 * Method to invalidate the instance pool of all tables related to attribute_impact
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -579,7 +586,7 @@ abstract class Oops_Model_Base_AttributeImpactPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_attribute_impact table.
+	 * Deletes all rows from the attribute_impact table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

@@ -1,8 +1,12 @@
 <?php
 
 
+define('OOPS_MODEL_PAGETYPE_ID_PAGE_TYPE', _DB_PREFIX_ . 'page_type.ID_PAGE_TYPE');
+define('OOPS_MODEL_PAGETYPE_NAME', _DB_PREFIX_ . 'page_type.NAME');
+define('OOPS_MODEL_PAGETYPE_TABLE_NAME', _DB_PREFIX_ . 'page_type');
+
 /**
- * Base static class for performing query and update operations on the 'djland_page_type' table.
+ * Base static class for performing query and update operations on the 'page_type' table.
  *
  * 
  *
@@ -14,7 +18,7 @@ abstract class Oops_Model_Base_PageTypePeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_page_type';
+	const TABLE_NAME = OOPS_MODEL_PAGETYPE_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_PageType';
@@ -35,10 +39,10 @@ abstract class Oops_Model_Base_PageTypePeer {
 	const NUM_HYDRATE_COLUMNS = 2;
 
 	/** the column name for the ID_PAGE_TYPE field */
-	const ID_PAGE_TYPE = 'djland_page_type.ID_PAGE_TYPE';
+	const ID_PAGE_TYPE = OOPS_MODEL_PAGETYPE_ID_PAGE_TYPE;
 
 	/** the column name for the NAME field */
-	const NAME = 'djland_page_type.NAME';
+	const NAME = OOPS_MODEL_PAGETYPE_NAME;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -344,7 +348,7 @@ abstract class Oops_Model_Base_PageTypePeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_page_type
+	 * Method to invalidate the instance pool of all tables related to page_type
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -564,7 +568,7 @@ abstract class Oops_Model_Base_PageTypePeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_page_type table.
+	 * Deletes all rows from the page_type table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

@@ -1,8 +1,18 @@
 <?php
 
 
+define('OOPS_MODEL_MESSAGE_ID_MESSAGE', _DB_PREFIX_ . 'message.ID_MESSAGE');
+define('OOPS_MODEL_MESSAGE_ID_CART', _DB_PREFIX_ . 'message.ID_CART');
+define('OOPS_MODEL_MESSAGE_ID_CUSTOMER', _DB_PREFIX_ . 'message.ID_CUSTOMER');
+define('OOPS_MODEL_MESSAGE_ID_EMPLOYEE', _DB_PREFIX_ . 'message.ID_EMPLOYEE');
+define('OOPS_MODEL_MESSAGE_ID_ORDER', _DB_PREFIX_ . 'message.ID_ORDER');
+define('OOPS_MODEL_MESSAGE_MESSAGE', _DB_PREFIX_ . 'message.MESSAGE');
+define('OOPS_MODEL_MESSAGE_ISPRIVATE', _DB_PREFIX_ . 'message.ISPRIVATE');
+define('OOPS_MODEL_MESSAGE_DATE_ADD', _DB_PREFIX_ . 'message.DATE_ADD');
+define('OOPS_MODEL_MESSAGE_TABLE_NAME', _DB_PREFIX_ . 'message');
+
 /**
- * Base static class for performing query and update operations on the 'djland_message' table.
+ * Base static class for performing query and update operations on the 'message' table.
  *
  * 
  *
@@ -14,7 +24,7 @@ abstract class Oops_Model_Base_MessagePeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_message';
+	const TABLE_NAME = OOPS_MODEL_MESSAGE_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_Message';
@@ -35,28 +45,28 @@ abstract class Oops_Model_Base_MessagePeer {
 	const NUM_HYDRATE_COLUMNS = 8;
 
 	/** the column name for the ID_MESSAGE field */
-	const ID_MESSAGE = 'djland_message.ID_MESSAGE';
+	const ID_MESSAGE = OOPS_MODEL_MESSAGE_ID_MESSAGE;
 
 	/** the column name for the ID_CART field */
-	const ID_CART = 'djland_message.ID_CART';
+	const ID_CART = OOPS_MODEL_MESSAGE_ID_CART;
 
 	/** the column name for the ID_CUSTOMER field */
-	const ID_CUSTOMER = 'djland_message.ID_CUSTOMER';
+	const ID_CUSTOMER = OOPS_MODEL_MESSAGE_ID_CUSTOMER;
 
 	/** the column name for the ID_EMPLOYEE field */
-	const ID_EMPLOYEE = 'djland_message.ID_EMPLOYEE';
+	const ID_EMPLOYEE = OOPS_MODEL_MESSAGE_ID_EMPLOYEE;
 
 	/** the column name for the ID_ORDER field */
-	const ID_ORDER = 'djland_message.ID_ORDER';
+	const ID_ORDER = OOPS_MODEL_MESSAGE_ID_ORDER;
 
 	/** the column name for the MESSAGE field */
-	const MESSAGE = 'djland_message.MESSAGE';
+	const MESSAGE = OOPS_MODEL_MESSAGE_MESSAGE;
 
 	/** the column name for the PRIVATE field */
-	const ISPRIVATE = 'djland_message.PRIVATE';
+	const ISPRIVATE = OOPS_MODEL_MESSAGE_ISPRIVATE;
 
 	/** the column name for the DATE_ADD field */
-	const DATE_ADD = 'djland_message.DATE_ADD';
+	const DATE_ADD = OOPS_MODEL_MESSAGE_DATE_ADD;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -374,7 +384,7 @@ abstract class Oops_Model_Base_MessagePeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_message
+	 * Method to invalidate the instance pool of all tables related to message
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -594,7 +604,7 @@ abstract class Oops_Model_Base_MessagePeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_message table.
+	 * Deletes all rows from the message table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

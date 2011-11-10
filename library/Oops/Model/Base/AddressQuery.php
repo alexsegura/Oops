@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_address' table.
+ * Base class that represents a query for the 'address' table.
  *
  * 
  *
@@ -196,7 +196,7 @@ abstract class Oops_Model_Base_AddressQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_ADDRESS`, `ID_COUNTRY`, `ID_STATE`, `ID_CUSTOMER`, `ID_MANUFACTURER`, `ID_SUPPLIER`, `ALIAS`, `COMPANY`, `LASTNAME`, `FIRSTNAME`, `ADDRESS1`, `ADDRESS2`, `POSTCODE`, `CITY`, `OTHER`, `PHONE`, `PHONE_MOBILE`, `VAT_NUMBER`, `DNI`, `DATE_ADD`, `DATE_UPD`, `ACTIVE`, `DELETED` FROM `djland_address` WHERE `ID_ADDRESS` = :p0';
+		$sql = 'SELECT `ID_ADDRESS`, `ID_COUNTRY`, `ID_STATE`, `ID_CUSTOMER`, `ID_MANUFACTURER`, `ID_SUPPLIER`, `ALIAS`, `COMPANY`, `LASTNAME`, `FIRSTNAME`, `ADDRESS1`, `ADDRESS2`, `POSTCODE`, `CITY`, `OTHER`, `PHONE`, `PHONE_MOBILE`, `VAT_NUMBER`, `DNI`, `DATE_ADD`, `DATE_UPD`, `ACTIVE`, `DELETED` FROM `' . _DB_PREFIX_ . 'address` WHERE `ID_ADDRESS` = :p0';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

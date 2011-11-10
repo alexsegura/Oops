@@ -1,8 +1,38 @@
 <?php
 
 
+define('OOPS_MODEL_ORDERDETAIL_ID_ORDER_DETAIL', _DB_PREFIX_ . 'order_detail.ID_ORDER_DETAIL');
+define('OOPS_MODEL_ORDERDETAIL_ID_ORDER', _DB_PREFIX_ . 'order_detail.ID_ORDER');
+define('OOPS_MODEL_ORDERDETAIL_PRODUCT_ID', _DB_PREFIX_ . 'order_detail.PRODUCT_ID');
+define('OOPS_MODEL_ORDERDETAIL_PRODUCT_ATTRIBUTE_ID', _DB_PREFIX_ . 'order_detail.PRODUCT_ATTRIBUTE_ID');
+define('OOPS_MODEL_ORDERDETAIL_PRODUCT_NAME', _DB_PREFIX_ . 'order_detail.PRODUCT_NAME');
+define('OOPS_MODEL_ORDERDETAIL_PRODUCT_QUANTITY', _DB_PREFIX_ . 'order_detail.PRODUCT_QUANTITY');
+define('OOPS_MODEL_ORDERDETAIL_PRODUCT_QUANTITY_IN_STOCK', _DB_PREFIX_ . 'order_detail.PRODUCT_QUANTITY_IN_STOCK');
+define('OOPS_MODEL_ORDERDETAIL_PRODUCT_QUANTITY_REFUNDED', _DB_PREFIX_ . 'order_detail.PRODUCT_QUANTITY_REFUNDED');
+define('OOPS_MODEL_ORDERDETAIL_PRODUCT_QUANTITY_RETURN', _DB_PREFIX_ . 'order_detail.PRODUCT_QUANTITY_RETURN');
+define('OOPS_MODEL_ORDERDETAIL_PRODUCT_QUANTITY_REINJECTED', _DB_PREFIX_ . 'order_detail.PRODUCT_QUANTITY_REINJECTED');
+define('OOPS_MODEL_ORDERDETAIL_PRODUCT_PRICE', _DB_PREFIX_ . 'order_detail.PRODUCT_PRICE');
+define('OOPS_MODEL_ORDERDETAIL_REDUCTION_PERCENT', _DB_PREFIX_ . 'order_detail.REDUCTION_PERCENT');
+define('OOPS_MODEL_ORDERDETAIL_REDUCTION_AMOUNT', _DB_PREFIX_ . 'order_detail.REDUCTION_AMOUNT');
+define('OOPS_MODEL_ORDERDETAIL_GROUP_REDUCTION', _DB_PREFIX_ . 'order_detail.GROUP_REDUCTION');
+define('OOPS_MODEL_ORDERDETAIL_PRODUCT_QUANTITY_DISCOUNT', _DB_PREFIX_ . 'order_detail.PRODUCT_QUANTITY_DISCOUNT');
+define('OOPS_MODEL_ORDERDETAIL_PRODUCT_EAN13', _DB_PREFIX_ . 'order_detail.PRODUCT_EAN13');
+define('OOPS_MODEL_ORDERDETAIL_PRODUCT_UPC', _DB_PREFIX_ . 'order_detail.PRODUCT_UPC');
+define('OOPS_MODEL_ORDERDETAIL_PRODUCT_REFERENCE', _DB_PREFIX_ . 'order_detail.PRODUCT_REFERENCE');
+define('OOPS_MODEL_ORDERDETAIL_PRODUCT_SUPPLIER_REFERENCE', _DB_PREFIX_ . 'order_detail.PRODUCT_SUPPLIER_REFERENCE');
+define('OOPS_MODEL_ORDERDETAIL_PRODUCT_WEIGHT', _DB_PREFIX_ . 'order_detail.PRODUCT_WEIGHT');
+define('OOPS_MODEL_ORDERDETAIL_TAX_NAME', _DB_PREFIX_ . 'order_detail.TAX_NAME');
+define('OOPS_MODEL_ORDERDETAIL_TAX_RATE', _DB_PREFIX_ . 'order_detail.TAX_RATE');
+define('OOPS_MODEL_ORDERDETAIL_ECOTAX', _DB_PREFIX_ . 'order_detail.ECOTAX');
+define('OOPS_MODEL_ORDERDETAIL_ECOTAX_TAX_RATE', _DB_PREFIX_ . 'order_detail.ECOTAX_TAX_RATE');
+define('OOPS_MODEL_ORDERDETAIL_DISCOUNT_QUANTITY_APPLIED', _DB_PREFIX_ . 'order_detail.DISCOUNT_QUANTITY_APPLIED');
+define('OOPS_MODEL_ORDERDETAIL_DOWNLOAD_HASH', _DB_PREFIX_ . 'order_detail.DOWNLOAD_HASH');
+define('OOPS_MODEL_ORDERDETAIL_DOWNLOAD_NB', _DB_PREFIX_ . 'order_detail.DOWNLOAD_NB');
+define('OOPS_MODEL_ORDERDETAIL_DOWNLOAD_DEADLINE', _DB_PREFIX_ . 'order_detail.DOWNLOAD_DEADLINE');
+define('OOPS_MODEL_ORDERDETAIL_TABLE_NAME', _DB_PREFIX_ . 'order_detail');
+
 /**
- * Base static class for performing query and update operations on the 'djland_order_detail' table.
+ * Base static class for performing query and update operations on the 'order_detail' table.
  *
  * 
  *
@@ -14,7 +44,7 @@ abstract class Oops_Model_Base_OrderDetailPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_order_detail';
+	const TABLE_NAME = OOPS_MODEL_ORDERDETAIL_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_OrderDetail';
@@ -35,88 +65,88 @@ abstract class Oops_Model_Base_OrderDetailPeer {
 	const NUM_HYDRATE_COLUMNS = 28;
 
 	/** the column name for the ID_ORDER_DETAIL field */
-	const ID_ORDER_DETAIL = 'djland_order_detail.ID_ORDER_DETAIL';
+	const ID_ORDER_DETAIL = OOPS_MODEL_ORDERDETAIL_ID_ORDER_DETAIL;
 
 	/** the column name for the ID_ORDER field */
-	const ID_ORDER = 'djland_order_detail.ID_ORDER';
+	const ID_ORDER = OOPS_MODEL_ORDERDETAIL_ID_ORDER;
 
 	/** the column name for the PRODUCT_ID field */
-	const PRODUCT_ID = 'djland_order_detail.PRODUCT_ID';
+	const PRODUCT_ID = OOPS_MODEL_ORDERDETAIL_PRODUCT_ID;
 
 	/** the column name for the PRODUCT_ATTRIBUTE_ID field */
-	const PRODUCT_ATTRIBUTE_ID = 'djland_order_detail.PRODUCT_ATTRIBUTE_ID';
+	const PRODUCT_ATTRIBUTE_ID = OOPS_MODEL_ORDERDETAIL_PRODUCT_ATTRIBUTE_ID;
 
 	/** the column name for the PRODUCT_NAME field */
-	const PRODUCT_NAME = 'djland_order_detail.PRODUCT_NAME';
+	const PRODUCT_NAME = OOPS_MODEL_ORDERDETAIL_PRODUCT_NAME;
 
 	/** the column name for the PRODUCT_QUANTITY field */
-	const PRODUCT_QUANTITY = 'djland_order_detail.PRODUCT_QUANTITY';
+	const PRODUCT_QUANTITY = OOPS_MODEL_ORDERDETAIL_PRODUCT_QUANTITY;
 
 	/** the column name for the PRODUCT_QUANTITY_IN_STOCK field */
-	const PRODUCT_QUANTITY_IN_STOCK = 'djland_order_detail.PRODUCT_QUANTITY_IN_STOCK';
+	const PRODUCT_QUANTITY_IN_STOCK = OOPS_MODEL_ORDERDETAIL_PRODUCT_QUANTITY_IN_STOCK;
 
 	/** the column name for the PRODUCT_QUANTITY_REFUNDED field */
-	const PRODUCT_QUANTITY_REFUNDED = 'djland_order_detail.PRODUCT_QUANTITY_REFUNDED';
+	const PRODUCT_QUANTITY_REFUNDED = OOPS_MODEL_ORDERDETAIL_PRODUCT_QUANTITY_REFUNDED;
 
 	/** the column name for the PRODUCT_QUANTITY_RETURN field */
-	const PRODUCT_QUANTITY_RETURN = 'djland_order_detail.PRODUCT_QUANTITY_RETURN';
+	const PRODUCT_QUANTITY_RETURN = OOPS_MODEL_ORDERDETAIL_PRODUCT_QUANTITY_RETURN;
 
 	/** the column name for the PRODUCT_QUANTITY_REINJECTED field */
-	const PRODUCT_QUANTITY_REINJECTED = 'djland_order_detail.PRODUCT_QUANTITY_REINJECTED';
+	const PRODUCT_QUANTITY_REINJECTED = OOPS_MODEL_ORDERDETAIL_PRODUCT_QUANTITY_REINJECTED;
 
 	/** the column name for the PRODUCT_PRICE field */
-	const PRODUCT_PRICE = 'djland_order_detail.PRODUCT_PRICE';
+	const PRODUCT_PRICE = OOPS_MODEL_ORDERDETAIL_PRODUCT_PRICE;
 
 	/** the column name for the REDUCTION_PERCENT field */
-	const REDUCTION_PERCENT = 'djland_order_detail.REDUCTION_PERCENT';
+	const REDUCTION_PERCENT = OOPS_MODEL_ORDERDETAIL_REDUCTION_PERCENT;
 
 	/** the column name for the REDUCTION_AMOUNT field */
-	const REDUCTION_AMOUNT = 'djland_order_detail.REDUCTION_AMOUNT';
+	const REDUCTION_AMOUNT = OOPS_MODEL_ORDERDETAIL_REDUCTION_AMOUNT;
 
 	/** the column name for the GROUP_REDUCTION field */
-	const GROUP_REDUCTION = 'djland_order_detail.GROUP_REDUCTION';
+	const GROUP_REDUCTION = OOPS_MODEL_ORDERDETAIL_GROUP_REDUCTION;
 
 	/** the column name for the PRODUCT_QUANTITY_DISCOUNT field */
-	const PRODUCT_QUANTITY_DISCOUNT = 'djland_order_detail.PRODUCT_QUANTITY_DISCOUNT';
+	const PRODUCT_QUANTITY_DISCOUNT = OOPS_MODEL_ORDERDETAIL_PRODUCT_QUANTITY_DISCOUNT;
 
 	/** the column name for the PRODUCT_EAN13 field */
-	const PRODUCT_EAN13 = 'djland_order_detail.PRODUCT_EAN13';
+	const PRODUCT_EAN13 = OOPS_MODEL_ORDERDETAIL_PRODUCT_EAN13;
 
 	/** the column name for the PRODUCT_UPC field */
-	const PRODUCT_UPC = 'djland_order_detail.PRODUCT_UPC';
+	const PRODUCT_UPC = OOPS_MODEL_ORDERDETAIL_PRODUCT_UPC;
 
 	/** the column name for the PRODUCT_REFERENCE field */
-	const PRODUCT_REFERENCE = 'djland_order_detail.PRODUCT_REFERENCE';
+	const PRODUCT_REFERENCE = OOPS_MODEL_ORDERDETAIL_PRODUCT_REFERENCE;
 
 	/** the column name for the PRODUCT_SUPPLIER_REFERENCE field */
-	const PRODUCT_SUPPLIER_REFERENCE = 'djland_order_detail.PRODUCT_SUPPLIER_REFERENCE';
+	const PRODUCT_SUPPLIER_REFERENCE = OOPS_MODEL_ORDERDETAIL_PRODUCT_SUPPLIER_REFERENCE;
 
 	/** the column name for the PRODUCT_WEIGHT field */
-	const PRODUCT_WEIGHT = 'djland_order_detail.PRODUCT_WEIGHT';
+	const PRODUCT_WEIGHT = OOPS_MODEL_ORDERDETAIL_PRODUCT_WEIGHT;
 
 	/** the column name for the TAX_NAME field */
-	const TAX_NAME = 'djland_order_detail.TAX_NAME';
+	const TAX_NAME = OOPS_MODEL_ORDERDETAIL_TAX_NAME;
 
 	/** the column name for the TAX_RATE field */
-	const TAX_RATE = 'djland_order_detail.TAX_RATE';
+	const TAX_RATE = OOPS_MODEL_ORDERDETAIL_TAX_RATE;
 
 	/** the column name for the ECOTAX field */
-	const ECOTAX = 'djland_order_detail.ECOTAX';
+	const ECOTAX = OOPS_MODEL_ORDERDETAIL_ECOTAX;
 
 	/** the column name for the ECOTAX_TAX_RATE field */
-	const ECOTAX_TAX_RATE = 'djland_order_detail.ECOTAX_TAX_RATE';
+	const ECOTAX_TAX_RATE = OOPS_MODEL_ORDERDETAIL_ECOTAX_TAX_RATE;
 
 	/** the column name for the DISCOUNT_QUANTITY_APPLIED field */
-	const DISCOUNT_QUANTITY_APPLIED = 'djland_order_detail.DISCOUNT_QUANTITY_APPLIED';
+	const DISCOUNT_QUANTITY_APPLIED = OOPS_MODEL_ORDERDETAIL_DISCOUNT_QUANTITY_APPLIED;
 
 	/** the column name for the DOWNLOAD_HASH field */
-	const DOWNLOAD_HASH = 'djland_order_detail.DOWNLOAD_HASH';
+	const DOWNLOAD_HASH = OOPS_MODEL_ORDERDETAIL_DOWNLOAD_HASH;
 
 	/** the column name for the DOWNLOAD_NB field */
-	const DOWNLOAD_NB = 'djland_order_detail.DOWNLOAD_NB';
+	const DOWNLOAD_NB = OOPS_MODEL_ORDERDETAIL_DOWNLOAD_NB;
 
 	/** the column name for the DOWNLOAD_DEADLINE field */
-	const DOWNLOAD_DEADLINE = 'djland_order_detail.DOWNLOAD_DEADLINE';
+	const DOWNLOAD_DEADLINE = OOPS_MODEL_ORDERDETAIL_DOWNLOAD_DEADLINE;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -474,7 +504,7 @@ abstract class Oops_Model_Base_OrderDetailPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_order_detail
+	 * Method to invalidate the instance pool of all tables related to order_detail
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -694,7 +724,7 @@ abstract class Oops_Model_Base_OrderDetailPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_order_detail table.
+	 * Deletes all rows from the order_detail table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

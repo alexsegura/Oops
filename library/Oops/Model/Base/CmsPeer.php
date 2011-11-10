@@ -1,8 +1,14 @@
 <?php
 
 
+define('OOPS_MODEL_CMS_ID_CMS', _DB_PREFIX_ . 'cms.ID_CMS');
+define('OOPS_MODEL_CMS_ID_CMS_CATEGORY', _DB_PREFIX_ . 'cms.ID_CMS_CATEGORY');
+define('OOPS_MODEL_CMS_POSITION', _DB_PREFIX_ . 'cms.POSITION');
+define('OOPS_MODEL_CMS_ACTIVE', _DB_PREFIX_ . 'cms.ACTIVE');
+define('OOPS_MODEL_CMS_TABLE_NAME', _DB_PREFIX_ . 'cms');
+
 /**
- * Base static class for performing query and update operations on the 'djland_cms' table.
+ * Base static class for performing query and update operations on the 'cms' table.
  *
  * 
  *
@@ -14,7 +20,7 @@ abstract class Oops_Model_Base_CmsPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_cms';
+	const TABLE_NAME = OOPS_MODEL_CMS_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_Cms';
@@ -35,16 +41,16 @@ abstract class Oops_Model_Base_CmsPeer {
 	const NUM_HYDRATE_COLUMNS = 4;
 
 	/** the column name for the ID_CMS field */
-	const ID_CMS = 'djland_cms.ID_CMS';
+	const ID_CMS = OOPS_MODEL_CMS_ID_CMS;
 
 	/** the column name for the ID_CMS_CATEGORY field */
-	const ID_CMS_CATEGORY = 'djland_cms.ID_CMS_CATEGORY';
+	const ID_CMS_CATEGORY = OOPS_MODEL_CMS_ID_CMS_CATEGORY;
 
 	/** the column name for the POSITION field */
-	const POSITION = 'djland_cms.POSITION';
+	const POSITION = OOPS_MODEL_CMS_POSITION;
 
 	/** the column name for the ACTIVE field */
-	const ACTIVE = 'djland_cms.ACTIVE';
+	const ACTIVE = OOPS_MODEL_CMS_ACTIVE;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -354,7 +360,7 @@ abstract class Oops_Model_Base_CmsPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_cms
+	 * Method to invalidate the instance pool of all tables related to cms
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -574,7 +580,7 @@ abstract class Oops_Model_Base_CmsPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_cms table.
+	 * Deletes all rows from the cms table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

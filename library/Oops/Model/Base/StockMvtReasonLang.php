@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_stock_mvt_reason_lang' table.
+ * Base class that represents a row from the 'stock_mvt_reason_lang' table.
  *
  * 
  *
@@ -404,7 +404,7 @@ abstract class Oops_Model_Base_StockMvtReasonLang extends BaseObject  implements
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_stock_mvt_reason_lang` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'stock_mvt_reason_lang` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

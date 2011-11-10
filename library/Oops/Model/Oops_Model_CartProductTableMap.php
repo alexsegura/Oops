@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_cart_product' table.
+ * This class defines the structure of the 'cart_product' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_CartProductTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_cart_product');
+		$this->setName(_DB_PREFIX_ . 'cart_product');
 		$this->setPhpName('CartProduct');
 		$this->setClassname('Oops_Model_CartProduct');
 		$this->setPackage('prestashop');

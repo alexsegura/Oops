@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_referrer_cache' table.
+ * This class defines the structure of the 'referrer_cache' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_ReferrerCacheTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_referrer_cache');
+		$this->setName(_DB_PREFIX_ . 'referrer_cache');
 		$this->setPhpName('ReferrerCache');
 		$this->setClassname('Oops_Model_ReferrerCache');
 		$this->setPackage('prestashop');

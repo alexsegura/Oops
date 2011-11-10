@@ -1,8 +1,14 @@
 <?php
 
 
+define('OOPS_MODEL_CONTACT_ID_CONTACT', _DB_PREFIX_ . 'contact.ID_CONTACT');
+define('OOPS_MODEL_CONTACT_EMAIL', _DB_PREFIX_ . 'contact.EMAIL');
+define('OOPS_MODEL_CONTACT_CUSTOMER_SERVICE', _DB_PREFIX_ . 'contact.CUSTOMER_SERVICE');
+define('OOPS_MODEL_CONTACT_POSITION', _DB_PREFIX_ . 'contact.POSITION');
+define('OOPS_MODEL_CONTACT_TABLE_NAME', _DB_PREFIX_ . 'contact');
+
 /**
- * Base static class for performing query and update operations on the 'djland_contact' table.
+ * Base static class for performing query and update operations on the 'contact' table.
  *
  * 
  *
@@ -14,7 +20,7 @@ abstract class Oops_Model_Base_ContactPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_contact';
+	const TABLE_NAME = OOPS_MODEL_CONTACT_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_Contact';
@@ -35,16 +41,16 @@ abstract class Oops_Model_Base_ContactPeer {
 	const NUM_HYDRATE_COLUMNS = 4;
 
 	/** the column name for the ID_CONTACT field */
-	const ID_CONTACT = 'djland_contact.ID_CONTACT';
+	const ID_CONTACT = OOPS_MODEL_CONTACT_ID_CONTACT;
 
 	/** the column name for the EMAIL field */
-	const EMAIL = 'djland_contact.EMAIL';
+	const EMAIL = OOPS_MODEL_CONTACT_EMAIL;
 
 	/** the column name for the CUSTOMER_SERVICE field */
-	const CUSTOMER_SERVICE = 'djland_contact.CUSTOMER_SERVICE';
+	const CUSTOMER_SERVICE = OOPS_MODEL_CONTACT_CUSTOMER_SERVICE;
 
 	/** the column name for the POSITION field */
-	const POSITION = 'djland_contact.POSITION';
+	const POSITION = OOPS_MODEL_CONTACT_POSITION;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -354,7 +360,7 @@ abstract class Oops_Model_Base_ContactPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_contact
+	 * Method to invalidate the instance pool of all tables related to contact
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -574,7 +580,7 @@ abstract class Oops_Model_Base_ContactPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_contact table.
+	 * Deletes all rows from the contact table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

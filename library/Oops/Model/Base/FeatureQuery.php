@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_feature' table.
+ * Base class that represents a query for the 'feature' table.
  *
  * 
  *
@@ -108,7 +108,7 @@ abstract class Oops_Model_Base_FeatureQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_FEATURE` FROM `djland_feature` WHERE `ID_FEATURE` = :p0';
+		$sql = 'SELECT `ID_FEATURE` FROM `' . _DB_PREFIX_ . 'feature` WHERE `ID_FEATURE` = :p0';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

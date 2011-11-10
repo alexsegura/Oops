@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_attribute_lang' table.
+ * This class defines the structure of the 'attribute_lang' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_AttributeLangTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_attribute_lang');
+		$this->setName(_DB_PREFIX_ . 'attribute_lang');
 		$this->setPhpName('AttributeLang');
 		$this->setClassname('Oops_Model_AttributeLang');
 		$this->setPackage('prestashop');

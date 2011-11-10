@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_product' table.
+ * Base class that represents a row from the 'product' table.
  *
  * 
  *
@@ -332,6 +332,20 @@ abstract class Oops_Model_Base_Product extends BaseObject  implements Persistent
 	 * @var        boolean
 	 */
 	protected $alreadyInValidation = false;
+
+	// i18n behavior
+	
+	/**
+	 * Current locale
+	 * @var        string
+	 */
+	protected $currentLocale = 'en_EN';
+	
+	/**
+	 * Current translation objects
+	 * @var        array[Oops_Model_ProductLang]
+	 */
+	protected $currentTranslations;
 
 	/**
 	 * An array of objects scheduled for deletion.
@@ -2029,6 +2043,12 @@ abstract class Oops_Model_Base_Product extends BaseObject  implements Persistent
 			if ($ret) {
 				$deleteQuery->delete($con);
 				$this->postDelete($con);
+				// i18n behavior
+				
+				// emulate delete cascade
+				Oops_Model_ProductLangQuery::create()
+					->filterByOops_Model_Product($this)
+					->delete($con);
 				$con->commit();
 				$this->setDeleted(true);
 			} else {
@@ -2365,7 +2385,7 @@ abstract class Oops_Model_Base_Product extends BaseObject  implements Persistent
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_product` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'product` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);
@@ -4050,7 +4070,7 @@ abstract class Oops_Model_Base_Product extends BaseObject  implements Persistent
 
 	/**
 	 * Gets a collection of Oops_Model_Category objects related by a many-to-many relationship
-	 * to the current object by way of the djland_category_product cross-reference table.
+	 * to the current object by way of the category_product cross-reference table.
 	 *
 	 * If the $criteria is not null, it is used to always fetch the results from the database.
 	 * Otherwise the results are fetched from the database the first time, then cached.
@@ -4084,7 +4104,7 @@ abstract class Oops_Model_Base_Product extends BaseObject  implements Persistent
 
 	/**
 	 * Sets a collection of Oops_Model_Category objects related by a many-to-many relationship
-	 * to the current object by way of the djland_category_product cross-reference table.
+	 * to the current object by way of the category_product cross-reference table.
 	 * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
 	 * and new objects from the given Propel collection.
 	 *
@@ -4115,7 +4135,7 @@ abstract class Oops_Model_Base_Product extends BaseObject  implements Persistent
 
 	/**
 	 * Gets the number of Oops_Model_Category objects related by a many-to-many relationship
-	 * to the current object by way of the djland_category_product cross-reference table.
+	 * to the current object by way of the category_product cross-reference table.
 	 *
 	 * @param      Criteria $criteria Optional query object to filter the query
 	 * @param      boolean $distinct Set to true to force count distinct
@@ -4144,7 +4164,7 @@ abstract class Oops_Model_Base_Product extends BaseObject  implements Persistent
 
 	/**
 	 * Associate a Oops_Model_Category object to this object
-	 * through the djland_category_product cross reference table.
+	 * through the category_product cross reference table.
 	 *
 	 * @param      Oops_Model_Category $category The Oops_Model_CategoryProduct object to relate
 	 * @return     void
@@ -4267,6 +4287,9 @@ abstract class Oops_Model_Base_Product extends BaseObject  implements Persistent
 			}
 		} // if ($deep)
 
+		// i18n behavior
+		$this->currentLocale = 'en_EN';
+		$this->currentTranslations = null;
 		if ($this->collCategoryProducts instanceof PropelCollection) {
 			$this->collCategoryProducts->clearIterator();
 		}
@@ -4301,6 +4324,150 @@ abstract class Oops_Model_Base_Product extends BaseObject  implements Persistent
 	public function __toString()
 	{
 		return (string) $this->exportTo(Oops_Model_ProductPeer::DEFAULT_STRING_FORMAT);
+	}
+
+	// i18n behavior
+	
+	/**
+	 * Sets the locale for translations
+	 *
+	 * @param     string $locale Locale to use for the translation, e.g. 'fr_FR'
+	 *
+	 * @return    Oops_Model_Product The current object (for fluent API support)
+	 */
+	public function setLocale($locale = 'en_EN')
+	{
+		$this->currentLocale = $locale;
+	
+		return $this;
+	}
+	
+	/**
+	 * Gets the locale for translations
+	 *
+	 * @return    string $locale Locale to use for the translation, e.g. 'fr_FR'
+	 */
+	public function getLocale()
+	{
+		return $this->currentLocale;
+	}
+	
+	/**
+	 * Returns the current translation for a given locale
+	 *
+	 * @param     string $locale Locale to use for the translation, e.g. 'fr_FR'
+	 * @param     PropelPDO $con an optional connection object
+	 *
+	 * @return Oops_Model_ProductLang */
+	public function getTranslation($locale = 'en_EN', PropelPDO $con = null)
+	{
+		if (!isset($this->currentTranslations[$locale])) {
+			if (null !== $this->collProductLangs) {
+				foreach ($this->collProductLangs as $translation) {
+					if ($translation->getIdLang() == $locale) {
+						$this->currentTranslations[$locale] = $translation;
+						return $translation;
+					}
+				}
+			}
+			if ($this->isNew()) {
+				$translation = new Oops_Model_ProductLang();
+				$translation->setIdLang($locale);
+			} else {
+				$translation = Oops_Model_ProductLangQuery::create()
+					->filterByPrimaryKey(array($this->getPrimaryKey(), $locale))
+					->findOneOrCreate($con);
+				$this->currentTranslations[$locale] = $translation;
+			}
+			$this->addProductLang($translation);
+		}
+	
+		return $this->currentTranslations[$locale];
+	}
+	
+	/**
+	 * Remove the translation for a given locale
+	 *
+	 * @param     string $locale Locale to use for the translation, e.g. 'fr_FR'
+	 * @param     PropelPDO $con an optional connection object
+	 *
+	 * @return    Oops_Model_Product The current object (for fluent API support)
+	 */
+	public function removeTranslation($locale = 'en_EN', PropelPDO $con = null)
+	{
+		if (!$this->isNew()) {
+			Oops_Model_ProductLangQuery::create()
+				->filterByPrimaryKey(array($this->getPrimaryKey(), $locale))
+				->delete($con);
+		}
+		if (isset($this->currentTranslations[$locale])) {
+			unset($this->currentTranslations[$locale]);
+		}
+		foreach ($this->collProductLangs as $key => $translation) {
+			if ($translation->getIdLang() == $locale) {
+				unset($this->collProductLangs[$key]);
+				break;
+			}
+		}
+	
+		return $this;
+	}
+	
+	/**
+	 * Returns the current translation
+	 *
+	 * @param     PropelPDO $con an optional connection object
+	 *
+	 * @return Oops_Model_ProductLang */
+	public function getCurrentTranslation(PropelPDO $con = null)
+	{
+		return $this->getTranslation($this->getLocale(), $con);
+	}
+	
+	
+	/**
+	 * Get the [name] column value.
+	 * 
+	 * @return     string
+	 */
+	public function getName()
+	{	return $this->getCurrentTranslation()->getName();
+	}
+	
+	
+	/**
+	 * Set the value of [name] column.
+	 * 
+	 * @param      string $v new value
+	 * @return     Oops_Model_Product The current object (for fluent API support)
+	 */
+	public function setName($v)
+	{	$this->getCurrentTranslation()->setName($v);
+	
+		return $this;
+	}
+	
+	
+	/**
+	 * Get the [description] column value.
+	 * 
+	 * @return     string
+	 */
+	public function getDescription()
+	{	return $this->getCurrentTranslation()->getDescription();
+	}
+	
+	
+	/**
+	 * Set the value of [description] column.
+	 * 
+	 * @param      string $v new value
+	 * @return     Oops_Model_Product The current object (for fluent API support)
+	 */
+	public function setDescription($v)
+	{	$this->getCurrentTranslation()->setDescription($v);
+	
+		return $this;
 	}
 
 } // Oops_Model_Base_Product

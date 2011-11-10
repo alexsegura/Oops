@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_guest' table.
+ * This class defines the structure of the 'guest' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_GuestTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_guest');
+		$this->setName(_DB_PREFIX_ . 'guest');
 		$this->setPhpName('Guest');
 		$this->setClassname('Oops_Model_Guest');
 		$this->setPackage('prestashop');

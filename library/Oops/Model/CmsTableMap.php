@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_cms' table.
+ * This class defines the structure of the 'cms' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_CmsTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_cms');
+		$this->setName(_DB_PREFIX_ . 'cms');
 		$this->setPhpName('Cms');
 		$this->setClassname('Oops_Model_Cms');
 		$this->setPackage('prestashop');

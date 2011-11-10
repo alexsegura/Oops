@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_product_group_reduction_cache' table.
+ * Base class that represents a row from the 'product_group_reduction_cache' table.
  *
  * 
  *
@@ -404,7 +404,7 @@ abstract class Oops_Model_Base_ProductGroupReductionCache extends BaseObject  im
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_product_group_reduction_cache` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'product_group_reduction_cache` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

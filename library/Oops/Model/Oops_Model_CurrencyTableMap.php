@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_currency' table.
+ * This class defines the structure of the 'currency' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_CurrencyTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_currency');
+		$this->setName(_DB_PREFIX_ . 'currency');
 		$this->setPhpName('Currency');
 		$this->setClassname('Oops_Model_Currency');
 		$this->setPackage('prestashop');

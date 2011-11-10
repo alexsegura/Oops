@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_editorial_lang' table.
+ * This class defines the structure of the 'editorial_lang' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_EditorialLangTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_editorial_lang');
+		$this->setName(_DB_PREFIX_ . 'editorial_lang');
 		$this->setPhpName('EditorialLang');
 		$this->setClassname('Oops_Model_EditorialLang');
 		$this->setPackage('prestashop');

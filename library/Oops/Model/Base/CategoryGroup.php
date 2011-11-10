@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_category_group' table.
+ * Base class that represents a row from the 'category_group' table.
  *
  * 
  *
@@ -364,7 +364,7 @@ abstract class Oops_Model_Base_CategoryGroup extends BaseObject  implements Pers
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_category_group` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'category_group` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_group_reduction' table.
+ * This class defines the structure of the 'group_reduction' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_GroupReductionTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_group_reduction');
+		$this->setName(_DB_PREFIX_ . 'group_reduction');
 		$this->setPhpName('GroupReduction');
 		$this->setClassname('Oops_Model_GroupReduction');
 		$this->setPackage('prestashop');

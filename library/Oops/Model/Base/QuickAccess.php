@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_quick_access' table.
+ * Base class that represents a row from the 'quick_access' table.
  *
  * 
  *
@@ -442,7 +442,7 @@ abstract class Oops_Model_Base_QuickAccess extends BaseObject  implements Persis
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_quick_access` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'quick_access` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

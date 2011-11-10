@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_search_index' table.
+ * Base class that represents a row from the 'search_index' table.
  *
  * 
  *
@@ -430,7 +430,7 @@ abstract class Oops_Model_Base_SearchIndex extends BaseObject  implements Persis
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_search_index` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'search_index` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

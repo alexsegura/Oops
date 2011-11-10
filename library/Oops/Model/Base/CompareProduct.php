@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_compare_product' table.
+ * Base class that represents a row from the 'compare_product' table.
  *
  * 
  *
@@ -588,7 +588,7 @@ abstract class Oops_Model_Base_CompareProduct extends BaseObject  implements Per
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_compare_product` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'compare_product` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

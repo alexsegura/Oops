@@ -1,8 +1,13 @@
 <?php
 
 
+define('OOPS_MODEL_PACK_ID_PRODUCT_PACK', _DB_PREFIX_ . 'pack.ID_PRODUCT_PACK');
+define('OOPS_MODEL_PACK_ID_PRODUCT_ITEM', _DB_PREFIX_ . 'pack.ID_PRODUCT_ITEM');
+define('OOPS_MODEL_PACK_QUANTITY', _DB_PREFIX_ . 'pack.QUANTITY');
+define('OOPS_MODEL_PACK_TABLE_NAME', _DB_PREFIX_ . 'pack');
+
 /**
- * Base static class for performing query and update operations on the 'djland_pack' table.
+ * Base static class for performing query and update operations on the 'pack' table.
  *
  * 
  *
@@ -14,7 +19,7 @@ abstract class Oops_Model_Base_PackPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_pack';
+	const TABLE_NAME = OOPS_MODEL_PACK_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_Pack';
@@ -35,13 +40,13 @@ abstract class Oops_Model_Base_PackPeer {
 	const NUM_HYDRATE_COLUMNS = 3;
 
 	/** the column name for the ID_PRODUCT_PACK field */
-	const ID_PRODUCT_PACK = 'djland_pack.ID_PRODUCT_PACK';
+	const ID_PRODUCT_PACK = OOPS_MODEL_PACK_ID_PRODUCT_PACK;
 
 	/** the column name for the ID_PRODUCT_ITEM field */
-	const ID_PRODUCT_ITEM = 'djland_pack.ID_PRODUCT_ITEM';
+	const ID_PRODUCT_ITEM = OOPS_MODEL_PACK_ID_PRODUCT_ITEM;
 
 	/** the column name for the QUANTITY field */
-	const QUANTITY = 'djland_pack.QUANTITY';
+	const QUANTITY = OOPS_MODEL_PACK_QUANTITY;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -349,7 +354,7 @@ abstract class Oops_Model_Base_PackPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_pack
+	 * Method to invalidate the instance pool of all tables related to pack
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -573,7 +578,7 @@ abstract class Oops_Model_Base_PackPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_pack table.
+	 * Deletes all rows from the pack table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

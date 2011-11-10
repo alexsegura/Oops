@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_help_access' table.
+ * Base class that represents a row from the 'help_access' table.
  *
  * 
  *
@@ -408,7 +408,7 @@ abstract class Oops_Model_Base_HelpAccess extends BaseObject  implements Persist
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_help_access` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'help_access` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

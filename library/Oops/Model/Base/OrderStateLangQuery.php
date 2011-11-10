@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_order_state_lang' table.
+ * Base class that represents a query for the 'order_state_lang' table.
  *
  * 
  *
@@ -120,7 +120,7 @@ abstract class Oops_Model_Base_OrderStateLangQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_ORDER_STATE`, `ID_LANG`, `NAME`, `TEMPLATE` FROM `djland_order_state_lang` WHERE `ID_ORDER_STATE` = :p0';
+		$sql = 'SELECT `ID_ORDER_STATE`, `ID_LANG`, `NAME`, `TEMPLATE` FROM `' . _DB_PREFIX_ . 'order_state_lang` WHERE `ID_ORDER_STATE` = :p0';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

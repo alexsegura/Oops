@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_range_weight' table.
+ * Base class that represents a row from the 'range_weight' table.
  *
  * 
  *
@@ -448,7 +448,7 @@ abstract class Oops_Model_Base_RangeWeight extends BaseObject  implements Persis
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_range_weight` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'range_weight` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

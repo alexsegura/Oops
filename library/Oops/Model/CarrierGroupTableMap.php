@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_carrier_group' table.
+ * This class defines the structure of the 'carrier_group' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_CarrierGroupTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_carrier_group');
+		$this->setName(_DB_PREFIX_ . 'carrier_group');
 		$this->setPhpName('CarrierGroup');
 		$this->setClassname('Oops_Model_CarrierGroup');
 		$this->setPackage('prestashop');

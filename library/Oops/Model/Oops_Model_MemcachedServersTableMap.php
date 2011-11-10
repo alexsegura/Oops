@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_memcached_servers' table.
+ * This class defines the structure of the 'memcached_servers' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_MemcachedServersTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_memcached_servers');
+		$this->setName(_DB_PREFIX_ . 'memcached_servers');
 		$this->setPhpName('MemcachedServers');
 		$this->setClassname('Oops_Model_MemcachedServers');
 		$this->setPackage('prestashop');

@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_customer_message' table.
+ * This class defines the structure of the 'customer_message' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_CustomerMessageTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_customer_message');
+		$this->setName(_DB_PREFIX_ . 'customer_message');
 		$this->setPhpName('CustomerMessage');
 		$this->setClassname('Oops_Model_CustomerMessage');
 		$this->setPackage('prestashop');

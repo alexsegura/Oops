@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_stock_mvt' table.
+ * Base class that represents a query for the 'stock_mvt' table.
  *
  * 
  *
@@ -148,7 +148,7 @@ abstract class Oops_Model_Base_StockMvtQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_STOCK_MVT`, `ID_PRODUCT`, `ID_PRODUCT_ATTRIBUTE`, `ID_ORDER`, `ID_STOCK_MVT_REASON`, `ID_EMPLOYEE`, `QUANTITY`, `DATE_ADD`, `DATE_UPD` FROM `djland_stock_mvt` WHERE `ID_STOCK_MVT` = :p0';
+		$sql = 'SELECT `ID_STOCK_MVT`, `ID_PRODUCT`, `ID_PRODUCT_ATTRIBUTE`, `ID_ORDER`, `ID_STOCK_MVT_REASON`, `ID_EMPLOYEE`, `QUANTITY`, `DATE_ADD`, `DATE_UPD` FROM `' . _DB_PREFIX_ . 'stock_mvt` WHERE `ID_STOCK_MVT` = :p0';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

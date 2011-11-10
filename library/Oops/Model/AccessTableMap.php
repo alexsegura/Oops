@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_access' table.
+ * This class defines the structure of the 'access' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_AccessTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_access');
+		$this->setName(_DB_PREFIX_ . 'access');
 		$this->setPhpName('Access');
 		$this->setClassname('Oops_Model_Access');
 		$this->setPackage('prestashop');

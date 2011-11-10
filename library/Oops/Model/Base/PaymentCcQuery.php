@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_payment_cc' table.
+ * Base class that represents a query for the 'payment_cc' table.
  *
  * 
  *
@@ -144,7 +144,7 @@ abstract class Oops_Model_Base_PaymentCcQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_PAYMENT_CC`, `ID_ORDER`, `ID_CURRENCY`, `AMOUNT`, `TRANSACTION_ID`, `CARD_NUMBER`, `CARD_BRAND`, `CARD_EXPIRATION`, `CARD_HOLDER`, `DATE_ADD` FROM `djland_payment_cc` WHERE `ID_PAYMENT_CC` = :p0';
+		$sql = 'SELECT `ID_PAYMENT_CC`, `ID_ORDER`, `ID_CURRENCY`, `AMOUNT`, `TRANSACTION_ID`, `CARD_NUMBER`, `CARD_BRAND`, `CARD_EXPIRATION`, `CARD_HOLDER`, `DATE_ADD` FROM `' . _DB_PREFIX_ . 'payment_cc` WHERE `ID_PAYMENT_CC` = :p0';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

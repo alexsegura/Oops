@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_lang' table.
+ * Base class that represents a query for the 'lang' table.
  *
  * 
  *
@@ -136,7 +136,7 @@ abstract class Oops_Model_Base_LangQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_LANG`, `NAME`, `ACTIVE`, `ISO_CODE`, `LANGUAGE_CODE`, `IS_RTL` FROM `djland_lang` WHERE `ID_LANG` = :p0';
+		$sql = 'SELECT `ID_LANG`, `NAME`, `ACTIVE`, `ISO_CODE`, `LANGUAGE_CODE`, `IS_RTL` FROM `' . _DB_PREFIX_ . 'lang` WHERE `ID_LANG` = :p0';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -545,7 +545,7 @@ abstract class Oops_Model_Base_LangQuery extends ModelCriteria
 
 	/**
 	 * Filter the query by a related Category object
-	 * using the djland_category_lang table as cross reference
+	 * using the category_lang table as cross reference
 	 *
 	 * @param     Category $category the related object to use as filter
 	 * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL

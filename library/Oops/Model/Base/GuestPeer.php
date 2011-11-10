@@ -1,8 +1,25 @@
 <?php
 
 
+define('OOPS_MODEL_GUEST_ID_GUEST', _DB_PREFIX_ . 'guest.ID_GUEST');
+define('OOPS_MODEL_GUEST_ID_OPERATING_SYSTEM', _DB_PREFIX_ . 'guest.ID_OPERATING_SYSTEM');
+define('OOPS_MODEL_GUEST_ID_WEB_BROWSER', _DB_PREFIX_ . 'guest.ID_WEB_BROWSER');
+define('OOPS_MODEL_GUEST_ID_CUSTOMER', _DB_PREFIX_ . 'guest.ID_CUSTOMER');
+define('OOPS_MODEL_GUEST_JAVASCRIPT', _DB_PREFIX_ . 'guest.JAVASCRIPT');
+define('OOPS_MODEL_GUEST_SCREEN_RESOLUTION_X', _DB_PREFIX_ . 'guest.SCREEN_RESOLUTION_X');
+define('OOPS_MODEL_GUEST_SCREEN_RESOLUTION_Y', _DB_PREFIX_ . 'guest.SCREEN_RESOLUTION_Y');
+define('OOPS_MODEL_GUEST_SCREEN_COLOR', _DB_PREFIX_ . 'guest.SCREEN_COLOR');
+define('OOPS_MODEL_GUEST_SUN_JAVA', _DB_PREFIX_ . 'guest.SUN_JAVA');
+define('OOPS_MODEL_GUEST_ADOBE_FLASH', _DB_PREFIX_ . 'guest.ADOBE_FLASH');
+define('OOPS_MODEL_GUEST_ADOBE_DIRECTOR', _DB_PREFIX_ . 'guest.ADOBE_DIRECTOR');
+define('OOPS_MODEL_GUEST_APPLE_QUICKTIME', _DB_PREFIX_ . 'guest.APPLE_QUICKTIME');
+define('OOPS_MODEL_GUEST_REAL_PLAYER', _DB_PREFIX_ . 'guest.REAL_PLAYER');
+define('OOPS_MODEL_GUEST_WINDOWS_MEDIA', _DB_PREFIX_ . 'guest.WINDOWS_MEDIA');
+define('OOPS_MODEL_GUEST_ACCEPT_LANGUAGE', _DB_PREFIX_ . 'guest.ACCEPT_LANGUAGE');
+define('OOPS_MODEL_GUEST_TABLE_NAME', _DB_PREFIX_ . 'guest');
+
 /**
- * Base static class for performing query and update operations on the 'djland_guest' table.
+ * Base static class for performing query and update operations on the 'guest' table.
  *
  * 
  *
@@ -14,7 +31,7 @@ abstract class Oops_Model_Base_GuestPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_guest';
+	const TABLE_NAME = OOPS_MODEL_GUEST_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_Guest';
@@ -35,49 +52,49 @@ abstract class Oops_Model_Base_GuestPeer {
 	const NUM_HYDRATE_COLUMNS = 15;
 
 	/** the column name for the ID_GUEST field */
-	const ID_GUEST = 'djland_guest.ID_GUEST';
+	const ID_GUEST = OOPS_MODEL_GUEST_ID_GUEST;
 
 	/** the column name for the ID_OPERATING_SYSTEM field */
-	const ID_OPERATING_SYSTEM = 'djland_guest.ID_OPERATING_SYSTEM';
+	const ID_OPERATING_SYSTEM = OOPS_MODEL_GUEST_ID_OPERATING_SYSTEM;
 
 	/** the column name for the ID_WEB_BROWSER field */
-	const ID_WEB_BROWSER = 'djland_guest.ID_WEB_BROWSER';
+	const ID_WEB_BROWSER = OOPS_MODEL_GUEST_ID_WEB_BROWSER;
 
 	/** the column name for the ID_CUSTOMER field */
-	const ID_CUSTOMER = 'djland_guest.ID_CUSTOMER';
+	const ID_CUSTOMER = OOPS_MODEL_GUEST_ID_CUSTOMER;
 
 	/** the column name for the JAVASCRIPT field */
-	const JAVASCRIPT = 'djland_guest.JAVASCRIPT';
+	const JAVASCRIPT = OOPS_MODEL_GUEST_JAVASCRIPT;
 
 	/** the column name for the SCREEN_RESOLUTION_X field */
-	const SCREEN_RESOLUTION_X = 'djland_guest.SCREEN_RESOLUTION_X';
+	const SCREEN_RESOLUTION_X = OOPS_MODEL_GUEST_SCREEN_RESOLUTION_X;
 
 	/** the column name for the SCREEN_RESOLUTION_Y field */
-	const SCREEN_RESOLUTION_Y = 'djland_guest.SCREEN_RESOLUTION_Y';
+	const SCREEN_RESOLUTION_Y = OOPS_MODEL_GUEST_SCREEN_RESOLUTION_Y;
 
 	/** the column name for the SCREEN_COLOR field */
-	const SCREEN_COLOR = 'djland_guest.SCREEN_COLOR';
+	const SCREEN_COLOR = OOPS_MODEL_GUEST_SCREEN_COLOR;
 
 	/** the column name for the SUN_JAVA field */
-	const SUN_JAVA = 'djland_guest.SUN_JAVA';
+	const SUN_JAVA = OOPS_MODEL_GUEST_SUN_JAVA;
 
 	/** the column name for the ADOBE_FLASH field */
-	const ADOBE_FLASH = 'djland_guest.ADOBE_FLASH';
+	const ADOBE_FLASH = OOPS_MODEL_GUEST_ADOBE_FLASH;
 
 	/** the column name for the ADOBE_DIRECTOR field */
-	const ADOBE_DIRECTOR = 'djland_guest.ADOBE_DIRECTOR';
+	const ADOBE_DIRECTOR = OOPS_MODEL_GUEST_ADOBE_DIRECTOR;
 
 	/** the column name for the APPLE_QUICKTIME field */
-	const APPLE_QUICKTIME = 'djland_guest.APPLE_QUICKTIME';
+	const APPLE_QUICKTIME = OOPS_MODEL_GUEST_APPLE_QUICKTIME;
 
 	/** the column name for the REAL_PLAYER field */
-	const REAL_PLAYER = 'djland_guest.REAL_PLAYER';
+	const REAL_PLAYER = OOPS_MODEL_GUEST_REAL_PLAYER;
 
 	/** the column name for the WINDOWS_MEDIA field */
-	const WINDOWS_MEDIA = 'djland_guest.WINDOWS_MEDIA';
+	const WINDOWS_MEDIA = OOPS_MODEL_GUEST_WINDOWS_MEDIA;
 
 	/** the column name for the ACCEPT_LANGUAGE field */
-	const ACCEPT_LANGUAGE = 'djland_guest.ACCEPT_LANGUAGE';
+	const ACCEPT_LANGUAGE = OOPS_MODEL_GUEST_ACCEPT_LANGUAGE;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -409,7 +426,7 @@ abstract class Oops_Model_Base_GuestPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_guest
+	 * Method to invalidate the instance pool of all tables related to guest
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -629,7 +646,7 @@ abstract class Oops_Model_Base_GuestPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_guest table.
+	 * Deletes all rows from the guest table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_alias' table.
+ * Base class that represents a query for the 'alias' table.
  *
  * 
  *
@@ -120,7 +120,7 @@ abstract class Oops_Model_Base_AliasQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_ALIAS`, `ALIAS`, `SEARCH`, `ACTIVE` FROM `djland_alias` WHERE `ID_ALIAS` = :p0';
+		$sql = 'SELECT `ID_ALIAS`, `ALIAS`, `SEARCH`, `ACTIVE` FROM `' . _DB_PREFIX_ . 'alias` WHERE `ID_ALIAS` = :p0';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

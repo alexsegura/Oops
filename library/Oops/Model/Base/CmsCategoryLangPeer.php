@@ -1,8 +1,18 @@
 <?php
 
 
+define('OOPS_MODEL_CMSCATEGORYLANG_ID_CMS_CATEGORY', _DB_PREFIX_ . 'cms_category_lang.ID_CMS_CATEGORY');
+define('OOPS_MODEL_CMSCATEGORYLANG_ID_LANG', _DB_PREFIX_ . 'cms_category_lang.ID_LANG');
+define('OOPS_MODEL_CMSCATEGORYLANG_NAME', _DB_PREFIX_ . 'cms_category_lang.NAME');
+define('OOPS_MODEL_CMSCATEGORYLANG_DESCRIPTION', _DB_PREFIX_ . 'cms_category_lang.DESCRIPTION');
+define('OOPS_MODEL_CMSCATEGORYLANG_LINK_REWRITE', _DB_PREFIX_ . 'cms_category_lang.LINK_REWRITE');
+define('OOPS_MODEL_CMSCATEGORYLANG_META_TITLE', _DB_PREFIX_ . 'cms_category_lang.META_TITLE');
+define('OOPS_MODEL_CMSCATEGORYLANG_META_KEYWORDS', _DB_PREFIX_ . 'cms_category_lang.META_KEYWORDS');
+define('OOPS_MODEL_CMSCATEGORYLANG_META_DESCRIPTION', _DB_PREFIX_ . 'cms_category_lang.META_DESCRIPTION');
+define('OOPS_MODEL_CMSCATEGORYLANG_TABLE_NAME', _DB_PREFIX_ . 'cms_category_lang');
+
 /**
- * Base static class for performing query and update operations on the 'djland_cms_category_lang' table.
+ * Base static class for performing query and update operations on the 'cms_category_lang' table.
  *
  * 
  *
@@ -14,7 +24,7 @@ abstract class Oops_Model_Base_CmsCategoryLangPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_cms_category_lang';
+	const TABLE_NAME = OOPS_MODEL_CMSCATEGORYLANG_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_CmsCategoryLang';
@@ -35,28 +45,28 @@ abstract class Oops_Model_Base_CmsCategoryLangPeer {
 	const NUM_HYDRATE_COLUMNS = 8;
 
 	/** the column name for the ID_CMS_CATEGORY field */
-	const ID_CMS_CATEGORY = 'djland_cms_category_lang.ID_CMS_CATEGORY';
+	const ID_CMS_CATEGORY = OOPS_MODEL_CMSCATEGORYLANG_ID_CMS_CATEGORY;
 
 	/** the column name for the ID_LANG field */
-	const ID_LANG = 'djland_cms_category_lang.ID_LANG';
+	const ID_LANG = OOPS_MODEL_CMSCATEGORYLANG_ID_LANG;
 
 	/** the column name for the NAME field */
-	const NAME = 'djland_cms_category_lang.NAME';
+	const NAME = OOPS_MODEL_CMSCATEGORYLANG_NAME;
 
 	/** the column name for the DESCRIPTION field */
-	const DESCRIPTION = 'djland_cms_category_lang.DESCRIPTION';
+	const DESCRIPTION = OOPS_MODEL_CMSCATEGORYLANG_DESCRIPTION;
 
 	/** the column name for the LINK_REWRITE field */
-	const LINK_REWRITE = 'djland_cms_category_lang.LINK_REWRITE';
+	const LINK_REWRITE = OOPS_MODEL_CMSCATEGORYLANG_LINK_REWRITE;
 
 	/** the column name for the META_TITLE field */
-	const META_TITLE = 'djland_cms_category_lang.META_TITLE';
+	const META_TITLE = OOPS_MODEL_CMSCATEGORYLANG_META_TITLE;
 
 	/** the column name for the META_KEYWORDS field */
-	const META_KEYWORDS = 'djland_cms_category_lang.META_KEYWORDS';
+	const META_KEYWORDS = OOPS_MODEL_CMSCATEGORYLANG_META_KEYWORDS;
 
 	/** the column name for the META_DESCRIPTION field */
-	const META_DESCRIPTION = 'djland_cms_category_lang.META_DESCRIPTION';
+	const META_DESCRIPTION = OOPS_MODEL_CMSCATEGORYLANG_META_DESCRIPTION;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -374,7 +384,7 @@ abstract class Oops_Model_Base_CmsCategoryLangPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_cms_category_lang
+	 * Method to invalidate the instance pool of all tables related to cms_category_lang
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -590,7 +600,7 @@ abstract class Oops_Model_Base_CmsCategoryLangPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_cms_category_lang table.
+	 * Deletes all rows from the cms_category_lang table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

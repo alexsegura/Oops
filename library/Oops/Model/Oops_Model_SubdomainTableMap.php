@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_subdomain' table.
+ * This class defines the structure of the 'subdomain' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_SubdomainTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_subdomain');
+		$this->setName(_DB_PREFIX_ . 'subdomain');
 		$this->setPhpName('Subdomain');
 		$this->setClassname('Oops_Model_Subdomain');
 		$this->setPackage('prestashop');

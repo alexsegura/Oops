@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_supplier' table.
+ * Base class that represents a query for the 'supplier' table.
  *
  * 
  *
@@ -128,7 +128,7 @@ abstract class Oops_Model_Base_SupplierQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_SUPPLIER`, `NAME`, `DATE_ADD`, `DATE_UPD`, `ACTIVE` FROM `djland_supplier` WHERE `ID_SUPPLIER` = :p0';
+		$sql = 'SELECT `ID_SUPPLIER`, `NAME`, `DATE_ADD`, `DATE_UPD`, `ACTIVE` FROM `' . _DB_PREFIX_ . 'supplier` WHERE `ID_SUPPLIER` = :p0';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_country' table.
+ * Base class that represents a query for the 'country' table.
  *
  * 
  *
@@ -148,7 +148,7 @@ abstract class Oops_Model_Base_CountryQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_COUNTRY`, `ID_ZONE`, `ID_CURRENCY`, `ISO_CODE`, `CALL_PREFIX`, `ACTIVE`, `CONTAINS_STATES`, `NEED_IDENTIFICATION_NUMBER`, `NEED_ZIP_CODE`, `ZIP_CODE_FORMAT`, `DISPLAY_TAX_LABEL` FROM `djland_country` WHERE `ID_COUNTRY` = :p0';
+		$sql = 'SELECT `ID_COUNTRY`, `ID_ZONE`, `ID_CURRENCY`, `ISO_CODE`, `CALL_PREFIX`, `ACTIVE`, `CONTAINS_STATES`, `NEED_IDENTIFICATION_NUMBER`, `NEED_ZIP_CODE`, `ZIP_CODE_FORMAT`, `DISPLAY_TAX_LABEL` FROM `' . _DB_PREFIX_ . 'country` WHERE `ID_COUNTRY` = :p0';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

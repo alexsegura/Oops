@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_web_browser' table.
+ * This class defines the structure of the 'web_browser' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_WebBrowserTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_web_browser');
+		$this->setName(_DB_PREFIX_ . 'web_browser');
 		$this->setPhpName('WebBrowser');
 		$this->setClassname('Oops_Model_WebBrowser');
 		$this->setPackage('prestashop');

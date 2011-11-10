@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_operating_system' table.
+ * Base class that represents a query for the 'operating_system' table.
  *
  * 
  *
@@ -112,7 +112,7 @@ abstract class Oops_Model_Base_OperatingSystemQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_OPERATING_SYSTEM`, `NAME` FROM `djland_operating_system` WHERE `ID_OPERATING_SYSTEM` = :p0';
+		$sql = 'SELECT `ID_OPERATING_SYSTEM`, `NAME` FROM `' . _DB_PREFIX_ . 'operating_system` WHERE `ID_OPERATING_SYSTEM` = :p0';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

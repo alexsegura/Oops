@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_module_group' table.
+ * Base class that represents a query for the 'module_group' table.
  *
  * 
  *
@@ -112,7 +112,7 @@ abstract class Oops_Model_Base_ModuleGroupQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_MODULE`, `ID_GROUP` FROM `djland_module_group` WHERE `ID_MODULE` = :p0 AND `ID_GROUP` = :p1';
+		$sql = 'SELECT `ID_MODULE`, `ID_GROUP` FROM `' . _DB_PREFIX_ . 'module_group` WHERE `ID_MODULE` = :p0 AND `ID_GROUP` = :p1';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key[0], PDO::PARAM_INT);

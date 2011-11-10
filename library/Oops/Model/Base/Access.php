@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_access' table.
+ * Base class that represents a row from the 'access' table.
  *
  * 
  *
@@ -524,7 +524,7 @@ abstract class Oops_Model_Base_Access extends BaseObject  implements Persistent
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_access` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'access` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

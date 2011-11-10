@@ -1,8 +1,15 @@
 <?php
 
 
+define('OOPS_MODEL_TAB_ID_TAB', _DB_PREFIX_ . 'tab.ID_TAB');
+define('OOPS_MODEL_TAB_ID_PARENT', _DB_PREFIX_ . 'tab.ID_PARENT');
+define('OOPS_MODEL_TAB_CLASS_NAME', _DB_PREFIX_ . 'tab.CLASS_NAME');
+define('OOPS_MODEL_TAB_MODULE', _DB_PREFIX_ . 'tab.MODULE');
+define('OOPS_MODEL_TAB_POSITION', _DB_PREFIX_ . 'tab.POSITION');
+define('OOPS_MODEL_TAB_TABLE_NAME', _DB_PREFIX_ . 'tab');
+
 /**
- * Base static class for performing query and update operations on the 'djland_tab' table.
+ * Base static class for performing query and update operations on the 'tab' table.
  *
  * 
  *
@@ -14,7 +21,7 @@ abstract class Oops_Model_Base_TabPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_tab';
+	const TABLE_NAME = OOPS_MODEL_TAB_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_Tab';
@@ -35,19 +42,19 @@ abstract class Oops_Model_Base_TabPeer {
 	const NUM_HYDRATE_COLUMNS = 5;
 
 	/** the column name for the ID_TAB field */
-	const ID_TAB = 'djland_tab.ID_TAB';
+	const ID_TAB = OOPS_MODEL_TAB_ID_TAB;
 
 	/** the column name for the ID_PARENT field */
-	const ID_PARENT = 'djland_tab.ID_PARENT';
+	const ID_PARENT = OOPS_MODEL_TAB_ID_PARENT;
 
 	/** the column name for the CLASS_NAME field */
-	const CLASS_NAME = 'djland_tab.CLASS_NAME';
+	const CLASS_NAME = OOPS_MODEL_TAB_CLASS_NAME;
 
 	/** the column name for the MODULE field */
-	const MODULE = 'djland_tab.MODULE';
+	const MODULE = OOPS_MODEL_TAB_MODULE;
 
 	/** the column name for the POSITION field */
-	const POSITION = 'djland_tab.POSITION';
+	const POSITION = OOPS_MODEL_TAB_POSITION;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -359,7 +366,7 @@ abstract class Oops_Model_Base_TabPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_tab
+	 * Method to invalidate the instance pool of all tables related to tab
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -579,7 +586,7 @@ abstract class Oops_Model_Base_TabPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_tab table.
+	 * Deletes all rows from the tab table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

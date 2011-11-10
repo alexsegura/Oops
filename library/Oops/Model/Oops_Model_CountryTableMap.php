@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_country' table.
+ * This class defines the structure of the 'country' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_CountryTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_country');
+		$this->setName(_DB_PREFIX_ . 'country');
 		$this->setPhpName('Country');
 		$this->setClassname('Oops_Model_Country');
 		$this->setPackage('prestashop');

@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_product_country_tax' table.
+ * Base class that represents a row from the 'product_country_tax' table.
  *
  * 
  *
@@ -404,7 +404,7 @@ abstract class Oops_Model_Base_ProductCountryTax extends BaseObject  implements 
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_product_country_tax` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'product_country_tax` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

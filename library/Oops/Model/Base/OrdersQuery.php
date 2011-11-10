@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_orders' table.
+ * Base class that represents a query for the 'orders' table.
  *
  * 
  *
@@ -228,7 +228,7 @@ abstract class Oops_Model_Base_OrdersQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_ORDER`, `ID_CARRIER`, `ID_LANG`, `ID_CUSTOMER`, `ID_CART`, `ID_CURRENCY`, `ID_ADDRESS_DELIVERY`, `ID_ADDRESS_INVOICE`, `SECURE_KEY`, `PAYMENT`, `CONVERSION_RATE`, `MODULE`, `RECYCLABLE`, `GIFT`, `GIFT_MESSAGE`, `SHIPPING_NUMBER`, `TOTAL_DISCOUNTS`, `TOTAL_PAID`, `TOTAL_PAID_REAL`, `TOTAL_PRODUCTS`, `TOTAL_PRODUCTS_WT`, `TOTAL_SHIPPING`, `CARRIER_TAX_RATE`, `TOTAL_WRAPPING`, `INVOICE_NUMBER`, `DELIVERY_NUMBER`, `INVOICE_DATE`, `DELIVERY_DATE`, `VALID`, `DATE_ADD`, `DATE_UPD` FROM `djland_orders` WHERE `ID_ORDER` = :p0';
+		$sql = 'SELECT `ID_ORDER`, `ID_CARRIER`, `ID_LANG`, `ID_CUSTOMER`, `ID_CART`, `ID_CURRENCY`, `ID_ADDRESS_DELIVERY`, `ID_ADDRESS_INVOICE`, `SECURE_KEY`, `PAYMENT`, `CONVERSION_RATE`, `MODULE`, `RECYCLABLE`, `GIFT`, `GIFT_MESSAGE`, `SHIPPING_NUMBER`, `TOTAL_DISCOUNTS`, `TOTAL_PAID`, `TOTAL_PAID_REAL`, `TOTAL_PRODUCTS`, `TOTAL_PRODUCTS_WT`, `TOTAL_SHIPPING`, `CARRIER_TAX_RATE`, `TOTAL_WRAPPING`, `INVOICE_NUMBER`, `DELIVERY_NUMBER`, `INVOICE_DATE`, `DELIVERY_DATE`, `VALID`, `DATE_ADD`, `DATE_UPD` FROM `' . _DB_PREFIX_ . 'orders` WHERE `ID_ORDER` = :p0';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

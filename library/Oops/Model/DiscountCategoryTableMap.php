@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_discount_category' table.
+ * This class defines the structure of the 'discount_category' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_DiscountCategoryTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_discount_category');
+		$this->setName(_DB_PREFIX_ . 'discount_category');
 		$this->setPhpName('DiscountCategory');
 		$this->setClassname('Oops_Model_DiscountCategory');
 		$this->setPackage('prestashop');

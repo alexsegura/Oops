@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_referrer' table.
+ * Base class that represents a query for the 'referrer' table.
  *
  * 
  *
@@ -196,7 +196,7 @@ abstract class Oops_Model_Base_ReferrerQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_REFERRER`, `NAME`, `PASSWD`, `HTTP_REFERER_REGEXP`, `HTTP_REFERER_LIKE`, `REQUEST_URI_REGEXP`, `REQUEST_URI_LIKE`, `HTTP_REFERER_REGEXP_NOT`, `HTTP_REFERER_LIKE_NOT`, `REQUEST_URI_REGEXP_NOT`, `REQUEST_URI_LIKE_NOT`, `BASE_FEE`, `PERCENT_FEE`, `CLICK_FEE`, `CACHE_VISITORS`, `CACHE_VISITS`, `CACHE_PAGES`, `CACHE_REGISTRATIONS`, `CACHE_ORDERS`, `CACHE_SALES`, `CACHE_REG_RATE`, `CACHE_ORDER_RATE`, `DATE_ADD` FROM `djland_referrer` WHERE `ID_REFERRER` = :p0';
+		$sql = 'SELECT `ID_REFERRER`, `NAME`, `PASSWD`, `HTTP_REFERER_REGEXP`, `HTTP_REFERER_LIKE`, `REQUEST_URI_REGEXP`, `REQUEST_URI_LIKE`, `HTTP_REFERER_REGEXP_NOT`, `HTTP_REFERER_LIKE_NOT`, `REQUEST_URI_REGEXP_NOT`, `REQUEST_URI_LIKE_NOT`, `BASE_FEE`, `PERCENT_FEE`, `CLICK_FEE`, `CACHE_VISITORS`, `CACHE_VISITS`, `CACHE_PAGES`, `CACHE_REGISTRATIONS`, `CACHE_ORDERS`, `CACHE_SALES`, `CACHE_REG_RATE`, `CACHE_ORDER_RATE`, `DATE_ADD` FROM `' . _DB_PREFIX_ . 'referrer` WHERE `ID_REFERRER` = :p0';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_product_download' table.
+ * Base class that represents a row from the 'product_download' table.
  *
  * 
  *
@@ -748,7 +748,7 @@ abstract class Oops_Model_Base_ProductDownload extends BaseObject  implements Pe
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_product_download` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'product_download` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

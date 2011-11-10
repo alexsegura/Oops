@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_group_reduction' table.
+ * Base class that represents a row from the 'group_reduction' table.
  *
  * 
  *
@@ -448,7 +448,7 @@ abstract class Oops_Model_Base_GroupReduction extends BaseObject  implements Per
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_group_reduction` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'group_reduction` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_order_discount' table.
+ * Base class that represents a query for the 'order_discount' table.
  *
  * 
  *
@@ -124,7 +124,7 @@ abstract class Oops_Model_Base_OrderDiscountQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_ORDER_DISCOUNT`, `ID_ORDER`, `ID_DISCOUNT`, `NAME`, `VALUE` FROM `djland_order_discount` WHERE `ID_ORDER_DISCOUNT` = :p0';
+		$sql = 'SELECT `ID_ORDER_DISCOUNT`, `ID_ORDER`, `ID_DISCOUNT`, `NAME`, `VALUE` FROM `' . _DB_PREFIX_ . 'order_discount` WHERE `ID_ORDER_DISCOUNT` = :p0';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_referrer_cache' table.
+ * Base class that represents a row from the 'referrer_cache' table.
  *
  * 
  *
@@ -364,7 +364,7 @@ abstract class Oops_Model_Base_ReferrerCache extends BaseObject  implements Pers
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_referrer_cache` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'referrer_cache` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

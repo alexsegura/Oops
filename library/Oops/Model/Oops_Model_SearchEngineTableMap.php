@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_search_engine' table.
+ * This class defines the structure of the 'search_engine' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_SearchEngineTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_search_engine');
+		$this->setName(_DB_PREFIX_ . 'search_engine');
 		$this->setPhpName('SearchEngine');
 		$this->setClassname('Oops_Model_SearchEngine');
 		$this->setPackage('prestashop');

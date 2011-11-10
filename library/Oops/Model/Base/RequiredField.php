@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_required_field' table.
+ * Base class that represents a row from the 'required_field' table.
  *
  * 
  *
@@ -408,7 +408,7 @@ abstract class Oops_Model_Base_RequiredField extends BaseObject  implements Pers
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_required_field` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'required_field` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

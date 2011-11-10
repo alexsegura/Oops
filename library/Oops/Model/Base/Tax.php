@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_tax' table.
+ * Base class that represents a row from the 'tax' table.
  *
  * 
  *
@@ -442,7 +442,7 @@ abstract class Oops_Model_Base_Tax extends BaseObject  implements Persistent
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_tax` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'tax` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

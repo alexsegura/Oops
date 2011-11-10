@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_customer_message' table.
+ * Base class that represents a row from the 'customer_message' table.
  *
  * 
  *
@@ -638,7 +638,7 @@ abstract class Oops_Model_Base_CustomerMessage extends BaseObject  implements Pe
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_customer_message` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'customer_message` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

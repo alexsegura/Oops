@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_order_message_lang' table.
+ * Base class that represents a query for the 'order_message_lang' table.
  *
  * 
  *
@@ -120,7 +120,7 @@ abstract class Oops_Model_Base_OrderMessageLangQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_ORDER_MESSAGE`, `ID_LANG`, `NAME`, `MESSAGE` FROM `djland_order_message_lang` WHERE `ID_ORDER_MESSAGE` = :p0 AND `ID_LANG` = :p1';
+		$sql = 'SELECT `ID_ORDER_MESSAGE`, `ID_LANG`, `NAME`, `MESSAGE` FROM `' . _DB_PREFIX_ . 'order_message_lang` WHERE `ID_ORDER_MESSAGE` = :p0 AND `ID_LANG` = :p1';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key[0], PDO::PARAM_INT);

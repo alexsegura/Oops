@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_product_tag' table.
+ * Base class that represents a row from the 'product_tag' table.
  *
  * 
  *
@@ -364,7 +364,7 @@ abstract class Oops_Model_Base_ProductTag extends BaseObject  implements Persist
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_product_tag` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'product_tag` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

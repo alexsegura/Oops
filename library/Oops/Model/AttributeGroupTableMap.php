@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_attribute_group' table.
+ * This class defines the structure of the 'attribute_group' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_AttributeGroupTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_attribute_group');
+		$this->setName(_DB_PREFIX_ . 'attribute_group');
 		$this->setPhpName('AttributeGroup');
 		$this->setClassname('Oops_Model_AttributeGroup');
 		$this->setPackage('prestashop');

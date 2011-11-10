@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_scene_lang' table.
+ * This class defines the structure of the 'scene_lang' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_SceneLangTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_scene_lang');
+		$this->setName(_DB_PREFIX_ . 'scene_lang');
 		$this->setPhpName('SceneLang');
 		$this->setClassname('Oops_Model_SceneLang');
 		$this->setPackage('prestashop');

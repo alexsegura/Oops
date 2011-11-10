@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_help_access' table.
+ * Base class that represents a query for the 'help_access' table.
  *
  * 
  *
@@ -116,7 +116,7 @@ abstract class Oops_Model_Base_HelpAccessQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_HELP_ACCESS`, `LABEL`, `VERSION` FROM `djland_help_access` WHERE `ID_HELP_ACCESS` = :p0';
+		$sql = 'SELECT `ID_HELP_ACCESS`, `LABEL`, `VERSION` FROM `' . _DB_PREFIX_ . 'help_access` WHERE `ID_HELP_ACCESS` = :p0';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

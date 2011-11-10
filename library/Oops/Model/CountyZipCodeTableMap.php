@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_county_zip_code' table.
+ * This class defines the structure of the 'county_zip_code' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_CountyZipCodeTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_county_zip_code');
+		$this->setName(_DB_PREFIX_ . 'county_zip_code');
 		$this->setPhpName('CountyZipCode');
 		$this->setClassname('Oops_Model_CountyZipCode');
 		$this->setPackage('prestashop');

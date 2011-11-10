@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_country' table.
+ * Base class that represents a row from the 'country' table.
  *
  * 
  *
@@ -830,7 +830,7 @@ abstract class Oops_Model_Base_Country extends BaseObject  implements Persistent
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_country` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'country` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

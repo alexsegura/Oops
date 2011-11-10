@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_module' table.
+ * Base class that represents a query for the 'module' table.
  *
  * 
  *
@@ -116,7 +116,7 @@ abstract class Oops_Model_Base_ModuleQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_MODULE`, `NAME`, `ACTIVE` FROM `djland_module` WHERE `ID_MODULE` = :p0';
+		$sql = 'SELECT `ID_MODULE`, `NAME`, `ACTIVE` FROM `' . _DB_PREFIX_ . 'module` WHERE `ID_MODULE` = :p0';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

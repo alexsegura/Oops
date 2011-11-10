@@ -1,8 +1,16 @@
 <?php
 
 
+define('OOPS_MODEL_DELIVERY_ID_DELIVERY', _DB_PREFIX_ . 'delivery.ID_DELIVERY');
+define('OOPS_MODEL_DELIVERY_ID_CARRIER', _DB_PREFIX_ . 'delivery.ID_CARRIER');
+define('OOPS_MODEL_DELIVERY_ID_RANGE_PRICE', _DB_PREFIX_ . 'delivery.ID_RANGE_PRICE');
+define('OOPS_MODEL_DELIVERY_ID_RANGE_WEIGHT', _DB_PREFIX_ . 'delivery.ID_RANGE_WEIGHT');
+define('OOPS_MODEL_DELIVERY_ID_ZONE', _DB_PREFIX_ . 'delivery.ID_ZONE');
+define('OOPS_MODEL_DELIVERY_PRICE', _DB_PREFIX_ . 'delivery.PRICE');
+define('OOPS_MODEL_DELIVERY_TABLE_NAME', _DB_PREFIX_ . 'delivery');
+
 /**
- * Base static class for performing query and update operations on the 'djland_delivery' table.
+ * Base static class for performing query and update operations on the 'delivery' table.
  *
  * 
  *
@@ -14,7 +22,7 @@ abstract class Oops_Model_Base_DeliveryPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_delivery';
+	const TABLE_NAME = OOPS_MODEL_DELIVERY_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_Delivery';
@@ -35,22 +43,22 @@ abstract class Oops_Model_Base_DeliveryPeer {
 	const NUM_HYDRATE_COLUMNS = 6;
 
 	/** the column name for the ID_DELIVERY field */
-	const ID_DELIVERY = 'djland_delivery.ID_DELIVERY';
+	const ID_DELIVERY = OOPS_MODEL_DELIVERY_ID_DELIVERY;
 
 	/** the column name for the ID_CARRIER field */
-	const ID_CARRIER = 'djland_delivery.ID_CARRIER';
+	const ID_CARRIER = OOPS_MODEL_DELIVERY_ID_CARRIER;
 
 	/** the column name for the ID_RANGE_PRICE field */
-	const ID_RANGE_PRICE = 'djland_delivery.ID_RANGE_PRICE';
+	const ID_RANGE_PRICE = OOPS_MODEL_DELIVERY_ID_RANGE_PRICE;
 
 	/** the column name for the ID_RANGE_WEIGHT field */
-	const ID_RANGE_WEIGHT = 'djland_delivery.ID_RANGE_WEIGHT';
+	const ID_RANGE_WEIGHT = OOPS_MODEL_DELIVERY_ID_RANGE_WEIGHT;
 
 	/** the column name for the ID_ZONE field */
-	const ID_ZONE = 'djland_delivery.ID_ZONE';
+	const ID_ZONE = OOPS_MODEL_DELIVERY_ID_ZONE;
 
 	/** the column name for the PRICE field */
-	const PRICE = 'djland_delivery.PRICE';
+	const PRICE = OOPS_MODEL_DELIVERY_PRICE;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -364,7 +372,7 @@ abstract class Oops_Model_Base_DeliveryPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_delivery
+	 * Method to invalidate the instance pool of all tables related to delivery
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -584,7 +592,7 @@ abstract class Oops_Model_Base_DeliveryPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_delivery table.
+	 * Deletes all rows from the delivery table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

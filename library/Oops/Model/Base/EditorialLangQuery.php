@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_editorial_lang' table.
+ * Base class that represents a query for the 'editorial_lang' table.
  *
  * 
  *
@@ -128,7 +128,7 @@ abstract class Oops_Model_Base_EditorialLangQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_EDITORIAL`, `ID_LANG`, `BODY_TITLE`, `BODY_SUBHEADING`, `BODY_PARAGRAPH`, `BODY_LOGO_SUBHEADING` FROM `djland_editorial_lang` WHERE `ID_EDITORIAL` = :p0 AND `ID_LANG` = :p1';
+		$sql = 'SELECT `ID_EDITORIAL`, `ID_LANG`, `BODY_TITLE`, `BODY_SUBHEADING`, `BODY_PARAGRAPH`, `BODY_LOGO_SUBHEADING` FROM `' . _DB_PREFIX_ . 'editorial_lang` WHERE `ID_EDITORIAL` = :p0 AND `ID_LANG` = :p1';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key[0], PDO::PARAM_INT);

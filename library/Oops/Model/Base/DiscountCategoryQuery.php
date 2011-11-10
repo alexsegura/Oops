@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_discount_category' table.
+ * Base class that represents a query for the 'discount_category' table.
  *
  * 
  *
@@ -112,7 +112,7 @@ abstract class Oops_Model_Base_DiscountCategoryQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_CATEGORY`, `ID_DISCOUNT` FROM `djland_discount_category` WHERE `ID_CATEGORY` = :p0 AND `ID_DISCOUNT` = :p1';
+		$sql = 'SELECT `ID_CATEGORY`, `ID_DISCOUNT` FROM `' . _DB_PREFIX_ . 'discount_category` WHERE `ID_CATEGORY` = :p0 AND `ID_DISCOUNT` = :p1';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key[0], PDO::PARAM_INT);

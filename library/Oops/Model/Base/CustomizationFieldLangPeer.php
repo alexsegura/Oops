@@ -1,8 +1,13 @@
 <?php
 
 
+define('OOPS_MODEL_CUSTOMIZATIONFIELDLANG_ID_CUSTOMIZATION_FIELD', _DB_PREFIX_ . 'customization_field_lang.ID_CUSTOMIZATION_FIELD');
+define('OOPS_MODEL_CUSTOMIZATIONFIELDLANG_ID_LANG', _DB_PREFIX_ . 'customization_field_lang.ID_LANG');
+define('OOPS_MODEL_CUSTOMIZATIONFIELDLANG_NAME', _DB_PREFIX_ . 'customization_field_lang.NAME');
+define('OOPS_MODEL_CUSTOMIZATIONFIELDLANG_TABLE_NAME', _DB_PREFIX_ . 'customization_field_lang');
+
 /**
- * Base static class for performing query and update operations on the 'djland_customization_field_lang' table.
+ * Base static class for performing query and update operations on the 'customization_field_lang' table.
  *
  * 
  *
@@ -14,7 +19,7 @@ abstract class Oops_Model_Base_CustomizationFieldLangPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_customization_field_lang';
+	const TABLE_NAME = OOPS_MODEL_CUSTOMIZATIONFIELDLANG_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_CustomizationFieldLang';
@@ -35,13 +40,13 @@ abstract class Oops_Model_Base_CustomizationFieldLangPeer {
 	const NUM_HYDRATE_COLUMNS = 3;
 
 	/** the column name for the ID_CUSTOMIZATION_FIELD field */
-	const ID_CUSTOMIZATION_FIELD = 'djland_customization_field_lang.ID_CUSTOMIZATION_FIELD';
+	const ID_CUSTOMIZATION_FIELD = OOPS_MODEL_CUSTOMIZATIONFIELDLANG_ID_CUSTOMIZATION_FIELD;
 
 	/** the column name for the ID_LANG field */
-	const ID_LANG = 'djland_customization_field_lang.ID_LANG';
+	const ID_LANG = OOPS_MODEL_CUSTOMIZATIONFIELDLANG_ID_LANG;
 
 	/** the column name for the NAME field */
-	const NAME = 'djland_customization_field_lang.NAME';
+	const NAME = OOPS_MODEL_CUSTOMIZATIONFIELDLANG_NAME;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -349,7 +354,7 @@ abstract class Oops_Model_Base_CustomizationFieldLangPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_customization_field_lang
+	 * Method to invalidate the instance pool of all tables related to customization_field_lang
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -573,7 +578,7 @@ abstract class Oops_Model_Base_CustomizationFieldLangPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_customization_field_lang table.
+	 * Deletes all rows from the customization_field_lang table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_carrier_lang' table.
+ * Base class that represents a query for the 'carrier_lang' table.
  *
  * 
  *
@@ -116,7 +116,7 @@ abstract class Oops_Model_Base_CarrierLangQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_CARRIER`, `ID_LANG`, `DELAY` FROM `djland_carrier_lang` WHERE `ID_CARRIER` = :p0';
+		$sql = 'SELECT `ID_CARRIER`, `ID_LANG`, `DELAY` FROM `' . _DB_PREFIX_ . 'carrier_lang` WHERE `ID_CARRIER` = :p0';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

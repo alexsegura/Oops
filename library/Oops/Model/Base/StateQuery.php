@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_state' table.
+ * Base class that represents a query for the 'state' table.
  *
  * 
  *
@@ -132,7 +132,7 @@ abstract class Oops_Model_Base_StateQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_STATE`, `ID_COUNTRY`, `ID_ZONE`, `NAME`, `ISO_CODE`, `TAX_BEHAVIOR`, `ACTIVE` FROM `djland_state` WHERE `ID_STATE` = :p0';
+		$sql = 'SELECT `ID_STATE`, `ID_COUNTRY`, `ID_ZONE`, `NAME`, `ISO_CODE`, `TAX_BEHAVIOR`, `ACTIVE` FROM `' . _DB_PREFIX_ . 'state` WHERE `ID_STATE` = :p0';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

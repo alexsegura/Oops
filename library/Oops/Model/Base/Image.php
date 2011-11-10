@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_image' table.
+ * Base class that represents a row from the 'image' table.
  *
  * 
  *
@@ -513,7 +513,7 @@ abstract class Oops_Model_Base_Image extends BaseObject  implements Persistent
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_image` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'image` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_currency' table.
+ * Base class that represents a query for the 'currency' table.
  *
  * 
  *
@@ -148,7 +148,7 @@ abstract class Oops_Model_Base_CurrencyQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_CURRENCY`, `NAME`, `ISO_CODE`, `ISO_CODE_NUM`, `SIGN`, `BLANK`, `FORMAT`, `DECIMALS`, `CONVERSION_RATE`, `DELETED`, `ACTIVE` FROM `djland_currency` WHERE `ID_CURRENCY` = :p0';
+		$sql = 'SELECT `ID_CURRENCY`, `NAME`, `ISO_CODE`, `ISO_CODE_NUM`, `SIGN`, `BLANK`, `FORMAT`, `DECIMALS`, `CONVERSION_RATE`, `DELETED`, `ACTIVE` FROM `' . _DB_PREFIX_ . 'currency` WHERE `ID_CURRENCY` = :p0';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_meta_lang' table.
+ * Base class that represents a query for the 'meta_lang' table.
  *
  * 
  *
@@ -128,7 +128,7 @@ abstract class Oops_Model_Base_MetaLangQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_META`, `ID_LANG`, `TITLE`, `DESCRIPTION`, `KEYWORDS`, `URL_REWRITE` FROM `djland_meta_lang` WHERE `ID_META` = :p0 AND `ID_LANG` = :p1';
+		$sql = 'SELECT `ID_META`, `ID_LANG`, `TITLE`, `DESCRIPTION`, `KEYWORDS`, `URL_REWRITE` FROM `' . _DB_PREFIX_ . 'meta_lang` WHERE `ID_META` = :p0 AND `ID_LANG` = :p1';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key[0], PDO::PARAM_INT);

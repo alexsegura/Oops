@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_quick_access_lang' table.
+ * Base class that represents a row from the 'quick_access_lang' table.
  *
  * 
  *
@@ -404,7 +404,7 @@ abstract class Oops_Model_Base_QuickAccessLang extends BaseObject  implements Pe
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_quick_access_lang` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'quick_access_lang` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

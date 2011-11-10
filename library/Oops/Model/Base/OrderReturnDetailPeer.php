@@ -1,8 +1,14 @@
 <?php
 
 
+define('OOPS_MODEL_ORDERRETURNDETAIL_ID_ORDER_RETURN', _DB_PREFIX_ . 'order_return_detail.ID_ORDER_RETURN');
+define('OOPS_MODEL_ORDERRETURNDETAIL_ID_ORDER_DETAIL', _DB_PREFIX_ . 'order_return_detail.ID_ORDER_DETAIL');
+define('OOPS_MODEL_ORDERRETURNDETAIL_ID_CUSTOMIZATION', _DB_PREFIX_ . 'order_return_detail.ID_CUSTOMIZATION');
+define('OOPS_MODEL_ORDERRETURNDETAIL_PRODUCT_QUANTITY', _DB_PREFIX_ . 'order_return_detail.PRODUCT_QUANTITY');
+define('OOPS_MODEL_ORDERRETURNDETAIL_TABLE_NAME', _DB_PREFIX_ . 'order_return_detail');
+
 /**
- * Base static class for performing query and update operations on the 'djland_order_return_detail' table.
+ * Base static class for performing query and update operations on the 'order_return_detail' table.
  *
  * 
  *
@@ -14,7 +20,7 @@ abstract class Oops_Model_Base_OrderReturnDetailPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_order_return_detail';
+	const TABLE_NAME = OOPS_MODEL_ORDERRETURNDETAIL_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_OrderReturnDetail';
@@ -35,16 +41,16 @@ abstract class Oops_Model_Base_OrderReturnDetailPeer {
 	const NUM_HYDRATE_COLUMNS = 4;
 
 	/** the column name for the ID_ORDER_RETURN field */
-	const ID_ORDER_RETURN = 'djland_order_return_detail.ID_ORDER_RETURN';
+	const ID_ORDER_RETURN = OOPS_MODEL_ORDERRETURNDETAIL_ID_ORDER_RETURN;
 
 	/** the column name for the ID_ORDER_DETAIL field */
-	const ID_ORDER_DETAIL = 'djland_order_return_detail.ID_ORDER_DETAIL';
+	const ID_ORDER_DETAIL = OOPS_MODEL_ORDERRETURNDETAIL_ID_ORDER_DETAIL;
 
 	/** the column name for the ID_CUSTOMIZATION field */
-	const ID_CUSTOMIZATION = 'djland_order_return_detail.ID_CUSTOMIZATION';
+	const ID_CUSTOMIZATION = OOPS_MODEL_ORDERRETURNDETAIL_ID_CUSTOMIZATION;
 
 	/** the column name for the PRODUCT_QUANTITY field */
-	const PRODUCT_QUANTITY = 'djland_order_return_detail.PRODUCT_QUANTITY';
+	const PRODUCT_QUANTITY = OOPS_MODEL_ORDERRETURNDETAIL_PRODUCT_QUANTITY;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -354,7 +360,7 @@ abstract class Oops_Model_Base_OrderReturnDetailPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_order_return_detail
+	 * Method to invalidate the instance pool of all tables related to order_return_detail
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -586,7 +592,7 @@ abstract class Oops_Model_Base_OrderReturnDetailPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_order_return_detail table.
+	 * Deletes all rows from the order_return_detail table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

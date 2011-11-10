@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_stock_mvt' table.
+ * This class defines the structure of the 'stock_mvt' table.
  *
  *
  *
@@ -32,14 +32,14 @@ class Oops_Model_StockMvtTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_stock_mvt');
+		$this->setName(_DB_PREFIX_ . 'stock_mvt');
 		$this->setPhpName('StockMvt');
 		$this->setClassname('Oops_Model_StockMvt');
 		$this->setPackage('prestashop');
 		$this->setUseIdGenerator(true);
 		// columns
 		$this->addPrimaryKey('ID_STOCK_MVT', 'IdStockMvt', 'INTEGER', true, null, null);
-		$this->addForeignKey('ID_PRODUCT', 'IdProduct', 'INTEGER', 'djland_product', 'ID_PRODUCT', false, null, null);
+		$this->addForeignKey('ID_PRODUCT', 'IdProduct', 'INTEGER', 'product', 'ID_PRODUCT', false, null, null);
 		$this->addColumn('ID_PRODUCT_ATTRIBUTE', 'IdProductAttribute', 'INTEGER', false, null, null);
 		$this->addColumn('ID_ORDER', 'IdOrder', 'INTEGER', false, null, null);
 		$this->addColumn('ID_STOCK_MVT_REASON', 'IdStockMvtReason', 'INTEGER', true, null, null);

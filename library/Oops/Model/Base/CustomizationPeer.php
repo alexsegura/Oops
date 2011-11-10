@@ -1,8 +1,17 @@
 <?php
 
 
+define('OOPS_MODEL_CUSTOMIZATION_ID_CUSTOMIZATION', _DB_PREFIX_ . 'customization.ID_CUSTOMIZATION');
+define('OOPS_MODEL_CUSTOMIZATION_ID_PRODUCT_ATTRIBUTE', _DB_PREFIX_ . 'customization.ID_PRODUCT_ATTRIBUTE');
+define('OOPS_MODEL_CUSTOMIZATION_ID_CART', _DB_PREFIX_ . 'customization.ID_CART');
+define('OOPS_MODEL_CUSTOMIZATION_ID_PRODUCT', _DB_PREFIX_ . 'customization.ID_PRODUCT');
+define('OOPS_MODEL_CUSTOMIZATION_QUANTITY', _DB_PREFIX_ . 'customization.QUANTITY');
+define('OOPS_MODEL_CUSTOMIZATION_QUANTITY_REFUNDED', _DB_PREFIX_ . 'customization.QUANTITY_REFUNDED');
+define('OOPS_MODEL_CUSTOMIZATION_QUANTITY_RETURNED', _DB_PREFIX_ . 'customization.QUANTITY_RETURNED');
+define('OOPS_MODEL_CUSTOMIZATION_TABLE_NAME', _DB_PREFIX_ . 'customization');
+
 /**
- * Base static class for performing query and update operations on the 'djland_customization' table.
+ * Base static class for performing query and update operations on the 'customization' table.
  *
  * 
  *
@@ -14,7 +23,7 @@ abstract class Oops_Model_Base_CustomizationPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_customization';
+	const TABLE_NAME = OOPS_MODEL_CUSTOMIZATION_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_Customization';
@@ -35,25 +44,25 @@ abstract class Oops_Model_Base_CustomizationPeer {
 	const NUM_HYDRATE_COLUMNS = 7;
 
 	/** the column name for the ID_CUSTOMIZATION field */
-	const ID_CUSTOMIZATION = 'djland_customization.ID_CUSTOMIZATION';
+	const ID_CUSTOMIZATION = OOPS_MODEL_CUSTOMIZATION_ID_CUSTOMIZATION;
 
 	/** the column name for the ID_PRODUCT_ATTRIBUTE field */
-	const ID_PRODUCT_ATTRIBUTE = 'djland_customization.ID_PRODUCT_ATTRIBUTE';
+	const ID_PRODUCT_ATTRIBUTE = OOPS_MODEL_CUSTOMIZATION_ID_PRODUCT_ATTRIBUTE;
 
 	/** the column name for the ID_CART field */
-	const ID_CART = 'djland_customization.ID_CART';
+	const ID_CART = OOPS_MODEL_CUSTOMIZATION_ID_CART;
 
 	/** the column name for the ID_PRODUCT field */
-	const ID_PRODUCT = 'djland_customization.ID_PRODUCT';
+	const ID_PRODUCT = OOPS_MODEL_CUSTOMIZATION_ID_PRODUCT;
 
 	/** the column name for the QUANTITY field */
-	const QUANTITY = 'djland_customization.QUANTITY';
+	const QUANTITY = OOPS_MODEL_CUSTOMIZATION_QUANTITY;
 
 	/** the column name for the QUANTITY_REFUNDED field */
-	const QUANTITY_REFUNDED = 'djland_customization.QUANTITY_REFUNDED';
+	const QUANTITY_REFUNDED = OOPS_MODEL_CUSTOMIZATION_QUANTITY_REFUNDED;
 
 	/** the column name for the QUANTITY_RETURNED field */
-	const QUANTITY_RETURNED = 'djland_customization.QUANTITY_RETURNED';
+	const QUANTITY_RETURNED = OOPS_MODEL_CUSTOMIZATION_QUANTITY_RETURNED;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -369,7 +378,7 @@ abstract class Oops_Model_Base_CustomizationPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_customization
+	 * Method to invalidate the instance pool of all tables related to customization
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -605,7 +614,7 @@ abstract class Oops_Model_Base_CustomizationPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_customization table.
+	 * Deletes all rows from the customization table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

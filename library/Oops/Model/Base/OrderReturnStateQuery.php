@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_order_return_state' table.
+ * Base class that represents a query for the 'order_return_state' table.
  *
  * 
  *
@@ -112,7 +112,7 @@ abstract class Oops_Model_Base_OrderReturnStateQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_ORDER_RETURN_STATE`, `COLOR` FROM `djland_order_return_state` WHERE `ID_ORDER_RETURN_STATE` = :p0';
+		$sql = 'SELECT `ID_ORDER_RETURN_STATE`, `COLOR` FROM `' . _DB_PREFIX_ . 'order_return_state` WHERE `ID_ORDER_RETURN_STATE` = :p0';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

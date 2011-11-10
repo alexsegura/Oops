@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_zone' table.
+ * This class defines the structure of the 'zone' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_ZoneTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_zone');
+		$this->setName(_DB_PREFIX_ . 'zone');
 		$this->setPhpName('Zone');
 		$this->setClassname('Oops_Model_Zone');
 		$this->setPackage('prestashop');

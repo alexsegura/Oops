@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_scene' table.
+ * This class defines the structure of the 'scene' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_SceneTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_scene');
+		$this->setName(_DB_PREFIX_ . 'scene');
 		$this->setPhpName('Scene');
 		$this->setClassname('Oops_Model_Scene');
 		$this->setPackage('prestashop');

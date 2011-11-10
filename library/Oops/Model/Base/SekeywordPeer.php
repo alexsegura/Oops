@@ -1,8 +1,13 @@
 <?php
 
 
+define('OOPS_MODEL_SEKEYWORD_ID_SEKEYWORD', _DB_PREFIX_ . 'sekeyword.ID_SEKEYWORD');
+define('OOPS_MODEL_SEKEYWORD_KEYWORD', _DB_PREFIX_ . 'sekeyword.KEYWORD');
+define('OOPS_MODEL_SEKEYWORD_DATE_ADD', _DB_PREFIX_ . 'sekeyword.DATE_ADD');
+define('OOPS_MODEL_SEKEYWORD_TABLE_NAME', _DB_PREFIX_ . 'sekeyword');
+
 /**
- * Base static class for performing query and update operations on the 'djland_sekeyword' table.
+ * Base static class for performing query and update operations on the 'sekeyword' table.
  *
  * 
  *
@@ -14,7 +19,7 @@ abstract class Oops_Model_Base_SekeywordPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_sekeyword';
+	const TABLE_NAME = OOPS_MODEL_SEKEYWORD_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_Sekeyword';
@@ -35,13 +40,13 @@ abstract class Oops_Model_Base_SekeywordPeer {
 	const NUM_HYDRATE_COLUMNS = 3;
 
 	/** the column name for the ID_SEKEYWORD field */
-	const ID_SEKEYWORD = 'djland_sekeyword.ID_SEKEYWORD';
+	const ID_SEKEYWORD = OOPS_MODEL_SEKEYWORD_ID_SEKEYWORD;
 
 	/** the column name for the KEYWORD field */
-	const KEYWORD = 'djland_sekeyword.KEYWORD';
+	const KEYWORD = OOPS_MODEL_SEKEYWORD_KEYWORD;
 
 	/** the column name for the DATE_ADD field */
-	const DATE_ADD = 'djland_sekeyword.DATE_ADD';
+	const DATE_ADD = OOPS_MODEL_SEKEYWORD_DATE_ADD;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -349,7 +354,7 @@ abstract class Oops_Model_Base_SekeywordPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_sekeyword
+	 * Method to invalidate the instance pool of all tables related to sekeyword
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -569,7 +574,7 @@ abstract class Oops_Model_Base_SekeywordPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_sekeyword table.
+	 * Deletes all rows from the sekeyword table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

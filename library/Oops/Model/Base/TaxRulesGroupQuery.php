@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_tax_rules_group' table.
+ * Base class that represents a query for the 'tax_rules_group' table.
  *
  * 
  *
@@ -116,7 +116,7 @@ abstract class Oops_Model_Base_TaxRulesGroupQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_TAX_RULES_GROUP`, `NAME`, `ACTIVE` FROM `djland_tax_rules_group` WHERE `ID_TAX_RULES_GROUP` = :p0';
+		$sql = 'SELECT `ID_TAX_RULES_GROUP`, `NAME`, `ACTIVE` FROM `' . _DB_PREFIX_ . 'tax_rules_group` WHERE `ID_TAX_RULES_GROUP` = :p0';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_configuration' table.
+ * This class defines the structure of the 'configuration' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_ConfigurationTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_configuration');
+		$this->setName(_DB_PREFIX_ . 'configuration');
 		$this->setPhpName('Configuration');
 		$this->setClassname('Oops_Model_Configuration');
 		$this->setPackage('prestashop');

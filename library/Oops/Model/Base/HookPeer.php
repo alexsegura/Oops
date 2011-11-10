@@ -1,8 +1,16 @@
 <?php
 
 
+define('OOPS_MODEL_HOOK_ID_HOOK', _DB_PREFIX_ . 'hook.ID_HOOK');
+define('OOPS_MODEL_HOOK_NAME', _DB_PREFIX_ . 'hook.NAME');
+define('OOPS_MODEL_HOOK_TITLE', _DB_PREFIX_ . 'hook.TITLE');
+define('OOPS_MODEL_HOOK_DESCRIPTION', _DB_PREFIX_ . 'hook.DESCRIPTION');
+define('OOPS_MODEL_HOOK_POSITION', _DB_PREFIX_ . 'hook.POSITION');
+define('OOPS_MODEL_HOOK_LIVE_EDIT', _DB_PREFIX_ . 'hook.LIVE_EDIT');
+define('OOPS_MODEL_HOOK_TABLE_NAME', _DB_PREFIX_ . 'hook');
+
 /**
- * Base static class for performing query and update operations on the 'djland_hook' table.
+ * Base static class for performing query and update operations on the 'hook' table.
  *
  * 
  *
@@ -14,7 +22,7 @@ abstract class Oops_Model_Base_HookPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_hook';
+	const TABLE_NAME = OOPS_MODEL_HOOK_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_Hook';
@@ -35,22 +43,22 @@ abstract class Oops_Model_Base_HookPeer {
 	const NUM_HYDRATE_COLUMNS = 6;
 
 	/** the column name for the ID_HOOK field */
-	const ID_HOOK = 'djland_hook.ID_HOOK';
+	const ID_HOOK = OOPS_MODEL_HOOK_ID_HOOK;
 
 	/** the column name for the NAME field */
-	const NAME = 'djland_hook.NAME';
+	const NAME = OOPS_MODEL_HOOK_NAME;
 
 	/** the column name for the TITLE field */
-	const TITLE = 'djland_hook.TITLE';
+	const TITLE = OOPS_MODEL_HOOK_TITLE;
 
 	/** the column name for the DESCRIPTION field */
-	const DESCRIPTION = 'djland_hook.DESCRIPTION';
+	const DESCRIPTION = OOPS_MODEL_HOOK_DESCRIPTION;
 
 	/** the column name for the POSITION field */
-	const POSITION = 'djland_hook.POSITION';
+	const POSITION = OOPS_MODEL_HOOK_POSITION;
 
 	/** the column name for the LIVE_EDIT field */
-	const LIVE_EDIT = 'djland_hook.LIVE_EDIT';
+	const LIVE_EDIT = OOPS_MODEL_HOOK_LIVE_EDIT;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -364,7 +372,7 @@ abstract class Oops_Model_Base_HookPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_hook
+	 * Method to invalidate the instance pool of all tables related to hook
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -584,7 +592,7 @@ abstract class Oops_Model_Base_HookPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_hook table.
+	 * Deletes all rows from the hook table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

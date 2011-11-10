@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_log' table.
+ * This class defines the structure of the 'log' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_LogTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_log');
+		$this->setName(_DB_PREFIX_ . 'log');
 		$this->setPhpName('Log');
 		$this->setClassname('Oops_Model_Log');
 		$this->setPackage('prestashop');

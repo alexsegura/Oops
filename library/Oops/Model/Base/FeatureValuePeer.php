@@ -1,8 +1,13 @@
 <?php
 
 
+define('OOPS_MODEL_FEATUREVALUE_ID_FEATURE_VALUE', _DB_PREFIX_ . 'feature_value.ID_FEATURE_VALUE');
+define('OOPS_MODEL_FEATUREVALUE_ID_FEATURE', _DB_PREFIX_ . 'feature_value.ID_FEATURE');
+define('OOPS_MODEL_FEATUREVALUE_CUSTOM', _DB_PREFIX_ . 'feature_value.CUSTOM');
+define('OOPS_MODEL_FEATUREVALUE_TABLE_NAME', _DB_PREFIX_ . 'feature_value');
+
 /**
- * Base static class for performing query and update operations on the 'djland_feature_value' table.
+ * Base static class for performing query and update operations on the 'feature_value' table.
  *
  * 
  *
@@ -14,7 +19,7 @@ abstract class Oops_Model_Base_FeatureValuePeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_feature_value';
+	const TABLE_NAME = OOPS_MODEL_FEATUREVALUE_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_FeatureValue';
@@ -35,13 +40,13 @@ abstract class Oops_Model_Base_FeatureValuePeer {
 	const NUM_HYDRATE_COLUMNS = 3;
 
 	/** the column name for the ID_FEATURE_VALUE field */
-	const ID_FEATURE_VALUE = 'djland_feature_value.ID_FEATURE_VALUE';
+	const ID_FEATURE_VALUE = OOPS_MODEL_FEATUREVALUE_ID_FEATURE_VALUE;
 
 	/** the column name for the ID_FEATURE field */
-	const ID_FEATURE = 'djland_feature_value.ID_FEATURE';
+	const ID_FEATURE = OOPS_MODEL_FEATUREVALUE_ID_FEATURE;
 
 	/** the column name for the CUSTOM field */
-	const CUSTOM = 'djland_feature_value.CUSTOM';
+	const CUSTOM = OOPS_MODEL_FEATUREVALUE_CUSTOM;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -349,7 +354,7 @@ abstract class Oops_Model_Base_FeatureValuePeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_feature_value
+	 * Method to invalidate the instance pool of all tables related to feature_value
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -569,7 +574,7 @@ abstract class Oops_Model_Base_FeatureValuePeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_feature_value table.
+	 * Deletes all rows from the feature_value table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

@@ -1,8 +1,12 @@
 <?php
 
 
+define('OOPS_MODEL_OPERATINGSYSTEM_ID_OPERATING_SYSTEM', _DB_PREFIX_ . 'operating_system.ID_OPERATING_SYSTEM');
+define('OOPS_MODEL_OPERATINGSYSTEM_NAME', _DB_PREFIX_ . 'operating_system.NAME');
+define('OOPS_MODEL_OPERATINGSYSTEM_TABLE_NAME', _DB_PREFIX_ . 'operating_system');
+
 /**
- * Base static class for performing query and update operations on the 'djland_operating_system' table.
+ * Base static class for performing query and update operations on the 'operating_system' table.
  *
  * 
  *
@@ -14,7 +18,7 @@ abstract class Oops_Model_Base_OperatingSystemPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_operating_system';
+	const TABLE_NAME = OOPS_MODEL_OPERATINGSYSTEM_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_OperatingSystem';
@@ -35,10 +39,10 @@ abstract class Oops_Model_Base_OperatingSystemPeer {
 	const NUM_HYDRATE_COLUMNS = 2;
 
 	/** the column name for the ID_OPERATING_SYSTEM field */
-	const ID_OPERATING_SYSTEM = 'djland_operating_system.ID_OPERATING_SYSTEM';
+	const ID_OPERATING_SYSTEM = OOPS_MODEL_OPERATINGSYSTEM_ID_OPERATING_SYSTEM;
 
 	/** the column name for the NAME field */
-	const NAME = 'djland_operating_system.NAME';
+	const NAME = OOPS_MODEL_OPERATINGSYSTEM_NAME;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -344,7 +348,7 @@ abstract class Oops_Model_Base_OperatingSystemPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_operating_system
+	 * Method to invalidate the instance pool of all tables related to operating_system
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -564,7 +568,7 @@ abstract class Oops_Model_Base_OperatingSystemPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_operating_system table.
+	 * Deletes all rows from the operating_system table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

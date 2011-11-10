@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_employee' table.
+ * Base class that represents a query for the 'employee' table.
  *
  * 
  *
@@ -160,7 +160,7 @@ abstract class Oops_Model_Base_EmployeeQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_EMPLOYEE`, `ID_PROFILE`, `ID_LANG`, `LASTNAME`, `FIRSTNAME`, `EMAIL`, `PASSWD`, `LAST_PASSWD_GEN`, `STATS_DATE_FROM`, `STATS_DATE_TO`, `BO_COLOR`, `BO_THEME`, `BO_UIMODE`, `ACTIVE` FROM `djland_employee` WHERE `ID_EMPLOYEE` = :p0';
+		$sql = 'SELECT `ID_EMPLOYEE`, `ID_PROFILE`, `ID_LANG`, `LASTNAME`, `FIRSTNAME`, `EMAIL`, `PASSWD`, `LAST_PASSWD_GEN`, `STATS_DATE_FROM`, `STATS_DATE_TO`, `BO_COLOR`, `BO_THEME`, `BO_UIMODE`, `ACTIVE` FROM `' . _DB_PREFIX_ . 'employee` WHERE `ID_EMPLOYEE` = :p0';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

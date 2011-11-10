@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_hook_module_exceptions' table.
+ * Base class that represents a query for the 'hook_module_exceptions' table.
  *
  * 
  *
@@ -120,7 +120,7 @@ abstract class Oops_Model_Base_HookModuleExceptionsQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_HOOK_MODULE_EXCEPTIONS`, `ID_MODULE`, `ID_HOOK`, `FILE_NAME` FROM `djland_hook_module_exceptions` WHERE `ID_HOOK_MODULE_EXCEPTIONS` = :p0';
+		$sql = 'SELECT `ID_HOOK_MODULE_EXCEPTIONS`, `ID_MODULE`, `ID_HOOK`, `FILE_NAME` FROM `' . _DB_PREFIX_ . 'hook_module_exceptions` WHERE `ID_HOOK_MODULE_EXCEPTIONS` = :p0';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

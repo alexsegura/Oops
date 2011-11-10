@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_supplier' table.
+ * Base class that represents a row from the 'supplier' table.
  *
  * 
  *
@@ -607,7 +607,7 @@ abstract class Oops_Model_Base_Supplier extends BaseObject  implements Persisten
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_supplier` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'supplier` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

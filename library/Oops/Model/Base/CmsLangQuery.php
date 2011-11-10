@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_cms_lang' table.
+ * Base class that represents a query for the 'cms_lang' table.
  *
  * 
  *
@@ -132,7 +132,7 @@ abstract class Oops_Model_Base_CmsLangQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_CMS`, `ID_LANG`, `META_TITLE`, `META_DESCRIPTION`, `META_KEYWORDS`, `CONTENT`, `LINK_REWRITE` FROM `djland_cms_lang` WHERE `ID_CMS` = :p0 AND `ID_LANG` = :p1';
+		$sql = 'SELECT `ID_CMS`, `ID_LANG`, `META_TITLE`, `META_DESCRIPTION`, `META_KEYWORDS`, `CONTENT`, `LINK_REWRITE` FROM `' . _DB_PREFIX_ . 'cms_lang` WHERE `ID_CMS` = :p0 AND `ID_LANG` = :p1';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key[0], PDO::PARAM_INT);

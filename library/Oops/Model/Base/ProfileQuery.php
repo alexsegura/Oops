@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_profile' table.
+ * Base class that represents a query for the 'profile' table.
  *
  * 
  *
@@ -108,7 +108,7 @@ abstract class Oops_Model_Base_ProfileQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_PROFILE` FROM `djland_profile` WHERE `ID_PROFILE` = :p0';
+		$sql = 'SELECT `ID_PROFILE` FROM `' . _DB_PREFIX_ . 'profile` WHERE `ID_PROFILE` = :p0';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

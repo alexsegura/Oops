@@ -1,8 +1,12 @@
 <?php
 
 
+define('OOPS_MODEL_DISCOUNTCATEGORY_ID_CATEGORY', _DB_PREFIX_ . 'discount_category.ID_CATEGORY');
+define('OOPS_MODEL_DISCOUNTCATEGORY_ID_DISCOUNT', _DB_PREFIX_ . 'discount_category.ID_DISCOUNT');
+define('OOPS_MODEL_DISCOUNTCATEGORY_TABLE_NAME', _DB_PREFIX_ . 'discount_category');
+
 /**
- * Base static class for performing query and update operations on the 'djland_discount_category' table.
+ * Base static class for performing query and update operations on the 'discount_category' table.
  *
  * 
  *
@@ -14,7 +18,7 @@ abstract class Oops_Model_Base_DiscountCategoryPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_discount_category';
+	const TABLE_NAME = OOPS_MODEL_DISCOUNTCATEGORY_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_DiscountCategory';
@@ -35,10 +39,10 @@ abstract class Oops_Model_Base_DiscountCategoryPeer {
 	const NUM_HYDRATE_COLUMNS = 2;
 
 	/** the column name for the ID_CATEGORY field */
-	const ID_CATEGORY = 'djland_discount_category.ID_CATEGORY';
+	const ID_CATEGORY = OOPS_MODEL_DISCOUNTCATEGORY_ID_CATEGORY;
 
 	/** the column name for the ID_DISCOUNT field */
-	const ID_DISCOUNT = 'djland_discount_category.ID_DISCOUNT';
+	const ID_DISCOUNT = OOPS_MODEL_DISCOUNTCATEGORY_ID_DISCOUNT;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -344,7 +348,7 @@ abstract class Oops_Model_Base_DiscountCategoryPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_discount_category
+	 * Method to invalidate the instance pool of all tables related to discount_category
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -568,7 +572,7 @@ abstract class Oops_Model_Base_DiscountCategoryPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_discount_category table.
+	 * Deletes all rows from the discount_category table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

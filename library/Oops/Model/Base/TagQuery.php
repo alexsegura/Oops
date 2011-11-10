@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_tag' table.
+ * Base class that represents a query for the 'tag' table.
  *
  * 
  *
@@ -116,7 +116,7 @@ abstract class Oops_Model_Base_TagQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_TAG`, `ID_LANG`, `NAME` FROM `djland_tag` WHERE `ID_TAG` = :p0';
+		$sql = 'SELECT `ID_TAG`, `ID_LANG`, `NAME` FROM `' . _DB_PREFIX_ . 'tag` WHERE `ID_TAG` = :p0';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

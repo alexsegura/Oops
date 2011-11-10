@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_customer_thread' table.
+ * Base class that represents a query for the 'customer_thread' table.
  *
  * 
  *
@@ -148,7 +148,7 @@ abstract class Oops_Model_Base_CustomerThreadQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_CUSTOMER_THREAD`, `ID_LANG`, `ID_CONTACT`, `ID_CUSTOMER`, `ID_ORDER`, `ID_PRODUCT`, `STATUS`, `EMAIL`, `TOKEN`, `DATE_ADD`, `DATE_UPD` FROM `djland_customer_thread` WHERE `ID_CUSTOMER_THREAD` = :p0';
+		$sql = 'SELECT `ID_CUSTOMER_THREAD`, `ID_LANG`, `ID_CONTACT`, `ID_CUSTOMER`, `ID_ORDER`, `ID_PRODUCT`, `STATUS`, `EMAIL`, `TOKEN`, `DATE_ADD`, `DATE_UPD` FROM `' . _DB_PREFIX_ . 'customer_thread` WHERE `ID_CUSTOMER_THREAD` = :p0';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

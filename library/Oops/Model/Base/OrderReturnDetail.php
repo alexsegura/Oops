@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_order_return_detail' table.
+ * Base class that represents a row from the 'order_return_detail' table.
  *
  * 
  *
@@ -476,7 +476,7 @@ abstract class Oops_Model_Base_OrderReturnDetail extends BaseObject  implements 
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_order_return_detail` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'order_return_detail` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

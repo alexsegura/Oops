@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_webservice_account' table.
+ * Base class that represents a row from the 'webservice_account' table.
  *
  * 
  *
@@ -600,7 +600,7 @@ abstract class Oops_Model_Base_WebserviceAccount extends BaseObject  implements 
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_webservice_account` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'webservice_account` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

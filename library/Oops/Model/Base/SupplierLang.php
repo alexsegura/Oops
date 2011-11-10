@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a row from the 'djland_supplier_lang' table.
+ * Base class that represents a row from the 'supplier_lang' table.
  *
  * 
  *
@@ -524,7 +524,7 @@ abstract class Oops_Model_Base_SupplierLang extends BaseObject  implements Persi
 		}
 
 		$sql = sprintf(
-			'INSERT INTO `djland_supplier_lang` (%s) VALUES (%s)',
+			'INSERT INTO `' .  _DB_PREFIX_ . 'supplier_lang` (%s) VALUES (%s)',
 			implode(', ', $modifiedColumns),
 			implode(', ', array_keys($modifiedColumns))
 		);

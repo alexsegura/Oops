@@ -1,8 +1,17 @@
 <?php
 
 
+define('OOPS_MODEL_ORDERSLIP_ID_ORDER_SLIP', _DB_PREFIX_ . 'order_slip.ID_ORDER_SLIP');
+define('OOPS_MODEL_ORDERSLIP_CONVERSION_RATE', _DB_PREFIX_ . 'order_slip.CONVERSION_RATE');
+define('OOPS_MODEL_ORDERSLIP_ID_CUSTOMER', _DB_PREFIX_ . 'order_slip.ID_CUSTOMER');
+define('OOPS_MODEL_ORDERSLIP_ID_ORDER', _DB_PREFIX_ . 'order_slip.ID_ORDER');
+define('OOPS_MODEL_ORDERSLIP_SHIPPING_COST', _DB_PREFIX_ . 'order_slip.SHIPPING_COST');
+define('OOPS_MODEL_ORDERSLIP_DATE_ADD', _DB_PREFIX_ . 'order_slip.DATE_ADD');
+define('OOPS_MODEL_ORDERSLIP_DATE_UPD', _DB_PREFIX_ . 'order_slip.DATE_UPD');
+define('OOPS_MODEL_ORDERSLIP_TABLE_NAME', _DB_PREFIX_ . 'order_slip');
+
 /**
- * Base static class for performing query and update operations on the 'djland_order_slip' table.
+ * Base static class for performing query and update operations on the 'order_slip' table.
  *
  * 
  *
@@ -14,7 +23,7 @@ abstract class Oops_Model_Base_OrderSlipPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_order_slip';
+	const TABLE_NAME = OOPS_MODEL_ORDERSLIP_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_OrderSlip';
@@ -35,25 +44,25 @@ abstract class Oops_Model_Base_OrderSlipPeer {
 	const NUM_HYDRATE_COLUMNS = 7;
 
 	/** the column name for the ID_ORDER_SLIP field */
-	const ID_ORDER_SLIP = 'djland_order_slip.ID_ORDER_SLIP';
+	const ID_ORDER_SLIP = OOPS_MODEL_ORDERSLIP_ID_ORDER_SLIP;
 
 	/** the column name for the CONVERSION_RATE field */
-	const CONVERSION_RATE = 'djland_order_slip.CONVERSION_RATE';
+	const CONVERSION_RATE = OOPS_MODEL_ORDERSLIP_CONVERSION_RATE;
 
 	/** the column name for the ID_CUSTOMER field */
-	const ID_CUSTOMER = 'djland_order_slip.ID_CUSTOMER';
+	const ID_CUSTOMER = OOPS_MODEL_ORDERSLIP_ID_CUSTOMER;
 
 	/** the column name for the ID_ORDER field */
-	const ID_ORDER = 'djland_order_slip.ID_ORDER';
+	const ID_ORDER = OOPS_MODEL_ORDERSLIP_ID_ORDER;
 
 	/** the column name for the SHIPPING_COST field */
-	const SHIPPING_COST = 'djland_order_slip.SHIPPING_COST';
+	const SHIPPING_COST = OOPS_MODEL_ORDERSLIP_SHIPPING_COST;
 
 	/** the column name for the DATE_ADD field */
-	const DATE_ADD = 'djland_order_slip.DATE_ADD';
+	const DATE_ADD = OOPS_MODEL_ORDERSLIP_DATE_ADD;
 
 	/** the column name for the DATE_UPD field */
-	const DATE_UPD = 'djland_order_slip.DATE_UPD';
+	const DATE_UPD = OOPS_MODEL_ORDERSLIP_DATE_UPD;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -369,7 +378,7 @@ abstract class Oops_Model_Base_OrderSlipPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_order_slip
+	 * Method to invalidate the instance pool of all tables related to order_slip
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -589,7 +598,7 @@ abstract class Oops_Model_Base_OrderSlipPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_order_slip table.
+	 * Deletes all rows from the order_slip table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

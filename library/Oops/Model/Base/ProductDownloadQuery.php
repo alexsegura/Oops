@@ -2,7 +2,7 @@
 
 
 /**
- * Base class that represents a query for the 'djland_product_download' table.
+ * Base class that represents a query for the 'product_download' table.
  *
  * 
  *
@@ -140,7 +140,7 @@ abstract class Oops_Model_Base_ProductDownloadQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_PRODUCT_DOWNLOAD`, `ID_PRODUCT`, `DISPLAY_FILENAME`, `PHYSICALLY_FILENAME`, `DATE_DEPOSIT`, `DATE_EXPIRATION`, `NB_DAYS_ACCESSIBLE`, `NB_DOWNLOADABLE`, `ACTIVE` FROM `djland_product_download` WHERE `ID_PRODUCT_DOWNLOAD` = :p0';
+		$sql = 'SELECT `ID_PRODUCT_DOWNLOAD`, `ID_PRODUCT`, `DISPLAY_FILENAME`, `PHYSICALLY_FILENAME`, `DATE_DEPOSIT`, `DATE_EXPIRATION`, `NB_DAYS_ACCESSIBLE`, `NB_DOWNLOADABLE`, `ACTIVE` FROM `' . _DB_PREFIX_ . 'product_download` WHERE `ID_PRODUCT_DOWNLOAD` = :p0';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

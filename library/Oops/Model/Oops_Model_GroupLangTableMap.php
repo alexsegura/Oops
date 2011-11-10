@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_group_lang' table.
+ * This class defines the structure of the 'group_lang' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_GroupLangTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_group_lang');
+		$this->setName(_DB_PREFIX_ . 'group_lang');
 		$this->setPhpName('GroupLang');
 		$this->setClassname('Oops_Model_GroupLang');
 		$this->setPackage('prestashop');

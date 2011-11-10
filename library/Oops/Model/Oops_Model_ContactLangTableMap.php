@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'djland_contact_lang' table.
+ * This class defines the structure of the 'contact_lang' table.
  *
  *
  *
@@ -32,7 +32,7 @@ class Oops_Model_ContactLangTableMap extends TableMap
 	public function initialize()
 	{
 		// attributes
-		$this->setName('djland_contact_lang');
+		$this->setName(_DB_PREFIX_ . 'contact_lang');
 		$this->setPhpName('ContactLang');
 		$this->setClassname('Oops_Model_ContactLang');
 		$this->setPackage('prestashop');

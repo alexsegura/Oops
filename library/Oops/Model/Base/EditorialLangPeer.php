@@ -1,8 +1,16 @@
 <?php
 
 
+define('OOPS_MODEL_EDITORIALLANG_ID_EDITORIAL', _DB_PREFIX_ . 'editorial_lang.ID_EDITORIAL');
+define('OOPS_MODEL_EDITORIALLANG_ID_LANG', _DB_PREFIX_ . 'editorial_lang.ID_LANG');
+define('OOPS_MODEL_EDITORIALLANG_BODY_TITLE', _DB_PREFIX_ . 'editorial_lang.BODY_TITLE');
+define('OOPS_MODEL_EDITORIALLANG_BODY_SUBHEADING', _DB_PREFIX_ . 'editorial_lang.BODY_SUBHEADING');
+define('OOPS_MODEL_EDITORIALLANG_BODY_PARAGRAPH', _DB_PREFIX_ . 'editorial_lang.BODY_PARAGRAPH');
+define('OOPS_MODEL_EDITORIALLANG_BODY_LOGO_SUBHEADING', _DB_PREFIX_ . 'editorial_lang.BODY_LOGO_SUBHEADING');
+define('OOPS_MODEL_EDITORIALLANG_TABLE_NAME', _DB_PREFIX_ . 'editorial_lang');
+
 /**
- * Base static class for performing query and update operations on the 'djland_editorial_lang' table.
+ * Base static class for performing query and update operations on the 'editorial_lang' table.
  *
  * 
  *
@@ -14,7 +22,7 @@ abstract class Oops_Model_Base_EditorialLangPeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_editorial_lang';
+	const TABLE_NAME = OOPS_MODEL_EDITORIALLANG_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_EditorialLang';
@@ -35,22 +43,22 @@ abstract class Oops_Model_Base_EditorialLangPeer {
 	const NUM_HYDRATE_COLUMNS = 6;
 
 	/** the column name for the ID_EDITORIAL field */
-	const ID_EDITORIAL = 'djland_editorial_lang.ID_EDITORIAL';
+	const ID_EDITORIAL = OOPS_MODEL_EDITORIALLANG_ID_EDITORIAL;
 
 	/** the column name for the ID_LANG field */
-	const ID_LANG = 'djland_editorial_lang.ID_LANG';
+	const ID_LANG = OOPS_MODEL_EDITORIALLANG_ID_LANG;
 
 	/** the column name for the BODY_TITLE field */
-	const BODY_TITLE = 'djland_editorial_lang.BODY_TITLE';
+	const BODY_TITLE = OOPS_MODEL_EDITORIALLANG_BODY_TITLE;
 
 	/** the column name for the BODY_SUBHEADING field */
-	const BODY_SUBHEADING = 'djland_editorial_lang.BODY_SUBHEADING';
+	const BODY_SUBHEADING = OOPS_MODEL_EDITORIALLANG_BODY_SUBHEADING;
 
 	/** the column name for the BODY_PARAGRAPH field */
-	const BODY_PARAGRAPH = 'djland_editorial_lang.BODY_PARAGRAPH';
+	const BODY_PARAGRAPH = OOPS_MODEL_EDITORIALLANG_BODY_PARAGRAPH;
 
 	/** the column name for the BODY_LOGO_SUBHEADING field */
-	const BODY_LOGO_SUBHEADING = 'djland_editorial_lang.BODY_LOGO_SUBHEADING';
+	const BODY_LOGO_SUBHEADING = OOPS_MODEL_EDITORIALLANG_BODY_LOGO_SUBHEADING;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -364,7 +372,7 @@ abstract class Oops_Model_Base_EditorialLangPeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_editorial_lang
+	 * Method to invalidate the instance pool of all tables related to editorial_lang
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -588,7 +596,7 @@ abstract class Oops_Model_Base_EditorialLangPeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_editorial_lang table.
+	 * Deletes all rows from the editorial_lang table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).

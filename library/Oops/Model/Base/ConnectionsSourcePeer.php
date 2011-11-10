@@ -1,8 +1,16 @@
 <?php
 
 
+define('OOPS_MODEL_CONNECTIONSSOURCE_ID_CONNECTIONS_SOURCE', _DB_PREFIX_ . 'connections_source.ID_CONNECTIONS_SOURCE');
+define('OOPS_MODEL_CONNECTIONSSOURCE_ID_CONNECTIONS', _DB_PREFIX_ . 'connections_source.ID_CONNECTIONS');
+define('OOPS_MODEL_CONNECTIONSSOURCE_HTTP_REFERER', _DB_PREFIX_ . 'connections_source.HTTP_REFERER');
+define('OOPS_MODEL_CONNECTIONSSOURCE_REQUEST_URI', _DB_PREFIX_ . 'connections_source.REQUEST_URI');
+define('OOPS_MODEL_CONNECTIONSSOURCE_KEYWORDS', _DB_PREFIX_ . 'connections_source.KEYWORDS');
+define('OOPS_MODEL_CONNECTIONSSOURCE_DATE_ADD', _DB_PREFIX_ . 'connections_source.DATE_ADD');
+define('OOPS_MODEL_CONNECTIONSSOURCE_TABLE_NAME', _DB_PREFIX_ . 'connections_source');
+
 /**
- * Base static class for performing query and update operations on the 'djland_connections_source' table.
+ * Base static class for performing query and update operations on the 'connections_source' table.
  *
  * 
  *
@@ -14,7 +22,7 @@ abstract class Oops_Model_Base_ConnectionsSourcePeer {
 	const DATABASE_NAME = 'prestashop';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'djland_connections_source';
+	const TABLE_NAME = OOPS_MODEL_CONNECTIONSSOURCE_TABLE_NAME;
 
 	/** the related Propel class for this table */
 	const OM_CLASS = 'Oops_Model_ConnectionsSource';
@@ -35,22 +43,22 @@ abstract class Oops_Model_Base_ConnectionsSourcePeer {
 	const NUM_HYDRATE_COLUMNS = 6;
 
 	/** the column name for the ID_CONNECTIONS_SOURCE field */
-	const ID_CONNECTIONS_SOURCE = 'djland_connections_source.ID_CONNECTIONS_SOURCE';
+	const ID_CONNECTIONS_SOURCE = OOPS_MODEL_CONNECTIONSSOURCE_ID_CONNECTIONS_SOURCE;
 
 	/** the column name for the ID_CONNECTIONS field */
-	const ID_CONNECTIONS = 'djland_connections_source.ID_CONNECTIONS';
+	const ID_CONNECTIONS = OOPS_MODEL_CONNECTIONSSOURCE_ID_CONNECTIONS;
 
 	/** the column name for the HTTP_REFERER field */
-	const HTTP_REFERER = 'djland_connections_source.HTTP_REFERER';
+	const HTTP_REFERER = OOPS_MODEL_CONNECTIONSSOURCE_HTTP_REFERER;
 
 	/** the column name for the REQUEST_URI field */
-	const REQUEST_URI = 'djland_connections_source.REQUEST_URI';
+	const REQUEST_URI = OOPS_MODEL_CONNECTIONSSOURCE_REQUEST_URI;
 
 	/** the column name for the KEYWORDS field */
-	const KEYWORDS = 'djland_connections_source.KEYWORDS';
+	const KEYWORDS = OOPS_MODEL_CONNECTIONSSOURCE_KEYWORDS;
 
 	/** the column name for the DATE_ADD field */
-	const DATE_ADD = 'djland_connections_source.DATE_ADD';
+	const DATE_ADD = OOPS_MODEL_CONNECTIONSSOURCE_DATE_ADD;
 
 	/** The default string format for model objects of the related table **/
 	const DEFAULT_STRING_FORMAT = 'YAML';
@@ -364,7 +372,7 @@ abstract class Oops_Model_Base_ConnectionsSourcePeer {
 	}
 	
 	/**
-	 * Method to invalidate the instance pool of all tables related to djland_connections_source
+	 * Method to invalidate the instance pool of all tables related to connections_source
 	 * by a foreign key with ON DELETE CASCADE
 	 */
 	public static function clearRelatedInstancePool()
@@ -584,7 +592,7 @@ abstract class Oops_Model_Base_ConnectionsSourcePeer {
 	}
 
 	/**
-	 * Deletes all rows from the djland_connections_source table.
+	 * Deletes all rows from the connections_source table.
 	 *
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int The number of affected rows (if supported by underlying database driver).
