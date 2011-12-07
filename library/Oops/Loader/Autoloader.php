@@ -6,12 +6,25 @@ class Oops_Loader_Autoloader {
 	
 	private function __construct() {
 		
-		$dbPath = realpath(dirname(__FILE__) . '/../../../db/');
-		
 		require_once 'propel/Propel.php';
 		
-		Propel :: init("$dbPath/build/conf/prestashop-conf.php");
-		// set_include_path("$dbPath/build/classes" . PATH_SEPARATOR . get_include_path());
+		Propel :: setConfiguration(array(
+  			'datasources' => array(
+    			'prestashop' => array(
+			    	'adapter' => 'mysql',
+			    	'connection' => array (
+				        'dsn' 		=> 'mysql:host=' . _DB_SERVER_ . ';dbname=' . _DB_NAME_,
+				        'user' 		=> _DB_USER_,
+				        'password' 	=> _DB_PASSWD_
+      				),
+    			),
+    			'default' => 'prestashop',
+  			),
+  			'generator_version' => '1.6.3',
+		));
+		Propel :: initialize();
+		
+		define('OOPS_LIBRARY_PATH', realpath(dirname(__FILE__) . '/../../../library'));
 		
 	}
 	
