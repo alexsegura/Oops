@@ -71,6 +71,7 @@ class Oops_Model_CategoryTableMap extends TableMap
 	{
 		return array(
 			'nested_set' => array('left_column' => 'nleft', 'right_column' => 'nright', 'level_column' => 'level_depth', 'use_scope' => 'false', 'scope_column' => 'tree_scope', 'method_proxies' => 'false', ),
+			'i18n' => array('i18n_table' => 'category_lang', 'i18n_phpname' => 'CategoryLang', 'i18n_columns' => 'name, description', 'locale_column' => 'id_lang', 'default_locale' => '1', 'locale_alias' => '', ),
 		);
 	} // getBehaviors()
 

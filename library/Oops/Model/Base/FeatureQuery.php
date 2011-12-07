@@ -14,6 +14,18 @@
  * @method     Oops_Model_FeatureQuery rightJoin($relation) Adds a RIGHT JOIN clause to the query
  * @method     Oops_Model_FeatureQuery innerJoin($relation) Adds a INNER JOIN clause to the query
  *
+ * @method     Oops_Model_FeatureQuery leftJoinFeatureProduct($relationAlias = null) Adds a LEFT JOIN clause to the query using the FeatureProduct relation
+ * @method     Oops_Model_FeatureQuery rightJoinFeatureProduct($relationAlias = null) Adds a RIGHT JOIN clause to the query using the FeatureProduct relation
+ * @method     Oops_Model_FeatureQuery innerJoinFeatureProduct($relationAlias = null) Adds a INNER JOIN clause to the query using the FeatureProduct relation
+ *
+ * @method     Oops_Model_FeatureQuery leftJoinFeatureValue($relationAlias = null) Adds a LEFT JOIN clause to the query using the FeatureValue relation
+ * @method     Oops_Model_FeatureQuery rightJoinFeatureValue($relationAlias = null) Adds a RIGHT JOIN clause to the query using the FeatureValue relation
+ * @method     Oops_Model_FeatureQuery innerJoinFeatureValue($relationAlias = null) Adds a INNER JOIN clause to the query using the FeatureValue relation
+ *
+ * @method     Oops_Model_FeatureQuery leftJoinFeatureLang($relationAlias = null) Adds a LEFT JOIN clause to the query using the FeatureLang relation
+ * @method     Oops_Model_FeatureQuery rightJoinFeatureLang($relationAlias = null) Adds a RIGHT JOIN clause to the query using the FeatureLang relation
+ * @method     Oops_Model_FeatureQuery innerJoinFeatureLang($relationAlias = null) Adds a INNER JOIN clause to the query using the FeatureLang relation
+ *
  * @method     Oops_Model_Feature findOne(PropelPDO $con = null) Return the first Oops_Model_Feature matching the query
  * @method     Oops_Model_Feature findOneOrCreate(PropelPDO $con = null) Return the first Oops_Model_Feature matching the query, or a new Oops_Model_Feature object populated from the query conditions when no match is found
  *
@@ -220,6 +232,242 @@ abstract class Oops_Model_Base_FeatureQuery extends ModelCriteria
 	}
 
 	/**
+	 * Filter the query by a related Oops_Model_FeatureProduct object
+	 *
+	 * @param     Oops_Model_FeatureProduct $featureProduct  the related object to use as filter
+	 * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+	 *
+	 * @return    Oops_Model_FeatureQuery The current query, for fluid interface
+	 */
+	public function filterByFeatureProduct($featureProduct, $comparison = null)
+	{
+		if ($featureProduct instanceof Oops_Model_FeatureProduct) {
+			return $this
+				->addUsingAlias(Oops_Model_FeaturePeer::ID_FEATURE, $featureProduct->getIdFeature(), $comparison);
+		} elseif ($featureProduct instanceof PropelCollection) {
+			return $this
+				->useFeatureProductQuery()
+				->filterByPrimaryKeys($featureProduct->getPrimaryKeys())
+				->endUse();
+		} else {
+			throw new PropelException('filterByFeatureProduct() only accepts arguments of type Oops_Model_FeatureProduct or PropelCollection');
+		}
+	}
+
+	/**
+	 * Adds a JOIN clause to the query using the FeatureProduct relation
+	 *
+	 * @param     string $relationAlias optional alias for the relation
+	 * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+	 *
+	 * @return    Oops_Model_FeatureQuery The current query, for fluid interface
+	 */
+	public function joinFeatureProduct($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+	{
+		$tableMap = $this->getTableMap();
+		$relationMap = $tableMap->getRelation('FeatureProduct');
+
+		// create a ModelJoin object for this join
+		$join = new ModelJoin();
+		$join->setJoinType($joinType);
+		$join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
+		if ($previousJoin = $this->getPreviousJoin()) {
+			$join->setPreviousJoin($previousJoin);
+		}
+
+		// add the ModelJoin to the current object
+		if($relationAlias) {
+			$this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
+			$this->addJoinObject($join, $relationAlias);
+		} else {
+			$this->addJoinObject($join, 'FeatureProduct');
+		}
+
+		return $this;
+	}
+
+	/**
+	 * Use the FeatureProduct relation FeatureProduct object
+	 *
+	 * @see       useQuery()
+	 *
+	 * @param     string $relationAlias optional alias for the relation,
+	 *                                   to be used as main alias in the secondary query
+	 * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+	 *
+	 * @return    Oops_Model_FeatureProductQuery A secondary query class using the current class as primary query
+	 */
+	public function useFeatureProductQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+	{
+		return $this
+			->joinFeatureProduct($relationAlias, $joinType)
+			->useQuery($relationAlias ? $relationAlias : 'FeatureProduct', 'Oops_Model_FeatureProductQuery');
+	}
+
+	/**
+	 * Filter the query by a related Oops_Model_FeatureValue object
+	 *
+	 * @param     Oops_Model_FeatureValue $featureValue  the related object to use as filter
+	 * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+	 *
+	 * @return    Oops_Model_FeatureQuery The current query, for fluid interface
+	 */
+	public function filterByFeatureValue($featureValue, $comparison = null)
+	{
+		if ($featureValue instanceof Oops_Model_FeatureValue) {
+			return $this
+				->addUsingAlias(Oops_Model_FeaturePeer::ID_FEATURE, $featureValue->getIdFeature(), $comparison);
+		} elseif ($featureValue instanceof PropelCollection) {
+			return $this
+				->useFeatureValueQuery()
+				->filterByPrimaryKeys($featureValue->getPrimaryKeys())
+				->endUse();
+		} else {
+			throw new PropelException('filterByFeatureValue() only accepts arguments of type Oops_Model_FeatureValue or PropelCollection');
+		}
+	}
+
+	/**
+	 * Adds a JOIN clause to the query using the FeatureValue relation
+	 *
+	 * @param     string $relationAlias optional alias for the relation
+	 * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+	 *
+	 * @return    Oops_Model_FeatureQuery The current query, for fluid interface
+	 */
+	public function joinFeatureValue($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+	{
+		$tableMap = $this->getTableMap();
+		$relationMap = $tableMap->getRelation('FeatureValue');
+
+		// create a ModelJoin object for this join
+		$join = new ModelJoin();
+		$join->setJoinType($joinType);
+		$join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
+		if ($previousJoin = $this->getPreviousJoin()) {
+			$join->setPreviousJoin($previousJoin);
+		}
+
+		// add the ModelJoin to the current object
+		if($relationAlias) {
+			$this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
+			$this->addJoinObject($join, $relationAlias);
+		} else {
+			$this->addJoinObject($join, 'FeatureValue');
+		}
+
+		return $this;
+	}
+
+	/**
+	 * Use the FeatureValue relation FeatureValue object
+	 *
+	 * @see       useQuery()
+	 *
+	 * @param     string $relationAlias optional alias for the relation,
+	 *                                   to be used as main alias in the secondary query
+	 * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+	 *
+	 * @return    Oops_Model_FeatureValueQuery A secondary query class using the current class as primary query
+	 */
+	public function useFeatureValueQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+	{
+		return $this
+			->joinFeatureValue($relationAlias, $joinType)
+			->useQuery($relationAlias ? $relationAlias : 'FeatureValue', 'Oops_Model_FeatureValueQuery');
+	}
+
+	/**
+	 * Filter the query by a related Oops_Model_FeatureLang object
+	 *
+	 * @param     Oops_Model_FeatureLang $featureLang  the related object to use as filter
+	 * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+	 *
+	 * @return    Oops_Model_FeatureQuery The current query, for fluid interface
+	 */
+	public function filterByFeatureLang($featureLang, $comparison = null)
+	{
+		if ($featureLang instanceof Oops_Model_FeatureLang) {
+			return $this
+				->addUsingAlias(Oops_Model_FeaturePeer::ID_FEATURE, $featureLang->getIdFeature(), $comparison);
+		} elseif ($featureLang instanceof PropelCollection) {
+			return $this
+				->useFeatureLangQuery()
+				->filterByPrimaryKeys($featureLang->getPrimaryKeys())
+				->endUse();
+		} else {
+			throw new PropelException('filterByFeatureLang() only accepts arguments of type Oops_Model_FeatureLang or PropelCollection');
+		}
+	}
+
+	/**
+	 * Adds a JOIN clause to the query using the FeatureLang relation
+	 *
+	 * @param     string $relationAlias optional alias for the relation
+	 * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+	 *
+	 * @return    Oops_Model_FeatureQuery The current query, for fluid interface
+	 */
+	public function joinFeatureLang($relationAlias = null, $joinType = 'LEFT JOIN')
+	{
+		$tableMap = $this->getTableMap();
+		$relationMap = $tableMap->getRelation('FeatureLang');
+
+		// create a ModelJoin object for this join
+		$join = new ModelJoin();
+		$join->setJoinType($joinType);
+		$join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
+		if ($previousJoin = $this->getPreviousJoin()) {
+			$join->setPreviousJoin($previousJoin);
+		}
+
+		// add the ModelJoin to the current object
+		if($relationAlias) {
+			$this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
+			$this->addJoinObject($join, $relationAlias);
+		} else {
+			$this->addJoinObject($join, 'FeatureLang');
+		}
+
+		return $this;
+	}
+
+	/**
+	 * Use the FeatureLang relation FeatureLang object
+	 *
+	 * @see       useQuery()
+	 *
+	 * @param     string $relationAlias optional alias for the relation,
+	 *                                   to be used as main alias in the secondary query
+	 * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+	 *
+	 * @return    Oops_Model_FeatureLangQuery A secondary query class using the current class as primary query
+	 */
+	public function useFeatureLangQuery($relationAlias = null, $joinType = 'LEFT JOIN')
+	{
+		return $this
+			->joinFeatureLang($relationAlias, $joinType)
+			->useQuery($relationAlias ? $relationAlias : 'FeatureLang', 'Oops_Model_FeatureLangQuery');
+	}
+
+	/**
+	 * Filter the query by a related Product object
+	 * using the feature_product table as cross reference
+	 *
+	 * @param     Product $product the related object to use as filter
+	 * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+	 *
+	 * @return    Oops_Model_FeatureQuery The current query, for fluid interface
+	 */
+	public function filterByProduct($product, $comparison = Criteria::EQUAL)
+	{
+		return $this
+			->useFeatureProductQuery()
+			->filterByProduct($product, $comparison)
+			->endUse();
+	}
+
+	/**
 	 * Exclude object from result
 	 *
 	 * @param     Oops_Model_Feature $feature Object to remove from the list of results
@@ -233,6 +481,61 @@ abstract class Oops_Model_Base_FeatureQuery extends ModelCriteria
 		}
 
 		return $this;
+	}
+
+	// i18n behavior
+	
+	/**
+	 * Adds a JOIN clause to the query using the i18n relation
+	 *
+	 * @param     string $locale Locale to use for the join condition, e.g. 'fr_FR'
+	 * @param     string $relationAlias optional alias for the relation
+	 * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'. Defaults to left join.
+	 *
+	 * @return    Oops_Model_FeatureQuery The current query, for fluid interface
+	 */
+	public function joinI18n($locale = '1', $relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+	{
+		$relationName = $relationAlias ? $relationAlias : 'FeatureLang';
+		return $this
+			->joinFeatureLang($relationAlias, $joinType)
+			->addJoinCondition($relationName, $relationName . '.IdLang = ?', $locale);
+	}
+	
+	/**
+	 * Adds a JOIN clause to the query and hydrates the related I18n object.
+	 * Shortcut for $c->joinI18n($locale)->with()
+	 *
+	 * @param     string $locale Locale to use for the join condition, e.g. 'fr_FR'
+	 * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'. Defaults to left join.
+	 *
+	 * @return    Oops_Model_FeatureQuery The current query, for fluid interface
+	 */
+	public function joinWithI18n($locale = '1', $joinType = Criteria::LEFT_JOIN)
+	{
+		$this
+			->joinI18n($locale, null, $joinType)
+			->with('FeatureLang');
+		$this->with['FeatureLang']->setIsWithOneToMany(false);
+		return $this;
+	}
+	
+	/**
+	 * Use the I18n relation query object
+	 *
+	 * @see       useQuery()
+	 *
+	 * @param     string $locale Locale to use for the join condition, e.g. 'fr_FR'
+	 * @param     string $relationAlias optional alias for the relation
+	 * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'. Defaults to left join.
+	 *
+	 * @return    Oops_Model_FeatureLangQuery A secondary query class using the current class as primary query
+	 */
+	public function useI18nQuery($locale = '1', $relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+	{
+		return $this
+			->joinI18n($locale, $relationAlias, $joinType)
+			->useQuery($relationAlias ? $relationAlias : 'FeatureLang', 'Oops_Model_FeatureLangQuery');
 	}
 
 } // Oops_Model_Base_FeatureQuery

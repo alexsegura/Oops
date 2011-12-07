@@ -43,6 +43,21 @@ abstract class Oops_Model_Base_FeatureValue extends BaseObject  implements Persi
 	protected $custom;
 
 	/**
+	 * @var        Feature
+	 */
+	protected $aFeature;
+
+	/**
+	 * @var        FeatureProduct
+	 */
+	protected $aFeatureProduct;
+
+	/**
+	 * @var        array Oops_Model_FeatureValueLang[] Collection to store aggregation of Oops_Model_FeatureValueLang objects.
+	 */
+	protected $collFeatureValueLangs;
+
+	/**
 	 * Flag to prevent endless save loop, if this object is referenced
 	 * by another object which falls in this transaction.
 	 * @var        boolean
@@ -55,6 +70,26 @@ abstract class Oops_Model_Base_FeatureValue extends BaseObject  implements Persi
 	 * @var        boolean
 	 */
 	protected $alreadyInValidation = false;
+
+	// i18n behavior
+	
+	/**
+	 * Current locale
+	 * @var        string
+	 */
+	protected $currentLocale = '1';
+	
+	/**
+	 * Current translation objects
+	 * @var        array[Oops_Model_FeatureValueLang]
+	 */
+	protected $currentTranslations;
+
+	/**
+	 * An array of objects scheduled for deletion.
+	 * @var		array
+	 */
+	protected $featureValueLangsScheduledForDeletion = null;
 
 	/**
 	 * Get the [id_feature_value] column value.
@@ -103,6 +138,10 @@ abstract class Oops_Model_Base_FeatureValue extends BaseObject  implements Persi
 			$this->modifiedColumns[] = Oops_Model_FeatureValuePeer::ID_FEATURE_VALUE;
 		}
 
+		if ($this->aFeatureProduct !== null && $this->aFeatureProduct->getIdFeatureValue() !== $v) {
+			$this->aFeatureProduct = null;
+		}
+
 		return $this;
 	} // setIdFeatureValue()
 
@@ -121,6 +160,10 @@ abstract class Oops_Model_Base_FeatureValue extends BaseObject  implements Persi
 		if ($this->id_feature !== $v) {
 			$this->id_feature = $v;
 			$this->modifiedColumns[] = Oops_Model_FeatureValuePeer::ID_FEATURE;
+		}
+
+		if ($this->aFeature !== null && $this->aFeature->getIdFeature() !== $v) {
+			$this->aFeature = null;
 		}
 
 		return $this;
@@ -212,6 +255,12 @@ abstract class Oops_Model_Base_FeatureValue extends BaseObject  implements Persi
 	public function ensureConsistency()
 	{
 
+		if ($this->aFeatureProduct !== null && $this->id_feature_value !== $this->aFeatureProduct->getIdFeatureValue()) {
+			$this->aFeatureProduct = null;
+		}
+		if ($this->aFeature !== null && $this->id_feature !== $this->aFeature->getIdFeature()) {
+			$this->aFeature = null;
+		}
 	} // ensureConsistency
 
 	/**
@@ -251,6 +300,10 @@ abstract class Oops_Model_Base_FeatureValue extends BaseObject  implements Persi
 
 		if ($deep) {  // also de-associate any related objects?
 
+			$this->aFeature = null;
+			$this->aFeatureProduct = null;
+			$this->collFeatureValueLangs = null;
+
 		} // if (deep)
 	}
 
@@ -281,6 +334,12 @@ abstract class Oops_Model_Base_FeatureValue extends BaseObject  implements Persi
 			if ($ret) {
 				$deleteQuery->delete($con);
 				$this->postDelete($con);
+				// i18n behavior
+				
+				// emulate delete cascade
+				Oops_Model_FeatureValueLangQuery::create()
+					->filterByOops_Model_FeatureValue($this)
+					->delete($con);
 				$con->commit();
 				$this->setDeleted(true);
 			} else {
@@ -361,6 +420,25 @@ abstract class Oops_Model_Base_FeatureValue extends BaseObject  implements Persi
 		if (!$this->alreadyInSave) {
 			$this->alreadyInSave = true;
 
+			// We call the save method on the following object(s) if they
+			// were passed to this object by their coresponding set
+			// method.  This object relates to these object(s) by a
+			// foreign key reference.
+
+			if ($this->aFeature !== null) {
+				if ($this->aFeature->isModified() || $this->aFeature->isNew()) {
+					$affectedRows += $this->aFeature->save($con);
+				}
+				$this->setFeature($this->aFeature);
+			}
+
+			if ($this->aFeatureProduct !== null) {
+				if ($this->aFeatureProduct->isModified() || $this->aFeatureProduct->isNew()) {
+					$affectedRows += $this->aFeatureProduct->save($con);
+				}
+				$this->setFeatureProduct($this->aFeatureProduct);
+			}
+
 			if ($this->isNew() || $this->isModified()) {
 				// persist changes
 				if ($this->isNew()) {
@@ -370,6 +448,23 @@ abstract class Oops_Model_Base_FeatureValue extends BaseObject  implements Persi
 				}
 				$affectedRows += 1;
 				$this->resetModified();
+			}
+
+			if ($this->featureValueLangsScheduledForDeletion !== null) {
+				if (!$this->featureValueLangsScheduledForDeletion->isEmpty()) {
+					Oops_Model_FeatureValueLangQuery::create()
+						->filterByPrimaryKeys($this->featureValueLangsScheduledForDeletion->getPrimaryKeys(false))
+						->delete($con);
+					$this->featureValueLangsScheduledForDeletion = null;
+				}
+			}
+
+			if ($this->collFeatureValueLangs !== null) {
+				foreach ($this->collFeatureValueLangs as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
 			}
 
 			$this->alreadyInSave = false;
@@ -518,10 +613,36 @@ abstract class Oops_Model_Base_FeatureValue extends BaseObject  implements Persi
 			$failureMap = array();
 
 
+			// We call the validate method on the following object(s) if they
+			// were passed to this object by their coresponding set
+			// method.  This object relates to these object(s) by a
+			// foreign key reference.
+
+			if ($this->aFeature !== null) {
+				if (!$this->aFeature->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aFeature->getValidationFailures());
+				}
+			}
+
+			if ($this->aFeatureProduct !== null) {
+				if (!$this->aFeatureProduct->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aFeatureProduct->getValidationFailures());
+				}
+			}
+
+
 			if (($retval = Oops_Model_FeatureValuePeer::doValidate($this, $columns)) !== true) {
 				$failureMap = array_merge($failureMap, $retval);
 			}
 
+
+				if ($this->collFeatureValueLangs !== null) {
+					foreach ($this->collFeatureValueLangs as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
 
 
 			$this->alreadyInValidation = false;
@@ -582,10 +703,11 @@ abstract class Oops_Model_Base_FeatureValue extends BaseObject  implements Persi
 	 *                    Defaults to BasePeer::TYPE_PHPNAME.
 	 * @param     boolean $includeLazyLoadColumns (optional) Whether to include lazy loaded columns. Defaults to TRUE.
 	 * @param     array $alreadyDumpedObjects List of objects to skip to avoid recursion
+	 * @param     boolean $includeForeignObjects (optional) Whether to include hydrated related objects. Default to FALSE.
 	 *
 	 * @return    array an associative array containing the field names (as keys) and field values
 	 */
-	public function toArray($keyType = BasePeer::TYPE_PHPNAME, $includeLazyLoadColumns = true, $alreadyDumpedObjects = array())
+	public function toArray($keyType = BasePeer::TYPE_PHPNAME, $includeLazyLoadColumns = true, $alreadyDumpedObjects = array(), $includeForeignObjects = false)
 	{
 		if (isset($alreadyDumpedObjects['Oops_Model_FeatureValue'][$this->getPrimaryKey()])) {
 			return '*RECURSION*';
@@ -597,6 +719,17 @@ abstract class Oops_Model_Base_FeatureValue extends BaseObject  implements Persi
 			$keys[1] => $this->getIdFeature(),
 			$keys[2] => $this->getCustom(),
 		);
+		if ($includeForeignObjects) {
+			if (null !== $this->aFeature) {
+				$result['Feature'] = $this->aFeature->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
+			}
+			if (null !== $this->aFeatureProduct) {
+				$result['FeatureProduct'] = $this->aFeatureProduct->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
+			}
+			if (null !== $this->collFeatureValueLangs) {
+				$result['FeatureValueLangs'] = $this->collFeatureValueLangs->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
+			}
+		}
 		return $result;
 	}
 
@@ -741,6 +874,20 @@ abstract class Oops_Model_Base_FeatureValue extends BaseObject  implements Persi
 	{
 		$copyObj->setIdFeature($this->getIdFeature());
 		$copyObj->setCustom($this->getCustom());
+
+		if ($deepCopy) {
+			// important: temporarily setNew(false) because this affects the behavior of
+			// the getter/setter methods for fkey referrer objects.
+			$copyObj->setNew(false);
+
+			foreach ($this->getFeatureValueLangs() as $relObj) {
+				if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
+					$copyObj->addFeatureValueLang($relObj->copy($deepCopy));
+				}
+			}
+
+		} // if ($deepCopy)
+
 		if ($makeNew) {
 			$copyObj->setNew(true);
 			$copyObj->setIdFeatureValue(NULL); // this is a auto-increment column, so set to default value
@@ -786,6 +933,264 @@ abstract class Oops_Model_Base_FeatureValue extends BaseObject  implements Persi
 	}
 
 	/**
+	 * Declares an association between this object and a Oops_Model_Feature object.
+	 *
+	 * @param      Oops_Model_Feature $v
+	 * @return     Oops_Model_FeatureValue The current object (for fluent API support)
+	 * @throws     PropelException
+	 */
+	public function setFeature(Oops_Model_Feature $v = null)
+	{
+		if ($v === null) {
+			$this->setIdFeature(NULL);
+		} else {
+			$this->setIdFeature($v->getIdFeature());
+		}
+
+		$this->aFeature = $v;
+
+		// Add binding for other direction of this n:n relationship.
+		// If this object has already been added to the Oops_Model_Feature object, it will not be re-added.
+		if ($v !== null) {
+			$v->addFeatureValue($this);
+		}
+
+		return $this;
+	}
+
+
+	/**
+	 * Get the associated Oops_Model_Feature object
+	 *
+	 * @param      PropelPDO Optional Connection object.
+	 * @return     Oops_Model_Feature The associated Oops_Model_Feature object.
+	 * @throws     PropelException
+	 */
+	public function getFeature(PropelPDO $con = null)
+	{
+		if ($this->aFeature === null && ($this->id_feature !== null)) {
+			$this->aFeature = Oops_Model_FeatureQuery::create()->findPk($this->id_feature, $con);
+			/* The following can be used additionally to
+				guarantee the related object contains a reference
+				to this object.  This level of coupling may, however, be
+				undesirable since it could result in an only partially populated collection
+				in the referenced object.
+				$this->aFeature->addFeatureValues($this);
+			 */
+		}
+		return $this->aFeature;
+	}
+
+	/**
+	 * Declares an association between this object and a Oops_Model_FeatureProduct object.
+	 *
+	 * @param      Oops_Model_FeatureProduct $v
+	 * @return     Oops_Model_FeatureValue The current object (for fluent API support)
+	 * @throws     PropelException
+	 */
+	public function setFeatureProduct(Oops_Model_FeatureProduct $v = null)
+	{
+		if ($v === null) {
+			$this->setIdFeatureValue(NULL);
+		} else {
+			$this->setIdFeatureValue($v->getIdFeatureValue());
+		}
+
+		$this->aFeatureProduct = $v;
+
+		// Add binding for other direction of this 1:1 relationship.
+		if ($v !== null) {
+			$v->setFeatureValue($this);
+		}
+
+		return $this;
+	}
+
+
+	/**
+	 * Get the associated Oops_Model_FeatureProduct object
+	 *
+	 * @param      PropelPDO Optional Connection object.
+	 * @return     Oops_Model_FeatureProduct The associated Oops_Model_FeatureProduct object.
+	 * @throws     PropelException
+	 */
+	public function getFeatureProduct(PropelPDO $con = null)
+	{
+		if ($this->aFeatureProduct === null && ($this->id_feature_value !== null)) {
+			$this->aFeatureProduct = Oops_Model_FeatureProductQuery::create()
+				->filterByFeatureValue($this) // here
+				->findOne($con);
+			// Because this foreign key represents a one-to-one relationship, we will create a bi-directional association.
+			$this->aFeatureProduct->setFeatureValue($this);
+		}
+		return $this->aFeatureProduct;
+	}
+
+
+	/**
+	 * Initializes a collection based on the name of a relation.
+	 * Avoids crafting an 'init[$relationName]s' method name
+	 * that wouldn't work when StandardEnglishPluralizer is used.
+	 *
+	 * @param      string $relationName The name of the relation to initialize
+	 * @return     void
+	 */
+	public function initRelation($relationName)
+	{
+		if ('FeatureValueLang' == $relationName) {
+			return $this->initFeatureValueLangs();
+		}
+	}
+
+	/**
+	 * Clears out the collFeatureValueLangs collection
+	 *
+	 * This does not modify the database; however, it will remove any associated objects, causing
+	 * them to be refetched by subsequent calls to accessor method.
+	 *
+	 * @return     void
+	 * @see        addFeatureValueLangs()
+	 */
+	public function clearFeatureValueLangs()
+	{
+		$this->collFeatureValueLangs = null; // important to set this to NULL since that means it is uninitialized
+	}
+
+	/**
+	 * Initializes the collFeatureValueLangs collection.
+	 *
+	 * By default this just sets the collFeatureValueLangs collection to an empty array (like clearcollFeatureValueLangs());
+	 * however, you may wish to override this method in your stub class to provide setting appropriate
+	 * to your application -- for example, setting the initial array to the values stored in database.
+	 *
+	 * @param      boolean $overrideExisting If set to true, the method call initializes
+	 *                                        the collection even if it is not empty
+	 *
+	 * @return     void
+	 */
+	public function initFeatureValueLangs($overrideExisting = true)
+	{
+		if (null !== $this->collFeatureValueLangs && !$overrideExisting) {
+			return;
+		}
+		$this->collFeatureValueLangs = new PropelObjectCollection();
+		$this->collFeatureValueLangs->setModel('Oops_Model_FeatureValueLang');
+	}
+
+	/**
+	 * Gets an array of Oops_Model_FeatureValueLang objects which contain a foreign key that references this object.
+	 *
+	 * If the $criteria is not null, it is used to always fetch the results from the database.
+	 * Otherwise the results are fetched from the database the first time, then cached.
+	 * Next time the same method is called without $criteria, the cached collection is returned.
+	 * If this Oops_Model_FeatureValue is new, it will return
+	 * an empty collection or the current collection; the criteria is ignored on a new object.
+	 *
+	 * @param      Criteria $criteria optional Criteria object to narrow the query
+	 * @param      PropelPDO $con optional connection object
+	 * @return     PropelCollection|array Oops_Model_FeatureValueLang[] List of Oops_Model_FeatureValueLang objects
+	 * @throws     PropelException
+	 */
+	public function getFeatureValueLangs($criteria = null, PropelPDO $con = null)
+	{
+		if(null === $this->collFeatureValueLangs || null !== $criteria) {
+			if ($this->isNew() && null === $this->collFeatureValueLangs) {
+				// return empty collection
+				$this->initFeatureValueLangs();
+			} else {
+				$collFeatureValueLangs = Oops_Model_FeatureValueLangQuery::create(null, $criteria)
+					->filterByFeatureValue($this)
+					->find($con);
+				if (null !== $criteria) {
+					return $collFeatureValueLangs;
+				}
+				$this->collFeatureValueLangs = $collFeatureValueLangs;
+			}
+		}
+		return $this->collFeatureValueLangs;
+	}
+
+	/**
+	 * Sets a collection of FeatureValueLang objects related by a one-to-many relationship
+	 * to the current object.
+	 * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
+	 * and new objects from the given Propel collection.
+	 *
+	 * @param      PropelCollection $featureValueLangs A Propel collection.
+	 * @param      PropelPDO $con Optional connection object
+	 */
+	public function setFeatureValueLangs(PropelCollection $featureValueLangs, PropelPDO $con = null)
+	{
+		$this->featureValueLangsScheduledForDeletion = $this->getFeatureValueLangs(new Criteria(), $con)->diff($featureValueLangs);
+
+		foreach ($featureValueLangs as $featureValueLang) {
+			// Fix issue with collection modified by reference
+			if ($featureValueLang->isNew()) {
+				$featureValueLang->setFeatureValue($this);
+			}
+			$this->addFeatureValueLang($featureValueLang);
+		}
+
+		$this->collFeatureValueLangs = $featureValueLangs;
+	}
+
+	/**
+	 * Returns the number of related Oops_Model_FeatureValueLang objects.
+	 *
+	 * @param      Criteria $criteria
+	 * @param      boolean $distinct
+	 * @param      PropelPDO $con
+	 * @return     int Count of related Oops_Model_FeatureValueLang objects.
+	 * @throws     PropelException
+	 */
+	public function countFeatureValueLangs(Criteria $criteria = null, $distinct = false, PropelPDO $con = null)
+	{
+		if(null === $this->collFeatureValueLangs || null !== $criteria) {
+			if ($this->isNew() && null === $this->collFeatureValueLangs) {
+				return 0;
+			} else {
+				$query = Oops_Model_FeatureValueLangQuery::create(null, $criteria);
+				if($distinct) {
+					$query->distinct();
+				}
+				return $query
+					->filterByFeatureValue($this)
+					->count($con);
+			}
+		} else {
+			return count($this->collFeatureValueLangs);
+		}
+	}
+
+	/**
+	 * Method called to associate a Oops_Model_FeatureValueLang object to this object
+	 * through the Oops_Model_FeatureValueLang foreign key attribute.
+	 *
+	 * @param      Oops_Model_FeatureValueLang $l Oops_Model_FeatureValueLang
+	 * @return     Oops_Model_FeatureValue The current object (for fluent API support)
+	 */
+	public function addFeatureValueLang(Oops_Model_FeatureValueLang $l)
+	{
+		if ($this->collFeatureValueLangs === null) {
+			$this->initFeatureValueLangs();
+		}
+		if (!$this->collFeatureValueLangs->contains($l)) { // only add it if the **same** object is not already associated
+			$this->doAddFeatureValueLang($l);
+		}
+
+		return $this;
+	}
+
+	/**
+	 * @param	FeatureValueLang $featureValueLang The featureValueLang object to add.
+	 */
+	protected function doAddFeatureValueLang($featureValueLang)
+	{
+		$this->collFeatureValueLangs[]= $featureValueLang;
+		$featureValueLang->setFeatureValue($this);
+	}
+
+	/**
 	 * Clears the current object and sets all attributes to their default values
 	 */
 	public function clear()
@@ -813,8 +1218,22 @@ abstract class Oops_Model_Base_FeatureValue extends BaseObject  implements Persi
 	public function clearAllReferences($deep = false)
 	{
 		if ($deep) {
+			if ($this->collFeatureValueLangs) {
+				foreach ($this->collFeatureValueLangs as $o) {
+					$o->clearAllReferences($deep);
+				}
+			}
 		} // if ($deep)
 
+		// i18n behavior
+		$this->currentLocale = '1';
+		$this->currentTranslations = null;
+		if ($this->collFeatureValueLangs instanceof PropelCollection) {
+			$this->collFeatureValueLangs->clearIterator();
+		}
+		$this->collFeatureValueLangs = null;
+		$this->aFeature = null;
+		$this->aFeatureProduct = null;
 	}
 
 	/**
@@ -825,6 +1244,127 @@ abstract class Oops_Model_Base_FeatureValue extends BaseObject  implements Persi
 	public function __toString()
 	{
 		return (string) $this->exportTo(Oops_Model_FeatureValuePeer::DEFAULT_STRING_FORMAT);
+	}
+
+	// i18n behavior
+	
+	/**
+	 * Sets the locale for translations
+	 *
+	 * @param     string $locale Locale to use for the translation, e.g. 'fr_FR'
+	 *
+	 * @return    Oops_Model_FeatureValue The current object (for fluent API support)
+	 */
+	public function setLocale($locale = '1')
+	{
+		$this->currentLocale = $locale;
+	
+		return $this;
+	}
+	
+	/**
+	 * Gets the locale for translations
+	 *
+	 * @return    string $locale Locale to use for the translation, e.g. 'fr_FR'
+	 */
+	public function getLocale()
+	{
+		return $this->currentLocale;
+	}
+	
+	/**
+	 * Returns the current translation for a given locale
+	 *
+	 * @param     string $locale Locale to use for the translation, e.g. 'fr_FR'
+	 * @param     PropelPDO $con an optional connection object
+	 *
+	 * @return Oops_Model_FeatureValueLang */
+	public function getTranslation($locale = '1', PropelPDO $con = null)
+	{
+		if (!isset($this->currentTranslations[$locale])) {
+			if (null !== $this->collFeatureValueLangs) {
+				foreach ($this->collFeatureValueLangs as $translation) {
+					if ($translation->getIdLang() == $locale) {
+						$this->currentTranslations[$locale] = $translation;
+						return $translation;
+					}
+				}
+			}
+			if ($this->isNew()) {
+				$translation = new Oops_Model_FeatureValueLang();
+				$translation->setIdLang($locale);
+			} else {
+				$translation = Oops_Model_FeatureValueLangQuery::create()
+					->filterByPrimaryKey(array($this->getPrimaryKey(), $locale))
+					->findOneOrCreate($con);
+				$this->currentTranslations[$locale] = $translation;
+			}
+			$this->addFeatureValueLang($translation);
+		}
+	
+		return $this->currentTranslations[$locale];
+	}
+	
+	/**
+	 * Remove the translation for a given locale
+	 *
+	 * @param     string $locale Locale to use for the translation, e.g. 'fr_FR'
+	 * @param     PropelPDO $con an optional connection object
+	 *
+	 * @return    Oops_Model_FeatureValue The current object (for fluent API support)
+	 */
+	public function removeTranslation($locale = '1', PropelPDO $con = null)
+	{
+		if (!$this->isNew()) {
+			Oops_Model_FeatureValueLangQuery::create()
+				->filterByPrimaryKey(array($this->getPrimaryKey(), $locale))
+				->delete($con);
+		}
+		if (isset($this->currentTranslations[$locale])) {
+			unset($this->currentTranslations[$locale]);
+		}
+		foreach ($this->collFeatureValueLangs as $key => $translation) {
+			if ($translation->getIdLang() == $locale) {
+				unset($this->collFeatureValueLangs[$key]);
+				break;
+			}
+		}
+	
+		return $this;
+	}
+	
+	/**
+	 * Returns the current translation
+	 *
+	 * @param     PropelPDO $con an optional connection object
+	 *
+	 * @return Oops_Model_FeatureValueLang */
+	public function getCurrentTranslation(PropelPDO $con = null)
+	{
+		return $this->getTranslation($this->getLocale(), $con);
+	}
+	
+	
+	/**
+	 * Get the [value] column value.
+	 * 
+	 * @return     string
+	 */
+	public function getValue()
+	{	return $this->getCurrentTranslation()->getValue();
+	}
+	
+	
+	/**
+	 * Set the value of [value] column.
+	 * 
+	 * @param      string $v new value
+	 * @return     Oops_Model_FeatureValue The current object (for fluent API support)
+	 */
+	public function setValue($v)
+	{	$this->getCurrentTranslation()->setValue($v);
+	
+		return $this;
 	}
 
 } // Oops_Model_Base_FeatureValue

@@ -43,6 +43,21 @@ abstract class Oops_Model_Base_FeatureProduct extends BaseObject  implements Per
 	protected $id_feature_value;
 
 	/**
+	 * @var        Product
+	 */
+	protected $aProduct;
+
+	/**
+	 * @var        Feature
+	 */
+	protected $aFeature;
+
+	/**
+	 * @var        Oops_Model_FeatureValue one-to-one related Oops_Model_FeatureValue object
+	 */
+	protected $singleFeatureValue;
+
+	/**
 	 * Flag to prevent endless save loop, if this object is referenced
 	 * by another object which falls in this transaction.
 	 * @var        boolean
@@ -55,6 +70,12 @@ abstract class Oops_Model_Base_FeatureProduct extends BaseObject  implements Per
 	 * @var        boolean
 	 */
 	protected $alreadyInValidation = false;
+
+	/**
+	 * An array of objects scheduled for deletion.
+	 * @var		array
+	 */
+	protected $featureValuesScheduledForDeletion = null;
 
 	/**
 	 * Get the [id_feature] column value.
@@ -103,6 +124,10 @@ abstract class Oops_Model_Base_FeatureProduct extends BaseObject  implements Per
 			$this->modifiedColumns[] = Oops_Model_FeatureProductPeer::ID_FEATURE;
 		}
 
+		if ($this->aFeature !== null && $this->aFeature->getIdFeature() !== $v) {
+			$this->aFeature = null;
+		}
+
 		return $this;
 	} // setIdFeature()
 
@@ -121,6 +146,10 @@ abstract class Oops_Model_Base_FeatureProduct extends BaseObject  implements Per
 		if ($this->id_product !== $v) {
 			$this->id_product = $v;
 			$this->modifiedColumns[] = Oops_Model_FeatureProductPeer::ID_PRODUCT;
+		}
+
+		if ($this->aProduct !== null && $this->aProduct->getIdProduct() !== $v) {
+			$this->aProduct = null;
 		}
 
 		return $this;
@@ -212,6 +241,12 @@ abstract class Oops_Model_Base_FeatureProduct extends BaseObject  implements Per
 	public function ensureConsistency()
 	{
 
+		if ($this->aFeature !== null && $this->id_feature !== $this->aFeature->getIdFeature()) {
+			$this->aFeature = null;
+		}
+		if ($this->aProduct !== null && $this->id_product !== $this->aProduct->getIdProduct()) {
+			$this->aProduct = null;
+		}
 	} // ensureConsistency
 
 	/**
@@ -250,6 +285,10 @@ abstract class Oops_Model_Base_FeatureProduct extends BaseObject  implements Per
 		$this->hydrate($row, 0, true); // rehydrate
 
 		if ($deep) {  // also de-associate any related objects?
+
+			$this->aProduct = null;
+			$this->aFeature = null;
+			$this->singleFeatureValue = null;
 
 		} // if (deep)
 	}
@@ -361,6 +400,25 @@ abstract class Oops_Model_Base_FeatureProduct extends BaseObject  implements Per
 		if (!$this->alreadyInSave) {
 			$this->alreadyInSave = true;
 
+			// We call the save method on the following object(s) if they
+			// were passed to this object by their coresponding set
+			// method.  This object relates to these object(s) by a
+			// foreign key reference.
+
+			if ($this->aProduct !== null) {
+				if ($this->aProduct->isModified() || $this->aProduct->isNew()) {
+					$affectedRows += $this->aProduct->save($con);
+				}
+				$this->setProduct($this->aProduct);
+			}
+
+			if ($this->aFeature !== null) {
+				if ($this->aFeature->isModified() || $this->aFeature->isNew()) {
+					$affectedRows += $this->aFeature->save($con);
+				}
+				$this->setFeature($this->aFeature);
+			}
+
 			if ($this->isNew() || $this->isModified()) {
 				// persist changes
 				if ($this->isNew()) {
@@ -370,6 +428,21 @@ abstract class Oops_Model_Base_FeatureProduct extends BaseObject  implements Per
 				}
 				$affectedRows += 1;
 				$this->resetModified();
+			}
+
+			if ($this->featureValuesScheduledForDeletion !== null) {
+				if (!$this->featureValuesScheduledForDeletion->isEmpty()) {
+					Oops_Model_FeatureValueQuery::create()
+						->filterByPrimaryKeys($this->featureValuesScheduledForDeletion->getPrimaryKeys(false))
+						->delete($con);
+					$this->featureValuesScheduledForDeletion = null;
+				}
+			}
+
+			if ($this->singleFeatureValue !== null) {
+				if (!$this->singleFeatureValue->isDeleted()) {
+						$affectedRows += $this->singleFeatureValue->save($con);
+				}
 			}
 
 			$this->alreadyInSave = false;
@@ -507,10 +580,34 @@ abstract class Oops_Model_Base_FeatureProduct extends BaseObject  implements Per
 			$failureMap = array();
 
 
+			// We call the validate method on the following object(s) if they
+			// were passed to this object by their coresponding set
+			// method.  This object relates to these object(s) by a
+			// foreign key reference.
+
+			if ($this->aProduct !== null) {
+				if (!$this->aProduct->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aProduct->getValidationFailures());
+				}
+			}
+
+			if ($this->aFeature !== null) {
+				if (!$this->aFeature->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aFeature->getValidationFailures());
+				}
+			}
+
+
 			if (($retval = Oops_Model_FeatureProductPeer::doValidate($this, $columns)) !== true) {
 				$failureMap = array_merge($failureMap, $retval);
 			}
 
+
+				if ($this->singleFeatureValue !== null) {
+					if (!$this->singleFeatureValue->validate($columns)) {
+						$failureMap = array_merge($failureMap, $this->singleFeatureValue->getValidationFailures());
+					}
+				}
 
 
 			$this->alreadyInValidation = false;
@@ -571,10 +668,11 @@ abstract class Oops_Model_Base_FeatureProduct extends BaseObject  implements Per
 	 *                    Defaults to BasePeer::TYPE_PHPNAME.
 	 * @param     boolean $includeLazyLoadColumns (optional) Whether to include lazy loaded columns. Defaults to TRUE.
 	 * @param     array $alreadyDumpedObjects List of objects to skip to avoid recursion
+	 * @param     boolean $includeForeignObjects (optional) Whether to include hydrated related objects. Default to FALSE.
 	 *
 	 * @return    array an associative array containing the field names (as keys) and field values
 	 */
-	public function toArray($keyType = BasePeer::TYPE_PHPNAME, $includeLazyLoadColumns = true, $alreadyDumpedObjects = array())
+	public function toArray($keyType = BasePeer::TYPE_PHPNAME, $includeLazyLoadColumns = true, $alreadyDumpedObjects = array(), $includeForeignObjects = false)
 	{
 		if (isset($alreadyDumpedObjects['Oops_Model_FeatureProduct'][serialize($this->getPrimaryKey())])) {
 			return '*RECURSION*';
@@ -586,6 +684,17 @@ abstract class Oops_Model_Base_FeatureProduct extends BaseObject  implements Per
 			$keys[1] => $this->getIdProduct(),
 			$keys[2] => $this->getIdFeatureValue(),
 		);
+		if ($includeForeignObjects) {
+			if (null !== $this->aProduct) {
+				$result['Product'] = $this->aProduct->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
+			}
+			if (null !== $this->aFeature) {
+				$result['Feature'] = $this->aFeature->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
+			}
+			if (null !== $this->singleFeatureValue) {
+				$result['FeatureValue'] = $this->singleFeatureValue->toArray($keyType, $includeLazyLoadColumns, $alreadyDumpedObjects, true);
+			}
+		}
 		return $result;
 	}
 
@@ -683,6 +792,7 @@ abstract class Oops_Model_Base_FeatureProduct extends BaseObject  implements Per
 		$criteria = new Criteria(Oops_Model_FeatureProductPeer::DATABASE_NAME);
 		$criteria->add(Oops_Model_FeatureProductPeer::ID_FEATURE, $this->id_feature);
 		$criteria->add(Oops_Model_FeatureProductPeer::ID_PRODUCT, $this->id_product);
+		$criteria->add(Oops_Model_FeatureProductPeer::ID_FEATURE_VALUE, $this->id_feature_value);
 
 		return $criteria;
 	}
@@ -697,6 +807,7 @@ abstract class Oops_Model_Base_FeatureProduct extends BaseObject  implements Per
 		$pks = array();
 		$pks[0] = $this->getIdFeature();
 		$pks[1] = $this->getIdProduct();
+		$pks[2] = $this->getIdFeatureValue();
 
 		return $pks;
 	}
@@ -711,6 +822,7 @@ abstract class Oops_Model_Base_FeatureProduct extends BaseObject  implements Per
 	{
 		$this->setIdFeature($keys[0]);
 		$this->setIdProduct($keys[1]);
+		$this->setIdFeatureValue($keys[2]);
 	}
 
 	/**
@@ -719,7 +831,7 @@ abstract class Oops_Model_Base_FeatureProduct extends BaseObject  implements Per
 	 */
 	public function isPrimaryKeyNull()
 	{
-		return (null === $this->getIdFeature()) && (null === $this->getIdProduct());
+		return (null === $this->getIdFeature()) && (null === $this->getIdProduct()) && (null === $this->getIdFeatureValue());
 	}
 
 	/**
@@ -738,6 +850,19 @@ abstract class Oops_Model_Base_FeatureProduct extends BaseObject  implements Per
 		$copyObj->setIdFeature($this->getIdFeature());
 		$copyObj->setIdProduct($this->getIdProduct());
 		$copyObj->setIdFeatureValue($this->getIdFeatureValue());
+
+		if ($deepCopy) {
+			// important: temporarily setNew(false) because this affects the behavior of
+			// the getter/setter methods for fkey referrer objects.
+			$copyObj->setNew(false);
+
+			$relObj = $this->getFeatureValue();
+			if ($relObj) {
+				$copyObj->setFeatureValue($relObj->copy($deepCopy));
+			}
+
+		} // if ($deepCopy)
+
 		if ($makeNew) {
 			$copyObj->setNew(true);
 		}
@@ -782,6 +907,153 @@ abstract class Oops_Model_Base_FeatureProduct extends BaseObject  implements Per
 	}
 
 	/**
+	 * Declares an association between this object and a Oops_Model_Product object.
+	 *
+	 * @param      Oops_Model_Product $v
+	 * @return     Oops_Model_FeatureProduct The current object (for fluent API support)
+	 * @throws     PropelException
+	 */
+	public function setProduct(Oops_Model_Product $v = null)
+	{
+		if ($v === null) {
+			$this->setIdProduct(NULL);
+		} else {
+			$this->setIdProduct($v->getIdProduct());
+		}
+
+		$this->aProduct = $v;
+
+		// Add binding for other direction of this n:n relationship.
+		// If this object has already been added to the Oops_Model_Product object, it will not be re-added.
+		if ($v !== null) {
+			$v->addFeatureProduct($this);
+		}
+
+		return $this;
+	}
+
+
+	/**
+	 * Get the associated Oops_Model_Product object
+	 *
+	 * @param      PropelPDO Optional Connection object.
+	 * @return     Oops_Model_Product The associated Oops_Model_Product object.
+	 * @throws     PropelException
+	 */
+	public function getProduct(PropelPDO $con = null)
+	{
+		if ($this->aProduct === null && ($this->id_product !== null)) {
+			$this->aProduct = Oops_Model_ProductQuery::create()->findPk($this->id_product, $con);
+			/* The following can be used additionally to
+				guarantee the related object contains a reference
+				to this object.  This level of coupling may, however, be
+				undesirable since it could result in an only partially populated collection
+				in the referenced object.
+				$this->aProduct->addFeatureProducts($this);
+			 */
+		}
+		return $this->aProduct;
+	}
+
+	/**
+	 * Declares an association between this object and a Oops_Model_Feature object.
+	 *
+	 * @param      Oops_Model_Feature $v
+	 * @return     Oops_Model_FeatureProduct The current object (for fluent API support)
+	 * @throws     PropelException
+	 */
+	public function setFeature(Oops_Model_Feature $v = null)
+	{
+		if ($v === null) {
+			$this->setIdFeature(NULL);
+		} else {
+			$this->setIdFeature($v->getIdFeature());
+		}
+
+		$this->aFeature = $v;
+
+		// Add binding for other direction of this n:n relationship.
+		// If this object has already been added to the Oops_Model_Feature object, it will not be re-added.
+		if ($v !== null) {
+			$v->addFeatureProduct($this);
+		}
+
+		return $this;
+	}
+
+
+	/**
+	 * Get the associated Oops_Model_Feature object
+	 *
+	 * @param      PropelPDO Optional Connection object.
+	 * @return     Oops_Model_Feature The associated Oops_Model_Feature object.
+	 * @throws     PropelException
+	 */
+	public function getFeature(PropelPDO $con = null)
+	{
+		if ($this->aFeature === null && ($this->id_feature !== null)) {
+			$this->aFeature = Oops_Model_FeatureQuery::create()->findPk($this->id_feature, $con);
+			/* The following can be used additionally to
+				guarantee the related object contains a reference
+				to this object.  This level of coupling may, however, be
+				undesirable since it could result in an only partially populated collection
+				in the referenced object.
+				$this->aFeature->addFeatureProducts($this);
+			 */
+		}
+		return $this->aFeature;
+	}
+
+
+	/**
+	 * Initializes a collection based on the name of a relation.
+	 * Avoids crafting an 'init[$relationName]s' method name
+	 * that wouldn't work when StandardEnglishPluralizer is used.
+	 *
+	 * @param      string $relationName The name of the relation to initialize
+	 * @return     void
+	 */
+	public function initRelation($relationName)
+	{
+	}
+
+	/**
+	 * Gets a single Oops_Model_FeatureValue object, which is related to this object by a one-to-one relationship.
+	 *
+	 * @param      PropelPDO $con optional connection object
+	 * @return     Oops_Model_FeatureValue
+	 * @throws     PropelException
+	 */
+	public function getFeatureValue(PropelPDO $con = null)
+	{
+
+		if ($this->singleFeatureValue === null && !$this->isNew()) {
+			$this->singleFeatureValue = Oops_Model_FeatureValueQuery::create()->findPk($this->getPrimaryKey(), $con);
+		}
+
+		return $this->singleFeatureValue;
+	}
+
+	/**
+	 * Sets a single Oops_Model_FeatureValue object as related to this object by a one-to-one relationship.
+	 *
+	 * @param      Oops_Model_FeatureValue $v Oops_Model_FeatureValue
+	 * @return     Oops_Model_FeatureProduct The current object (for fluent API support)
+	 * @throws     PropelException
+	 */
+	public function setFeatureValue(Oops_Model_FeatureValue $v = null)
+	{
+		$this->singleFeatureValue = $v;
+
+		// Make sure that that the passed-in Oops_Model_FeatureValue isn't already associated with this object
+		if ($v !== null && $v->getFeatureProduct() === null) {
+			$v->setFeatureProduct($this);
+		}
+
+		return $this;
+	}
+
+	/**
 	 * Clears the current object and sets all attributes to their default values
 	 */
 	public function clear()
@@ -809,8 +1081,17 @@ abstract class Oops_Model_Base_FeatureProduct extends BaseObject  implements Per
 	public function clearAllReferences($deep = false)
 	{
 		if ($deep) {
+			if ($this->singleFeatureValue) {
+				$this->singleFeatureValue->clearAllReferences($deep);
+			}
 		} // if ($deep)
 
+		if ($this->singleFeatureValue instanceof PropelCollection) {
+			$this->singleFeatureValue->clearIterator();
+		}
+		$this->singleFeatureValue = null;
+		$this->aProduct = null;
+		$this->aFeature = null;
 	}
 
 	/**

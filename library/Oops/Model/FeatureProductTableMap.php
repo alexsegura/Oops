@@ -38,9 +38,9 @@ class Oops_Model_FeatureProductTableMap extends TableMap
 		$this->setPackage('prestashop');
 		$this->setUseIdGenerator(false);
 		// columns
-		$this->addPrimaryKey('ID_FEATURE', 'IdFeature', 'INTEGER', true, 10, null);
-		$this->addPrimaryKey('ID_PRODUCT', 'IdProduct', 'INTEGER', true, 10, null);
-		$this->addColumn('ID_FEATURE_VALUE', 'IdFeatureValue', 'INTEGER', true, 10, null);
+		$this->addForeignPrimaryKey('ID_FEATURE', 'IdFeature', 'INTEGER' , 'feature', 'ID_FEATURE', true, 10, null);
+		$this->addForeignPrimaryKey('ID_PRODUCT', 'IdProduct', 'INTEGER' , 'product', 'ID_PRODUCT', true, 10, null);
+		$this->addPrimaryKey('ID_FEATURE_VALUE', 'IdFeatureValue', 'INTEGER', true, 10, null);
 		// validators
 	} // initialize()
 
@@ -49,6 +49,9 @@ class Oops_Model_FeatureProductTableMap extends TableMap
 	 */
 	public function buildRelations()
 	{
+		$this->addRelation('Product', 'Oops_Model_Product', RelationMap::MANY_TO_ONE, array('id_product' => 'id_product', ), null, null);
+		$this->addRelation('Feature', 'Oops_Model_Feature', RelationMap::MANY_TO_ONE, array('id_feature' => 'id_feature', ), null, null);
+		$this->addRelation('FeatureValue', 'Oops_Model_FeatureValue', RelationMap::ONE_TO_ONE, array('id_feature_value' => 'id_feature_value', ), null, null);
 	} // buildRelations()
 
 } // Oops_Model_FeatureProductTableMap

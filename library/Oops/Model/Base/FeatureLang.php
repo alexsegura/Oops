@@ -43,6 +43,11 @@ abstract class Oops_Model_Base_FeatureLang extends BaseObject  implements Persis
 	protected $name;
 
 	/**
+	 * @var        Feature
+	 */
+	protected $aFeature;
+
+	/**
 	 * Flag to prevent endless save loop, if this object is referenced
 	 * by another object which falls in this transaction.
 	 * @var        boolean
@@ -101,6 +106,10 @@ abstract class Oops_Model_Base_FeatureLang extends BaseObject  implements Persis
 		if ($this->id_feature !== $v) {
 			$this->id_feature = $v;
 			$this->modifiedColumns[] = Oops_Model_FeatureLangPeer::ID_FEATURE;
+		}
+
+		if ($this->aFeature !== null && $this->aFeature->getIdFeature() !== $v) {
+			$this->aFeature = null;
 		}
 
 		return $this;
@@ -212,6 +221,9 @@ abstract class Oops_Model_Base_FeatureLang extends BaseObject  implements Persis
 	public function ensureConsistency()
 	{
 
+		if ($this->aFeature !== null && $this->id_feature !== $this->aFeature->getIdFeature()) {
+			$this->aFeature = null;
+		}
 	} // ensureConsistency
 
 	/**
@@ -251,6 +263,7 @@ abstract class Oops_Model_Base_FeatureLang extends BaseObject  implements Persis
 
 		if ($deep) {  // also de-associate any related objects?
 
+			$this->aFeature = null;
 		} // if (deep)
 	}
 
@@ -360,6 +373,18 @@ abstract class Oops_Model_Base_FeatureLang extends BaseObject  implements Persis
 		$affectedRows = 0; // initialize var to track total num of affected rows
 		if (!$this->alreadyInSave) {
 			$this->alreadyInSave = true;
+
+			// We call the save method on the following object(s) if they
+			// were passed to this object by their coresponding set
+			// method.  This object relates to these object(s) by a
+			// foreign key reference.
+
+			if ($this->aFeature !== null) {
+				if ($this->aFeature->isModified() || $this->aFeature->isNew()) {
+					$affectedRows += $this->aFeature->save($con);
+				}
+				$this->setFeature($this->aFeature);
+			}
 
 			if ($this->isNew() || $this->isModified()) {
 				// persist changes
@@ -507,6 +532,18 @@ abstract class Oops_Model_Base_FeatureLang extends BaseObject  implements Persis
 			$failureMap = array();
 
 
+			// We call the validate method on the following object(s) if they
+			// were passed to this object by their coresponding set
+			// method.  This object relates to these object(s) by a
+			// foreign key reference.
+
+			if ($this->aFeature !== null) {
+				if (!$this->aFeature->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aFeature->getValidationFailures());
+				}
+			}
+
+
 			if (($retval = Oops_Model_FeatureLangPeer::doValidate($this, $columns)) !== true) {
 				$failureMap = array_merge($failureMap, $retval);
 			}
@@ -571,10 +608,11 @@ abstract class Oops_Model_Base_FeatureLang extends BaseObject  implements Persis
 	 *                    Defaults to BasePeer::TYPE_PHPNAME.
 	 * @param     boolean $includeLazyLoadColumns (optional) Whether to include lazy loaded columns. Defaults to TRUE.
 	 * @param     array $alreadyDumpedObjects List of objects to skip to avoid recursion
+	 * @param     boolean $includeForeignObjects (optional) Whether to include hydrated related objects. Default to FALSE.
 	 *
 	 * @return    array an associative array containing the field names (as keys) and field values
 	 */
-	public function toArray($keyType = BasePeer::TYPE_PHPNAME, $includeLazyLoadColumns = true, $alreadyDumpedObjects = array())
+	public function toArray($keyType = BasePeer::TYPE_PHPNAME, $includeLazyLoadColumns = true, $alreadyDumpedObjects = array(), $includeForeignObjects = false)
 	{
 		if (isset($alreadyDumpedObjects['Oops_Model_FeatureLang'][serialize($this->getPrimaryKey())])) {
 			return '*RECURSION*';
@@ -586,6 +624,11 @@ abstract class Oops_Model_Base_FeatureLang extends BaseObject  implements Persis
 			$keys[1] => $this->getIdLang(),
 			$keys[2] => $this->getName(),
 		);
+		if ($includeForeignObjects) {
+			if (null !== $this->aFeature) {
+				$result['Feature'] = $this->aFeature->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
+			}
+		}
 		return $result;
 	}
 
@@ -782,6 +825,55 @@ abstract class Oops_Model_Base_FeatureLang extends BaseObject  implements Persis
 	}
 
 	/**
+	 * Declares an association between this object and a Oops_Model_Feature object.
+	 *
+	 * @param      Oops_Model_Feature $v
+	 * @return     Oops_Model_FeatureLang The current object (for fluent API support)
+	 * @throws     PropelException
+	 */
+	public function setFeature(Oops_Model_Feature $v = null)
+	{
+		if ($v === null) {
+			$this->setIdFeature(NULL);
+		} else {
+			$this->setIdFeature($v->getIdFeature());
+		}
+
+		$this->aFeature = $v;
+
+		// Add binding for other direction of this n:n relationship.
+		// If this object has already been added to the Oops_Model_Feature object, it will not be re-added.
+		if ($v !== null) {
+			$v->addFeatureLang($this);
+		}
+
+		return $this;
+	}
+
+
+	/**
+	 * Get the associated Oops_Model_Feature object
+	 *
+	 * @param      PropelPDO Optional Connection object.
+	 * @return     Oops_Model_Feature The associated Oops_Model_Feature object.
+	 * @throws     PropelException
+	 */
+	public function getFeature(PropelPDO $con = null)
+	{
+		if ($this->aFeature === null && ($this->id_feature !== null)) {
+			$this->aFeature = Oops_Model_FeatureQuery::create()->findPk($this->id_feature, $con);
+			/* The following can be used additionally to
+				guarantee the related object contains a reference
+				to this object.  This level of coupling may, however, be
+				undesirable since it could result in an only partially populated collection
+				in the referenced object.
+				$this->aFeature->addFeatureLangs($this);
+			 */
+		}
+		return $this->aFeature;
+	}
+
+	/**
 	 * Clears the current object and sets all attributes to their default values
 	 */
 	public function clear()
@@ -811,6 +903,7 @@ abstract class Oops_Model_Base_FeatureLang extends BaseObject  implements Persis
 		if ($deep) {
 		} // if ($deep)
 
+		$this->aFeature = null;
 	}
 
 	/**

@@ -290,7 +290,7 @@ abstract class Oops_Model_Base_FeatureProductPeer {
 	{
 		if (Propel::isInstancePoolingEnabled()) {
 			if ($key === null) {
-				$key = serialize(array((string) $obj->getIdFeature(), (string) $obj->getIdProduct()));
+				$key = serialize(array((string) $obj->getIdFeature(), (string) $obj->getIdProduct(), (string) $obj->getIdFeatureValue()));
 			} // if key === null
 			self::$instances[$key] = $obj;
 		}
@@ -310,10 +310,10 @@ abstract class Oops_Model_Base_FeatureProductPeer {
 	{
 		if (Propel::isInstancePoolingEnabled() && $value !== null) {
 			if (is_object($value) && $value instanceof Oops_Model_FeatureProduct) {
-				$key = serialize(array((string) $value->getIdFeature(), (string) $value->getIdProduct()));
-			} elseif (is_array($value) && count($value) === 2) {
+				$key = serialize(array((string) $value->getIdFeature(), (string) $value->getIdProduct(), (string) $value->getIdFeatureValue()));
+			} elseif (is_array($value) && count($value) === 3) {
 				// assume we've been passed a primary key
-				$key = serialize(array((string) $value[0], (string) $value[1]));
+				$key = serialize(array((string) $value[0], (string) $value[1], (string) $value[2]));
 			} else {
 				$e = new PropelException("Invalid value passed to removeInstanceFromPool().  Expected primary key or Oops_Model_FeatureProduct object; got " . (is_object($value) ? get_class($value) . ' object.' : var_export($value,true)));
 				throw $e;
@@ -374,10 +374,10 @@ abstract class Oops_Model_Base_FeatureProductPeer {
 	public static function getPrimaryKeyHashFromRow($row, $startcol = 0)
 	{
 		// If the PK cannot be derived from the row, return NULL.
-		if ($row[$startcol] === null && $row[$startcol + 1] === null) {
+		if ($row[$startcol] === null && $row[$startcol + 1] === null && $row[$startcol + 2] === null) {
 			return null;
 		}
-		return serialize(array((string) $row[$startcol], (string) $row[$startcol + 1]));
+		return serialize(array((string) $row[$startcol], (string) $row[$startcol + 1], (string) $row[$startcol + 2]));
 	}
 
 	/**
@@ -391,7 +391,7 @@ abstract class Oops_Model_Base_FeatureProductPeer {
 	 */
 	public static function getPrimaryKeyFromRow($row, $startcol = 0)
 	{
-		return array((int) $row[$startcol], (int) $row[$startcol + 1]);
+		return array((int) $row[$startcol], (int) $row[$startcol + 1], (int) $row[$startcol + 2]);
 	}
 	
 	/**
@@ -449,6 +449,627 @@ abstract class Oops_Model_Base_FeatureProductPeer {
 			Oops_Model_FeatureProductPeer::addInstanceToPool($obj, $key);
 		}
 		return array($obj, $col);
+	}
+
+
+	/**
+	 * Returns the number of rows matching criteria, joining the related Product table
+	 *
+	 * @param      Criteria $criteria
+	 * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
+	 * @param      PropelPDO $con
+	 * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+	 * @return     int Number of matching rows.
+	 */
+	public static function doCountJoinProduct(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
+	{
+		// we're going to modify criteria, so copy it first
+		$criteria = clone $criteria;
+
+		// We need to set the primary table name, since in the case that there are no WHERE columns
+		// it will be impossible for the BasePeer::createSelectSql() method to determine which
+		// tables go into the FROM clause.
+		$criteria->setPrimaryTableName(Oops_Model_FeatureProductPeer::TABLE_NAME);
+
+		if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->setDistinct();
+		}
+
+		if (!$criteria->hasSelectClause()) {
+			Oops_Model_FeatureProductPeer::addSelectColumns($criteria);
+		}
+
+		$criteria->clearOrderByColumns(); // ORDER BY won't ever affect the count
+
+		// Set the correct dbName
+		$criteria->setDbName(self::DATABASE_NAME);
+
+		if ($con === null) {
+			$con = Propel::getConnection(Oops_Model_FeatureProductPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+		}
+
+		$criteria->addJoin(Oops_Model_FeatureProductPeer::ID_PRODUCT, Oops_Model_ProductPeer::ID_PRODUCT, $join_behavior);
+
+		$stmt = BasePeer::doCount($criteria, $con);
+
+		if ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+			$count = (int) $row[0];
+		} else {
+			$count = 0; // no rows returned; we infer that means 0 matches.
+		}
+		$stmt->closeCursor();
+		return $count;
+	}
+
+
+	/**
+	 * Returns the number of rows matching criteria, joining the related Feature table
+	 *
+	 * @param      Criteria $criteria
+	 * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
+	 * @param      PropelPDO $con
+	 * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+	 * @return     int Number of matching rows.
+	 */
+	public static function doCountJoinFeature(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
+	{
+		// we're going to modify criteria, so copy it first
+		$criteria = clone $criteria;
+
+		// We need to set the primary table name, since in the case that there are no WHERE columns
+		// it will be impossible for the BasePeer::createSelectSql() method to determine which
+		// tables go into the FROM clause.
+		$criteria->setPrimaryTableName(Oops_Model_FeatureProductPeer::TABLE_NAME);
+
+		if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->setDistinct();
+		}
+
+		if (!$criteria->hasSelectClause()) {
+			Oops_Model_FeatureProductPeer::addSelectColumns($criteria);
+		}
+
+		$criteria->clearOrderByColumns(); // ORDER BY won't ever affect the count
+
+		// Set the correct dbName
+		$criteria->setDbName(self::DATABASE_NAME);
+
+		if ($con === null) {
+			$con = Propel::getConnection(Oops_Model_FeatureProductPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+		}
+
+		$criteria->addJoin(Oops_Model_FeatureProductPeer::ID_FEATURE, Oops_Model_FeaturePeer::ID_FEATURE, $join_behavior);
+
+		$stmt = BasePeer::doCount($criteria, $con);
+
+		if ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+			$count = (int) $row[0];
+		} else {
+			$count = 0; // no rows returned; we infer that means 0 matches.
+		}
+		$stmt->closeCursor();
+		return $count;
+	}
+
+
+	/**
+	 * Selects a collection of Oops_Model_FeatureProduct objects pre-filled with their Oops_Model_Product objects.
+	 * @param      Criteria  $criteria
+	 * @param      PropelPDO $con
+	 * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+	 * @return     array Array of Oops_Model_FeatureProduct objects.
+	 * @throws     PropelException Any exceptions caught during processing will be
+	 *		 rethrown wrapped into a PropelException.
+	 */
+	public static function doSelectJoinProduct(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+	{
+		$criteria = clone $criteria;
+
+		// Set the correct dbName if it has not been overridden
+		if ($criteria->getDbName() == Propel::getDefaultDB()) {
+			$criteria->setDbName(self::DATABASE_NAME);
+		}
+
+		Oops_Model_FeatureProductPeer::addSelectColumns($criteria);
+		$startcol = Oops_Model_FeatureProductPeer::NUM_HYDRATE_COLUMNS;
+		Oops_Model_ProductPeer::addSelectColumns($criteria);
+
+		$criteria->addJoin(Oops_Model_FeatureProductPeer::ID_PRODUCT, Oops_Model_ProductPeer::ID_PRODUCT, $join_behavior);
+
+		$stmt = BasePeer::doSelect($criteria, $con);
+		$results = array();
+
+		while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+			$key1 = Oops_Model_FeatureProductPeer::getPrimaryKeyHashFromRow($row, 0);
+			if (null !== ($obj1 = Oops_Model_FeatureProductPeer::getInstanceFromPool($key1))) {
+				// We no longer rehydrate the object, since this can cause data loss.
+				// See http://www.propelorm.org/ticket/509
+				// $obj1->hydrate($row, 0, true); // rehydrate
+			} else {
+
+				$cls = Oops_Model_FeatureProductPeer::getOMClass(false);
+
+				$obj1 = new $cls();
+				$obj1->hydrate($row);
+				Oops_Model_FeatureProductPeer::addInstanceToPool($obj1, $key1);
+			} // if $obj1 already loaded
+
+			$key2 = Oops_Model_ProductPeer::getPrimaryKeyHashFromRow($row, $startcol);
+			if ($key2 !== null) {
+				$obj2 = Oops_Model_ProductPeer::getInstanceFromPool($key2);
+				if (!$obj2) {
+
+					$cls = Oops_Model_ProductPeer::getOMClass(false);
+
+					$obj2 = new $cls();
+					$obj2->hydrate($row, $startcol);
+					Oops_Model_ProductPeer::addInstanceToPool($obj2, $key2);
+				} // if obj2 already loaded
+
+				// Add the $obj1 (Oops_Model_FeatureProduct) to $obj2 (Oops_Model_Product)
+				$obj2->addFeatureProduct($obj1);
+
+			} // if joined row was not null
+
+			$results[] = $obj1;
+		}
+		$stmt->closeCursor();
+		return $results;
+	}
+
+
+	/**
+	 * Selects a collection of Oops_Model_FeatureProduct objects pre-filled with their Oops_Model_Feature objects.
+	 * @param      Criteria  $criteria
+	 * @param      PropelPDO $con
+	 * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+	 * @return     array Array of Oops_Model_FeatureProduct objects.
+	 * @throws     PropelException Any exceptions caught during processing will be
+	 *		 rethrown wrapped into a PropelException.
+	 */
+	public static function doSelectJoinFeature(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+	{
+		$criteria = clone $criteria;
+
+		// Set the correct dbName if it has not been overridden
+		if ($criteria->getDbName() == Propel::getDefaultDB()) {
+			$criteria->setDbName(self::DATABASE_NAME);
+		}
+
+		Oops_Model_FeatureProductPeer::addSelectColumns($criteria);
+		$startcol = Oops_Model_FeatureProductPeer::NUM_HYDRATE_COLUMNS;
+		Oops_Model_FeaturePeer::addSelectColumns($criteria);
+
+		$criteria->addJoin(Oops_Model_FeatureProductPeer::ID_FEATURE, Oops_Model_FeaturePeer::ID_FEATURE, $join_behavior);
+
+		$stmt = BasePeer::doSelect($criteria, $con);
+		$results = array();
+
+		while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+			$key1 = Oops_Model_FeatureProductPeer::getPrimaryKeyHashFromRow($row, 0);
+			if (null !== ($obj1 = Oops_Model_FeatureProductPeer::getInstanceFromPool($key1))) {
+				// We no longer rehydrate the object, since this can cause data loss.
+				// See http://www.propelorm.org/ticket/509
+				// $obj1->hydrate($row, 0, true); // rehydrate
+			} else {
+
+				$cls = Oops_Model_FeatureProductPeer::getOMClass(false);
+
+				$obj1 = new $cls();
+				$obj1->hydrate($row);
+				Oops_Model_FeatureProductPeer::addInstanceToPool($obj1, $key1);
+			} // if $obj1 already loaded
+
+			$key2 = Oops_Model_FeaturePeer::getPrimaryKeyHashFromRow($row, $startcol);
+			if ($key2 !== null) {
+				$obj2 = Oops_Model_FeaturePeer::getInstanceFromPool($key2);
+				if (!$obj2) {
+
+					$cls = Oops_Model_FeaturePeer::getOMClass(false);
+
+					$obj2 = new $cls();
+					$obj2->hydrate($row, $startcol);
+					Oops_Model_FeaturePeer::addInstanceToPool($obj2, $key2);
+				} // if obj2 already loaded
+
+				// Add the $obj1 (Oops_Model_FeatureProduct) to $obj2 (Oops_Model_Feature)
+				$obj2->addFeatureProduct($obj1);
+
+			} // if joined row was not null
+
+			$results[] = $obj1;
+		}
+		$stmt->closeCursor();
+		return $results;
+	}
+
+
+	/**
+	 * Returns the number of rows matching criteria, joining all related tables
+	 *
+	 * @param      Criteria $criteria
+	 * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
+	 * @param      PropelPDO $con
+	 * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+	 * @return     int Number of matching rows.
+	 */
+	public static function doCountJoinAll(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
+	{
+		// we're going to modify criteria, so copy it first
+		$criteria = clone $criteria;
+
+		// We need to set the primary table name, since in the case that there are no WHERE columns
+		// it will be impossible for the BasePeer::createSelectSql() method to determine which
+		// tables go into the FROM clause.
+		$criteria->setPrimaryTableName(Oops_Model_FeatureProductPeer::TABLE_NAME);
+
+		if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->setDistinct();
+		}
+
+		if (!$criteria->hasSelectClause()) {
+			Oops_Model_FeatureProductPeer::addSelectColumns($criteria);
+		}
+
+		$criteria->clearOrderByColumns(); // ORDER BY won't ever affect the count
+
+		// Set the correct dbName
+		$criteria->setDbName(self::DATABASE_NAME);
+
+		if ($con === null) {
+			$con = Propel::getConnection(Oops_Model_FeatureProductPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+		}
+
+		$criteria->addJoin(Oops_Model_FeatureProductPeer::ID_PRODUCT, Oops_Model_ProductPeer::ID_PRODUCT, $join_behavior);
+
+		$criteria->addJoin(Oops_Model_FeatureProductPeer::ID_FEATURE, Oops_Model_FeaturePeer::ID_FEATURE, $join_behavior);
+
+		$stmt = BasePeer::doCount($criteria, $con);
+
+		if ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+			$count = (int) $row[0];
+		} else {
+			$count = 0; // no rows returned; we infer that means 0 matches.
+		}
+		$stmt->closeCursor();
+		return $count;
+	}
+
+	/**
+	 * Selects a collection of Oops_Model_FeatureProduct objects pre-filled with all related objects.
+	 *
+	 * @param      Criteria  $criteria
+	 * @param      PropelPDO $con
+	 * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+	 * @return     array Array of Oops_Model_FeatureProduct objects.
+	 * @throws     PropelException Any exceptions caught during processing will be
+	 *		 rethrown wrapped into a PropelException.
+	 */
+	public static function doSelectJoinAll(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+	{
+		$criteria = clone $criteria;
+
+		// Set the correct dbName if it has not been overridden
+		if ($criteria->getDbName() == Propel::getDefaultDB()) {
+			$criteria->setDbName(self::DATABASE_NAME);
+		}
+
+		Oops_Model_FeatureProductPeer::addSelectColumns($criteria);
+		$startcol2 = Oops_Model_FeatureProductPeer::NUM_HYDRATE_COLUMNS;
+
+		Oops_Model_ProductPeer::addSelectColumns($criteria);
+		$startcol3 = $startcol2 + Oops_Model_ProductPeer::NUM_HYDRATE_COLUMNS;
+
+		Oops_Model_FeaturePeer::addSelectColumns($criteria);
+		$startcol4 = $startcol3 + Oops_Model_FeaturePeer::NUM_HYDRATE_COLUMNS;
+
+		$criteria->addJoin(Oops_Model_FeatureProductPeer::ID_PRODUCT, Oops_Model_ProductPeer::ID_PRODUCT, $join_behavior);
+
+		$criteria->addJoin(Oops_Model_FeatureProductPeer::ID_FEATURE, Oops_Model_FeaturePeer::ID_FEATURE, $join_behavior);
+
+		$stmt = BasePeer::doSelect($criteria, $con);
+		$results = array();
+
+		while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+			$key1 = Oops_Model_FeatureProductPeer::getPrimaryKeyHashFromRow($row, 0);
+			if (null !== ($obj1 = Oops_Model_FeatureProductPeer::getInstanceFromPool($key1))) {
+				// We no longer rehydrate the object, since this can cause data loss.
+				// See http://www.propelorm.org/ticket/509
+				// $obj1->hydrate($row, 0, true); // rehydrate
+			} else {
+				$cls = Oops_Model_FeatureProductPeer::getOMClass(false);
+
+				$obj1 = new $cls();
+				$obj1->hydrate($row);
+				Oops_Model_FeatureProductPeer::addInstanceToPool($obj1, $key1);
+			} // if obj1 already loaded
+
+			// Add objects for joined Oops_Model_Product rows
+
+			$key2 = Oops_Model_ProductPeer::getPrimaryKeyHashFromRow($row, $startcol2);
+			if ($key2 !== null) {
+				$obj2 = Oops_Model_ProductPeer::getInstanceFromPool($key2);
+				if (!$obj2) {
+
+					$cls = Oops_Model_ProductPeer::getOMClass(false);
+
+					$obj2 = new $cls();
+					$obj2->hydrate($row, $startcol2);
+					Oops_Model_ProductPeer::addInstanceToPool($obj2, $key2);
+				} // if obj2 loaded
+
+				// Add the $obj1 (Oops_Model_FeatureProduct) to the collection in $obj2 (Oops_Model_Product)
+				$obj2->addFeatureProduct($obj1);
+			} // if joined row not null
+
+			// Add objects for joined Oops_Model_Feature rows
+
+			$key3 = Oops_Model_FeaturePeer::getPrimaryKeyHashFromRow($row, $startcol3);
+			if ($key3 !== null) {
+				$obj3 = Oops_Model_FeaturePeer::getInstanceFromPool($key3);
+				if (!$obj3) {
+
+					$cls = Oops_Model_FeaturePeer::getOMClass(false);
+
+					$obj3 = new $cls();
+					$obj3->hydrate($row, $startcol3);
+					Oops_Model_FeaturePeer::addInstanceToPool($obj3, $key3);
+				} // if obj3 loaded
+
+				// Add the $obj1 (Oops_Model_FeatureProduct) to the collection in $obj3 (Oops_Model_Feature)
+				$obj3->addFeatureProduct($obj1);
+			} // if joined row not null
+
+			$results[] = $obj1;
+		}
+		$stmt->closeCursor();
+		return $results;
+	}
+
+
+	/**
+	 * Returns the number of rows matching criteria, joining the related Product table
+	 *
+	 * @param      Criteria $criteria
+	 * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
+	 * @param      PropelPDO $con
+	 * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+	 * @return     int Number of matching rows.
+	 */
+	public static function doCountJoinAllExceptProduct(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
+	{
+		// we're going to modify criteria, so copy it first
+		$criteria = clone $criteria;
+
+		// We need to set the primary table name, since in the case that there are no WHERE columns
+		// it will be impossible for the BasePeer::createSelectSql() method to determine which
+		// tables go into the FROM clause.
+		$criteria->setPrimaryTableName(Oops_Model_FeatureProductPeer::TABLE_NAME);
+
+		if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->setDistinct();
+		}
+
+		if (!$criteria->hasSelectClause()) {
+			Oops_Model_FeatureProductPeer::addSelectColumns($criteria);
+		}
+
+		$criteria->clearOrderByColumns(); // ORDER BY should not affect count
+
+		// Set the correct dbName
+		$criteria->setDbName(self::DATABASE_NAME);
+
+		if ($con === null) {
+			$con = Propel::getConnection(Oops_Model_FeatureProductPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+		}
+	
+		$criteria->addJoin(Oops_Model_FeatureProductPeer::ID_FEATURE, Oops_Model_FeaturePeer::ID_FEATURE, $join_behavior);
+
+		$stmt = BasePeer::doCount($criteria, $con);
+
+		if ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+			$count = (int) $row[0];
+		} else {
+			$count = 0; // no rows returned; we infer that means 0 matches.
+		}
+		$stmt->closeCursor();
+		return $count;
+	}
+
+
+	/**
+	 * Returns the number of rows matching criteria, joining the related Feature table
+	 *
+	 * @param      Criteria $criteria
+	 * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
+	 * @param      PropelPDO $con
+	 * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+	 * @return     int Number of matching rows.
+	 */
+	public static function doCountJoinAllExceptFeature(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
+	{
+		// we're going to modify criteria, so copy it first
+		$criteria = clone $criteria;
+
+		// We need to set the primary table name, since in the case that there are no WHERE columns
+		// it will be impossible for the BasePeer::createSelectSql() method to determine which
+		// tables go into the FROM clause.
+		$criteria->setPrimaryTableName(Oops_Model_FeatureProductPeer::TABLE_NAME);
+
+		if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->setDistinct();
+		}
+
+		if (!$criteria->hasSelectClause()) {
+			Oops_Model_FeatureProductPeer::addSelectColumns($criteria);
+		}
+
+		$criteria->clearOrderByColumns(); // ORDER BY should not affect count
+
+		// Set the correct dbName
+		$criteria->setDbName(self::DATABASE_NAME);
+
+		if ($con === null) {
+			$con = Propel::getConnection(Oops_Model_FeatureProductPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+		}
+	
+		$criteria->addJoin(Oops_Model_FeatureProductPeer::ID_PRODUCT, Oops_Model_ProductPeer::ID_PRODUCT, $join_behavior);
+
+		$stmt = BasePeer::doCount($criteria, $con);
+
+		if ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+			$count = (int) $row[0];
+		} else {
+			$count = 0; // no rows returned; we infer that means 0 matches.
+		}
+		$stmt->closeCursor();
+		return $count;
+	}
+
+
+	/**
+	 * Selects a collection of Oops_Model_FeatureProduct objects pre-filled with all related objects except Product.
+	 *
+	 * @param      Criteria  $criteria
+	 * @param      PropelPDO $con
+	 * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+	 * @return     array Array of Oops_Model_FeatureProduct objects.
+	 * @throws     PropelException Any exceptions caught during processing will be
+	 *		 rethrown wrapped into a PropelException.
+	 */
+	public static function doSelectJoinAllExceptProduct(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+	{
+		$criteria = clone $criteria;
+
+		// Set the correct dbName if it has not been overridden
+		// $criteria->getDbName() will return the same object if not set to another value
+		// so == check is okay and faster
+		if ($criteria->getDbName() == Propel::getDefaultDB()) {
+			$criteria->setDbName(self::DATABASE_NAME);
+		}
+
+		Oops_Model_FeatureProductPeer::addSelectColumns($criteria);
+		$startcol2 = Oops_Model_FeatureProductPeer::NUM_HYDRATE_COLUMNS;
+
+		Oops_Model_FeaturePeer::addSelectColumns($criteria);
+		$startcol3 = $startcol2 + Oops_Model_FeaturePeer::NUM_HYDRATE_COLUMNS;
+
+		$criteria->addJoin(Oops_Model_FeatureProductPeer::ID_FEATURE, Oops_Model_FeaturePeer::ID_FEATURE, $join_behavior);
+
+
+		$stmt = BasePeer::doSelect($criteria, $con);
+		$results = array();
+
+		while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+			$key1 = Oops_Model_FeatureProductPeer::getPrimaryKeyHashFromRow($row, 0);
+			if (null !== ($obj1 = Oops_Model_FeatureProductPeer::getInstanceFromPool($key1))) {
+				// We no longer rehydrate the object, since this can cause data loss.
+				// See http://www.propelorm.org/ticket/509
+				// $obj1->hydrate($row, 0, true); // rehydrate
+			} else {
+				$cls = Oops_Model_FeatureProductPeer::getOMClass(false);
+
+				$obj1 = new $cls();
+				$obj1->hydrate($row);
+				Oops_Model_FeatureProductPeer::addInstanceToPool($obj1, $key1);
+			} // if obj1 already loaded
+
+				// Add objects for joined Oops_Model_Feature rows
+
+				$key2 = Oops_Model_FeaturePeer::getPrimaryKeyHashFromRow($row, $startcol2);
+				if ($key2 !== null) {
+					$obj2 = Oops_Model_FeaturePeer::getInstanceFromPool($key2);
+					if (!$obj2) {
+	
+						$cls = Oops_Model_FeaturePeer::getOMClass(false);
+
+					$obj2 = new $cls();
+					$obj2->hydrate($row, $startcol2);
+					Oops_Model_FeaturePeer::addInstanceToPool($obj2, $key2);
+				} // if $obj2 already loaded
+
+				// Add the $obj1 (Oops_Model_FeatureProduct) to the collection in $obj2 (Oops_Model_Feature)
+				$obj2->addFeatureProduct($obj1);
+
+			} // if joined row is not null
+
+			$results[] = $obj1;
+		}
+		$stmt->closeCursor();
+		return $results;
+	}
+
+
+	/**
+	 * Selects a collection of Oops_Model_FeatureProduct objects pre-filled with all related objects except Feature.
+	 *
+	 * @param      Criteria  $criteria
+	 * @param      PropelPDO $con
+	 * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+	 * @return     array Array of Oops_Model_FeatureProduct objects.
+	 * @throws     PropelException Any exceptions caught during processing will be
+	 *		 rethrown wrapped into a PropelException.
+	 */
+	public static function doSelectJoinAllExceptFeature(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+	{
+		$criteria = clone $criteria;
+
+		// Set the correct dbName if it has not been overridden
+		// $criteria->getDbName() will return the same object if not set to another value
+		// so == check is okay and faster
+		if ($criteria->getDbName() == Propel::getDefaultDB()) {
+			$criteria->setDbName(self::DATABASE_NAME);
+		}
+
+		Oops_Model_FeatureProductPeer::addSelectColumns($criteria);
+		$startcol2 = Oops_Model_FeatureProductPeer::NUM_HYDRATE_COLUMNS;
+
+		Oops_Model_ProductPeer::addSelectColumns($criteria);
+		$startcol3 = $startcol2 + Oops_Model_ProductPeer::NUM_HYDRATE_COLUMNS;
+
+		$criteria->addJoin(Oops_Model_FeatureProductPeer::ID_PRODUCT, Oops_Model_ProductPeer::ID_PRODUCT, $join_behavior);
+
+
+		$stmt = BasePeer::doSelect($criteria, $con);
+		$results = array();
+
+		while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+			$key1 = Oops_Model_FeatureProductPeer::getPrimaryKeyHashFromRow($row, 0);
+			if (null !== ($obj1 = Oops_Model_FeatureProductPeer::getInstanceFromPool($key1))) {
+				// We no longer rehydrate the object, since this can cause data loss.
+				// See http://www.propelorm.org/ticket/509
+				// $obj1->hydrate($row, 0, true); // rehydrate
+			} else {
+				$cls = Oops_Model_FeatureProductPeer::getOMClass(false);
+
+				$obj1 = new $cls();
+				$obj1->hydrate($row);
+				Oops_Model_FeatureProductPeer::addInstanceToPool($obj1, $key1);
+			} // if obj1 already loaded
+
+				// Add objects for joined Oops_Model_Product rows
+
+				$key2 = Oops_Model_ProductPeer::getPrimaryKeyHashFromRow($row, $startcol2);
+				if ($key2 !== null) {
+					$obj2 = Oops_Model_ProductPeer::getInstanceFromPool($key2);
+					if (!$obj2) {
+	
+						$cls = Oops_Model_ProductPeer::getOMClass(false);
+
+					$obj2 = new $cls();
+					$obj2->hydrate($row, $startcol2);
+					Oops_Model_ProductPeer::addInstanceToPool($obj2, $key2);
+				} // if $obj2 already loaded
+
+				// Add the $obj1 (Oops_Model_FeatureProduct) to the collection in $obj2 (Oops_Model_Product)
+				$obj2->addFeatureProduct($obj1);
+
+			} // if joined row is not null
+
+			$results[] = $obj1;
+		}
+		$stmt->closeCursor();
+		return $results;
 	}
 
 	/**
@@ -566,6 +1187,14 @@ abstract class Oops_Model_Base_FeatureProductPeer {
 				$selectCriteria->setPrimaryTableName(Oops_Model_FeatureProductPeer::TABLE_NAME);
 			}
 
+			$comparison = $criteria->getComparison(Oops_Model_FeatureProductPeer::ID_FEATURE_VALUE);
+			$value = $criteria->remove(Oops_Model_FeatureProductPeer::ID_FEATURE_VALUE);
+			if ($value) {
+				$selectCriteria->add(Oops_Model_FeatureProductPeer::ID_FEATURE_VALUE, $value, $comparison);
+			} else {
+				$selectCriteria->setPrimaryTableName(Oops_Model_FeatureProductPeer::TABLE_NAME);
+			}
+
 		} else { // $values is Oops_Model_FeatureProduct object
 			$criteria = $values->buildCriteria(); // gets full criteria
 			$selectCriteria = $values->buildPkeyCriteria(); // gets criteria w/ primary key(s)
@@ -647,6 +1276,7 @@ abstract class Oops_Model_Base_FeatureProductPeer {
 			foreach ($values as $value) {
 				$criterion = $criteria->getNewCriterion(Oops_Model_FeatureProductPeer::ID_FEATURE, $value[0]);
 				$criterion->addAnd($criteria->getNewCriterion(Oops_Model_FeatureProductPeer::ID_PRODUCT, $value[1]));
+				$criterion->addAnd($criteria->getNewCriterion(Oops_Model_FeatureProductPeer::ID_FEATURE_VALUE, $value[2]));
 				$criteria->addOr($criterion);
 				// we can invalidate the cache for this single PK
 				Oops_Model_FeatureProductPeer::removeInstanceFromPool($value);
@@ -714,11 +1344,12 @@ abstract class Oops_Model_Base_FeatureProductPeer {
 	 * Retrieve object using using composite pkey values.
 	 * @param      int $id_feature
 	 * @param      int $id_product
+	 * @param      int $id_feature_value
 	 * @param      PropelPDO $con
 	 * @return     Oops_Model_FeatureProduct
 	 */
-	public static function retrieveByPK($id_feature, $id_product, PropelPDO $con = null) {
-		$_instancePoolKey = serialize(array((string) $id_feature, (string) $id_product));
+	public static function retrieveByPK($id_feature, $id_product, $id_feature_value, PropelPDO $con = null) {
+		$_instancePoolKey = serialize(array((string) $id_feature, (string) $id_product, (string) $id_feature_value));
  		if (null !== ($obj = Oops_Model_FeatureProductPeer::getInstanceFromPool($_instancePoolKey))) {
  			return $obj;
 		}
@@ -729,6 +1360,7 @@ abstract class Oops_Model_Base_FeatureProductPeer {
 		$criteria = new Criteria(Oops_Model_FeatureProductPeer::DATABASE_NAME);
 		$criteria->add(Oops_Model_FeatureProductPeer::ID_FEATURE, $id_feature);
 		$criteria->add(Oops_Model_FeatureProductPeer::ID_PRODUCT, $id_product);
+		$criteria->add(Oops_Model_FeatureProductPeer::ID_FEATURE_VALUE, $id_feature_value);
 		$v = Oops_Model_FeatureProductPeer::doSelect($criteria, $con);
 
 		return !empty($v) ? $v[0] : null;

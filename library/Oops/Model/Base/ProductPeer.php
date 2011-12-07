@@ -214,7 +214,7 @@ abstract class Oops_Model_Base_ProductPeer {
 	 * The default locale to use for translations
 	 * @var        string
 	 */
-	const DEFAULT_LOCALE = 'en_EN';
+	const DEFAULT_LOCALE = '1';
 	/**
 	 * holds an array of fieldnames
 	 *

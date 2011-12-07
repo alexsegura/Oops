@@ -96,6 +96,10 @@
  * @method     Oops_Model_ProductQuery rightJoinCategoryProduct($relationAlias = null) Adds a RIGHT JOIN clause to the query using the CategoryProduct relation
  * @method     Oops_Model_ProductQuery innerJoinCategoryProduct($relationAlias = null) Adds a INNER JOIN clause to the query using the CategoryProduct relation
  *
+ * @method     Oops_Model_ProductQuery leftJoinFeatureProduct($relationAlias = null) Adds a LEFT JOIN clause to the query using the FeatureProduct relation
+ * @method     Oops_Model_ProductQuery rightJoinFeatureProduct($relationAlias = null) Adds a RIGHT JOIN clause to the query using the FeatureProduct relation
+ * @method     Oops_Model_ProductQuery innerJoinFeatureProduct($relationAlias = null) Adds a INNER JOIN clause to the query using the FeatureProduct relation
+ *
  * @method     Oops_Model_ProductQuery leftJoinImage($relationAlias = null) Adds a LEFT JOIN clause to the query using the Image relation
  * @method     Oops_Model_ProductQuery rightJoinImage($relationAlias = null) Adds a RIGHT JOIN clause to the query using the Image relation
  * @method     Oops_Model_ProductQuery innerJoinImage($relationAlias = null) Adds a INNER JOIN clause to the query using the Image relation
@@ -1823,6 +1827,79 @@ abstract class Oops_Model_Base_ProductQuery extends ModelCriteria
 	}
 
 	/**
+	 * Filter the query by a related Oops_Model_FeatureProduct object
+	 *
+	 * @param     Oops_Model_FeatureProduct $featureProduct  the related object to use as filter
+	 * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+	 *
+	 * @return    Oops_Model_ProductQuery The current query, for fluid interface
+	 */
+	public function filterByFeatureProduct($featureProduct, $comparison = null)
+	{
+		if ($featureProduct instanceof Oops_Model_FeatureProduct) {
+			return $this
+				->addUsingAlias(Oops_Model_ProductPeer::ID_PRODUCT, $featureProduct->getIdProduct(), $comparison);
+		} elseif ($featureProduct instanceof PropelCollection) {
+			return $this
+				->useFeatureProductQuery()
+				->filterByPrimaryKeys($featureProduct->getPrimaryKeys())
+				->endUse();
+		} else {
+			throw new PropelException('filterByFeatureProduct() only accepts arguments of type Oops_Model_FeatureProduct or PropelCollection');
+		}
+	}
+
+	/**
+	 * Adds a JOIN clause to the query using the FeatureProduct relation
+	 *
+	 * @param     string $relationAlias optional alias for the relation
+	 * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+	 *
+	 * @return    Oops_Model_ProductQuery The current query, for fluid interface
+	 */
+	public function joinFeatureProduct($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+	{
+		$tableMap = $this->getTableMap();
+		$relationMap = $tableMap->getRelation('FeatureProduct');
+
+		// create a ModelJoin object for this join
+		$join = new ModelJoin();
+		$join->setJoinType($joinType);
+		$join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
+		if ($previousJoin = $this->getPreviousJoin()) {
+			$join->setPreviousJoin($previousJoin);
+		}
+
+		// add the ModelJoin to the current object
+		if($relationAlias) {
+			$this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
+			$this->addJoinObject($join, $relationAlias);
+		} else {
+			$this->addJoinObject($join, 'FeatureProduct');
+		}
+
+		return $this;
+	}
+
+	/**
+	 * Use the FeatureProduct relation FeatureProduct object
+	 *
+	 * @see       useQuery()
+	 *
+	 * @param     string $relationAlias optional alias for the relation,
+	 *                                   to be used as main alias in the secondary query
+	 * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+	 *
+	 * @return    Oops_Model_FeatureProductQuery A secondary query class using the current class as primary query
+	 */
+	public function useFeatureProductQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+	{
+		return $this
+			->joinFeatureProduct($relationAlias, $joinType)
+			->useQuery($relationAlias ? $relationAlias : 'FeatureProduct', 'Oops_Model_FeatureProductQuery');
+	}
+
+	/**
 	 * Filter the query by a related Oops_Model_Image object
 	 *
 	 * @param     Oops_Model_Image $image  the related object to use as filter
@@ -2132,6 +2209,23 @@ abstract class Oops_Model_Base_ProductQuery extends ModelCriteria
 	}
 
 	/**
+	 * Filter the query by a related Feature object
+	 * using the feature_product table as cross reference
+	 *
+	 * @param     Feature $feature the related object to use as filter
+	 * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+	 *
+	 * @return    Oops_Model_ProductQuery The current query, for fluid interface
+	 */
+	public function filterByFeature($feature, $comparison = Criteria::EQUAL)
+	{
+		return $this
+			->useFeatureProductQuery()
+			->filterByFeature($feature, $comparison)
+			->endUse();
+	}
+
+	/**
 	 * Exclude object from result
 	 *
 	 * @param     Oops_Model_Product $product Object to remove from the list of results
@@ -2158,7 +2252,7 @@ abstract class Oops_Model_Base_ProductQuery extends ModelCriteria
 	 *
 	 * @return    Oops_Model_ProductQuery The current query, for fluid interface
 	 */
-	public function joinI18n($locale = 'en_EN', $relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+	public function joinI18n($locale = '1', $relationAlias = null, $joinType = Criteria::LEFT_JOIN)
 	{
 		$relationName = $relationAlias ? $relationAlias : 'ProductLang';
 		return $this
@@ -2175,7 +2269,7 @@ abstract class Oops_Model_Base_ProductQuery extends ModelCriteria
 	 *
 	 * @return    Oops_Model_ProductQuery The current query, for fluid interface
 	 */
-	public function joinWithI18n($locale = 'en_EN', $joinType = Criteria::LEFT_JOIN)
+	public function joinWithI18n($locale = '1', $joinType = Criteria::LEFT_JOIN)
 	{
 		$this
 			->joinI18n($locale, null, $joinType)
@@ -2195,7 +2289,7 @@ abstract class Oops_Model_Base_ProductQuery extends ModelCriteria
 	 *
 	 * @return    Oops_Model_ProductLangQuery A secondary query class using the current class as primary query
 	 */
-	public function useI18nQuery($locale = 'en_EN', $relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+	public function useI18nQuery($locale = '1', $relationAlias = null, $joinType = Criteria::LEFT_JOIN)
 	{
 		return $this
 			->joinI18n($locale, $relationAlias, $joinType)

@@ -18,6 +18,10 @@
  * @method     Oops_Model_FeatureValueLangQuery rightJoin($relation) Adds a RIGHT JOIN clause to the query
  * @method     Oops_Model_FeatureValueLangQuery innerJoin($relation) Adds a INNER JOIN clause to the query
  *
+ * @method     Oops_Model_FeatureValueLangQuery leftJoinFeatureValue($relationAlias = null) Adds a LEFT JOIN clause to the query using the FeatureValue relation
+ * @method     Oops_Model_FeatureValueLangQuery rightJoinFeatureValue($relationAlias = null) Adds a RIGHT JOIN clause to the query using the FeatureValue relation
+ * @method     Oops_Model_FeatureValueLangQuery innerJoinFeatureValue($relationAlias = null) Adds a INNER JOIN clause to the query using the FeatureValue relation
+ *
  * @method     Oops_Model_FeatureValueLang findOne(PropelPDO $con = null) Return the first Oops_Model_FeatureValueLang matching the query
  * @method     Oops_Model_FeatureValueLang findOneOrCreate(PropelPDO $con = null) Return the first Oops_Model_FeatureValueLang matching the query, or a new Oops_Model_FeatureValueLang object populated from the query conditions when no match is found
  *
@@ -225,6 +229,8 @@ abstract class Oops_Model_Base_FeatureValueLangQuery extends ModelCriteria
 	 * $query->filterByIdFeatureValue(array('min' => 12)); // WHERE id_feature_value > 12
 	 * </code>
 	 *
+	 * @see       filterByFeatureValue()
+	 *
 	 * @param     mixed $idFeatureValue The value to use as filter.
 	 *              Use scalar values for equality.
 	 *              Use array values for in_array() equivalent.
@@ -293,6 +299,80 @@ abstract class Oops_Model_Base_FeatureValueLangQuery extends ModelCriteria
 			}
 		}
 		return $this->addUsingAlias(Oops_Model_FeatureValueLangPeer::VALUE, $value, $comparison);
+	}
+
+	/**
+	 * Filter the query by a related Oops_Model_FeatureValue object
+	 *
+	 * @param     Oops_Model_FeatureValue|PropelCollection $featureValue The related object(s) to use as filter
+	 * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+	 *
+	 * @return    Oops_Model_FeatureValueLangQuery The current query, for fluid interface
+	 */
+	public function filterByFeatureValue($featureValue, $comparison = null)
+	{
+		if ($featureValue instanceof Oops_Model_FeatureValue) {
+			return $this
+				->addUsingAlias(Oops_Model_FeatureValueLangPeer::ID_FEATURE_VALUE, $featureValue->getIdFeatureValue(), $comparison);
+		} elseif ($featureValue instanceof PropelCollection) {
+			if (null === $comparison) {
+				$comparison = Criteria::IN;
+			}
+			return $this
+				->addUsingAlias(Oops_Model_FeatureValueLangPeer::ID_FEATURE_VALUE, $featureValue->toKeyValue('PrimaryKey', 'IdFeatureValue'), $comparison);
+		} else {
+			throw new PropelException('filterByFeatureValue() only accepts arguments of type Oops_Model_FeatureValue or PropelCollection');
+		}
+	}
+
+	/**
+	 * Adds a JOIN clause to the query using the FeatureValue relation
+	 *
+	 * @param     string $relationAlias optional alias for the relation
+	 * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+	 *
+	 * @return    Oops_Model_FeatureValueLangQuery The current query, for fluid interface
+	 */
+	public function joinFeatureValue($relationAlias = null, $joinType = 'LEFT JOIN')
+	{
+		$tableMap = $this->getTableMap();
+		$relationMap = $tableMap->getRelation('FeatureValue');
+
+		// create a ModelJoin object for this join
+		$join = new ModelJoin();
+		$join->setJoinType($joinType);
+		$join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
+		if ($previousJoin = $this->getPreviousJoin()) {
+			$join->setPreviousJoin($previousJoin);
+		}
+
+		// add the ModelJoin to the current object
+		if($relationAlias) {
+			$this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
+			$this->addJoinObject($join, $relationAlias);
+		} else {
+			$this->addJoinObject($join, 'FeatureValue');
+		}
+
+		return $this;
+	}
+
+	/**
+	 * Use the FeatureValue relation FeatureValue object
+	 *
+	 * @see       useQuery()
+	 *
+	 * @param     string $relationAlias optional alias for the relation,
+	 *                                   to be used as main alias in the secondary query
+	 * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+	 *
+	 * @return    Oops_Model_FeatureValueQuery A secondary query class using the current class as primary query
+	 */
+	public function useFeatureValueQuery($relationAlias = null, $joinType = 'LEFT JOIN')
+	{
+		return $this
+			->joinFeatureValue($relationAlias, $joinType)
+			->useQuery($relationAlias ? $relationAlias : 'FeatureValue', 'Oops_Model_FeatureValueQuery');
 	}
 
 	/**

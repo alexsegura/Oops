@@ -38,7 +38,7 @@ class Oops_Model_FeatureLangTableMap extends TableMap
 		$this->setPackage('prestashop');
 		$this->setUseIdGenerator(false);
 		// columns
-		$this->addPrimaryKey('ID_FEATURE', 'IdFeature', 'INTEGER', true, 10, null);
+		$this->addForeignPrimaryKey('ID_FEATURE', 'IdFeature', 'INTEGER' , 'feature', 'ID_FEATURE', true, 10, null);
 		$this->addPrimaryKey('ID_LANG', 'IdLang', 'INTEGER', true, 10, null);
 		$this->addColumn('NAME', 'Name', 'VARCHAR', false, 128, null);
 		// validators
@@ -49,6 +49,7 @@ class Oops_Model_FeatureLangTableMap extends TableMap
 	 */
 	public function buildRelations()
 	{
+		$this->addRelation('Feature', 'Oops_Model_Feature', RelationMap::MANY_TO_ONE, array('id_feature' => 'id_feature', ), 'CASCADE', null);
 	} // buildRelations()
 
 } // Oops_Model_FeatureLangTableMap

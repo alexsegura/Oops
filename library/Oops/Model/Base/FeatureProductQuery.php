@@ -18,6 +18,18 @@
  * @method     Oops_Model_FeatureProductQuery rightJoin($relation) Adds a RIGHT JOIN clause to the query
  * @method     Oops_Model_FeatureProductQuery innerJoin($relation) Adds a INNER JOIN clause to the query
  *
+ * @method     Oops_Model_FeatureProductQuery leftJoinProduct($relationAlias = null) Adds a LEFT JOIN clause to the query using the Product relation
+ * @method     Oops_Model_FeatureProductQuery rightJoinProduct($relationAlias = null) Adds a RIGHT JOIN clause to the query using the Product relation
+ * @method     Oops_Model_FeatureProductQuery innerJoinProduct($relationAlias = null) Adds a INNER JOIN clause to the query using the Product relation
+ *
+ * @method     Oops_Model_FeatureProductQuery leftJoinFeature($relationAlias = null) Adds a LEFT JOIN clause to the query using the Feature relation
+ * @method     Oops_Model_FeatureProductQuery rightJoinFeature($relationAlias = null) Adds a RIGHT JOIN clause to the query using the Feature relation
+ * @method     Oops_Model_FeatureProductQuery innerJoinFeature($relationAlias = null) Adds a INNER JOIN clause to the query using the Feature relation
+ *
+ * @method     Oops_Model_FeatureProductQuery leftJoinFeatureValue($relationAlias = null) Adds a LEFT JOIN clause to the query using the FeatureValue relation
+ * @method     Oops_Model_FeatureProductQuery rightJoinFeatureValue($relationAlias = null) Adds a RIGHT JOIN clause to the query using the FeatureValue relation
+ * @method     Oops_Model_FeatureProductQuery innerJoinFeatureValue($relationAlias = null) Adds a INNER JOIN clause to the query using the FeatureValue relation
+ *
  * @method     Oops_Model_FeatureProduct findOne(PropelPDO $con = null) Return the first Oops_Model_FeatureProduct matching the query
  * @method     Oops_Model_FeatureProduct findOneOrCreate(PropelPDO $con = null) Return the first Oops_Model_FeatureProduct matching the query, or a new Oops_Model_FeatureProduct object populated from the query conditions when no match is found
  *
@@ -75,10 +87,10 @@ abstract class Oops_Model_Base_FeatureProductQuery extends ModelCriteria
 	 * Go fast if the query is untouched.
 	 *
 	 * <code>
-	 * $obj = $c->findPk(array(12, 34), $con);
+	 * $obj = $c->findPk(array(12, 34, 56), $con);
 	 * </code>
 	 *
-	 * @param     array[$id_feature, $id_product] $key Primary key to use for the query
+	 * @param     array[$id_feature, $id_product, $id_feature_value] $key Primary key to use for the query
 	 * @param     PropelPDO $con an optional connection object
 	 *
 	 * @return    Oops_Model_FeatureProduct|array|mixed the result, formatted by the current formatter
@@ -88,7 +100,7 @@ abstract class Oops_Model_Base_FeatureProductQuery extends ModelCriteria
 		if ($key === null) {
 			return null;
 		}
-		if ((null !== ($obj = Oops_Model_FeatureProductPeer::getInstanceFromPool(serialize(array((string) $key[0], (string) $key[1]))))) && !$this->formatter) {
+		if ((null !== ($obj = Oops_Model_FeatureProductPeer::getInstanceFromPool(serialize(array((string) $key[0], (string) $key[1], (string) $key[2]))))) && !$this->formatter) {
 			// the object is alredy in the instance pool
 			return $obj;
 		}
@@ -116,11 +128,12 @@ abstract class Oops_Model_Base_FeatureProductQuery extends ModelCriteria
 	 */
 	protected function findPkSimple($key, $con)
 	{
-		$sql = 'SELECT `ID_FEATURE`, `ID_PRODUCT`, `ID_FEATURE_VALUE` FROM `' . _DB_PREFIX_ . 'feature_product` WHERE `ID_FEATURE` = :p0 AND `ID_PRODUCT` = :p1';
+		$sql = 'SELECT `ID_FEATURE`, `ID_PRODUCT`, `ID_FEATURE_VALUE` FROM `' . _DB_PREFIX_ . 'feature_product` WHERE `ID_FEATURE` = :p0 AND `ID_PRODUCT` = :p1 AND `ID_FEATURE_VALUE` = :p2';
 		try {
 			$stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key[0], PDO::PARAM_INT);
 			$stmt->bindValue(':p1', $key[1], PDO::PARAM_INT);
+			$stmt->bindValue(':p2', $key[2], PDO::PARAM_INT);
 			$stmt->execute();
 		} catch (Exception $e) {
 			Propel::log($e->getMessage(), Propel::LOG_ERR);
@@ -130,7 +143,7 @@ abstract class Oops_Model_Base_FeatureProductQuery extends ModelCriteria
 		if ($row = $stmt->fetch(PDO::FETCH_NUM)) {
 			$obj = new Oops_Model_FeatureProduct();
 			$obj->hydrate($row);
-			Oops_Model_FeatureProductPeer::addInstanceToPool($obj, serialize(array((string) $row[0], (string) $row[1])));
+			Oops_Model_FeatureProductPeer::addInstanceToPool($obj, serialize(array((string) $row[0], (string) $row[1], (string) $row[2])));
 		}
 		$stmt->closeCursor();
 
@@ -189,6 +202,7 @@ abstract class Oops_Model_Base_FeatureProductQuery extends ModelCriteria
 	{
 		$this->addUsingAlias(Oops_Model_FeatureProductPeer::ID_FEATURE, $key[0], Criteria::EQUAL);
 		$this->addUsingAlias(Oops_Model_FeatureProductPeer::ID_PRODUCT, $key[1], Criteria::EQUAL);
+		$this->addUsingAlias(Oops_Model_FeatureProductPeer::ID_FEATURE_VALUE, $key[2], Criteria::EQUAL);
 
 		return $this;
 	}
@@ -209,6 +223,8 @@ abstract class Oops_Model_Base_FeatureProductQuery extends ModelCriteria
 			$cton0 = $this->getNewCriterion(Oops_Model_FeatureProductPeer::ID_FEATURE, $key[0], Criteria::EQUAL);
 			$cton1 = $this->getNewCriterion(Oops_Model_FeatureProductPeer::ID_PRODUCT, $key[1], Criteria::EQUAL);
 			$cton0->addAnd($cton1);
+			$cton2 = $this->getNewCriterion(Oops_Model_FeatureProductPeer::ID_FEATURE_VALUE, $key[2], Criteria::EQUAL);
+			$cton0->addAnd($cton2);
 			$this->addOr($cton0);
 		}
 
@@ -224,6 +240,8 @@ abstract class Oops_Model_Base_FeatureProductQuery extends ModelCriteria
 	 * $query->filterByIdFeature(array(12, 34)); // WHERE id_feature IN (12, 34)
 	 * $query->filterByIdFeature(array('min' => 12)); // WHERE id_feature > 12
 	 * </code>
+	 *
+	 * @see       filterByFeature()
 	 *
 	 * @param     mixed $idFeature The value to use as filter.
 	 *              Use scalar values for equality.
@@ -250,6 +268,8 @@ abstract class Oops_Model_Base_FeatureProductQuery extends ModelCriteria
 	 * $query->filterByIdProduct(array(12, 34)); // WHERE id_product IN (12, 34)
 	 * $query->filterByIdProduct(array('min' => 12)); // WHERE id_product > 12
 	 * </code>
+	 *
+	 * @see       filterByProduct()
 	 *
 	 * @param     mixed $idProduct The value to use as filter.
 	 *              Use scalar values for equality.
@@ -287,24 +307,231 @@ abstract class Oops_Model_Base_FeatureProductQuery extends ModelCriteria
 	 */
 	public function filterByIdFeatureValue($idFeatureValue = null, $comparison = null)
 	{
-		if (is_array($idFeatureValue)) {
-			$useMinMax = false;
-			if (isset($idFeatureValue['min'])) {
-				$this->addUsingAlias(Oops_Model_FeatureProductPeer::ID_FEATURE_VALUE, $idFeatureValue['min'], Criteria::GREATER_EQUAL);
-				$useMinMax = true;
-			}
-			if (isset($idFeatureValue['max'])) {
-				$this->addUsingAlias(Oops_Model_FeatureProductPeer::ID_FEATURE_VALUE, $idFeatureValue['max'], Criteria::LESS_EQUAL);
-				$useMinMax = true;
-			}
-			if ($useMinMax) {
-				return $this;
-			}
+		if (is_array($idFeatureValue) && null === $comparison) {
+			$comparison = Criteria::IN;
+		}
+		return $this->addUsingAlias(Oops_Model_FeatureProductPeer::ID_FEATURE_VALUE, $idFeatureValue, $comparison);
+	}
+
+	/**
+	 * Filter the query by a related Oops_Model_Product object
+	 *
+	 * @param     Oops_Model_Product|PropelCollection $product The related object(s) to use as filter
+	 * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+	 *
+	 * @return    Oops_Model_FeatureProductQuery The current query, for fluid interface
+	 */
+	public function filterByProduct($product, $comparison = null)
+	{
+		if ($product instanceof Oops_Model_Product) {
+			return $this
+				->addUsingAlias(Oops_Model_FeatureProductPeer::ID_PRODUCT, $product->getIdProduct(), $comparison);
+		} elseif ($product instanceof PropelCollection) {
 			if (null === $comparison) {
 				$comparison = Criteria::IN;
 			}
+			return $this
+				->addUsingAlias(Oops_Model_FeatureProductPeer::ID_PRODUCT, $product->toKeyValue('PrimaryKey', 'IdProduct'), $comparison);
+		} else {
+			throw new PropelException('filterByProduct() only accepts arguments of type Oops_Model_Product or PropelCollection');
 		}
-		return $this->addUsingAlias(Oops_Model_FeatureProductPeer::ID_FEATURE_VALUE, $idFeatureValue, $comparison);
+	}
+
+	/**
+	 * Adds a JOIN clause to the query using the Product relation
+	 *
+	 * @param     string $relationAlias optional alias for the relation
+	 * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+	 *
+	 * @return    Oops_Model_FeatureProductQuery The current query, for fluid interface
+	 */
+	public function joinProduct($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+	{
+		$tableMap = $this->getTableMap();
+		$relationMap = $tableMap->getRelation('Product');
+
+		// create a ModelJoin object for this join
+		$join = new ModelJoin();
+		$join->setJoinType($joinType);
+		$join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
+		if ($previousJoin = $this->getPreviousJoin()) {
+			$join->setPreviousJoin($previousJoin);
+		}
+
+		// add the ModelJoin to the current object
+		if($relationAlias) {
+			$this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
+			$this->addJoinObject($join, $relationAlias);
+		} else {
+			$this->addJoinObject($join, 'Product');
+		}
+
+		return $this;
+	}
+
+	/**
+	 * Use the Product relation Product object
+	 *
+	 * @see       useQuery()
+	 *
+	 * @param     string $relationAlias optional alias for the relation,
+	 *                                   to be used as main alias in the secondary query
+	 * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+	 *
+	 * @return    Oops_Model_ProductQuery A secondary query class using the current class as primary query
+	 */
+	public function useProductQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+	{
+		return $this
+			->joinProduct($relationAlias, $joinType)
+			->useQuery($relationAlias ? $relationAlias : 'Product', 'Oops_Model_ProductQuery');
+	}
+
+	/**
+	 * Filter the query by a related Oops_Model_Feature object
+	 *
+	 * @param     Oops_Model_Feature|PropelCollection $feature The related object(s) to use as filter
+	 * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+	 *
+	 * @return    Oops_Model_FeatureProductQuery The current query, for fluid interface
+	 */
+	public function filterByFeature($feature, $comparison = null)
+	{
+		if ($feature instanceof Oops_Model_Feature) {
+			return $this
+				->addUsingAlias(Oops_Model_FeatureProductPeer::ID_FEATURE, $feature->getIdFeature(), $comparison);
+		} elseif ($feature instanceof PropelCollection) {
+			if (null === $comparison) {
+				$comparison = Criteria::IN;
+			}
+			return $this
+				->addUsingAlias(Oops_Model_FeatureProductPeer::ID_FEATURE, $feature->toKeyValue('PrimaryKey', 'IdFeature'), $comparison);
+		} else {
+			throw new PropelException('filterByFeature() only accepts arguments of type Oops_Model_Feature or PropelCollection');
+		}
+	}
+
+	/**
+	 * Adds a JOIN clause to the query using the Feature relation
+	 *
+	 * @param     string $relationAlias optional alias for the relation
+	 * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+	 *
+	 * @return    Oops_Model_FeatureProductQuery The current query, for fluid interface
+	 */
+	public function joinFeature($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+	{
+		$tableMap = $this->getTableMap();
+		$relationMap = $tableMap->getRelation('Feature');
+
+		// create a ModelJoin object for this join
+		$join = new ModelJoin();
+		$join->setJoinType($joinType);
+		$join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
+		if ($previousJoin = $this->getPreviousJoin()) {
+			$join->setPreviousJoin($previousJoin);
+		}
+
+		// add the ModelJoin to the current object
+		if($relationAlias) {
+			$this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
+			$this->addJoinObject($join, $relationAlias);
+		} else {
+			$this->addJoinObject($join, 'Feature');
+		}
+
+		return $this;
+	}
+
+	/**
+	 * Use the Feature relation Feature object
+	 *
+	 * @see       useQuery()
+	 *
+	 * @param     string $relationAlias optional alias for the relation,
+	 *                                   to be used as main alias in the secondary query
+	 * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+	 *
+	 * @return    Oops_Model_FeatureQuery A secondary query class using the current class as primary query
+	 */
+	public function useFeatureQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+	{
+		return $this
+			->joinFeature($relationAlias, $joinType)
+			->useQuery($relationAlias ? $relationAlias : 'Feature', 'Oops_Model_FeatureQuery');
+	}
+
+	/**
+	 * Filter the query by a related Oops_Model_FeatureValue object
+	 *
+	 * @param     Oops_Model_FeatureValue $featureValue  the related object to use as filter
+	 * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+	 *
+	 * @return    Oops_Model_FeatureProductQuery The current query, for fluid interface
+	 */
+	public function filterByFeatureValue($featureValue, $comparison = null)
+	{
+		if ($featureValue instanceof Oops_Model_FeatureValue) {
+			return $this
+				->addUsingAlias(Oops_Model_FeatureProductPeer::ID_FEATURE_VALUE, $featureValue->getIdFeatureValue(), $comparison);
+		} elseif ($featureValue instanceof PropelCollection) {
+			return $this
+				->useFeatureValueQuery()
+				->filterByPrimaryKeys($featureValue->getPrimaryKeys())
+				->endUse();
+		} else {
+			throw new PropelException('filterByFeatureValue() only accepts arguments of type Oops_Model_FeatureValue or PropelCollection');
+		}
+	}
+
+	/**
+	 * Adds a JOIN clause to the query using the FeatureValue relation
+	 *
+	 * @param     string $relationAlias optional alias for the relation
+	 * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+	 *
+	 * @return    Oops_Model_FeatureProductQuery The current query, for fluid interface
+	 */
+	public function joinFeatureValue($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+	{
+		$tableMap = $this->getTableMap();
+		$relationMap = $tableMap->getRelation('FeatureValue');
+
+		// create a ModelJoin object for this join
+		$join = new ModelJoin();
+		$join->setJoinType($joinType);
+		$join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
+		if ($previousJoin = $this->getPreviousJoin()) {
+			$join->setPreviousJoin($previousJoin);
+		}
+
+		// add the ModelJoin to the current object
+		if($relationAlias) {
+			$this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
+			$this->addJoinObject($join, $relationAlias);
+		} else {
+			$this->addJoinObject($join, 'FeatureValue');
+		}
+
+		return $this;
+	}
+
+	/**
+	 * Use the FeatureValue relation FeatureValue object
+	 *
+	 * @see       useQuery()
+	 *
+	 * @param     string $relationAlias optional alias for the relation,
+	 *                                   to be used as main alias in the secondary query
+	 * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+	 *
+	 * @return    Oops_Model_FeatureValueQuery A secondary query class using the current class as primary query
+	 */
+	public function useFeatureValueQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+	{
+		return $this
+			->joinFeatureValue($relationAlias, $joinType)
+			->useQuery($relationAlias ? $relationAlias : 'FeatureValue', 'Oops_Model_FeatureValueQuery');
 	}
 
 	/**
@@ -319,7 +546,8 @@ abstract class Oops_Model_Base_FeatureProductQuery extends ModelCriteria
 		if ($featureProduct) {
 			$this->addCond('pruneCond0', $this->getAliasedColName(Oops_Model_FeatureProductPeer::ID_FEATURE), $featureProduct->getIdFeature(), Criteria::NOT_EQUAL);
 			$this->addCond('pruneCond1', $this->getAliasedColName(Oops_Model_FeatureProductPeer::ID_PRODUCT), $featureProduct->getIdProduct(), Criteria::NOT_EQUAL);
-			$this->combine(array('pruneCond0', 'pruneCond1'), Criteria::LOGICAL_OR);
+			$this->addCond('pruneCond2', $this->getAliasedColName(Oops_Model_FeatureProductPeer::ID_FEATURE_VALUE), $featureProduct->getIdFeatureValue(), Criteria::NOT_EQUAL);
+			$this->combine(array('pruneCond0', 'pruneCond1', 'pruneCond2'), Criteria::LOGICAL_OR);
 		}
 
 		return $this;

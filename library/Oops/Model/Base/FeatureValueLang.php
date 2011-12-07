@@ -43,6 +43,11 @@ abstract class Oops_Model_Base_FeatureValueLang extends BaseObject  implements P
 	protected $value;
 
 	/**
+	 * @var        FeatureValue
+	 */
+	protected $aFeatureValue;
+
+	/**
 	 * Flag to prevent endless save loop, if this object is referenced
 	 * by another object which falls in this transaction.
 	 * @var        boolean
@@ -101,6 +106,10 @@ abstract class Oops_Model_Base_FeatureValueLang extends BaseObject  implements P
 		if ($this->id_feature_value !== $v) {
 			$this->id_feature_value = $v;
 			$this->modifiedColumns[] = Oops_Model_FeatureValueLangPeer::ID_FEATURE_VALUE;
+		}
+
+		if ($this->aFeatureValue !== null && $this->aFeatureValue->getIdFeatureValue() !== $v) {
+			$this->aFeatureValue = null;
 		}
 
 		return $this;
@@ -212,6 +221,9 @@ abstract class Oops_Model_Base_FeatureValueLang extends BaseObject  implements P
 	public function ensureConsistency()
 	{
 
+		if ($this->aFeatureValue !== null && $this->id_feature_value !== $this->aFeatureValue->getIdFeatureValue()) {
+			$this->aFeatureValue = null;
+		}
 	} // ensureConsistency
 
 	/**
@@ -251,6 +263,7 @@ abstract class Oops_Model_Base_FeatureValueLang extends BaseObject  implements P
 
 		if ($deep) {  // also de-associate any related objects?
 
+			$this->aFeatureValue = null;
 		} // if (deep)
 	}
 
@@ -360,6 +373,18 @@ abstract class Oops_Model_Base_FeatureValueLang extends BaseObject  implements P
 		$affectedRows = 0; // initialize var to track total num of affected rows
 		if (!$this->alreadyInSave) {
 			$this->alreadyInSave = true;
+
+			// We call the save method on the following object(s) if they
+			// were passed to this object by their coresponding set
+			// method.  This object relates to these object(s) by a
+			// foreign key reference.
+
+			if ($this->aFeatureValue !== null) {
+				if ($this->aFeatureValue->isModified() || $this->aFeatureValue->isNew()) {
+					$affectedRows += $this->aFeatureValue->save($con);
+				}
+				$this->setFeatureValue($this->aFeatureValue);
+			}
 
 			if ($this->isNew() || $this->isModified()) {
 				// persist changes
@@ -507,6 +532,18 @@ abstract class Oops_Model_Base_FeatureValueLang extends BaseObject  implements P
 			$failureMap = array();
 
 
+			// We call the validate method on the following object(s) if they
+			// were passed to this object by their coresponding set
+			// method.  This object relates to these object(s) by a
+			// foreign key reference.
+
+			if ($this->aFeatureValue !== null) {
+				if (!$this->aFeatureValue->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aFeatureValue->getValidationFailures());
+				}
+			}
+
+
 			if (($retval = Oops_Model_FeatureValueLangPeer::doValidate($this, $columns)) !== true) {
 				$failureMap = array_merge($failureMap, $retval);
 			}
@@ -571,10 +608,11 @@ abstract class Oops_Model_Base_FeatureValueLang extends BaseObject  implements P
 	 *                    Defaults to BasePeer::TYPE_PHPNAME.
 	 * @param     boolean $includeLazyLoadColumns (optional) Whether to include lazy loaded columns. Defaults to TRUE.
 	 * @param     array $alreadyDumpedObjects List of objects to skip to avoid recursion
+	 * @param     boolean $includeForeignObjects (optional) Whether to include hydrated related objects. Default to FALSE.
 	 *
 	 * @return    array an associative array containing the field names (as keys) and field values
 	 */
-	public function toArray($keyType = BasePeer::TYPE_PHPNAME, $includeLazyLoadColumns = true, $alreadyDumpedObjects = array())
+	public function toArray($keyType = BasePeer::TYPE_PHPNAME, $includeLazyLoadColumns = true, $alreadyDumpedObjects = array(), $includeForeignObjects = false)
 	{
 		if (isset($alreadyDumpedObjects['Oops_Model_FeatureValueLang'][serialize($this->getPrimaryKey())])) {
 			return '*RECURSION*';
@@ -586,6 +624,11 @@ abstract class Oops_Model_Base_FeatureValueLang extends BaseObject  implements P
 			$keys[1] => $this->getIdLang(),
 			$keys[2] => $this->getValue(),
 		);
+		if ($includeForeignObjects) {
+			if (null !== $this->aFeatureValue) {
+				$result['FeatureValue'] = $this->aFeatureValue->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
+			}
+		}
 		return $result;
 	}
 
@@ -782,6 +825,55 @@ abstract class Oops_Model_Base_FeatureValueLang extends BaseObject  implements P
 	}
 
 	/**
+	 * Declares an association between this object and a Oops_Model_FeatureValue object.
+	 *
+	 * @param      Oops_Model_FeatureValue $v
+	 * @return     Oops_Model_FeatureValueLang The current object (for fluent API support)
+	 * @throws     PropelException
+	 */
+	public function setFeatureValue(Oops_Model_FeatureValue $v = null)
+	{
+		if ($v === null) {
+			$this->setIdFeatureValue(NULL);
+		} else {
+			$this->setIdFeatureValue($v->getIdFeatureValue());
+		}
+
+		$this->aFeatureValue = $v;
+
+		// Add binding for other direction of this n:n relationship.
+		// If this object has already been added to the Oops_Model_FeatureValue object, it will not be re-added.
+		if ($v !== null) {
+			$v->addFeatureValueLang($this);
+		}
+
+		return $this;
+	}
+
+
+	/**
+	 * Get the associated Oops_Model_FeatureValue object
+	 *
+	 * @param      PropelPDO Optional Connection object.
+	 * @return     Oops_Model_FeatureValue The associated Oops_Model_FeatureValue object.
+	 * @throws     PropelException
+	 */
+	public function getFeatureValue(PropelPDO $con = null)
+	{
+		if ($this->aFeatureValue === null && ($this->id_feature_value !== null)) {
+			$this->aFeatureValue = Oops_Model_FeatureValueQuery::create()->findPk($this->id_feature_value, $con);
+			/* The following can be used additionally to
+				guarantee the related object contains a reference
+				to this object.  This level of coupling may, however, be
+				undesirable since it could result in an only partially populated collection
+				in the referenced object.
+				$this->aFeatureValue->addFeatureValueLangs($this);
+			 */
+		}
+		return $this->aFeatureValue;
+	}
+
+	/**
 	 * Clears the current object and sets all attributes to their default values
 	 */
 	public function clear()
@@ -811,6 +903,7 @@ abstract class Oops_Model_Base_FeatureValueLang extends BaseObject  implements P
 		if ($deep) {
 		} // if ($deep)
 
+		$this->aFeatureValue = null;
 	}
 
 	/**

@@ -31,6 +31,26 @@ abstract class Oops_Model_Base_Feature extends BaseObject  implements Persistent
 	protected $id_feature;
 
 	/**
+	 * @var        array Oops_Model_FeatureProduct[] Collection to store aggregation of Oops_Model_FeatureProduct objects.
+	 */
+	protected $collFeatureProducts;
+
+	/**
+	 * @var        array Oops_Model_FeatureValue[] Collection to store aggregation of Oops_Model_FeatureValue objects.
+	 */
+	protected $collFeatureValues;
+
+	/**
+	 * @var        array Oops_Model_FeatureLang[] Collection to store aggregation of Oops_Model_FeatureLang objects.
+	 */
+	protected $collFeatureLangs;
+
+	/**
+	 * @var        array Oops_Model_Product[] Collection to store aggregation of Oops_Model_Product objects.
+	 */
+	protected $collProducts;
+
+	/**
 	 * Flag to prevent endless save loop, if this object is referenced
 	 * by another object which falls in this transaction.
 	 * @var        boolean
@@ -43,6 +63,44 @@ abstract class Oops_Model_Base_Feature extends BaseObject  implements Persistent
 	 * @var        boolean
 	 */
 	protected $alreadyInValidation = false;
+
+	// i18n behavior
+	
+	/**
+	 * Current locale
+	 * @var        string
+	 */
+	protected $currentLocale = '1';
+	
+	/**
+	 * Current translation objects
+	 * @var        array[Oops_Model_FeatureLang]
+	 */
+	protected $currentTranslations;
+
+	/**
+	 * An array of objects scheduled for deletion.
+	 * @var		array
+	 */
+	protected $productsScheduledForDeletion = null;
+
+	/**
+	 * An array of objects scheduled for deletion.
+	 * @var		array
+	 */
+	protected $featureProductsScheduledForDeletion = null;
+
+	/**
+	 * An array of objects scheduled for deletion.
+	 * @var		array
+	 */
+	protected $featureValuesScheduledForDeletion = null;
+
+	/**
+	 * An array of objects scheduled for deletion.
+	 * @var		array
+	 */
+	protected $featureLangsScheduledForDeletion = null;
 
 	/**
 	 * Get the [id_feature] column value.
@@ -177,6 +235,13 @@ abstract class Oops_Model_Base_Feature extends BaseObject  implements Persistent
 
 		if ($deep) {  // also de-associate any related objects?
 
+			$this->collFeatureProducts = null;
+
+			$this->collFeatureValues = null;
+
+			$this->collFeatureLangs = null;
+
+			$this->collProducts = null;
 		} // if (deep)
 	}
 
@@ -207,6 +272,12 @@ abstract class Oops_Model_Base_Feature extends BaseObject  implements Persistent
 			if ($ret) {
 				$deleteQuery->delete($con);
 				$this->postDelete($con);
+				// i18n behavior
+				
+				// emulate delete cascade
+				Oops_Model_FeatureLangQuery::create()
+					->filterByOops_Model_Feature($this)
+					->delete($con);
 				$con->commit();
 				$this->setDeleted(true);
 			} else {
@@ -296,6 +367,72 @@ abstract class Oops_Model_Base_Feature extends BaseObject  implements Persistent
 				}
 				$affectedRows += 1;
 				$this->resetModified();
+			}
+
+			if ($this->productsScheduledForDeletion !== null) {
+				if (!$this->productsScheduledForDeletion->isEmpty()) {
+					FeatureProductQuery::create()
+						->filterByPrimaryKeys($this->productsScheduledForDeletion->getPrimaryKeys(false))
+						->delete($con);
+					$this->productsScheduledForDeletion = null;
+				}
+
+				foreach ($this->getProducts() as $product) {
+					if ($product->isModified()) {
+						$product->save($con);
+					}
+				}
+			}
+
+			if ($this->featureProductsScheduledForDeletion !== null) {
+				if (!$this->featureProductsScheduledForDeletion->isEmpty()) {
+					Oops_Model_FeatureProductQuery::create()
+						->filterByPrimaryKeys($this->featureProductsScheduledForDeletion->getPrimaryKeys(false))
+						->delete($con);
+					$this->featureProductsScheduledForDeletion = null;
+				}
+			}
+
+			if ($this->collFeatureProducts !== null) {
+				foreach ($this->collFeatureProducts as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
+			}
+
+			if ($this->featureValuesScheduledForDeletion !== null) {
+				if (!$this->featureValuesScheduledForDeletion->isEmpty()) {
+					Oops_Model_FeatureValueQuery::create()
+						->filterByPrimaryKeys($this->featureValuesScheduledForDeletion->getPrimaryKeys(false))
+						->delete($con);
+					$this->featureValuesScheduledForDeletion = null;
+				}
+			}
+
+			if ($this->collFeatureValues !== null) {
+				foreach ($this->collFeatureValues as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
+			}
+
+			if ($this->featureLangsScheduledForDeletion !== null) {
+				if (!$this->featureLangsScheduledForDeletion->isEmpty()) {
+					Oops_Model_FeatureLangQuery::create()
+						->filterByPrimaryKeys($this->featureLangsScheduledForDeletion->getPrimaryKeys(false))
+						->delete($con);
+					$this->featureLangsScheduledForDeletion = null;
+				}
+			}
+
+			if ($this->collFeatureLangs !== null) {
+				foreach ($this->collFeatureLangs as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
 			}
 
 			$this->alreadyInSave = false;
@@ -437,6 +574,30 @@ abstract class Oops_Model_Base_Feature extends BaseObject  implements Persistent
 			}
 
 
+				if ($this->collFeatureProducts !== null) {
+					foreach ($this->collFeatureProducts as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
+
+				if ($this->collFeatureValues !== null) {
+					foreach ($this->collFeatureValues as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
+
+				if ($this->collFeatureLangs !== null) {
+					foreach ($this->collFeatureLangs as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
+
 
 			$this->alreadyInValidation = false;
 		}
@@ -490,10 +651,11 @@ abstract class Oops_Model_Base_Feature extends BaseObject  implements Persistent
 	 *                    Defaults to BasePeer::TYPE_PHPNAME.
 	 * @param     boolean $includeLazyLoadColumns (optional) Whether to include lazy loaded columns. Defaults to TRUE.
 	 * @param     array $alreadyDumpedObjects List of objects to skip to avoid recursion
+	 * @param     boolean $includeForeignObjects (optional) Whether to include hydrated related objects. Default to FALSE.
 	 *
 	 * @return    array an associative array containing the field names (as keys) and field values
 	 */
-	public function toArray($keyType = BasePeer::TYPE_PHPNAME, $includeLazyLoadColumns = true, $alreadyDumpedObjects = array())
+	public function toArray($keyType = BasePeer::TYPE_PHPNAME, $includeLazyLoadColumns = true, $alreadyDumpedObjects = array(), $includeForeignObjects = false)
 	{
 		if (isset($alreadyDumpedObjects['Oops_Model_Feature'][$this->getPrimaryKey()])) {
 			return '*RECURSION*';
@@ -503,6 +665,17 @@ abstract class Oops_Model_Base_Feature extends BaseObject  implements Persistent
 		$result = array(
 			$keys[0] => $this->getIdFeature(),
 		);
+		if ($includeForeignObjects) {
+			if (null !== $this->collFeatureProducts) {
+				$result['FeatureProducts'] = $this->collFeatureProducts->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
+			}
+			if (null !== $this->collFeatureValues) {
+				$result['FeatureValues'] = $this->collFeatureValues->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
+			}
+			if (null !== $this->collFeatureLangs) {
+				$result['FeatureLangs'] = $this->collFeatureLangs->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
+			}
+		}
 		return $result;
 	}
 
@@ -635,6 +808,32 @@ abstract class Oops_Model_Base_Feature extends BaseObject  implements Persistent
 	 */
 	public function copyInto($copyObj, $deepCopy = false, $makeNew = true)
 	{
+
+		if ($deepCopy) {
+			// important: temporarily setNew(false) because this affects the behavior of
+			// the getter/setter methods for fkey referrer objects.
+			$copyObj->setNew(false);
+
+			foreach ($this->getFeatureProducts() as $relObj) {
+				if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
+					$copyObj->addFeatureProduct($relObj->copy($deepCopy));
+				}
+			}
+
+			foreach ($this->getFeatureValues() as $relObj) {
+				if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
+					$copyObj->addFeatureValue($relObj->copy($deepCopy));
+				}
+			}
+
+			foreach ($this->getFeatureLangs() as $relObj) {
+				if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
+					$copyObj->addFeatureLang($relObj->copy($deepCopy));
+				}
+			}
+
+		} // if ($deepCopy)
+
 		if ($makeNew) {
 			$copyObj->setNew(true);
 			$copyObj->setIdFeature(NULL); // this is a auto-increment column, so set to default value
@@ -679,6 +878,674 @@ abstract class Oops_Model_Base_Feature extends BaseObject  implements Persistent
 		return self::$peer;
 	}
 
+
+	/**
+	 * Initializes a collection based on the name of a relation.
+	 * Avoids crafting an 'init[$relationName]s' method name
+	 * that wouldn't work when StandardEnglishPluralizer is used.
+	 *
+	 * @param      string $relationName The name of the relation to initialize
+	 * @return     void
+	 */
+	public function initRelation($relationName)
+	{
+		if ('FeatureProduct' == $relationName) {
+			return $this->initFeatureProducts();
+		}
+		if ('FeatureValue' == $relationName) {
+			return $this->initFeatureValues();
+		}
+		if ('FeatureLang' == $relationName) {
+			return $this->initFeatureLangs();
+		}
+	}
+
+	/**
+	 * Clears out the collFeatureProducts collection
+	 *
+	 * This does not modify the database; however, it will remove any associated objects, causing
+	 * them to be refetched by subsequent calls to accessor method.
+	 *
+	 * @return     void
+	 * @see        addFeatureProducts()
+	 */
+	public function clearFeatureProducts()
+	{
+		$this->collFeatureProducts = null; // important to set this to NULL since that means it is uninitialized
+	}
+
+	/**
+	 * Initializes the collFeatureProducts collection.
+	 *
+	 * By default this just sets the collFeatureProducts collection to an empty array (like clearcollFeatureProducts());
+	 * however, you may wish to override this method in your stub class to provide setting appropriate
+	 * to your application -- for example, setting the initial array to the values stored in database.
+	 *
+	 * @param      boolean $overrideExisting If set to true, the method call initializes
+	 *                                        the collection even if it is not empty
+	 *
+	 * @return     void
+	 */
+	public function initFeatureProducts($overrideExisting = true)
+	{
+		if (null !== $this->collFeatureProducts && !$overrideExisting) {
+			return;
+		}
+		$this->collFeatureProducts = new PropelObjectCollection();
+		$this->collFeatureProducts->setModel('Oops_Model_FeatureProduct');
+	}
+
+	/**
+	 * Gets an array of Oops_Model_FeatureProduct objects which contain a foreign key that references this object.
+	 *
+	 * If the $criteria is not null, it is used to always fetch the results from the database.
+	 * Otherwise the results are fetched from the database the first time, then cached.
+	 * Next time the same method is called without $criteria, the cached collection is returned.
+	 * If this Oops_Model_Feature is new, it will return
+	 * an empty collection or the current collection; the criteria is ignored on a new object.
+	 *
+	 * @param      Criteria $criteria optional Criteria object to narrow the query
+	 * @param      PropelPDO $con optional connection object
+	 * @return     PropelCollection|array Oops_Model_FeatureProduct[] List of Oops_Model_FeatureProduct objects
+	 * @throws     PropelException
+	 */
+	public function getFeatureProducts($criteria = null, PropelPDO $con = null)
+	{
+		if(null === $this->collFeatureProducts || null !== $criteria) {
+			if ($this->isNew() && null === $this->collFeatureProducts) {
+				// return empty collection
+				$this->initFeatureProducts();
+			} else {
+				$collFeatureProducts = Oops_Model_FeatureProductQuery::create(null, $criteria)
+					->filterByFeature($this)
+					->find($con);
+				if (null !== $criteria) {
+					return $collFeatureProducts;
+				}
+				$this->collFeatureProducts = $collFeatureProducts;
+			}
+		}
+		return $this->collFeatureProducts;
+	}
+
+	/**
+	 * Sets a collection of FeatureProduct objects related by a one-to-many relationship
+	 * to the current object.
+	 * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
+	 * and new objects from the given Propel collection.
+	 *
+	 * @param      PropelCollection $featureProducts A Propel collection.
+	 * @param      PropelPDO $con Optional connection object
+	 */
+	public function setFeatureProducts(PropelCollection $featureProducts, PropelPDO $con = null)
+	{
+		$this->featureProductsScheduledForDeletion = $this->getFeatureProducts(new Criteria(), $con)->diff($featureProducts);
+
+		foreach ($featureProducts as $featureProduct) {
+			// Fix issue with collection modified by reference
+			if ($featureProduct->isNew()) {
+				$featureProduct->setFeature($this);
+			}
+			$this->addFeatureProduct($featureProduct);
+		}
+
+		$this->collFeatureProducts = $featureProducts;
+	}
+
+	/**
+	 * Returns the number of related Oops_Model_FeatureProduct objects.
+	 *
+	 * @param      Criteria $criteria
+	 * @param      boolean $distinct
+	 * @param      PropelPDO $con
+	 * @return     int Count of related Oops_Model_FeatureProduct objects.
+	 * @throws     PropelException
+	 */
+	public function countFeatureProducts(Criteria $criteria = null, $distinct = false, PropelPDO $con = null)
+	{
+		if(null === $this->collFeatureProducts || null !== $criteria) {
+			if ($this->isNew() && null === $this->collFeatureProducts) {
+				return 0;
+			} else {
+				$query = Oops_Model_FeatureProductQuery::create(null, $criteria);
+				if($distinct) {
+					$query->distinct();
+				}
+				return $query
+					->filterByFeature($this)
+					->count($con);
+			}
+		} else {
+			return count($this->collFeatureProducts);
+		}
+	}
+
+	/**
+	 * Method called to associate a Oops_Model_FeatureProduct object to this object
+	 * through the Oops_Model_FeatureProduct foreign key attribute.
+	 *
+	 * @param      Oops_Model_FeatureProduct $l Oops_Model_FeatureProduct
+	 * @return     Oops_Model_Feature The current object (for fluent API support)
+	 */
+	public function addFeatureProduct(Oops_Model_FeatureProduct $l)
+	{
+		if ($this->collFeatureProducts === null) {
+			$this->initFeatureProducts();
+		}
+		if (!$this->collFeatureProducts->contains($l)) { // only add it if the **same** object is not already associated
+			$this->doAddFeatureProduct($l);
+		}
+
+		return $this;
+	}
+
+	/**
+	 * @param	FeatureProduct $featureProduct The featureProduct object to add.
+	 */
+	protected function doAddFeatureProduct($featureProduct)
+	{
+		$this->collFeatureProducts[]= $featureProduct;
+		$featureProduct->setFeature($this);
+	}
+
+
+	/**
+	 * If this collection has already been initialized with
+	 * an identical criteria, it returns the collection.
+	 * Otherwise if this Feature is new, it will return
+	 * an empty collection; or if this Feature has previously
+	 * been saved, it will retrieve related FeatureProducts from storage.
+	 *
+	 * This method is protected by default in order to keep the public
+	 * api reasonable.  You can provide public methods for those you
+	 * actually need in Feature.
+	 *
+	 * @param      Criteria $criteria optional Criteria object to narrow the query
+	 * @param      PropelPDO $con optional connection object
+	 * @param      string $join_behavior optional join type to use (defaults to Criteria::LEFT_JOIN)
+	 * @return     PropelCollection|array Oops_Model_FeatureProduct[] List of Oops_Model_FeatureProduct objects
+	 */
+	public function getFeatureProductsJoinProduct($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+	{
+		$query = Oops_Model_FeatureProductQuery::create(null, $criteria);
+		$query->joinWith('Product', $join_behavior);
+
+		return $this->getFeatureProducts($query, $con);
+	}
+
+	/**
+	 * Clears out the collFeatureValues collection
+	 *
+	 * This does not modify the database; however, it will remove any associated objects, causing
+	 * them to be refetched by subsequent calls to accessor method.
+	 *
+	 * @return     void
+	 * @see        addFeatureValues()
+	 */
+	public function clearFeatureValues()
+	{
+		$this->collFeatureValues = null; // important to set this to NULL since that means it is uninitialized
+	}
+
+	/**
+	 * Initializes the collFeatureValues collection.
+	 *
+	 * By default this just sets the collFeatureValues collection to an empty array (like clearcollFeatureValues());
+	 * however, you may wish to override this method in your stub class to provide setting appropriate
+	 * to your application -- for example, setting the initial array to the values stored in database.
+	 *
+	 * @param      boolean $overrideExisting If set to true, the method call initializes
+	 *                                        the collection even if it is not empty
+	 *
+	 * @return     void
+	 */
+	public function initFeatureValues($overrideExisting = true)
+	{
+		if (null !== $this->collFeatureValues && !$overrideExisting) {
+			return;
+		}
+		$this->collFeatureValues = new PropelObjectCollection();
+		$this->collFeatureValues->setModel('Oops_Model_FeatureValue');
+	}
+
+	/**
+	 * Gets an array of Oops_Model_FeatureValue objects which contain a foreign key that references this object.
+	 *
+	 * If the $criteria is not null, it is used to always fetch the results from the database.
+	 * Otherwise the results are fetched from the database the first time, then cached.
+	 * Next time the same method is called without $criteria, the cached collection is returned.
+	 * If this Oops_Model_Feature is new, it will return
+	 * an empty collection or the current collection; the criteria is ignored on a new object.
+	 *
+	 * @param      Criteria $criteria optional Criteria object to narrow the query
+	 * @param      PropelPDO $con optional connection object
+	 * @return     PropelCollection|array Oops_Model_FeatureValue[] List of Oops_Model_FeatureValue objects
+	 * @throws     PropelException
+	 */
+	public function getFeatureValues($criteria = null, PropelPDO $con = null)
+	{
+		if(null === $this->collFeatureValues || null !== $criteria) {
+			if ($this->isNew() && null === $this->collFeatureValues) {
+				// return empty collection
+				$this->initFeatureValues();
+			} else {
+				$collFeatureValues = Oops_Model_FeatureValueQuery::create(null, $criteria)
+					->filterByFeature($this)
+					->find($con);
+				if (null !== $criteria) {
+					return $collFeatureValues;
+				}
+				$this->collFeatureValues = $collFeatureValues;
+			}
+		}
+		return $this->collFeatureValues;
+	}
+
+	/**
+	 * Sets a collection of FeatureValue objects related by a one-to-many relationship
+	 * to the current object.
+	 * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
+	 * and new objects from the given Propel collection.
+	 *
+	 * @param      PropelCollection $featureValues A Propel collection.
+	 * @param      PropelPDO $con Optional connection object
+	 */
+	public function setFeatureValues(PropelCollection $featureValues, PropelPDO $con = null)
+	{
+		$this->featureValuesScheduledForDeletion = $this->getFeatureValues(new Criteria(), $con)->diff($featureValues);
+
+		foreach ($featureValues as $featureValue) {
+			// Fix issue with collection modified by reference
+			if ($featureValue->isNew()) {
+				$featureValue->setFeature($this);
+			}
+			$this->addFeatureValue($featureValue);
+		}
+
+		$this->collFeatureValues = $featureValues;
+	}
+
+	/**
+	 * Returns the number of related Oops_Model_FeatureValue objects.
+	 *
+	 * @param      Criteria $criteria
+	 * @param      boolean $distinct
+	 * @param      PropelPDO $con
+	 * @return     int Count of related Oops_Model_FeatureValue objects.
+	 * @throws     PropelException
+	 */
+	public function countFeatureValues(Criteria $criteria = null, $distinct = false, PropelPDO $con = null)
+	{
+		if(null === $this->collFeatureValues || null !== $criteria) {
+			if ($this->isNew() && null === $this->collFeatureValues) {
+				return 0;
+			} else {
+				$query = Oops_Model_FeatureValueQuery::create(null, $criteria);
+				if($distinct) {
+					$query->distinct();
+				}
+				return $query
+					->filterByFeature($this)
+					->count($con);
+			}
+		} else {
+			return count($this->collFeatureValues);
+		}
+	}
+
+	/**
+	 * Method called to associate a Oops_Model_FeatureValue object to this object
+	 * through the Oops_Model_FeatureValue foreign key attribute.
+	 *
+	 * @param      Oops_Model_FeatureValue $l Oops_Model_FeatureValue
+	 * @return     Oops_Model_Feature The current object (for fluent API support)
+	 */
+	public function addFeatureValue(Oops_Model_FeatureValue $l)
+	{
+		if ($this->collFeatureValues === null) {
+			$this->initFeatureValues();
+		}
+		if (!$this->collFeatureValues->contains($l)) { // only add it if the **same** object is not already associated
+			$this->doAddFeatureValue($l);
+		}
+
+		return $this;
+	}
+
+	/**
+	 * @param	FeatureValue $featureValue The featureValue object to add.
+	 */
+	protected function doAddFeatureValue($featureValue)
+	{
+		$this->collFeatureValues[]= $featureValue;
+		$featureValue->setFeature($this);
+	}
+
+
+	/**
+	 * If this collection has already been initialized with
+	 * an identical criteria, it returns the collection.
+	 * Otherwise if this Feature is new, it will return
+	 * an empty collection; or if this Feature has previously
+	 * been saved, it will retrieve related FeatureValues from storage.
+	 *
+	 * This method is protected by default in order to keep the public
+	 * api reasonable.  You can provide public methods for those you
+	 * actually need in Feature.
+	 *
+	 * @param      Criteria $criteria optional Criteria object to narrow the query
+	 * @param      PropelPDO $con optional connection object
+	 * @param      string $join_behavior optional join type to use (defaults to Criteria::LEFT_JOIN)
+	 * @return     PropelCollection|array Oops_Model_FeatureValue[] List of Oops_Model_FeatureValue objects
+	 */
+	public function getFeatureValuesJoinFeatureProduct($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+	{
+		$query = Oops_Model_FeatureValueQuery::create(null, $criteria);
+		$query->joinWith('FeatureProduct', $join_behavior);
+
+		return $this->getFeatureValues($query, $con);
+	}
+
+	/**
+	 * Clears out the collFeatureLangs collection
+	 *
+	 * This does not modify the database; however, it will remove any associated objects, causing
+	 * them to be refetched by subsequent calls to accessor method.
+	 *
+	 * @return     void
+	 * @see        addFeatureLangs()
+	 */
+	public function clearFeatureLangs()
+	{
+		$this->collFeatureLangs = null; // important to set this to NULL since that means it is uninitialized
+	}
+
+	/**
+	 * Initializes the collFeatureLangs collection.
+	 *
+	 * By default this just sets the collFeatureLangs collection to an empty array (like clearcollFeatureLangs());
+	 * however, you may wish to override this method in your stub class to provide setting appropriate
+	 * to your application -- for example, setting the initial array to the values stored in database.
+	 *
+	 * @param      boolean $overrideExisting If set to true, the method call initializes
+	 *                                        the collection even if it is not empty
+	 *
+	 * @return     void
+	 */
+	public function initFeatureLangs($overrideExisting = true)
+	{
+		if (null !== $this->collFeatureLangs && !$overrideExisting) {
+			return;
+		}
+		$this->collFeatureLangs = new PropelObjectCollection();
+		$this->collFeatureLangs->setModel('Oops_Model_FeatureLang');
+	}
+
+	/**
+	 * Gets an array of Oops_Model_FeatureLang objects which contain a foreign key that references this object.
+	 *
+	 * If the $criteria is not null, it is used to always fetch the results from the database.
+	 * Otherwise the results are fetched from the database the first time, then cached.
+	 * Next time the same method is called without $criteria, the cached collection is returned.
+	 * If this Oops_Model_Feature is new, it will return
+	 * an empty collection or the current collection; the criteria is ignored on a new object.
+	 *
+	 * @param      Criteria $criteria optional Criteria object to narrow the query
+	 * @param      PropelPDO $con optional connection object
+	 * @return     PropelCollection|array Oops_Model_FeatureLang[] List of Oops_Model_FeatureLang objects
+	 * @throws     PropelException
+	 */
+	public function getFeatureLangs($criteria = null, PropelPDO $con = null)
+	{
+		if(null === $this->collFeatureLangs || null !== $criteria) {
+			if ($this->isNew() && null === $this->collFeatureLangs) {
+				// return empty collection
+				$this->initFeatureLangs();
+			} else {
+				$collFeatureLangs = Oops_Model_FeatureLangQuery::create(null, $criteria)
+					->filterByFeature($this)
+					->find($con);
+				if (null !== $criteria) {
+					return $collFeatureLangs;
+				}
+				$this->collFeatureLangs = $collFeatureLangs;
+			}
+		}
+		return $this->collFeatureLangs;
+	}
+
+	/**
+	 * Sets a collection of FeatureLang objects related by a one-to-many relationship
+	 * to the current object.
+	 * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
+	 * and new objects from the given Propel collection.
+	 *
+	 * @param      PropelCollection $featureLangs A Propel collection.
+	 * @param      PropelPDO $con Optional connection object
+	 */
+	public function setFeatureLangs(PropelCollection $featureLangs, PropelPDO $con = null)
+	{
+		$this->featureLangsScheduledForDeletion = $this->getFeatureLangs(new Criteria(), $con)->diff($featureLangs);
+
+		foreach ($featureLangs as $featureLang) {
+			// Fix issue with collection modified by reference
+			if ($featureLang->isNew()) {
+				$featureLang->setFeature($this);
+			}
+			$this->addFeatureLang($featureLang);
+		}
+
+		$this->collFeatureLangs = $featureLangs;
+	}
+
+	/**
+	 * Returns the number of related Oops_Model_FeatureLang objects.
+	 *
+	 * @param      Criteria $criteria
+	 * @param      boolean $distinct
+	 * @param      PropelPDO $con
+	 * @return     int Count of related Oops_Model_FeatureLang objects.
+	 * @throws     PropelException
+	 */
+	public function countFeatureLangs(Criteria $criteria = null, $distinct = false, PropelPDO $con = null)
+	{
+		if(null === $this->collFeatureLangs || null !== $criteria) {
+			if ($this->isNew() && null === $this->collFeatureLangs) {
+				return 0;
+			} else {
+				$query = Oops_Model_FeatureLangQuery::create(null, $criteria);
+				if($distinct) {
+					$query->distinct();
+				}
+				return $query
+					->filterByFeature($this)
+					->count($con);
+			}
+		} else {
+			return count($this->collFeatureLangs);
+		}
+	}
+
+	/**
+	 * Method called to associate a Oops_Model_FeatureLang object to this object
+	 * through the Oops_Model_FeatureLang foreign key attribute.
+	 *
+	 * @param      Oops_Model_FeatureLang $l Oops_Model_FeatureLang
+	 * @return     Oops_Model_Feature The current object (for fluent API support)
+	 */
+	public function addFeatureLang(Oops_Model_FeatureLang $l)
+	{
+		if ($this->collFeatureLangs === null) {
+			$this->initFeatureLangs();
+		}
+		if (!$this->collFeatureLangs->contains($l)) { // only add it if the **same** object is not already associated
+			$this->doAddFeatureLang($l);
+		}
+
+		return $this;
+	}
+
+	/**
+	 * @param	FeatureLang $featureLang The featureLang object to add.
+	 */
+	protected function doAddFeatureLang($featureLang)
+	{
+		$this->collFeatureLangs[]= $featureLang;
+		$featureLang->setFeature($this);
+	}
+
+	/**
+	 * Clears out the collProducts collection
+	 *
+	 * This does not modify the database; however, it will remove any associated objects, causing
+	 * them to be refetched by subsequent calls to accessor method.
+	 *
+	 * @return     void
+	 * @see        addProducts()
+	 */
+	public function clearProducts()
+	{
+		$this->collProducts = null; // important to set this to NULL since that means it is uninitialized
+	}
+
+	/**
+	 * Initializes the collProducts collection.
+	 *
+	 * By default this just sets the collProducts collection to an empty collection (like clearProducts());
+	 * however, you may wish to override this method in your stub class to provide setting appropriate
+	 * to your application -- for example, setting the initial array to the values stored in database.
+	 *
+	 * @return     void
+	 */
+	public function initProducts()
+	{
+		$this->collProducts = new PropelObjectCollection();
+		$this->collProducts->setModel('Oops_Model_Product');
+	}
+
+	/**
+	 * Gets a collection of Oops_Model_Product objects related by a many-to-many relationship
+	 * to the current object by way of the feature_product cross-reference table.
+	 *
+	 * If the $criteria is not null, it is used to always fetch the results from the database.
+	 * Otherwise the results are fetched from the database the first time, then cached.
+	 * Next time the same method is called without $criteria, the cached collection is returned.
+	 * If this Oops_Model_Feature is new, it will return
+	 * an empty collection or the current collection; the criteria is ignored on a new object.
+	 *
+	 * @param      Criteria $criteria Optional query object to filter the query
+	 * @param      PropelPDO $con Optional connection object
+	 *
+	 * @return     PropelCollection|array Oops_Model_Product[] List of Oops_Model_Product objects
+	 */
+	public function getProducts($criteria = null, PropelPDO $con = null)
+	{
+		if(null === $this->collProducts || null !== $criteria) {
+			if ($this->isNew() && null === $this->collProducts) {
+				// return empty collection
+				$this->initProducts();
+			} else {
+				$collProducts = Oops_Model_ProductQuery::create(null, $criteria)
+					->filterByFeature($this)
+					->find($con);
+				if (null !== $criteria) {
+					return $collProducts;
+				}
+				$this->collProducts = $collProducts;
+			}
+		}
+		return $this->collProducts;
+	}
+
+	/**
+	 * Sets a collection of Oops_Model_Product objects related by a many-to-many relationship
+	 * to the current object by way of the feature_product cross-reference table.
+	 * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
+	 * and new objects from the given Propel collection.
+	 *
+	 * @param      PropelCollection $products A Propel collection.
+	 * @param      PropelPDO $con Optional connection object
+	 */
+	public function setProducts(PropelCollection $products, PropelPDO $con = null)
+	{
+		$oops_Model_FeatureProducts = FeatureProductQuery::create()
+			->filterByOops_Model_Product($products)
+			->filterByFeature($this)
+			->find($con);
+
+		$this->productsScheduledForDeletion = $this->getFeatureProducts()->diff($oops_Model_FeatureProducts);
+		$this->collFeatureProducts = $oops_Model_FeatureProducts;
+
+		foreach ($products as $product) {
+			// Fix issue with collection modified by reference
+			if ($product->isNew()) {
+				$this->doAddOops_Model_Product($product);
+			} else {
+				$this->addOops_Model_Product($product);
+			}
+		}
+
+		$this->collProducts = $products;
+	}
+
+	/**
+	 * Gets the number of Oops_Model_Product objects related by a many-to-many relationship
+	 * to the current object by way of the feature_product cross-reference table.
+	 *
+	 * @param      Criteria $criteria Optional query object to filter the query
+	 * @param      boolean $distinct Set to true to force count distinct
+	 * @param      PropelPDO $con Optional connection object
+	 *
+	 * @return     int the number of related Oops_Model_Product objects
+	 */
+	public function countProducts($criteria = null, $distinct = false, PropelPDO $con = null)
+	{
+		if(null === $this->collProducts || null !== $criteria) {
+			if ($this->isNew() && null === $this->collProducts) {
+				return 0;
+			} else {
+				$query = Oops_Model_ProductQuery::create(null, $criteria);
+				if($distinct) {
+					$query->distinct();
+				}
+				return $query
+					->filterByFeature($this)
+					->count($con);
+			}
+		} else {
+			return count($this->collProducts);
+		}
+	}
+
+	/**
+	 * Associate a Oops_Model_Product object to this object
+	 * through the feature_product cross reference table.
+	 *
+	 * @param      Oops_Model_Product $product The Oops_Model_FeatureProduct object to relate
+	 * @return     void
+	 */
+	public function addProduct($product)
+	{
+		if ($this->collProducts === null) {
+			$this->initProducts();
+		}
+		if (!$this->collProducts->contains($product)) { // only add it if the **same** object is not already associated
+			$this->doAddProduct($product);
+
+			$this->collProducts[]= $product;
+		}
+	}
+
+	/**
+	 * @param	Product $product The product object to add.
+	 */
+	protected function doAddProduct($product)
+	{
+		$featureProduct = new Oops_Model_FeatureProduct();
+		$featureProduct->setProduct($product);
+		$this->addOops_Model_FeatureProduct($featureProduct);
+	}
+
 	/**
 	 * Clears the current object and sets all attributes to their default values
 	 */
@@ -705,8 +1572,47 @@ abstract class Oops_Model_Base_Feature extends BaseObject  implements Persistent
 	public function clearAllReferences($deep = false)
 	{
 		if ($deep) {
+			if ($this->collFeatureProducts) {
+				foreach ($this->collFeatureProducts as $o) {
+					$o->clearAllReferences($deep);
+				}
+			}
+			if ($this->collFeatureValues) {
+				foreach ($this->collFeatureValues as $o) {
+					$o->clearAllReferences($deep);
+				}
+			}
+			if ($this->collFeatureLangs) {
+				foreach ($this->collFeatureLangs as $o) {
+					$o->clearAllReferences($deep);
+				}
+			}
+			if ($this->collProducts) {
+				foreach ($this->collProducts as $o) {
+					$o->clearAllReferences($deep);
+				}
+			}
 		} // if ($deep)
 
+		// i18n behavior
+		$this->currentLocale = '1';
+		$this->currentTranslations = null;
+		if ($this->collFeatureProducts instanceof PropelCollection) {
+			$this->collFeatureProducts->clearIterator();
+		}
+		$this->collFeatureProducts = null;
+		if ($this->collFeatureValues instanceof PropelCollection) {
+			$this->collFeatureValues->clearIterator();
+		}
+		$this->collFeatureValues = null;
+		if ($this->collFeatureLangs instanceof PropelCollection) {
+			$this->collFeatureLangs->clearIterator();
+		}
+		$this->collFeatureLangs = null;
+		if ($this->collProducts instanceof PropelCollection) {
+			$this->collProducts->clearIterator();
+		}
+		$this->collProducts = null;
 	}
 
 	/**
@@ -717,6 +1623,127 @@ abstract class Oops_Model_Base_Feature extends BaseObject  implements Persistent
 	public function __toString()
 	{
 		return (string) $this->exportTo(Oops_Model_FeaturePeer::DEFAULT_STRING_FORMAT);
+	}
+
+	// i18n behavior
+	
+	/**
+	 * Sets the locale for translations
+	 *
+	 * @param     string $locale Locale to use for the translation, e.g. 'fr_FR'
+	 *
+	 * @return    Oops_Model_Feature The current object (for fluent API support)
+	 */
+	public function setLocale($locale = '1')
+	{
+		$this->currentLocale = $locale;
+	
+		return $this;
+	}
+	
+	/**
+	 * Gets the locale for translations
+	 *
+	 * @return    string $locale Locale to use for the translation, e.g. 'fr_FR'
+	 */
+	public function getLocale()
+	{
+		return $this->currentLocale;
+	}
+	
+	/**
+	 * Returns the current translation for a given locale
+	 *
+	 * @param     string $locale Locale to use for the translation, e.g. 'fr_FR'
+	 * @param     PropelPDO $con an optional connection object
+	 *
+	 * @return Oops_Model_FeatureLang */
+	public function getTranslation($locale = '1', PropelPDO $con = null)
+	{
+		if (!isset($this->currentTranslations[$locale])) {
+			if (null !== $this->collFeatureLangs) {
+				foreach ($this->collFeatureLangs as $translation) {
+					if ($translation->getIdLang() == $locale) {
+						$this->currentTranslations[$locale] = $translation;
+						return $translation;
+					}
+				}
+			}
+			if ($this->isNew()) {
+				$translation = new Oops_Model_FeatureLang();
+				$translation->setIdLang($locale);
+			} else {
+				$translation = Oops_Model_FeatureLangQuery::create()
+					->filterByPrimaryKey(array($this->getPrimaryKey(), $locale))
+					->findOneOrCreate($con);
+				$this->currentTranslations[$locale] = $translation;
+			}
+			$this->addFeatureLang($translation);
+		}
+	
+		return $this->currentTranslations[$locale];
+	}
+	
+	/**
+	 * Remove the translation for a given locale
+	 *
+	 * @param     string $locale Locale to use for the translation, e.g. 'fr_FR'
+	 * @param     PropelPDO $con an optional connection object
+	 *
+	 * @return    Oops_Model_Feature The current object (for fluent API support)
+	 */
+	public function removeTranslation($locale = '1', PropelPDO $con = null)
+	{
+		if (!$this->isNew()) {
+			Oops_Model_FeatureLangQuery::create()
+				->filterByPrimaryKey(array($this->getPrimaryKey(), $locale))
+				->delete($con);
+		}
+		if (isset($this->currentTranslations[$locale])) {
+			unset($this->currentTranslations[$locale]);
+		}
+		foreach ($this->collFeatureLangs as $key => $translation) {
+			if ($translation->getIdLang() == $locale) {
+				unset($this->collFeatureLangs[$key]);
+				break;
+			}
+		}
+	
+		return $this;
+	}
+	
+	/**
+	 * Returns the current translation
+	 *
+	 * @param     PropelPDO $con an optional connection object
+	 *
+	 * @return Oops_Model_FeatureLang */
+	public function getCurrentTranslation(PropelPDO $con = null)
+	{
+		return $this->getTranslation($this->getLocale(), $con);
+	}
+	
+	
+	/**
+	 * Get the [name] column value.
+	 * 
+	 * @return     string
+	 */
+	public function getName()
+	{	return $this->getCurrentTranslation()->getName();
+	}
+	
+	
+	/**
+	 * Set the value of [name] column.
+	 * 
+	 * @param      string $v new value
+	 * @return     Oops_Model_Feature The current object (for fluent API support)
+	 */
+	public function setName($v)
+	{	$this->getCurrentTranslation()->setName($v);
+	
+		return $this;
 	}
 
 } // Oops_Model_Base_Feature

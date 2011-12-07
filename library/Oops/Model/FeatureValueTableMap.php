@@ -38,8 +38,8 @@ class Oops_Model_FeatureValueTableMap extends TableMap
 		$this->setPackage('prestashop');
 		$this->setUseIdGenerator(true);
 		// columns
-		$this->addPrimaryKey('ID_FEATURE_VALUE', 'IdFeatureValue', 'INTEGER', true, 10, null);
-		$this->addColumn('ID_FEATURE', 'IdFeature', 'INTEGER', true, 10, null);
+		$this->addForeignPrimaryKey('ID_FEATURE_VALUE', 'IdFeatureValue', 'INTEGER' , 'feature_product', 'ID_FEATURE_VALUE', true, 10, null);
+		$this->addForeignKey('ID_FEATURE', 'IdFeature', 'INTEGER', 'feature', 'ID_FEATURE', true, 10, null);
 		$this->addColumn('CUSTOM', 'Custom', 'TINYINT', false, 3, null);
 		// validators
 	} // initialize()
@@ -49,6 +49,22 @@ class Oops_Model_FeatureValueTableMap extends TableMap
 	 */
 	public function buildRelations()
 	{
+		$this->addRelation('Feature', 'Oops_Model_Feature', RelationMap::MANY_TO_ONE, array('id_feature' => 'id_feature', ), null, null);
+		$this->addRelation('FeatureProduct', 'Oops_Model_FeatureProduct', RelationMap::MANY_TO_ONE, array('id_feature_value' => 'id_feature_value', ), null, null);
+		$this->addRelation('FeatureValueLang', 'Oops_Model_FeatureValueLang', RelationMap::ONE_TO_MANY, array('id_feature_value' => 'id_feature_value', ), 'CASCADE', null, 'FeatureValueLangs');
 	} // buildRelations()
+
+	/**
+	 *
+	 * Gets the list of behaviors registered for this table
+	 *
+	 * @return array Associative array (name => parameters) of behaviors
+	 */
+	public function getBehaviors()
+	{
+		return array(
+			'i18n' => array('i18n_table' => 'feature_value_lang', 'i18n_phpname' => 'FeatureValueLang', 'i18n_columns' => 'value', 'locale_column' => 'id_lang', 'default_locale' => '1', 'locale_alias' => '', ),
+		);
+	} // getBehaviors()
 
 } // Oops_Model_FeatureValueTableMap

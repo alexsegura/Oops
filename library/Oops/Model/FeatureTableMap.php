@@ -47,6 +47,23 @@ class Oops_Model_FeatureTableMap extends TableMap
 	 */
 	public function buildRelations()
 	{
+		$this->addRelation('FeatureProduct', 'Oops_Model_FeatureProduct', RelationMap::ONE_TO_MANY, array('id_feature' => 'id_feature', ), null, null, 'FeatureProducts');
+		$this->addRelation('FeatureValue', 'Oops_Model_FeatureValue', RelationMap::ONE_TO_MANY, array('id_feature' => 'id_feature', ), null, null, 'FeatureValues');
+		$this->addRelation('FeatureLang', 'Oops_Model_FeatureLang', RelationMap::ONE_TO_MANY, array('id_feature' => 'id_feature', ), 'CASCADE', null, 'FeatureLangs');
+		$this->addRelation('Product', 'Oops_Model_Product', RelationMap::MANY_TO_MANY, array(), 'CASCADE', null, 'Products');
 	} // buildRelations()
+
+	/**
+	 *
+	 * Gets the list of behaviors registered for this table
+	 *
+	 * @return array Associative array (name => parameters) of behaviors
+	 */
+	public function getBehaviors()
+	{
+		return array(
+			'i18n' => array('i18n_table' => 'feature_lang', 'i18n_phpname' => 'FeatureLang', 'i18n_columns' => 'name', 'locale_column' => 'id_lang', 'default_locale' => '1', 'locale_alias' => '', ),
+		);
+	} // getBehaviors()
 
 } // Oops_Model_FeatureTableMap

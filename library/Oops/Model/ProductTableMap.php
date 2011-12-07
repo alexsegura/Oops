@@ -87,11 +87,13 @@ class Oops_Model_ProductTableMap extends TableMap
 	public function buildRelations()
 	{
 		$this->addRelation('CategoryProduct', 'Oops_Model_CategoryProduct', RelationMap::ONE_TO_MANY, array('id_product' => 'id_product', ), null, null, 'CategoryProducts');
+		$this->addRelation('FeatureProduct', 'Oops_Model_FeatureProduct', RelationMap::ONE_TO_MANY, array('id_product' => 'id_product', ), null, null, 'FeatureProducts');
 		$this->addRelation('Image', 'Oops_Model_Image', RelationMap::ONE_TO_MANY, array('id_product' => 'id_product', ), null, null, 'Images');
 		$this->addRelation('ProductLang', 'Oops_Model_ProductLang', RelationMap::ONE_TO_MANY, array('id_product' => 'id_product', ), null, null, 'ProductLangs');
 		$this->addRelation('StockMvt', 'Oops_Model_StockMvt', RelationMap::ONE_TO_MANY, array('id_product' => 'id_product', ), null, null, 'StockMvts');
 		$this->addRelation('Supplier', 'Oops_Model_Supplier', RelationMap::ONE_TO_ONE, array('id_supplier' => 'id_supplier', ), null, null);
 		$this->addRelation('Category', 'Oops_Model_Category', RelationMap::MANY_TO_MANY, array(), null, null, 'Categories');
+		$this->addRelation('Feature', 'Oops_Model_Feature', RelationMap::MANY_TO_MANY, array(), null, null, 'Features');
 	} // buildRelations()
 
 	/**
@@ -103,7 +105,7 @@ class Oops_Model_ProductTableMap extends TableMap
 	public function getBehaviors()
 	{
 		return array(
-			'i18n' => array('i18n_table' => 'product_lang', 'i18n_phpname' => 'ProductLang', 'i18n_columns' => 'name, description', 'locale_column' => 'id_lang', 'default_locale' => '', 'locale_alias' => '', ),
+			'i18n' => array('i18n_table' => 'product_lang', 'i18n_phpname' => 'ProductLang', 'i18n_columns' => 'name,description,description_short,link_rewrite', 'locale_column' => 'id_lang', 'default_locale' => '1', 'locale_alias' => '', ),
 		);
 	} // getBehaviors()
 
