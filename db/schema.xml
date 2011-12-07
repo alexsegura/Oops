@@ -734,27 +734,58 @@
   </table>
   <table name="feature" phpName="Feature" idMethod="native">
     <column name="id_feature" phpName="IdFeature" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true" autoIncrement="true" required="true"/>
+    <behavior name="i18n">
+    	<parameter name="i18n_columns" value="name" />
+    	<parameter name="locale_column" value="id_lang" />
+    	<parameter name="i18n_table" value="feature_lang" />
+    	<parameter name="i18n_phpname" value="FeatureLang" />
+    	<parameter name="default_locale" value="1" />
+  	</behavior>
   </table>
   <table name="feature_lang" phpName="FeatureLang" idMethod="native">
     <column name="id_feature" phpName="IdFeature" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true" required="true"/>
     <column name="id_lang" phpName="IdLang" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true" required="true"/>
     <column name="name" phpName="Name" type="VARCHAR" size="128" required="false"/>
   </table>
-  <table name="feature_product" phpName="FeatureProduct" idMethod="native">
+  <table name="feature_product" phpName="FeatureProduct" isCrossRef="true">
     <column name="id_feature" phpName="IdFeature" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true" required="true"/>
     <column name="id_product" phpName="IdProduct" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true" required="true"/>
-    <column name="id_feature_value" phpName="IdFeatureValue" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true"/>
+    <column name="id_feature_value" phpName="IdFeatureValue" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true" required="true"/>
     <index name="id_feature_value">
       <index-column name="id_feature_value"/>
     </index>
+    <foreign-key foreignTable="product">
+    	<reference local="id_product" foreign="id_product"/>
+  	</foreign-key>
+    <foreign-key foreignTable="feature">
+    	<reference local="id_feature" foreign="id_feature"/>
+  	</foreign-key>
+  	<unique>
+  		<unique-column name="id_feature" />
+  		<unique-column name="id_product" />
+  		<unique-column name="id_feature_value" />
+	</unique>
   </table>
   <table name="feature_value" phpName="FeatureValue" idMethod="native">
-    <column name="id_feature_value" phpName="IdFeatureValue" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="id_feature_value" phpName="IdFeatureValue" type="INTEGER" size="10" sqlType="int(10) unsigned" autoIncrement="true" primaryKey="true" required="true" />
     <column name="id_feature" phpName="IdFeature" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true"/>
     <column name="custom" phpName="Custom" type="TINYINT" size="3" sqlType="tinyint(3) unsigned" required="false"/>
-    <index name="feature">
+  	<index name="feature">
       <index-column name="id_feature"/>
     </index>
+  	<foreign-key foreignTable="feature">
+    	<reference local="id_feature" foreign="id_feature"/>
+  	</foreign-key>
+  	<foreign-key foreignTable="feature_product">
+    	<reference local="id_feature_value" foreign="id_feature_value"/>
+  	</foreign-key>
+    <behavior name="i18n">
+    	<parameter name="i18n_columns" value="value" />
+    	<parameter name="locale_column" value="id_lang" />
+    	<parameter name="i18n_table" value="feature_value_lang" />
+    	<parameter name="i18n_phpname" value="FeatureValueLang" />
+    	<parameter name="default_locale" value="1" />
+  	</behavior>
   </table>
   <table name="feature_value_lang" phpName="FeatureValueLang" idMethod="native">
     <column name="id_feature_value" phpName="IdFeatureValue" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true" required="true"/>
@@ -1343,10 +1374,11 @@
     </index>
     
     <behavior name="i18n">
-    	<parameter name="i18n_columns" value="name, description" />
+    	<parameter name="i18n_columns" value="name,description,description_short,link_rewrite" />
     	<parameter name="locale_column" value="id_lang" />
     	<parameter name="i18n_table" value="product_lang" />
     	<parameter name="i18n_phpname" value="ProductLang" />
+    	<parameter name="default_locale" value="1" />
   	</behavior>
   	
   </table>
