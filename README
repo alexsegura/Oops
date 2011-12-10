@@ -107,22 +107,22 @@ http://framework.zend.com/manual/en/zend.loader.autoloader-resource.html#zend.lo
 You can use the standard directory structure in the back/front office components of the application. 
 
 mymodule/
-|-- mymodule.php => class MyModule
+|-- mymodule.php                        => class MyModule
 `-- application/
     |-- back-office/
     |   |-- controllers/
-    |   |   `-- IndexController.php 	=> class MyModule_BackOffice_IndexController
+    |   |   `-- IndexController.php     => class MyModule_BackOffice_IndexController
     |   `-- forms/
-    |       `-- Preferences.php 		=> class MyModule_BackOffice_Form_Preferences
+    |       `-- Preferences.php         => class MyModule_BackOffice_Form_Preferences
     |-- front-office/
     |   |-- controllers/
-    |   |   `-- IndexController.php 	=> class MyModule_FrontOffice_IndexController
+    |   |   `-- IndexController.php     => class MyModule_FrontOffice_IndexController
     |   `-- models/
-    |       `-- Foo.php 				=> class MyModule_FrontOffice_Model_Foo
+    |       `-- Foo.php                 => class MyModule_FrontOffice_Model_Foo
     |-- models/
-    |   `-- Util.php 					=> class MyModule_Model_Util
+    |   `-- Util.php                    => class MyModule_Model_Util
     `-- forms/
-        `-- Subscribe.php 				=> class MyModule_Form_Subscribe
+        `-- Subscribe.php               => class MyModule_Form_Subscribe
 
 
 
