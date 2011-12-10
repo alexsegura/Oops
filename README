@@ -18,9 +18,9 @@ Features :
 - Module namespace, easy autoload
 - PHP and/or Smarty templates
 
-Installation instructions : 
+INSTALLATION 
 
-1. Dependencies
+1. Installing Dependencies
 
 Oops needs Zend and Propel to run. 
 
@@ -58,4 +58,8 @@ tools/
   
 Then, copy the file override/classes/Configuration.php to the override/classes folder of PrestaShop.
 This override is important to allow Oops to register its own autoload function. 
- 
+
+GETTING STARTED
+
+Check out the example "Hello, Oops" module for the standard directory layout to use. 
+More documentation coming soon... 
