@@ -10,7 +10,9 @@ Oops - Object Oriented PrestaShop
 Oops is a tool for PrestaShop. 
 It is designed to help develop robust modules faster.  
 
-Features : 
+********
+FEATURES
+********
 
 - Fully object oriented
 - MVC layer built on Zend Framework
@@ -18,7 +20,9 @@ Features :
 - Module namespace, easy autoload
 - PHP and/or Smarty templates
 
-INSTALLATION 
+************
+INSTALLATION
+************
 
 1. Installing Dependencies
 
@@ -59,10 +63,11 @@ tools/
 Then, copy the file override/classes/Configuration.php to the override/classes folder of PrestaShop.
 This override is important to allow Oops to register its own autoload function. 
 
+***************
 GETTING STARTED
+***************
 
-Check out the example "Hello, Oops" module for a concrete example of creating 
-a modules with Oops. 
+Check out the example "Hello, Oops" module for a concrete example of creating a module with Oops !
 
 1. Directory structure
 
