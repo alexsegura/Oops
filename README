@@ -34,7 +34,7 @@ There are several ways to install both libraries.
 To work, Oops needs them to be in the include_path. 
 You can either install them by yourself, or let Oops do the job for you. 
 
-Just make sure Propel and Zend are loadable from the tool/ folder of Prestashop : 
+Just make sure Propel and Zend are loadable from the tools/ folder of Prestashop : 
 
 tools/
   +-- propel/
@@ -48,7 +48,7 @@ tools/
 
 2. Installing Oops
 
-To install Oops, copy the library/Oops/ folder to the /tools folder of PrestaShop. 
+To install Oops, copy the library/Oops/ folder to the tools/ folder of PrestaShop. 
 You should end up with : 
 
 tools/
@@ -61,5 +61,71 @@ This override is important to allow Oops to register its own autoload function.
 
 GETTING STARTED
 
-Check out the example "Hello, Oops" module for the standard directory layout to use. 
-More documentation coming soon... 
+Check out the example "Hello, Oops" module for a concrete example of creating 
+a modules with Oops. 
+
+1. Directory structure
+
+Oops offers Zend_Application support to develop modules. 
+
+To learn more about how to build an application using Zend, 
+check http://framework.zend.com/manual/en/learning.quickstart.intro.html.
+ 
+Actually, a module created with Oops is a Zend_Application, that is customized
+to fit within PrestaShop. 
+Every module in Oops is composed of a back-office and a front-office part, each 
+with their own controllers and views. 
+
+The following minimal directory structure is assumed for a module : 
+
+mymodule/
+|-- mymodule.php
+`-- application/
+    |-- configs/
+    |   `-- application.ini
+    |-- back-office/
+    |   `-- controllers/
+    |   `-- views/
+    |       `-- scripts/
+    |-- front-office/
+    |   `-- controllers/
+    |   `-- views/
+    |       `-- scripts/
+    `-- models/
+    
+2. Naming conventions
+
+By default, any class in your module is namespaced with the name of the module, i.e the name 
+of the main module class. This way, you are sure that your module classes will never conflict 
+with another class having the same name. 
+Provided your classes follow the naming conventions, you don't have to take care about loading 
+them, they will be loaded automatically by Oops. 
+
+Oops uses a custom version of the Module Resource Autoloader, which allows to namespace application 
+components in a more sophisticated way. 
+http://framework.zend.com/manual/en/zend.loader.autoloader-resource.html#zend.loader.autoloader-resource.module
+You can use the standard directory structure in the back/front office components of the application. 
+
+mymodule/
+|-- mymodule.php => class MyModule
+`-- application/
+    |-- back-office/
+    |   |-- controllers/
+    |   |   `-- IndexController.php 	=> class MyModule_BackOffice_IndexController
+    |   `-- forms/
+    |       `-- Preferences.php 		=> class MyModule_BackOffice_Form_Preferences
+    |-- front-office/
+    |   |-- controllers/
+    |   |   `-- IndexController.php 	=> class MyModule_FrontOffice_IndexController
+    |   `-- models/
+    |       `-- Foo.php 				=> class MyModule_FrontOffice_Model_Foo
+    |-- models/
+    |   `-- Util.php 					=> class MyModule_Model_Util
+    `-- forms/
+        `-- Subscribe.php 				=> class MyModule_Form_Subscribe
+
+
+
+
+
+
