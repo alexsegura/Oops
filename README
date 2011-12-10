@@ -37,24 +37,24 @@ You can either install them by yourself, or let Oops do the job for you.
 Just make sure Propel and Zend are loadable from the tools/ folder of Prestashop : 
 
 tools/
-  +-- propel/
-     +-- Propel.php
-     +-- ...
-  +-- Zend/
-     +-- Loader
-        +-- Autoloader.php
-        +-- ...
-  
+|-- propel/
+    |-- Propel.php
+    `-- ...
+`-- Zend/
+	|-- ...
+    `-- Loader/
+        |-- Autoloader.php
+        `-- ...
 
 2. Installing Oops
 
 To install Oops, copy the library/Oops/ folder to the tools/ folder of PrestaShop. 
 You should end up with : 
-
+  
 tools/
-  +-- Oops/
-  +-- propel/
-  +-- Zend/
+|-- Oops/
+|-- propel/
+`-- Zend/
   
 Then, copy the file override/classes/Configuration.php to the override/classes folder of PrestaShop.
 This override is important to allow Oops to register its own autoload function. 
