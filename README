@@ -24,21 +24,21 @@ FEATURES
 INSTALLATION
 ************
 
-Download the Oops package (https://github.com/alexsegura/Oops/downloads). 
+Download & extract the Oops package from GitHub : https://github.com/downloads/alexsegura/Oops/oops.alpha.zip 
 
 The archive contains 3 folders : 
-|-- modules/
-|-- overrides/
-|-- tools/ 
+|-- modules/  => contains an example module written with Oops
+|-- override/ => contains an override of the ConfigurationCore class, needed by Oops to register its own autoload. 
+|-- tools/    => contains framework & dependencies. 
 
-Oops is packaged with Zend and Propel, located in the tools/ folder, together with Oops itself. 
-Just unzip the contents of the archive in the same folders of PrestaShop. 
+Just copy the contents of each folder in the corresponding folder of PrestaShop !
+
+Check that Oops is running correctly by installing the "Hello, Oops" module from Modules > Front Office Features. 
+Attach the module to the left column to see it running. 
 
 ***************
 GETTING STARTED
 ***************
-
-Check out the example "Hello, Oops" module for a concrete example of creating a module with Oops !
 
 1. Directory structure
 
@@ -99,6 +99,37 @@ mymodule/
     |   `-- Util.php                    => class MyModule_Model_Util
     `-- forms/
         `-- Subscribe.php               => class MyModule_Form_Subscribe
+        
+3. Database
+
+Oops relies on Propel for the database side. 
+The Propel objects to query the full database schema can be found in the Oops/Db package.
+(Please note that not all the relationships are built). 
+
+To learn more about how to use Propel for CRUD : http://www.propelorm.org/documentation/03-basic-crud.html
+
+To simplify database usage, Oops uses the nested_set behavior for easy manipulation of the categories tree, 
+and the i18n behavior for all the tables that have a *_lang related table. 
+- http://www.propelorm.org/behaviors/nested-set.html
+- http://www.propelorm.org/behaviors/i18n.html 
+
+Example : verify if product #1 belongs to category #42
+
+$product     = Oops_Db_ProductQuery :: create()->findPk(1);
+$category_42 = Oops_Db_CategoryQuery :: create()->findPk(42);
+
+// Get all the categories of a product in one method !
+foreach ($product->getCategories() as $category) {
+    // All standard tree operations available !
+    if ($category->isDescendantOf($category_42)) {
+        // Translated automatically !
+        $name = $product->getName(); 
+        echo "Product $name belongs to category #42 !";
+    }
+}
+
+
+
 
 
 
