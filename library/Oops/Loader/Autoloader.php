@@ -22,9 +22,10 @@ class Oops_Loader_Autoloader {
   			),
   			'generator_version' => '1.6.3',
 		));
+		
 		Propel :: initialize();
 		
-		define('OOPS_LIBRARY_PATH', realpath(dirname(__FILE__) . '/../../../library'));
+		define('OOPS_LIBRARY_PATH', realpath(dirname(__FILE__) . '/../../'));
 		
 	}
 	
