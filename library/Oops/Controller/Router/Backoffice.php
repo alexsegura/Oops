@@ -9,14 +9,13 @@ class Oops_Controller_Router_Backoffice extends Zend_Controller_Router_Abstract 
 		
 		$url = $this->getFrontController()->getBaseUrl();
 		
-		// tab=AdminModules&configure=blockrestock&token=fe0913d0b21c6faca8c4b29b81501e58&tab_module=front_office_features
-		
 		$params = array();
 		
 		$params['tab'] 			= $this->getFrontController()->getRequest()->getParam('tab');
 		$params['configure'] 	= $this->getFrontController()->getRequest()->getParam('configure');
 		$params['token'] 		= $this->getFrontController()->getRequest()->getParam('token');
 		$params['tab_module'] 	= $this->getFrontController()->getRequest()->getParam('tab_module');
+		$params['module_name'] 	= $this->getFrontController()->getRequest()->getParam('module_name');
 		$params['action'] 		= $this->getFrontController()->getRequest()->getParam('action');
 		
 		// $params = $this->getFrontController()->getRequest()->getParams();

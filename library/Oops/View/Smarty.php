@@ -19,7 +19,7 @@ class Oops_View_Smarty extends Zend_View_Abstract {
     
     public function addScriptPath($path) {
     	parent :: addScriptPath($path);
-    	$this->smarty->addTemplateDir($path);
+    	// $this->smarty->addTemplateDir($path);
         return $this;
     }
     

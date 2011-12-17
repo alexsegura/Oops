@@ -4,13 +4,11 @@ class Oops_View_Helper_ImageLink {
 	
 	public function imageLink($product) {
 		
-		global $protocol_content;
-		
 		$link 			= new Link();
 		$filterByCover 	= Oops_Db_ImageQuery :: create()->filterByCover(1);
 		$images 		= $product->getImages($filterByCover);
 		
-		if ($images->count() >= 1) {
+		if ($images->count() > 0) {
 			
 			$image = $images->get(0);
 			
@@ -18,15 +16,16 @@ class Oops_View_Helper_ImageLink {
 				$product->getIdProduct() . '-' . $image->getIdImage(), 'medium');
 			
 			// FIXME
-			// The LinkCore class uses $protocol_content, which is not
-			// always defined when FrontController is not used (case on 
-			// ajax requests). The piece of code below makes sure the 
+			// The LinkCore :: getImageLink uses $protocol_content, which is not
+			// always defined when FrontController is not used (ex :ajax requests). 
+			// The piece of code below makes sure the 
 			// protocol is always prepended to the link. 
+			global $protocol_content;
 			$protocol = Tools :: getProtocol();
 			if (null == $protocol_content && false === strpos($lnk, $protocol)) {
 				$lnk = $protocol . $lnk;
 			}
-				
+			
 			return $lnk;
 			
 		}

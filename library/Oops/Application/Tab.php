@@ -9,10 +9,10 @@
  * 
  * Tab class and file must be located directly inside the module folder, 
  * next to the module class, and respect the following syntax : 
- * <appnamespace>_Tab_<tabName>
+ * <appnamespace>_Tab<tabName>
  * 
  * This will trigger the corresponding application module in application/controllers : 
- * <tabName>-tab (Please note that the <tabName> is converted to lower case)
+ * tab-<tabName> (Please note that the <tabName> is converted to lower case)
  * 
  * @author Alexandre Segura <mex.zktk@gmail.com>
  */
@@ -55,7 +55,7 @@ abstract class Oops_Application_Tab extends AdminTabCore {
 	 * @return string
 	 */
 	public function getTabName() {
-		return substr(get_class($this), strrpos(get_class($this), "_") + 1);
+		return substr(get_class($this), strrpos(get_class($this), "_Tab") + 4);
 	}
 	
 	/**
@@ -64,7 +64,7 @@ abstract class Oops_Application_Tab extends AdminTabCore {
 	 */
 	private function getApplicationModuleName() {
 		// TODO Camel case to dash
-		return strtolower($this->getTabName()) . '-tab';
+		return 'tab-' . strtolower($this->getTabName());
 	}
 	
 	public function display() {

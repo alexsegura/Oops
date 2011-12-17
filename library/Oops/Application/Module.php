@@ -16,17 +16,25 @@ class Oops_Application_Module extends ModuleCore {
 			$this->getApplicationEnv(), true);
 			
 		$config->resources->frontController->moduleDirectory = 
-			$this->getApplicationPath() . '/controllers';
+			$this->getApplicationPath() . '/mvc';
 			
 		$config->appnamespace = $this->getNamespace();
 		
 		// It is necessary to override the default resourceloader, 
 		// because it supposes the application path is located in the same
 		// folder as the application. 
+		// @see Zend_Application_Bootstrap_Bootstrap :: getResourceLoader()
 		$config->resourceloader = new Zend_Application_Module_Autoloader(array(
-        	'namespace' => $this->getNamespace(),
-        	'basePath'  => $this->getApplicationPath()
+        	'namespace' 	=> $this->getNamespace(),
+        	'basePath'  	=> $this->getApplicationPath(), 
+			'resourceTypes'	=> array(
+				'tab' => array(
+	                'namespace' => 'Tab',
+	                'path'      => 'tabs',
+	            ),
+			)
         ));
+        
 		
         // Overrides default "modules" resourceloader to make sure
         // default module bootstraps are triggered. 
@@ -95,7 +103,7 @@ class Oops_Application_Module extends ModuleCore {
 	public function getContent() {
 		
 		try {
-			$this->request->setModuleName('back-office');
+			$this->request->setModuleName('preferences');
 			$response = $this->application->getBootstrap()->run();
 			return (string) $response;
 		} catch (Exception $e) {
@@ -114,6 +122,7 @@ class Oops_Application_Module extends ModuleCore {
 			
 			$response = $this->application->getBootstrap()->run();
 			
+			// TODO Better error management ! 
 			if ($response->isException()) {
 				var_dump($response);
 			}
