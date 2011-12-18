@@ -40,93 +40,9 @@ Attach the module to the left column to see it running.
 GETTING STARTED
 ***************
 
-1. Directory structure
+Check the "Hello, Oops" module code to see a running example
 
-Oops offers Zend_Application support to develop modules. 
-
-To learn more about how to build an application using Zend, 
-check http://framework.zend.com/manual/en/learning.quickstart.intro.html.
- 
-Actually, a module created with Oops is a Zend_Application, that is customized
-to fit within PrestaShop. 
-Every module in Oops is composed of a back-office and a front-office part, each 
-with their own controllers and views. 
-
-The following minimal directory structure is assumed for a module : 
-
-mymodule/
-|-- mymodule.php
-`-- application/
-    |-- configs/
-    |   `-- application.ini
-    |-- back-office/
-    |   `-- controllers/
-    |   `-- views/
-    |       `-- scripts/
-    |-- front-office/
-    |   `-- controllers/
-    |   `-- views/
-    |       `-- scripts/
-    `-- models/
-    
-2. Naming conventions
-
-By default, any class in your module is namespaced with the name of the module, i.e the name 
-of the main module class. This way, you are sure that your module classes will never conflict 
-with another class having the same name. 
-Provided your classes follow the naming conventions, you don't have to take care about loading 
-them, they will be loaded automatically by Oops. 
-
-Oops uses a custom version of the Module Resource Autoloader, which allows to namespace application 
-components in a more sophisticated way. 
-http://framework.zend.com/manual/en/zend.loader.autoloader-resource.html#zend.loader.autoloader-resource.module
-You can use the standard directory structure in the back/front office components of the application. 
-
-mymodule/
-|-- mymodule.php                        => class MyModule
-`-- application/
-    |-- back-office/
-    |   |-- controllers/
-    |   |   `-- IndexController.php     => class MyModule_BackOffice_IndexController
-    |   `-- forms/
-    |       `-- Preferences.php         => class MyModule_BackOffice_Form_Preferences
-    |-- front-office/
-    |   |-- controllers/
-    |   |   `-- IndexController.php     => class MyModule_FrontOffice_IndexController
-    |   `-- models/
-    |       `-- Foo.php                 => class MyModule_FrontOffice_Model_Foo
-    |-- models/
-    |   `-- Util.php                    => class MyModule_Model_Util
-    `-- forms/
-        `-- Subscribe.php               => class MyModule_Form_Subscribe
-        
-3. Database
-
-Oops relies on Propel for the database side. 
-The Propel objects to query the full database schema can be found in the Oops/Db package.
-(Please note that not all the relationships are built). 
-
-To learn more about how to use Propel for CRUD : http://www.propelorm.org/documentation/03-basic-crud.html
-
-To simplify database usage, Oops uses the nested_set behavior for easy manipulation of the categories tree, 
-and the i18n behavior for all the tables that have a *_lang related table. 
-- http://www.propelorm.org/behaviors/nested-set.html
-- http://www.propelorm.org/behaviors/i18n.html 
-
-Example : verify if product #1 belongs to category #42
-
-$product     = Oops_Db_ProductQuery :: create()->findPk(1);
-$category_42 = Oops_Db_CategoryQuery :: create()->findPk(42);
-
-// Get all the categories of a product in one method !
-foreach ($product->getCategories() as $category) {
-    // All standard tree operations available !
-    if ($category->isDescendantOf($category_42)) {
-        // Translated automatically !
-        $name = $product->getName(); 
-        echo "Product $name belongs to category #42 !";
-    }
-}
+Read the wiki (https://github.com/alexsegura/Oops/wiki) to learn more
 
 
 
