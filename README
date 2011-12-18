@@ -24,7 +24,7 @@ FEATURES
 INSTALLATION
 ************
 
-Download & extract the Oops package from GitHub : https://github.com/downloads/alexsegura/Oops/oops.alpha.zip 
+Download & extract the latest Oops all-in-one package from GitHub : https://github.com/alexsegura/Oops/downloads
 
 The archive contains 3 folders : 
 |-- modules/  => contains an example module written with Oops
