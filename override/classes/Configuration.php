@@ -27,7 +27,7 @@ class Configuration extends ConfigurationCore {
 
 		Oops_Loader_Autoloader :: getInstance();
 		
-		ConfigurationCore :: loadConfiguration();
+		Parent :: loadConfiguration();
 		
 	}
 	
