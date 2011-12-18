@@ -1,7 +1,7 @@
 <?php
 
 /**
- * 
+ * View implementation of Smarty. 
  * @author Alexandre Segura <mex.zktk@gmail.com>
  */
 class Oops_View_Smarty extends Zend_View_Abstract {
@@ -18,8 +18,18 @@ class Oops_View_Smarty extends Zend_View_Abstract {
     }
     
     public function addScriptPath($path) {
+    	
     	parent :: addScriptPath($path);
-    	// $this->smarty->addTemplateDir($path);
+    	
+    	if (method_exists($this->smarty, 'addTemplateDir')) {
+    		$this->smarty->addTemplateDir($path);
+    	} else {
+    		// FIXME
+	    	// Quick'n'dirty compatibility patch for Smarty V2
+	    	// Not sure it is safe to do this on the front-office
+    		$this->smarty->template_dir = $path;
+    	}
+    	
         return $this;
     }
     

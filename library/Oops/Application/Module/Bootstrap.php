@@ -10,8 +10,8 @@ class Oops_Application_Module_Bootstrap extends Zend_Application_Module_Bootstra
     	
     	// echo '<pre>' . print_r($class, 1) . '</pre>';
     	
-		if (false !== strpos(strtolower($class), 'frontoffice')) {
-        	$moduleName = 'front-office';
+		if (false !== strpos(strtolower($class), 'hooks')) {
+        	$moduleName = 'hooks';
         } else if (false !== strpos(strtolower($class), 'preferences')) {
             $moduleName = 'preferences';
         } else if (false !== strpos(strtolower($class), 'tab')) {
@@ -56,15 +56,12 @@ class Oops_Application_Module_Bootstrap extends Zend_Application_Module_Bootstra
 		
 		$ns = $this->getApplication()->getOption('appnamespace');
 		
-		// var_dump('getModuleName : ' . $this->_moduleName);
-		
-		
         // if (empty($this->_moduleName)) {
         	
             $class = get_class($this);
             
-            if (false !== strpos(strtolower($class), 'frontoffice')) {
-            	$this->_moduleName = $ns . '_FrontOffice';
+            if (false !== strpos(strtolower($class), 'hooks')) {
+            	$this->_moduleName = $ns . '_Hooks';
             } else if (false !== strpos(strtolower($class), 'preferences')) {
             	$this->_moduleName = $ns . '_Preferences';
             } else if (false !== strpos(strtolower($class), 'tab')) {
@@ -75,8 +72,6 @@ class Oops_Application_Module_Bootstrap extends Zend_Application_Module_Bootstra
             }
             
         // }
-        
-            // var_dump($this->_moduleName);
         
         return $this->_moduleName;
         

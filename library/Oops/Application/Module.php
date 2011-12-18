@@ -116,12 +116,12 @@ class Oops_Application_Module extends ModuleCore {
 		
 		try {
 			
-			$this->request->setModuleName('front-office');
+			$this->request->setModuleName('hooks');
 			$this->request->setControllerName('index');
 			$this->request->setActionName($hookName);
 			
 			$response = $this->application->getBootstrap()->run();
-			
+
 			// TODO Better error management ! 
 			if ($response->isException()) {
 				var_dump($response);
@@ -161,7 +161,7 @@ class Oops_Application_Module extends ModuleCore {
 	public function run() {
 		
 		try {
-			$this->request->setModuleName('front-office');
+			$this->request->setModuleName('hooks');
 			$response = $this->application->getBootstrap()->run();
 			echo (string) $response;
 		} catch (Exception $e) {

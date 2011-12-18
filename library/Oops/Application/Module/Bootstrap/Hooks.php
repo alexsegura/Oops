@@ -1,6 +1,6 @@
 <?php
 
-class Oops_Application_Module_Bootstrap_FrontOffice extends Oops_Application_Module_Bootstrap {
+class Oops_Application_Module_Bootstrap_Hooks extends Oops_Application_Module_Bootstrap {
 	
 	protected function _initRouter() {
         $this->bootstrap('FrontController');
