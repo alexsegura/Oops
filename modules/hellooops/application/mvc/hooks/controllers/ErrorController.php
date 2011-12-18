@@ -1,6 +1,6 @@
 <?php
 
-class HelloOops_FrontOffice_ErrorController extends Zend_Controller_Action {
+class HelloOops_Hooks_ErrorController extends Zend_Controller_Action {
 	
     public function errorAction() {
     	

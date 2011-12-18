@@ -1,6 +1,6 @@
 <?php 
 
-class HelloOops_BackOffice_IndexController extends Zend_Controller_Action {
+class HelloOops_Preferences_IndexController extends Zend_Controller_Action {
 	
 	public function init() {
     }

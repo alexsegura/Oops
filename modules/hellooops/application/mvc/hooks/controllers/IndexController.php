@@ -1,6 +1,6 @@
 <?php 
 
-class HelloOops_FrontOffice_IndexController extends Zend_Controller_Action {
+class HelloOops_Hooks_IndexController extends Zend_Controller_Action {
 	
 	public function init() {
 	}

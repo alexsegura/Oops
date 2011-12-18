@@ -1,6 +1,6 @@
 <?php 
 
-class HelloOops_ManageTab_IndexController extends Zend_Controller_Action {
+class HelloOops_TabManage_IndexController extends Zend_Controller_Action {
 	
 	public function init() {
     }
