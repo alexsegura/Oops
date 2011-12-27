@@ -2,7 +2,7 @@
 
 class Oops_View_Helper_ImageLink {
 	
-	public function imageLink($product) {
+	public function imageLink($product, $size = 'medium') {
 		
 		$link 			= new Link();
 		$filterByCover 	= Oops_Db_ImageQuery :: create()->filterByCover(1);
@@ -13,7 +13,7 @@ class Oops_View_Helper_ImageLink {
 			$image = $images->get(0);
 			
 			$lnk = $link->getImageLink($product->getLinkRewrite(), 
-				$product->getIdProduct() . '-' . $image->getIdImage(), 'medium');
+				$product->getIdProduct() . '-' . $image->getIdImage(), $size);
 			
 			// FIXME
 			// The LinkCore :: getImageLink uses $protocol_content, which is not

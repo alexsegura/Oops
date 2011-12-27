@@ -43,10 +43,9 @@ class Oops_Application_Module extends ModuleCore {
 			'Oops_Application_Resource' => OOPS_LIBRARY_PATH . "/Oops/Application/Resource/"
 		);
 		
-		// TODO
-		// Load module config
-		// $config->merge($moduleConfig);
-		// echo '<pre>'.print_r($config->toArray(), 1).'</pre>'; exit;
+		// Merge module configuration with default configuration
+		// TODO Make sure mandatory default configuration is NOT overwritten
+		$config->merge($moduleConfig);
 		
 		// Create a Zend_Application with no environment, 
 		// as the $config is already loaded base on environment. 
@@ -58,12 +57,10 @@ class Oops_Application_Module extends ModuleCore {
 		$this->application->bootstrap();
 		
 		
-		// echo '<pre>'.print_r($this->application, 1).'</pre>'; exit;
-		
 		$this->request = $this->application->getBootstrap()->getContainer()->get('request');
 		
 		parent :: __construct($name);
-
+		
 	}
 	
 	/**
@@ -93,7 +90,17 @@ class Oops_Application_Module extends ModuleCore {
 	}
 	
 	public function install() {
-		return parent :: install();
+		
+		$install = parent :: install();
+		
+		$hooks = $this->application->getBootstrap()->getResource('hooks');
+		
+		foreach ($hooks as $hook) {
+			$this->registerHook($hook);
+		}
+		
+		return $install;
+		
 	}
 	
 	public function uninstall() {
@@ -121,7 +128,7 @@ class Oops_Application_Module extends ModuleCore {
 			$this->request->setActionName($hookName);
 			
 			$response = $this->application->getBootstrap()->run();
-
+			
 			// TODO Better error management ! 
 			if ($response->isException()) {
 				var_dump($response);
@@ -138,12 +145,18 @@ class Oops_Application_Module extends ModuleCore {
 		
 	}
 	
+	/* PrestaShop standard hook methods */
+	
 	public function hookHeader() {
 		return $this->hook('header');
 	}
 	
-	public function hookleftColumn($params) {
+	public function hookLeftColumn($params) {
 		return $this->hook('left-column');
+	}
+	
+	public function hookRightColumn($params) {
+		return $this->hook('right-column');
 	}
 	
 	public function hookProductTab($params) {

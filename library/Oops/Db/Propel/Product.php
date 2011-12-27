@@ -290,6 +290,11 @@ abstract class Oops_Db_Propel_Product extends BaseObject  implements Persistent
 	protected $date_upd;
 
 	/**
+	 * @var        Manufacturer
+	 */
+	protected $aManufacturer;
+
+	/**
 	 * @var        array Oops_Db_CategoryProduct[] Collection to store aggregation of Oops_Db_CategoryProduct objects.
 	 */
 	protected $collCategoryProducts;
@@ -961,6 +966,10 @@ abstract class Oops_Db_Propel_Product extends BaseObject  implements Persistent
 		if ($this->id_manufacturer !== $v) {
 			$this->id_manufacturer = $v;
 			$this->modifiedColumns[] = Oops_Db_ProductPeer::ID_MANUFACTURER;
+		}
+
+		if ($this->aManufacturer !== null && $this->aManufacturer->getIdManufacturer() !== $v) {
+			$this->aManufacturer = null;
 		}
 
 		return $this;
@@ -1985,6 +1994,9 @@ abstract class Oops_Db_Propel_Product extends BaseObject  implements Persistent
 	public function ensureConsistency()
 	{
 
+		if ($this->aManufacturer !== null && $this->id_manufacturer !== $this->aManufacturer->getIdManufacturer()) {
+			$this->aManufacturer = null;
+		}
 	} // ensureConsistency
 
 	/**
@@ -2024,6 +2036,7 @@ abstract class Oops_Db_Propel_Product extends BaseObject  implements Persistent
 
 		if ($deep) {  // also de-associate any related objects?
 
+			$this->aManufacturer = null;
 			$this->collCategoryProducts = null;
 
 			$this->collFeatureProducts = null;
@@ -2153,6 +2166,18 @@ abstract class Oops_Db_Propel_Product extends BaseObject  implements Persistent
 		$affectedRows = 0; // initialize var to track total num of affected rows
 		if (!$this->alreadyInSave) {
 			$this->alreadyInSave = true;
+
+			// We call the save method on the following object(s) if they
+			// were passed to this object by their coresponding set
+			// method.  This object relates to these object(s) by a
+			// foreign key reference.
+
+			if ($this->aManufacturer !== null) {
+				if ($this->aManufacturer->isModified() || $this->aManufacturer->isNew()) {
+					$affectedRows += $this->aManufacturer->save($con);
+				}
+				$this->setManufacturer($this->aManufacturer);
+			}
 
 			if ($this->isNew() || $this->isModified()) {
 				// persist changes
@@ -2663,6 +2688,18 @@ abstract class Oops_Db_Propel_Product extends BaseObject  implements Persistent
 			$failureMap = array();
 
 
+			// We call the validate method on the following object(s) if they
+			// were passed to this object by their coresponding set
+			// method.  This object relates to these object(s) by a
+			// foreign key reference.
+
+			if ($this->aManufacturer !== null) {
+				if (!$this->aManufacturer->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aManufacturer->getValidationFailures());
+				}
+			}
+
+
 			if (($retval = Oops_Db_ProductPeer::doValidate($this, $columns)) !== true) {
 				$failureMap = array_merge($failureMap, $retval);
 			}
@@ -2938,6 +2975,9 @@ abstract class Oops_Db_Propel_Product extends BaseObject  implements Persistent
 			$keys[39] => $this->getDateUpd(),
 		);
 		if ($includeForeignObjects) {
+			if (null !== $this->aManufacturer) {
+				$result['Manufacturer'] = $this->aManufacturer->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
+			}
 			if (null !== $this->collCategoryProducts) {
 				$result['CategoryProducts'] = $this->collCategoryProducts->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
 			}
@@ -3408,6 +3448,55 @@ abstract class Oops_Db_Propel_Product extends BaseObject  implements Persistent
 			self::$peer = new Oops_Db_ProductPeer();
 		}
 		return self::$peer;
+	}
+
+	/**
+	 * Declares an association between this object and a Oops_Db_Manufacturer object.
+	 *
+	 * @param      Oops_Db_Manufacturer $v
+	 * @return     Oops_Db_Product The current object (for fluent API support)
+	 * @throws     PropelException
+	 */
+	public function setManufacturer(Oops_Db_Manufacturer $v = null)
+	{
+		if ($v === null) {
+			$this->setIdManufacturer(NULL);
+		} else {
+			$this->setIdManufacturer($v->getIdManufacturer());
+		}
+
+		$this->aManufacturer = $v;
+
+		// Add binding for other direction of this n:n relationship.
+		// If this object has already been added to the Oops_Db_Manufacturer object, it will not be re-added.
+		if ($v !== null) {
+			$v->addProduct($this);
+		}
+
+		return $this;
+	}
+
+
+	/**
+	 * Get the associated Oops_Db_Manufacturer object
+	 *
+	 * @param      PropelPDO Optional Connection object.
+	 * @return     Oops_Db_Manufacturer The associated Oops_Db_Manufacturer object.
+	 * @throws     PropelException
+	 */
+	public function getManufacturer(PropelPDO $con = null)
+	{
+		if ($this->aManufacturer === null && ($this->id_manufacturer !== null)) {
+			$this->aManufacturer = Oops_Db_ManufacturerQuery::create()->findPk($this->id_manufacturer, $con);
+			/* The following can be used additionally to
+				guarantee the related object contains a reference
+				to this object.  This level of coupling may, however, be
+				undesirable since it could result in an only partially populated collection
+				in the referenced object.
+				$this->aManufacturer->addProducts($this);
+			 */
+		}
+		return $this->aManufacturer;
 	}
 
 
@@ -4734,6 +4823,7 @@ abstract class Oops_Db_Propel_Product extends BaseObject  implements Persistent
 			$this->collFeatures->clearIterator();
 		}
 		$this->collFeatures = null;
+		$this->aManufacturer = null;
 	}
 
 	/**

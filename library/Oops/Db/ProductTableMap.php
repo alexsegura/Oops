@@ -40,7 +40,7 @@ class Oops_Db_ProductTableMap extends TableMap
 		// columns
 		$this->addPrimaryKey('ID_PRODUCT', 'IdProduct', 'INTEGER', true, 10, null);
 		$this->addColumn('ID_SUPPLIER', 'IdSupplier', 'INTEGER', false, 10, null);
-		$this->addColumn('ID_MANUFACTURER', 'IdManufacturer', 'INTEGER', false, 10, null);
+		$this->addForeignKey('ID_MANUFACTURER', 'IdManufacturer', 'INTEGER', 'manufacturer', 'ID_MANUFACTURER', false, 10, null);
 		$this->addColumn('ID_TAX_RULES_GROUP', 'IdTaxRulesGroup', 'INTEGER', true, 10, null);
 		$this->addColumn('ID_CATEGORY_DEFAULT', 'IdCategoryDefault', 'INTEGER', false, 10, null);
 		$this->addColumn('ID_COLOR_DEFAULT', 'IdColorDefault', 'INTEGER', false, 10, null);
@@ -86,6 +86,7 @@ class Oops_Db_ProductTableMap extends TableMap
 	 */
 	public function buildRelations()
 	{
+		$this->addRelation('Manufacturer', 'Oops_Db_Manufacturer', RelationMap::MANY_TO_ONE, array('id_manufacturer' => 'id_manufacturer', ), null, null);
 		$this->addRelation('CategoryProduct', 'Oops_Db_CategoryProduct', RelationMap::ONE_TO_MANY, array('id_product' => 'id_product', ), null, null, 'CategoryProducts');
 		$this->addRelation('FeatureProduct', 'Oops_Db_FeatureProduct', RelationMap::ONE_TO_MANY, array('id_product' => 'id_product', ), null, null, 'FeatureProducts');
 		$this->addRelation('Image', 'Oops_Db_Image', RelationMap::ONE_TO_MANY, array('id_product' => 'id_product', ), null, null, 'Images');

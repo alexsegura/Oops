@@ -56,6 +56,11 @@ abstract class Oops_Db_Propel_Manufacturer extends BaseObject  implements Persis
 	protected $active;
 
 	/**
+	 * @var        array Oops_Db_Product[] Collection to store aggregation of Oops_Db_Product objects.
+	 */
+	protected $collProducts;
+
+	/**
 	 * Flag to prevent endless save loop, if this object is referenced
 	 * by another object which falls in this transaction.
 	 * @var        boolean
@@ -68,6 +73,12 @@ abstract class Oops_Db_Propel_Manufacturer extends BaseObject  implements Persis
 	 * @var        boolean
 	 */
 	protected $alreadyInValidation = false;
+
+	/**
+	 * An array of objects scheduled for deletion.
+	 * @var		array
+	 */
+	protected $productsScheduledForDeletion = null;
 
 	/**
 	 * Applies default values to this object.
@@ -419,6 +430,8 @@ abstract class Oops_Db_Propel_Manufacturer extends BaseObject  implements Persis
 
 		if ($deep) {  // also de-associate any related objects?
 
+			$this->collProducts = null;
+
 		} // if (deep)
 	}
 
@@ -538,6 +551,23 @@ abstract class Oops_Db_Propel_Manufacturer extends BaseObject  implements Persis
 				}
 				$affectedRows += 1;
 				$this->resetModified();
+			}
+
+			if ($this->productsScheduledForDeletion !== null) {
+				if (!$this->productsScheduledForDeletion->isEmpty()) {
+					Oops_Db_ProductQuery::create()
+						->filterByPrimaryKeys($this->productsScheduledForDeletion->getPrimaryKeys(false))
+						->delete($con);
+					$this->productsScheduledForDeletion = null;
+				}
+			}
+
+			if ($this->collProducts !== null) {
+				foreach ($this->collProducts as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
 			}
 
 			$this->alreadyInSave = false;
@@ -703,6 +733,14 @@ abstract class Oops_Db_Propel_Manufacturer extends BaseObject  implements Persis
 			}
 
 
+				if ($this->collProducts !== null) {
+					foreach ($this->collProducts as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
+
 
 			$this->alreadyInValidation = false;
 		}
@@ -768,10 +806,11 @@ abstract class Oops_Db_Propel_Manufacturer extends BaseObject  implements Persis
 	 *                    Defaults to BasePeer::TYPE_PHPNAME.
 	 * @param     boolean $includeLazyLoadColumns (optional) Whether to include lazy loaded columns. Defaults to TRUE.
 	 * @param     array $alreadyDumpedObjects List of objects to skip to avoid recursion
+	 * @param     boolean $includeForeignObjects (optional) Whether to include hydrated related objects. Default to FALSE.
 	 *
 	 * @return    array an associative array containing the field names (as keys) and field values
 	 */
-	public function toArray($keyType = BasePeer::TYPE_PHPNAME, $includeLazyLoadColumns = true, $alreadyDumpedObjects = array())
+	public function toArray($keyType = BasePeer::TYPE_PHPNAME, $includeLazyLoadColumns = true, $alreadyDumpedObjects = array(), $includeForeignObjects = false)
 	{
 		if (isset($alreadyDumpedObjects['Oops_Db_Manufacturer'][$this->getPrimaryKey()])) {
 			return '*RECURSION*';
@@ -785,6 +824,11 @@ abstract class Oops_Db_Propel_Manufacturer extends BaseObject  implements Persis
 			$keys[3] => $this->getDateUpd(),
 			$keys[4] => $this->getActive(),
 		);
+		if ($includeForeignObjects) {
+			if (null !== $this->collProducts) {
+				$result['Products'] = $this->collProducts->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
+			}
+		}
 		return $result;
 	}
 
@@ -941,6 +985,20 @@ abstract class Oops_Db_Propel_Manufacturer extends BaseObject  implements Persis
 		$copyObj->setDateAdd($this->getDateAdd());
 		$copyObj->setDateUpd($this->getDateUpd());
 		$copyObj->setActive($this->getActive());
+
+		if ($deepCopy) {
+			// important: temporarily setNew(false) because this affects the behavior of
+			// the getter/setter methods for fkey referrer objects.
+			$copyObj->setNew(false);
+
+			foreach ($this->getProducts() as $relObj) {
+				if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
+					$copyObj->addProduct($relObj->copy($deepCopy));
+				}
+			}
+
+		} // if ($deepCopy)
+
 		if ($makeNew) {
 			$copyObj->setNew(true);
 			$copyObj->setIdManufacturer(NULL); // this is a auto-increment column, so set to default value
@@ -985,6 +1043,170 @@ abstract class Oops_Db_Propel_Manufacturer extends BaseObject  implements Persis
 		return self::$peer;
 	}
 
+
+	/**
+	 * Initializes a collection based on the name of a relation.
+	 * Avoids crafting an 'init[$relationName]s' method name
+	 * that wouldn't work when StandardEnglishPluralizer is used.
+	 *
+	 * @param      string $relationName The name of the relation to initialize
+	 * @return     void
+	 */
+	public function initRelation($relationName)
+	{
+		if ('Product' == $relationName) {
+			return $this->initProducts();
+		}
+	}
+
+	/**
+	 * Clears out the collProducts collection
+	 *
+	 * This does not modify the database; however, it will remove any associated objects, causing
+	 * them to be refetched by subsequent calls to accessor method.
+	 *
+	 * @return     void
+	 * @see        addProducts()
+	 */
+	public function clearProducts()
+	{
+		$this->collProducts = null; // important to set this to NULL since that means it is uninitialized
+	}
+
+	/**
+	 * Initializes the collProducts collection.
+	 *
+	 * By default this just sets the collProducts collection to an empty array (like clearcollProducts());
+	 * however, you may wish to override this method in your stub class to provide setting appropriate
+	 * to your application -- for example, setting the initial array to the values stored in database.
+	 *
+	 * @param      boolean $overrideExisting If set to true, the method call initializes
+	 *                                        the collection even if it is not empty
+	 *
+	 * @return     void
+	 */
+	public function initProducts($overrideExisting = true)
+	{
+		if (null !== $this->collProducts && !$overrideExisting) {
+			return;
+		}
+		$this->collProducts = new PropelObjectCollection();
+		$this->collProducts->setModel('Oops_Db_Product');
+	}
+
+	/**
+	 * Gets an array of Oops_Db_Product objects which contain a foreign key that references this object.
+	 *
+	 * If the $criteria is not null, it is used to always fetch the results from the database.
+	 * Otherwise the results are fetched from the database the first time, then cached.
+	 * Next time the same method is called without $criteria, the cached collection is returned.
+	 * If this Oops_Db_Manufacturer is new, it will return
+	 * an empty collection or the current collection; the criteria is ignored on a new object.
+	 *
+	 * @param      Criteria $criteria optional Criteria object to narrow the query
+	 * @param      PropelPDO $con optional connection object
+	 * @return     PropelCollection|array Oops_Db_Product[] List of Oops_Db_Product objects
+	 * @throws     PropelException
+	 */
+	public function getProducts($criteria = null, PropelPDO $con = null)
+	{
+		if(null === $this->collProducts || null !== $criteria) {
+			if ($this->isNew() && null === $this->collProducts) {
+				// return empty collection
+				$this->initProducts();
+			} else {
+				$collProducts = Oops_Db_ProductQuery::create(null, $criteria)
+					->filterByManufacturer($this)
+					->find($con);
+				if (null !== $criteria) {
+					return $collProducts;
+				}
+				$this->collProducts = $collProducts;
+			}
+		}
+		return $this->collProducts;
+	}
+
+	/**
+	 * Sets a collection of Product objects related by a one-to-many relationship
+	 * to the current object.
+	 * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
+	 * and new objects from the given Propel collection.
+	 *
+	 * @param      PropelCollection $products A Propel collection.
+	 * @param      PropelPDO $con Optional connection object
+	 */
+	public function setProducts(PropelCollection $products, PropelPDO $con = null)
+	{
+		$this->productsScheduledForDeletion = $this->getProducts(new Criteria(), $con)->diff($products);
+
+		foreach ($products as $product) {
+			// Fix issue with collection modified by reference
+			if ($product->isNew()) {
+				$product->setManufacturer($this);
+			}
+			$this->addProduct($product);
+		}
+
+		$this->collProducts = $products;
+	}
+
+	/**
+	 * Returns the number of related Oops_Db_Product objects.
+	 *
+	 * @param      Criteria $criteria
+	 * @param      boolean $distinct
+	 * @param      PropelPDO $con
+	 * @return     int Count of related Oops_Db_Product objects.
+	 * @throws     PropelException
+	 */
+	public function countProducts(Criteria $criteria = null, $distinct = false, PropelPDO $con = null)
+	{
+		if(null === $this->collProducts || null !== $criteria) {
+			if ($this->isNew() && null === $this->collProducts) {
+				return 0;
+			} else {
+				$query = Oops_Db_ProductQuery::create(null, $criteria);
+				if($distinct) {
+					$query->distinct();
+				}
+				return $query
+					->filterByManufacturer($this)
+					->count($con);
+			}
+		} else {
+			return count($this->collProducts);
+		}
+	}
+
+	/**
+	 * Method called to associate a Oops_Db_Product object to this object
+	 * through the Oops_Db_Product foreign key attribute.
+	 *
+	 * @param      Oops_Db_Product $l Oops_Db_Product
+	 * @return     Oops_Db_Manufacturer The current object (for fluent API support)
+	 */
+	public function addProduct(Oops_Db_Product $l)
+	{
+		if ($this->collProducts === null) {
+			$this->initProducts();
+		}
+		if (!$this->collProducts->contains($l)) { // only add it if the **same** object is not already associated
+			$this->doAddProduct($l);
+		}
+
+		return $this;
+	}
+
+	/**
+	 * @param	Product $product The product object to add.
+	 */
+	protected function doAddProduct($product)
+	{
+		$this->collProducts[]= $product;
+		$product->setManufacturer($this);
+	}
+
 	/**
 	 * Clears the current object and sets all attributes to their default values
 	 */
@@ -1016,8 +1238,17 @@ abstract class Oops_Db_Propel_Manufacturer extends BaseObject  implements Persis
 	public function clearAllReferences($deep = false)
 	{
 		if ($deep) {
+			if ($this->collProducts) {
+				foreach ($this->collProducts as $o) {
+					$o->clearAllReferences($deep);
+				}
+			}
 		} // if ($deep)
 
+		if ($this->collProducts instanceof PropelCollection) {
+			$this->collProducts->clearIterator();
+		}
+		$this->collProducts = null;
 	}
 
 	/**

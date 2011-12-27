@@ -14,9 +14,6 @@ class Oops_Controller_Action_Helper_ViewResolver extends Zend_Controller_Action_
     	
         $viewRenderer = Zend_Controller_Action_HelperBroker :: getStaticHelper('viewRenderer');
         
-        // TODO 
-        // Register template dir for theme override 
-        
         $defaultView = $viewRenderer->view;
         $smartyView	 = new Oops_View_Smarty();
         $smartyView->addScriptPath($defaultView->getScriptPaths());
@@ -28,21 +25,30 @@ class Oops_Controller_Action_Helper_ViewResolver extends Zend_Controller_Action_
         
         // TODO
         // - Allow configurable priority
-        // - Allow *.php templates
         
         $viewsBySuffix = array(
-        	'tpl' 	=> $smartyView, 
+        	'tpl' 	=> $smartyView,
+        	'php'	=> $defaultView,  
         	'phtml'	=> $defaultView 
         );
         
         // Iterates over view suffixes, trying to find a view script. 
         foreach ($viewsBySuffix as $suffix => $view) {
         	
+        	// Add theme module template directory to the stack of script paths
+        	// This will reproduce the "theme override" behavior
+        	// Views should be placed in subfolders for each controller
+        	$appnamespace = 
+        		$this->getActionController()->getInvokeArg('bootstrap')->getOption('appnamespace');
+        	$view->addScriptPath(_PS_THEME_DIR_ . 'modules/' . strtolower($appnamespace));
+        	
+        	// Try to resolve a view based on current suffix
 	        $viewRenderer->setViewSuffix($suffix);
 	        $script = $viewRenderer->getViewScript();
 	        
 	        if ($view->getScriptPath($script)) {
 	        	
+	        	// Completely replace the view that will be rendered
 	            $viewRenderer->setView($view);
 	            $viewRenderer->getActionController()->view = null;
 	            
@@ -63,6 +69,11 @@ class Oops_Controller_Action_Helper_ViewResolver extends Zend_Controller_Action_
 
     }
     
+    /**
+     * Sets a unique response segment for each hook action of each module. 
+     * Allows to render several hooks of several modules on the same page with no conflict. 
+     * @param $viewRenderer
+     */
     private function initResponseSegment($viewRenderer) {
     	
     	$namespace = 

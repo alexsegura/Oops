@@ -22,6 +22,10 @@
  * @method     Oops_Db_ManufacturerQuery rightJoin($relation) Adds a RIGHT JOIN clause to the query
  * @method     Oops_Db_ManufacturerQuery innerJoin($relation) Adds a INNER JOIN clause to the query
  *
+ * @method     Oops_Db_ManufacturerQuery leftJoinProduct($relationAlias = null) Adds a LEFT JOIN clause to the query using the Product relation
+ * @method     Oops_Db_ManufacturerQuery rightJoinProduct($relationAlias = null) Adds a RIGHT JOIN clause to the query using the Product relation
+ * @method     Oops_Db_ManufacturerQuery innerJoinProduct($relationAlias = null) Adds a INNER JOIN clause to the query using the Product relation
+ *
  * @method     Oops_Db_Manufacturer findOne(PropelPDO $con = null) Return the first Oops_Db_Manufacturer matching the query
  * @method     Oops_Db_Manufacturer findOneOrCreate(PropelPDO $con = null) Return the first Oops_Db_Manufacturer matching the query, or a new Oops_Db_Manufacturer object populated from the query conditions when no match is found
  *
@@ -371,6 +375,79 @@ abstract class Oops_Db_Propel_ManufacturerQuery extends ModelCriteria
 			$active = in_array(strtolower($active), array('false', 'off', '-', 'no', 'n', '0', '')) ? false : true;
 		}
 		return $this->addUsingAlias(Oops_Db_ManufacturerPeer::ACTIVE, $active, $comparison);
+	}
+
+	/**
+	 * Filter the query by a related Oops_Db_Product object
+	 *
+	 * @param     Oops_Db_Product $product  the related object to use as filter
+	 * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+	 *
+	 * @return    Oops_Db_ManufacturerQuery The current query, for fluid interface
+	 */
+	public function filterByProduct($product, $comparison = null)
+	{
+		if ($product instanceof Oops_Db_Product) {
+			return $this
+				->addUsingAlias(Oops_Db_ManufacturerPeer::ID_MANUFACTURER, $product->getIdManufacturer(), $comparison);
+		} elseif ($product instanceof PropelCollection) {
+			return $this
+				->useProductQuery()
+				->filterByPrimaryKeys($product->getPrimaryKeys())
+				->endUse();
+		} else {
+			throw new PropelException('filterByProduct() only accepts arguments of type Oops_Db_Product or PropelCollection');
+		}
+	}
+
+	/**
+	 * Adds a JOIN clause to the query using the Product relation
+	 *
+	 * @param     string $relationAlias optional alias for the relation
+	 * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+	 *
+	 * @return    Oops_Db_ManufacturerQuery The current query, for fluid interface
+	 */
+	public function joinProduct($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+	{
+		$tableMap = $this->getTableMap();
+		$relationMap = $tableMap->getRelation('Product');
+
+		// create a ModelJoin object for this join
+		$join = new ModelJoin();
+		$join->setJoinType($joinType);
+		$join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
+		if ($previousJoin = $this->getPreviousJoin()) {
+			$join->setPreviousJoin($previousJoin);
+		}
+
+		// add the ModelJoin to the current object
+		if($relationAlias) {
+			$this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
+			$this->addJoinObject($join, $relationAlias);
+		} else {
+			$this->addJoinObject($join, 'Product');
+		}
+
+		return $this;
+	}
+
+	/**
+	 * Use the Product relation Product object
+	 *
+	 * @see       useQuery()
+	 *
+	 * @param     string $relationAlias optional alias for the relation,
+	 *                                   to be used as main alias in the secondary query
+	 * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+	 *
+	 * @return    Oops_Db_ProductQuery A secondary query class using the current class as primary query
+	 */
+	public function useProductQuery($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+	{
+		return $this
+			->joinProduct($relationAlias, $joinType)
+			->useQuery($relationAlias ? $relationAlias : 'Product', 'Oops_Db_ProductQuery');
 	}
 
 	/**

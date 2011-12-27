@@ -51,6 +51,7 @@ class Oops_Db_ManufacturerTableMap extends TableMap
 	 */
 	public function buildRelations()
 	{
+		$this->addRelation('Product', 'Oops_Db_Product', RelationMap::ONE_TO_MANY, array('id_manufacturer' => 'id_manufacturer', ), null, null, 'Products');
 	} // buildRelations()
 
 } // Oops_Db_ManufacturerTableMap

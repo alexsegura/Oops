@@ -92,6 +92,10 @@
  * @method     Oops_Db_ProductQuery rightJoin($relation) Adds a RIGHT JOIN clause to the query
  * @method     Oops_Db_ProductQuery innerJoin($relation) Adds a INNER JOIN clause to the query
  *
+ * @method     Oops_Db_ProductQuery leftJoinManufacturer($relationAlias = null) Adds a LEFT JOIN clause to the query using the Manufacturer relation
+ * @method     Oops_Db_ProductQuery rightJoinManufacturer($relationAlias = null) Adds a RIGHT JOIN clause to the query using the Manufacturer relation
+ * @method     Oops_Db_ProductQuery innerJoinManufacturer($relationAlias = null) Adds a INNER JOIN clause to the query using the Manufacturer relation
+ *
  * @method     Oops_Db_ProductQuery leftJoinCategoryProduct($relationAlias = null) Adds a LEFT JOIN clause to the query using the CategoryProduct relation
  * @method     Oops_Db_ProductQuery rightJoinCategoryProduct($relationAlias = null) Adds a RIGHT JOIN clause to the query using the CategoryProduct relation
  * @method     Oops_Db_ProductQuery innerJoinCategoryProduct($relationAlias = null) Adds a INNER JOIN clause to the query using the CategoryProduct relation
@@ -448,6 +452,8 @@ abstract class Oops_Db_Propel_ProductQuery extends ModelCriteria
 	 * $query->filterByIdManufacturer(array(12, 34)); // WHERE id_manufacturer IN (12, 34)
 	 * $query->filterByIdManufacturer(array('min' => 12)); // WHERE id_manufacturer > 12
 	 * </code>
+	 *
+	 * @see       filterByManufacturer()
 	 *
 	 * @param     mixed $idManufacturer The value to use as filter.
 	 *              Use scalar values for equality.
@@ -1751,6 +1757,80 @@ abstract class Oops_Db_Propel_ProductQuery extends ModelCriteria
 			}
 		}
 		return $this->addUsingAlias(Oops_Db_ProductPeer::DATE_UPD, $dateUpd, $comparison);
+	}
+
+	/**
+	 * Filter the query by a related Oops_Db_Manufacturer object
+	 *
+	 * @param     Oops_Db_Manufacturer|PropelCollection $manufacturer The related object(s) to use as filter
+	 * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+	 *
+	 * @return    Oops_Db_ProductQuery The current query, for fluid interface
+	 */
+	public function filterByManufacturer($manufacturer, $comparison = null)
+	{
+		if ($manufacturer instanceof Oops_Db_Manufacturer) {
+			return $this
+				->addUsingAlias(Oops_Db_ProductPeer::ID_MANUFACTURER, $manufacturer->getIdManufacturer(), $comparison);
+		} elseif ($manufacturer instanceof PropelCollection) {
+			if (null === $comparison) {
+				$comparison = Criteria::IN;
+			}
+			return $this
+				->addUsingAlias(Oops_Db_ProductPeer::ID_MANUFACTURER, $manufacturer->toKeyValue('PrimaryKey', 'IdManufacturer'), $comparison);
+		} else {
+			throw new PropelException('filterByManufacturer() only accepts arguments of type Oops_Db_Manufacturer or PropelCollection');
+		}
+	}
+
+	/**
+	 * Adds a JOIN clause to the query using the Manufacturer relation
+	 *
+	 * @param     string $relationAlias optional alias for the relation
+	 * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+	 *
+	 * @return    Oops_Db_ProductQuery The current query, for fluid interface
+	 */
+	public function joinManufacturer($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+	{
+		$tableMap = $this->getTableMap();
+		$relationMap = $tableMap->getRelation('Manufacturer');
+
+		// create a ModelJoin object for this join
+		$join = new ModelJoin();
+		$join->setJoinType($joinType);
+		$join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
+		if ($previousJoin = $this->getPreviousJoin()) {
+			$join->setPreviousJoin($previousJoin);
+		}
+
+		// add the ModelJoin to the current object
+		if($relationAlias) {
+			$this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
+			$this->addJoinObject($join, $relationAlias);
+		} else {
+			$this->addJoinObject($join, 'Manufacturer');
+		}
+
+		return $this;
+	}
+
+	/**
+	 * Use the Manufacturer relation Manufacturer object
+	 *
+	 * @see       useQuery()
+	 *
+	 * @param     string $relationAlias optional alias for the relation,
+	 *                                   to be used as main alias in the secondary query
+	 * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+	 *
+	 * @return    Oops_Db_ManufacturerQuery A secondary query class using the current class as primary query
+	 */
+	public function useManufacturerQuery($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+	{
+		return $this
+			->joinManufacturer($relationAlias, $joinType)
+			->useQuery($relationAlias ? $relationAlias : 'Manufacturer', 'Oops_Db_ManufacturerQuery');
 	}
 
 	/**
