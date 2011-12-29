@@ -7,7 +7,7 @@
 class Oops_Controller_Action_Helper_ViewResolver extends Zend_Controller_Action_Helper_Abstract {
 	
 	/**
-	 * Operates before the dipatch loop startup to 
+	 * Operates before the dispatch loop startup to 
 	 * change the view that will be rendered, if needed. 
 	 */
     public function preDispatch() {

@@ -34,7 +34,11 @@ class Oops_Application_Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 	
 	protected function _initHelpers() {
 	    Zend_Controller_Action_HelperBroker :: addHelper(
-	        new Oops_Controller_Action_Helper_ViewResolver()
+	        new Oops_Controller_Action_Helper_ViewResolver() 
+	        
+	    );
+	    Zend_Controller_Action_HelperBroker :: addHelper(
+	    	new Oops_Controller_Action_Helper_Configuration()
 	    );
 	}
 	
