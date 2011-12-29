@@ -17,7 +17,17 @@ class HelloOops_Preferences_IndexController extends Zend_Controller_Action {
      * 
      */
     public function indexAction() {
+    	
+    	$config = $this->_helper->configuration();
+    	
+    	$config->baz = 43;
+    	
+    	print_r($config->toArray());
+    	
+    	$this->_helper->configuration($config);
+    	
     	// Render the "index/index" view
+    	
     }
     
     /**

@@ -1,12 +1,18 @@
 <h1>Hello, Oops</h1>
 
-<p>The form below is an example form. </p>
+<p>The form below and its validation rules are built using only PHP code. </p>
 <p>It will be processed with the <a href="http://en.wikipedia.org/wiki/Post/Redirect/Get">Post/Redirect/Get</a> technique if valid.</p> 
 
-
+<hr />
 
 <div>
 	<a class="button" href="<?php echo $this->url(array('action' => 'example')) ?>">SHOW ME A SMARTY VIEW</a> 
+</div>
+
+<hr />
+
+<div>
+	<a class="button" href="<?php echo $this->url(array('controller' => 'configuration')) ?>">SHOW ME ANOTHER CONTROLLER</a> 
 </div>
 
 <hr />
