@@ -51,6 +51,11 @@ abstract class Oops_Db_Propel_ProductSale extends BaseObject  implements Persist
 	protected $date_upd;
 
 	/**
+	 * @var        Product
+	 */
+	protected $aProduct;
+
+	/**
 	 * Flag to prevent endless save loop, if this object is referenced
 	 * by another object which falls in this transaction.
 	 * @var        boolean
@@ -169,6 +174,10 @@ abstract class Oops_Db_Propel_ProductSale extends BaseObject  implements Persist
 		if ($this->id_product !== $v) {
 			$this->id_product = $v;
 			$this->modifiedColumns[] = Oops_Db_ProductSalePeer::ID_PRODUCT;
+		}
+
+		if ($this->aProduct !== null && $this->aProduct->getIdProduct() !== $v) {
+			$this->aProduct = null;
 		}
 
 		return $this;
@@ -311,6 +320,9 @@ abstract class Oops_Db_Propel_ProductSale extends BaseObject  implements Persist
 	public function ensureConsistency()
 	{
 
+		if ($this->aProduct !== null && $this->id_product !== $this->aProduct->getIdProduct()) {
+			$this->aProduct = null;
+		}
 	} // ensureConsistency
 
 	/**
@@ -350,6 +362,7 @@ abstract class Oops_Db_Propel_ProductSale extends BaseObject  implements Persist
 
 		if ($deep) {  // also de-associate any related objects?
 
+			$this->aProduct = null;
 		} // if (deep)
 	}
 
@@ -459,6 +472,18 @@ abstract class Oops_Db_Propel_ProductSale extends BaseObject  implements Persist
 		$affectedRows = 0; // initialize var to track total num of affected rows
 		if (!$this->alreadyInSave) {
 			$this->alreadyInSave = true;
+
+			// We call the save method on the following object(s) if they
+			// were passed to this object by their coresponding set
+			// method.  This object relates to these object(s) by a
+			// foreign key reference.
+
+			if ($this->aProduct !== null) {
+				if ($this->aProduct->isModified() || $this->aProduct->isNew()) {
+					$affectedRows += $this->aProduct->save($con);
+				}
+				$this->setProduct($this->aProduct);
+			}
 
 			if ($this->isNew() || $this->isModified()) {
 				// persist changes
@@ -612,6 +637,18 @@ abstract class Oops_Db_Propel_ProductSale extends BaseObject  implements Persist
 			$failureMap = array();
 
 
+			// We call the validate method on the following object(s) if they
+			// were passed to this object by their coresponding set
+			// method.  This object relates to these object(s) by a
+			// foreign key reference.
+
+			if ($this->aProduct !== null) {
+				if (!$this->aProduct->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aProduct->getValidationFailures());
+				}
+			}
+
+
 			if (($retval = Oops_Db_ProductSalePeer::doValidate($this, $columns)) !== true) {
 				$failureMap = array_merge($failureMap, $retval);
 			}
@@ -679,10 +716,11 @@ abstract class Oops_Db_Propel_ProductSale extends BaseObject  implements Persist
 	 *                    Defaults to BasePeer::TYPE_PHPNAME.
 	 * @param     boolean $includeLazyLoadColumns (optional) Whether to include lazy loaded columns. Defaults to TRUE.
 	 * @param     array $alreadyDumpedObjects List of objects to skip to avoid recursion
+	 * @param     boolean $includeForeignObjects (optional) Whether to include hydrated related objects. Default to FALSE.
 	 *
 	 * @return    array an associative array containing the field names (as keys) and field values
 	 */
-	public function toArray($keyType = BasePeer::TYPE_PHPNAME, $includeLazyLoadColumns = true, $alreadyDumpedObjects = array())
+	public function toArray($keyType = BasePeer::TYPE_PHPNAME, $includeLazyLoadColumns = true, $alreadyDumpedObjects = array(), $includeForeignObjects = false)
 	{
 		if (isset($alreadyDumpedObjects['Oops_Db_ProductSale'][$this->getPrimaryKey()])) {
 			return '*RECURSION*';
@@ -695,6 +733,11 @@ abstract class Oops_Db_Propel_ProductSale extends BaseObject  implements Persist
 			$keys[2] => $this->getSaleNbr(),
 			$keys[3] => $this->getDateUpd(),
 		);
+		if ($includeForeignObjects) {
+			if (null !== $this->aProduct) {
+				$result['Product'] = $this->aProduct->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
+			}
+		}
 		return $result;
 	}
 
@@ -890,6 +933,49 @@ abstract class Oops_Db_Propel_ProductSale extends BaseObject  implements Persist
 	}
 
 	/**
+	 * Declares an association between this object and a Oops_Db_Product object.
+	 *
+	 * @param      Oops_Db_Product $v
+	 * @return     Oops_Db_ProductSale The current object (for fluent API support)
+	 * @throws     PropelException
+	 */
+	public function setProduct(Oops_Db_Product $v = null)
+	{
+		if ($v === null) {
+			$this->setIdProduct(NULL);
+		} else {
+			$this->setIdProduct($v->getIdProduct());
+		}
+
+		$this->aProduct = $v;
+
+		// Add binding for other direction of this 1:1 relationship.
+		if ($v !== null) {
+			$v->setProductSale($this);
+		}
+
+		return $this;
+	}
+
+
+	/**
+	 * Get the associated Oops_Db_Product object
+	 *
+	 * @param      PropelPDO Optional Connection object.
+	 * @return     Oops_Db_Product The associated Oops_Db_Product object.
+	 * @throws     PropelException
+	 */
+	public function getProduct(PropelPDO $con = null)
+	{
+		if ($this->aProduct === null && ($this->id_product !== null)) {
+			$this->aProduct = Oops_Db_ProductQuery::create()->findPk($this->id_product, $con);
+			// Because this foreign key represents a one-to-one relationship, we will create a bi-directional association.
+			$this->aProduct->setProductSale($this);
+		}
+		return $this->aProduct;
+	}
+
+	/**
 	 * Clears the current object and sets all attributes to their default values
 	 */
 	public function clear()
@@ -921,6 +1007,7 @@ abstract class Oops_Db_Propel_ProductSale extends BaseObject  implements Persist
 		if ($deep) {
 		} // if ($deep)
 
+		$this->aProduct = null;
 	}
 
 	/**

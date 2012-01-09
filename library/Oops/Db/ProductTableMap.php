@@ -91,6 +91,7 @@ class Oops_Db_ProductTableMap extends TableMap
 		$this->addRelation('FeatureProduct', 'Oops_Db_FeatureProduct', RelationMap::ONE_TO_MANY, array('id_product' => 'id_product', ), null, null, 'FeatureProducts');
 		$this->addRelation('Image', 'Oops_Db_Image', RelationMap::ONE_TO_MANY, array('id_product' => 'id_product', ), null, null, 'Images');
 		$this->addRelation('ProductLang', 'Oops_Db_ProductLang', RelationMap::ONE_TO_MANY, array('id_product' => 'id_product', ), null, null, 'ProductLangs');
+		$this->addRelation('ProductSale', 'Oops_Db_ProductSale', RelationMap::ONE_TO_ONE, array('id_product' => 'id_product', ), null, null);
 		$this->addRelation('StockMvt', 'Oops_Db_StockMvt', RelationMap::ONE_TO_MANY, array('id_product' => 'id_product', ), null, null, 'StockMvts');
 		$this->addRelation('Supplier', 'Oops_Db_Supplier', RelationMap::ONE_TO_ONE, array('id_supplier' => 'id_supplier', ), null, null);
 		$this->addRelation('Category', 'Oops_Db_Category', RelationMap::MANY_TO_MANY, array(), null, null, 'Categories');

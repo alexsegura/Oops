@@ -315,6 +315,11 @@ abstract class Oops_Db_Propel_Product extends BaseObject  implements Persistent
 	protected $collProductLangs;
 
 	/**
+	 * @var        Oops_Db_ProductSale one-to-one related Oops_Db_ProductSale object
+	 */
+	protected $singleProductSale;
+
+	/**
 	 * @var        array Oops_Db_StockMvt[] Collection to store aggregation of Oops_Db_StockMvt objects.
 	 */
 	protected $collStockMvts;
@@ -397,6 +402,12 @@ abstract class Oops_Db_Propel_Product extends BaseObject  implements Persistent
 	 * @var		array
 	 */
 	protected $productLangsScheduledForDeletion = null;
+
+	/**
+	 * An array of objects scheduled for deletion.
+	 * @var		array
+	 */
+	protected $productSalesScheduledForDeletion = null;
 
 	/**
 	 * An array of objects scheduled for deletion.
@@ -2045,6 +2056,8 @@ abstract class Oops_Db_Propel_Product extends BaseObject  implements Persistent
 
 			$this->collProductLangs = null;
 
+			$this->singleProductSale = null;
+
 			$this->collStockMvts = null;
 
 			$this->singleSupplier = null;
@@ -2285,6 +2298,21 @@ abstract class Oops_Db_Propel_Product extends BaseObject  implements Persistent
 					if (!$referrerFK->isDeleted()) {
 						$affectedRows += $referrerFK->save($con);
 					}
+				}
+			}
+
+			if ($this->productSalesScheduledForDeletion !== null) {
+				if (!$this->productSalesScheduledForDeletion->isEmpty()) {
+					Oops_Db_ProductSaleQuery::create()
+						->filterByPrimaryKeys($this->productSalesScheduledForDeletion->getPrimaryKeys(false))
+						->delete($con);
+					$this->productSalesScheduledForDeletion = null;
+				}
+			}
+
+			if ($this->singleProductSale !== null) {
+				if (!$this->singleProductSale->isDeleted()) {
+						$affectedRows += $this->singleProductSale->save($con);
 				}
 			}
 
@@ -2737,6 +2765,12 @@ abstract class Oops_Db_Propel_Product extends BaseObject  implements Persistent
 					}
 				}
 
+				if ($this->singleProductSale !== null) {
+					if (!$this->singleProductSale->validate($columns)) {
+						$failureMap = array_merge($failureMap, $this->singleProductSale->getValidationFailures());
+					}
+				}
+
 				if ($this->collStockMvts !== null) {
 					foreach ($this->collStockMvts as $referrerFK) {
 						if (!$referrerFK->validate($columns)) {
@@ -2989,6 +3023,9 @@ abstract class Oops_Db_Propel_Product extends BaseObject  implements Persistent
 			}
 			if (null !== $this->collProductLangs) {
 				$result['ProductLangs'] = $this->collProductLangs->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
+			}
+			if (null !== $this->singleProductSale) {
+				$result['ProductSale'] = $this->singleProductSale->toArray($keyType, $includeLazyLoadColumns, $alreadyDumpedObjects, true);
 			}
 			if (null !== $this->collStockMvts) {
 				$result['StockMvts'] = $this->collStockMvts->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
@@ -3391,6 +3428,11 @@ abstract class Oops_Db_Propel_Product extends BaseObject  implements Persistent
 				if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
 					$copyObj->addProductLang($relObj->copy($deepCopy));
 				}
+			}
+
+			$relObj = $this->getProductSale();
+			if ($relObj) {
+				$copyObj->setProductSale($relObj->copy($deepCopy));
 			}
 
 			foreach ($this->getStockMvts() as $relObj) {
@@ -4195,6 +4237,42 @@ abstract class Oops_Db_Propel_Product extends BaseObject  implements Persistent
 	}
 
 	/**
+	 * Gets a single Oops_Db_ProductSale object, which is related to this object by a one-to-one relationship.
+	 *
+	 * @param      PropelPDO $con optional connection object
+	 * @return     Oops_Db_ProductSale
+	 * @throws     PropelException
+	 */
+	public function getProductSale(PropelPDO $con = null)
+	{
+
+		if ($this->singleProductSale === null && !$this->isNew()) {
+			$this->singleProductSale = Oops_Db_ProductSaleQuery::create()->findPk($this->getPrimaryKey(), $con);
+		}
+
+		return $this->singleProductSale;
+	}
+
+	/**
+	 * Sets a single Oops_Db_ProductSale object as related to this object by a one-to-one relationship.
+	 *
+	 * @param      Oops_Db_ProductSale $v Oops_Db_ProductSale
+	 * @return     Oops_Db_Product The current object (for fluent API support)
+	 * @throws     PropelException
+	 */
+	public function setProductSale(Oops_Db_ProductSale $v = null)
+	{
+		$this->singleProductSale = $v;
+
+		// Make sure that that the passed-in Oops_Db_ProductSale isn't already associated with this object
+		if ($v !== null && $v->getProduct() === null) {
+			$v->setProduct($this);
+		}
+
+		return $this;
+	}
+
+	/**
 	 * Clears out the collStockMvts collection
 	 *
 	 * This does not modify the database; however, it will remove any associated objects, causing
@@ -4768,6 +4846,9 @@ abstract class Oops_Db_Propel_Product extends BaseObject  implements Persistent
 					$o->clearAllReferences($deep);
 				}
 			}
+			if ($this->singleProductSale) {
+				$this->singleProductSale->clearAllReferences($deep);
+			}
 			if ($this->collStockMvts) {
 				foreach ($this->collStockMvts as $o) {
 					$o->clearAllReferences($deep);
@@ -4807,6 +4888,10 @@ abstract class Oops_Db_Propel_Product extends BaseObject  implements Persistent
 			$this->collProductLangs->clearIterator();
 		}
 		$this->collProductLangs = null;
+		if ($this->singleProductSale instanceof PropelCollection) {
+			$this->singleProductSale->clearIterator();
+		}
+		$this->singleProductSale = null;
 		if ($this->collStockMvts instanceof PropelCollection) {
 			$this->collStockMvts->clearIterator();
 		}

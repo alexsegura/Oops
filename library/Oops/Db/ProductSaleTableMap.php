@@ -38,7 +38,7 @@ class Oops_Db_ProductSaleTableMap extends TableMap
 		$this->setPackage('prestashop');
 		$this->setUseIdGenerator(false);
 		// columns
-		$this->addPrimaryKey('ID_PRODUCT', 'IdProduct', 'INTEGER', true, 10, null);
+		$this->addForeignPrimaryKey('ID_PRODUCT', 'IdProduct', 'INTEGER' , 'product', 'ID_PRODUCT', true, 10, null);
 		$this->addColumn('QUANTITY', 'Quantity', 'INTEGER', true, 10, 0);
 		$this->addColumn('SALE_NBR', 'SaleNbr', 'INTEGER', true, 10, 0);
 		$this->addColumn('DATE_UPD', 'DateUpd', 'DATE', true, null, null);
@@ -50,6 +50,7 @@ class Oops_Db_ProductSaleTableMap extends TableMap
 	 */
 	public function buildRelations()
 	{
+		$this->addRelation('Product', 'Oops_Db_Product', RelationMap::MANY_TO_ONE, array('id_product' => 'id_product', ), null, null);
 	} // buildRelations()
 
 } // Oops_Db_ProductSaleTableMap
