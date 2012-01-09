@@ -63,11 +63,17 @@ class HelloOops_Preferences_ConfigurationController extends Zend_Controller_Acti
     public function confirmAction() {
     	
     	$this->view->message = 'Configuration saved successfully';
+    	$this->view->foo = 'bar';
     	
     	// TODO 
     	// Override Zend_Controller_Action_Helper_ViewResolver
     	// $this->render('index') does not work
-    	return $this->_forward('index');
+    	// return $this->_forward('test');
+    	$this->render('foo');
+    	$this->view->foo = 'yooo';
+    	$this->render('test');
+    	// throw new Exception("Aiie");
+    	
     	
     }
 	
