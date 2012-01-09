@@ -21,17 +21,22 @@ class Oops_Controller_Action_Helper_Configuration extends Zend_Controller_Action
 			// Retrieve default config from application resources
 			$config = $this->getActionController()->getInvokeArg('bootstrap')->getResource('configuration');
 			
-			// Overwrite default config with db values
-			foreach ($config as $key => $value) {
-				$dbValue = ConfigurationCore :: get(strtoupper($key));
-				if ($dbValue) {
-					$config->{$key} = $dbValue;
-				}
-			}
+			// Config may have been initialized previously 
+			if (!$config->readOnly()) {
 			
-			// Hooks can't modify the config
-			if ('hooks' == $this->getActionController()->getRequest()->getModuleName()) {
-				$config->setReadOnly();
+				// Overwrite default config with db values
+				foreach ($config as $key => $value) {
+					$dbValue = ConfigurationCore :: get(strtoupper($key));
+					if ($dbValue) {
+						$config->{$key} = $dbValue;
+					}
+				}
+				
+				// Hooks can't modify the config
+				if ('hooks' == $this->getActionController()->getRequest()->getModuleName()) {
+					$config->setReadOnly();
+				}
+				
 			}
 			
 			return $config;

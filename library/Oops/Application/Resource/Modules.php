@@ -17,7 +17,7 @@ class Oops_Application_Resource_Modules extends Zend_Application_Resource_Module
         foreach ($modules as $module => $moduleDirectory) {
         	
         	// Add the default module bootstraps if not found
-    		if (!isset($bootstraps[$module])) {
+    		if (!isset($bootstraps[$module]) && $module != 'default') {
     			
     			// TODO Make sure the string STARTS WITH tab- !
     			if (false !== strpos($module, 'tab-')) {

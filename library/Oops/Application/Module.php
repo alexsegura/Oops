@@ -2,8 +2,11 @@
 
 class Oops_Application_Module extends ModuleCore {
 	
-	protected $application;
+	private $application;
 	protected $request;
+	private $log;
+	
+	private $config;
 	
 	public function __construct($name = NULL) {
 		
@@ -26,13 +29,15 @@ class Oops_Application_Module extends ModuleCore {
 		// @see Zend_Application_Bootstrap_Bootstrap :: getResourceLoader()
 		$config->resourceloader = new Zend_Application_Module_Autoloader(array(
         	'namespace' 	=> $this->getNamespace(),
-        	'basePath'  	=> $this->getApplicationPath(), 
+        	'basePath'  	=> $this->getApplicationPath()
+			/*
 			'resourceTypes'	=> array(
 				'tab' => array(
 	                'namespace' => 'Tab',
 	                'path'      => 'tabs',
 	            ),
 			)
+			*/
         ));
         
 		
@@ -47,6 +52,8 @@ class Oops_Application_Module extends ModuleCore {
 		// TODO Make sure mandatory default configuration is NOT overwritten
 		$config->merge($moduleConfig);
 		
+		$this->config = $config;
+		
 		// Create a Zend_Application with no environment, 
 		// as the $config is already loaded base on environment. 
 		$this->application = new Zend_Application(
@@ -56,6 +63,7 @@ class Oops_Application_Module extends ModuleCore {
 		
 		$this->application->bootstrap();
 		
+		$this->log = $this->application->getBootstrap()->getResource('log');
 		
 		$this->request = $this->application->getBootstrap()->getContainer()->get('request');
 		
@@ -84,9 +92,7 @@ class Oops_Application_Module extends ModuleCore {
 	}
 	
 	private function getApplicationEnv() {
-		$constant = 'MODULE_' . strtoupper($this->name) . '_ENV';
-		defined($constant) || define($constant, (getenv('OOPS_ENV') ? getenv('OOPS_ENV') : 'development'));
-		return constant($constant);
+		return 'development';
 	}
 	
 	public function install() {
@@ -109,10 +115,19 @@ class Oops_Application_Module extends ModuleCore {
 	
 	public function getContent() {
 		
+		// Catch them all !
 		try {
+			
 			$this->request->setModuleName('preferences');
 			$response = $this->application->getBootstrap()->run();
+			
+			if ($response->isException()) {
+				$exceptions = $response->getException();
+				throw $exceptions[0];
+			}
+			
 			return (string) $response;
+			
 		} catch (Exception $e) {
 			return (string) $e;
 		}
@@ -121,23 +136,52 @@ class Oops_Application_Module extends ModuleCore {
 	
 	private function hook($hookName) {
 		
+		// Catch them all !
 		try {
 			
+			$front 	= $this
+					->application
+					->getBootstrap()
+					->bootstrap('frontController')
+					->getResource('frontController');
+			
+			// Make sure the module directories are always the good ones
+			// Zend_Controller_Front is a singleton, so module names may collide
+			// if the same module has several hooks
+			// FIXME 
+			// Maybe we need a custom FrontController, 
+			// or at least namespace aware
+			$controllerDirectory = $front->getControllerDirectory();
+			$modules = array_keys($controllerDirectory);
+			foreach ($modules as $moduleName) {
+				if ($moduleName != 'default') {
+					$front->removeControllerDirectory($moduleName);
+				}
+			}
+			$front->addModuleDirectory($this->config->resources->frontController->moduleDirectory);
+			
+			// Modify the request that will be processed
 			$this->request->setModuleName('hooks');
 			$this->request->setControllerName('index');
 			$this->request->setActionName($hookName);
 			
-			$response = $this->application->getBootstrap()->run();
+			$front->setRequest($this->request);
 			
-			// TODO Better error management ! 
-			if ($response->isException()) {
-				var_dump($response);
-			}
+			$this->log->info("hookName : $hookName");
+			
+			$response = $this->application->getBootstrap()->run();
 			
 			$namespace = 
         		$this->application->getBootstrap()->getOption('appnamespace');
+        	
+        	$hookBody = $response->getBody($namespace . '-' . $hookName);
+        	
+			if (null == $hookBody && $response->isException()) {
+				$exceptions = $response->getException();
+				throw array_pop($exceptions);
+			}
 			
-			return $response->getBody($namespace . '-' . $hookName);
+			return $hookBody;
 			
 		} catch (Exception $e) {
 			return (string) $e;

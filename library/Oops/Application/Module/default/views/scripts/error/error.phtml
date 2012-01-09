@@ -1,0 +1,22 @@
+<div class="block">
+
+<h4>An error occurred</h4>
+  
+	<p><strong><?php echo $this->message ?></strong></p>
+	
+	<?php if (isset($this->exception)): ?>
+	  
+	  	<p><strong>Exception information:</strong></p>
+	  	<p>
+	      	<b>Message:</b> <?php echo $this->exception->getMessage() ?>
+	  	</p>
+	
+	  	<strong>Stack trace:</strong>
+	  	<pre><?php echo $this->exception->getTraceAsString() ?></pre>
+	
+	  	<strong>Request Parameters:</strong>
+	  	<pre><?php echo $this->escape(var_export($this->request->getParams(), true)) ?></pre>
+	
+	<?php endif ?>
+
+</div>

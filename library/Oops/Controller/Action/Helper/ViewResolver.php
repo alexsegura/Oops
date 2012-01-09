@@ -1,7 +1,10 @@
 <?php
 
 /**
- * Action Helper that enables Smarty views rendering. 
+ * Action Helper that enables Smarty views rendering.
+ * FIXME
+ * Does not work with Zend_Controller_Action :: render, as it calls
+ * directly the ViewRenderer. To replace by a custom ViewRenderer class.  
  * @author Alexandre Segura <mex.zktk@gmail.com>
  */
 class Oops_Controller_Action_Helper_ViewResolver extends Zend_Controller_Action_Helper_Abstract {
@@ -11,6 +14,8 @@ class Oops_Controller_Action_Helper_ViewResolver extends Zend_Controller_Action_
 	 * change the view that will be rendered, if needed. 
 	 */
     public function preDispatch() {
+    	
+    	return;
     	
         $viewRenderer = Zend_Controller_Action_HelperBroker :: getStaticHelper('viewRenderer');
         
@@ -40,7 +45,7 @@ class Oops_Controller_Action_Helper_ViewResolver extends Zend_Controller_Action_
         	// Views should be placed in subfolders for each controller
         	$appnamespace = 
         		$this->getActionController()->getInvokeArg('bootstrap')->getOption('appnamespace');
-        	$view->addScriptPath(_PS_THEME_DIR_ . 'modules/' . strtolower($appnamespace));
+        	// $view->addScriptPath(_PS_THEME_DIR_ . 'modules/' . strtolower($appnamespace));
         	
         	// Try to resolve a view based on current suffix
 	        $viewRenderer->setViewSuffix($suffix);
@@ -80,6 +85,14 @@ class Oops_Controller_Action_Helper_ViewResolver extends Zend_Controller_Action_
         	$this->getActionController()->getInvokeArg('bootstrap')->getOption('appnamespace');
         	
     	$request = $this->getActionController()->getRequest();
+    	
+    	if ($error = $request->getParam('error_handler')) {
+    		$errorRequest = $error->request;
+	    	if ($errorRequest->getModuleName() == 'hooks') {
+				$viewRenderer->setResponseSegment($namespace . '-' . $errorRequest->getActionName());
+			}
+    	}
+    	
 		if ($request->getModuleName() == 'hooks') {
 			$viewRenderer->setResponseSegment($namespace . '-' . $request->getActionName());
 		}

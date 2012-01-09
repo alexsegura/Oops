@@ -78,4 +78,8 @@ abstract class Oops_Application_Tab extends AdminTabCore {
 		
 	}
 	
+	public function displayAjax() {
+		echo "okk";
+	}
+	
 }
