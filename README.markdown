@@ -23,9 +23,12 @@ Oops is a developer tool for PrestaShop 1.4.x
 Download & extract the latest Oops all-in-one package from GitHub : https://github.com/alexsegura/Oops/downloads
 
 The archive contains 3 folders : 
+
+<pre>
 |-- modules/  => contains an example module written with Oops
 |-- override/ => contains an override of the ConfigurationCore class, needed by Oops to register its own autoload. 
 |-- tools/    => contains framework & dependencies. 
+</pre>
 
 Just copy the contents of each folder in the corresponding folder of PrestaShop !
 
