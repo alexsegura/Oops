@@ -2,6 +2,8 @@
 
 class Oops_Application_Resource_Modules extends Zend_Application_Resource_Modules {
 	
+	private static $namespaces = array();
+	
 	/**
 	 * Called by parent :: init() to instanciate classes listed in $bootstraps. 
 	 * Adds a default module bootstrap if not defined. 
@@ -9,21 +11,33 @@ class Oops_Application_Resource_Modules extends Zend_Application_Resource_Module
 	 */
     protected function bootstrapBootstraps($bootstraps) {
     	
-    	$bootstrap = $this->getBootstrap();
+    	$bootstrap 	= $this->getBootstrap();
+    	
+    	$namespace 	= $bootstrap->getOption('appnamespace');
+    	
         $bootstrap->bootstrap('FrontController');
         $front = $bootstrap->getResource('FrontController');
         
     	$modules = $front->getControllerDirectory();
+    	
+    	self :: $namespaces[strtolower($namespace)] = $namespace;
+    	
         foreach ($modules as $module => $moduleDirectory) {
         	
+        	// Check the current ps module is being bootstapped
+        	// or the namespace won't match 
+        	$isCurrentModule = (false !== strpos(strtolower($module), strtolower($namespace)));
+        	
         	// Add the default module bootstraps if not found
-    		if (!isset($bootstraps[$module]) && $module != 'default') {
+    		if ($isCurrentModule && $module != 'default' && !isset($bootstraps[$module])) {
     			
+    			$shortModuleName = str_replace(strtolower($namespace) ."-", '', $module);
+    		
     			// TODO Make sure the string STARTS WITH tab- !
-    			if (false !== strpos($module, 'tab-')) {
+    			if (false !== strpos($shortModuleName, 'tab-')) {
     				$className = 'Tab';
     			} else {
-	    			$pieces = explode('-', $module);
+	    			$pieces = explode('-', $shortModuleName);
 	    			foreach ($pieces as $key => $piece) {
 	    				$pieces[$key] = ucfirst($piece);
 	    			}
@@ -39,7 +53,6 @@ class Oops_Application_Resource_Modules extends Zend_Application_Resource_Module
     	$result = parent :: bootstrapBootstraps($bootstraps);
     	
     	foreach ($result as $module => $bootstrapObj) {
-            $moduleName = $this->_formatModuleName($module);
             $bootstrapObj->setModuleDirectory($module);
             $result[$module] = $bootstrapObj;
         }
@@ -56,12 +69,26 @@ class Oops_Application_Resource_Modules extends Zend_Application_Resource_Module
      */
 	protected function _formatModuleName($name) {
 		
-    	$bootstrap 	= $this->getBootstrap();
+		$bootstrap 	= $this->getBootstrap();
     	$ns 		= $bootstrap->getOption('appnamespace');
     	
-        $moduleName = parent :: _formatModuleName($name);
-        
-        return "${ns}_${moduleName}";
+		if ($name != 'default') {
+
+			$lowerCaseNs 	= substr($name, 0, strpos($name, '-'));
+			$moduleName 	= substr($name, strpos($name, '-') + 1);
+			
+			$formattedModuleName 	= parent :: _formatModuleName($moduleName);
+			
+			if (isset(self :: $namespaces[strtolower($lowerCaseNs)])) {
+				$namespace = self :: $namespaces[$lowerCaseNs];
+				return "${namespace}_${formattedModuleName}";
+			} else {
+				return "${ns}_${formattedModuleName}";
+			}
+			
+		}
+		
+        return "${ns}_" . parent :: _formatModuleName($name);
         
     }
 }
