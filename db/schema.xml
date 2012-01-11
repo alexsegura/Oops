@@ -1373,6 +1373,15 @@
       	<index-column name="date_add"/>
     </index>
     
+    <foreign-key foreignTable="manufacturer">
+    	<reference local="id_manufacturer" foreign="id_manufacturer"/>
+  	</foreign-key>
+  	<!--
+  	<foreign-key foreignTable="product_sale">
+    	<reference local="id_product" foreign="id_product"/>
+  	</foreign-key>
+    -->
+    
     <behavior name="i18n">
     	<parameter name="i18n_columns" value="name,description,description_short,link_rewrite" />
     	<parameter name="locale_column" value="id_lang" />
@@ -1382,9 +1391,15 @@
   	</behavior>
   	
   </table>
-  <table name="product_attachment" phpName="ProductAttachment" idMethod="native">
+  <table name="product_attachment" phpName="ProductAttachment" isCrossRef="true">
     <column name="id_product" phpName="IdProduct" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true" required="true"/>
     <column name="id_attachment" phpName="IdAttachment" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true" required="true"/>
+    <foreign-key foreignTable="product">
+    	<reference local="id_product" foreign="id_product"/>
+  	</foreign-key>
+  	<foreign-key foreignTable="attachment">
+    	<reference local="id_attachment" foreign="id_attachment"/>
+  	</foreign-key>
   </table>
   <table name="product_attribute" phpName="ProductAttribute" idMethod="native">
     <column name="id_product_attribute" phpName="IdProductAttribute" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true" autoIncrement="true" required="true"/>
@@ -1492,11 +1507,14 @@
     	<reference local="id_lang" foreign="id_lang"/>
   	</foreign-key>
   </table>
-  <table name="product_sale" phpName="ProductSale" idMethod="native">
+  <table name="product_sale" phpName="ProductSale" idMethod="native" >
     <column name="id_product" phpName="IdProduct" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true" required="true"/>
     <column name="quantity" phpName="Quantity" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true" defaultValue="0"/>
     <column name="sale_nbr" phpName="SaleNbr" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true" defaultValue="0"/>
     <column name="date_upd" phpName="DateUpd" type="DATE" required="true"/>
+    <foreign-key foreignTable="product">
+    	<reference local="id_product" foreign="id_product"/>
+  	</foreign-key>
   </table>
   <table name="product_tag" phpName="ProductTag" idMethod="native">
     <column name="id_product" phpName="IdProduct" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true" required="true"/>
