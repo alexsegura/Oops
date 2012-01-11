@@ -38,8 +38,8 @@ class Oops_Db_ProductAttachmentTableMap extends TableMap
 		$this->setPackage('prestashop');
 		$this->setUseIdGenerator(false);
 		// columns
-		$this->addPrimaryKey('ID_PRODUCT', 'IdProduct', 'INTEGER', true, 10, null);
-		$this->addPrimaryKey('ID_ATTACHMENT', 'IdAttachment', 'INTEGER', true, 10, null);
+		$this->addForeignPrimaryKey('ID_PRODUCT', 'IdProduct', 'INTEGER' , 'product', 'ID_PRODUCT', true, 10, null);
+		$this->addForeignPrimaryKey('ID_ATTACHMENT', 'IdAttachment', 'INTEGER' , 'attachment', 'ID_ATTACHMENT', true, 10, null);
 		// validators
 	} // initialize()
 
@@ -48,6 +48,8 @@ class Oops_Db_ProductAttachmentTableMap extends TableMap
 	 */
 	public function buildRelations()
 	{
+		$this->addRelation('Product', 'Oops_Db_Product', RelationMap::MANY_TO_ONE, array('id_product' => 'id_product', ), null, null);
+		$this->addRelation('Attachment', 'Oops_Db_Attachment', RelationMap::MANY_TO_ONE, array('id_attachment' => 'id_attachment', ), null, null);
 	} // buildRelations()
 
 } // Oops_Db_ProductAttachmentTableMap

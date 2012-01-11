@@ -50,6 +50,8 @@ class Oops_Db_AttachmentTableMap extends TableMap
 	 */
 	public function buildRelations()
 	{
+		$this->addRelation('ProductAttachment', 'Oops_Db_ProductAttachment', RelationMap::ONE_TO_MANY, array('id_attachment' => 'id_attachment', ), null, null, 'ProductAttachments');
+		$this->addRelation('Product', 'Oops_Db_Product', RelationMap::MANY_TO_MANY, array(), null, null, 'Products');
 	} // buildRelations()
 
 } // Oops_Db_AttachmentTableMap

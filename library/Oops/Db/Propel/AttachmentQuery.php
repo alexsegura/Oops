@@ -20,6 +20,10 @@
  * @method     Oops_Db_AttachmentQuery rightJoin($relation) Adds a RIGHT JOIN clause to the query
  * @method     Oops_Db_AttachmentQuery innerJoin($relation) Adds a INNER JOIN clause to the query
  *
+ * @method     Oops_Db_AttachmentQuery leftJoinProductAttachment($relationAlias = null) Adds a LEFT JOIN clause to the query using the ProductAttachment relation
+ * @method     Oops_Db_AttachmentQuery rightJoinProductAttachment($relationAlias = null) Adds a RIGHT JOIN clause to the query using the ProductAttachment relation
+ * @method     Oops_Db_AttachmentQuery innerJoinProductAttachment($relationAlias = null) Adds a INNER JOIN clause to the query using the ProductAttachment relation
+ *
  * @method     Oops_Db_Attachment findOne(PropelPDO $con = null) Return the first Oops_Db_Attachment matching the query
  * @method     Oops_Db_Attachment findOneOrCreate(PropelPDO $con = null) Return the first Oops_Db_Attachment matching the query, or a new Oops_Db_Attachment object populated from the query conditions when no match is found
  *
@@ -313,6 +317,96 @@ abstract class Oops_Db_Propel_AttachmentQuery extends ModelCriteria
 			}
 		}
 		return $this->addUsingAlias(Oops_Db_AttachmentPeer::MIME, $mime, $comparison);
+	}
+
+	/**
+	 * Filter the query by a related Oops_Db_ProductAttachment object
+	 *
+	 * @param     Oops_Db_ProductAttachment $productAttachment  the related object to use as filter
+	 * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+	 *
+	 * @return    Oops_Db_AttachmentQuery The current query, for fluid interface
+	 */
+	public function filterByProductAttachment($productAttachment, $comparison = null)
+	{
+		if ($productAttachment instanceof Oops_Db_ProductAttachment) {
+			return $this
+				->addUsingAlias(Oops_Db_AttachmentPeer::ID_ATTACHMENT, $productAttachment->getIdAttachment(), $comparison);
+		} elseif ($productAttachment instanceof PropelCollection) {
+			return $this
+				->useProductAttachmentQuery()
+				->filterByPrimaryKeys($productAttachment->getPrimaryKeys())
+				->endUse();
+		} else {
+			throw new PropelException('filterByProductAttachment() only accepts arguments of type Oops_Db_ProductAttachment or PropelCollection');
+		}
+	}
+
+	/**
+	 * Adds a JOIN clause to the query using the ProductAttachment relation
+	 *
+	 * @param     string $relationAlias optional alias for the relation
+	 * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+	 *
+	 * @return    Oops_Db_AttachmentQuery The current query, for fluid interface
+	 */
+	public function joinProductAttachment($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+	{
+		$tableMap = $this->getTableMap();
+		$relationMap = $tableMap->getRelation('ProductAttachment');
+
+		// create a ModelJoin object for this join
+		$join = new ModelJoin();
+		$join->setJoinType($joinType);
+		$join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
+		if ($previousJoin = $this->getPreviousJoin()) {
+			$join->setPreviousJoin($previousJoin);
+		}
+
+		// add the ModelJoin to the current object
+		if($relationAlias) {
+			$this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
+			$this->addJoinObject($join, $relationAlias);
+		} else {
+			$this->addJoinObject($join, 'ProductAttachment');
+		}
+
+		return $this;
+	}
+
+	/**
+	 * Use the ProductAttachment relation ProductAttachment object
+	 *
+	 * @see       useQuery()
+	 *
+	 * @param     string $relationAlias optional alias for the relation,
+	 *                                   to be used as main alias in the secondary query
+	 * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+	 *
+	 * @return    Oops_Db_ProductAttachmentQuery A secondary query class using the current class as primary query
+	 */
+	public function useProductAttachmentQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+	{
+		return $this
+			->joinProductAttachment($relationAlias, $joinType)
+			->useQuery($relationAlias ? $relationAlias : 'ProductAttachment', 'Oops_Db_ProductAttachmentQuery');
+	}
+
+	/**
+	 * Filter the query by a related Product object
+	 * using the product_attachment table as cross reference
+	 *
+	 * @param     Product $product the related object to use as filter
+	 * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+	 *
+	 * @return    Oops_Db_AttachmentQuery The current query, for fluid interface
+	 */
+	public function filterByProduct($product, $comparison = Criteria::EQUAL)
+	{
+		return $this
+			->useProductAttachmentQuery()
+			->filterByProduct($product, $comparison)
+			->endUse();
 	}
 
 	/**

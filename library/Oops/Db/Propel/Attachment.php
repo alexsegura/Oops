@@ -49,6 +49,16 @@ abstract class Oops_Db_Propel_Attachment extends BaseObject  implements Persiste
 	protected $mime;
 
 	/**
+	 * @var        array Oops_Db_ProductAttachment[] Collection to store aggregation of Oops_Db_ProductAttachment objects.
+	 */
+	protected $collProductAttachments;
+
+	/**
+	 * @var        array Oops_Db_Product[] Collection to store aggregation of Oops_Db_Product objects.
+	 */
+	protected $collProducts;
+
+	/**
 	 * Flag to prevent endless save loop, if this object is referenced
 	 * by another object which falls in this transaction.
 	 * @var        boolean
@@ -61,6 +71,18 @@ abstract class Oops_Db_Propel_Attachment extends BaseObject  implements Persiste
 	 * @var        boolean
 	 */
 	protected $alreadyInValidation = false;
+
+	/**
+	 * An array of objects scheduled for deletion.
+	 * @var		array
+	 */
+	protected $productsScheduledForDeletion = null;
+
+	/**
+	 * An array of objects scheduled for deletion.
+	 * @var		array
+	 */
+	protected $productAttachmentsScheduledForDeletion = null;
 
 	/**
 	 * Get the [id_attachment] column value.
@@ -288,6 +310,9 @@ abstract class Oops_Db_Propel_Attachment extends BaseObject  implements Persiste
 
 		if ($deep) {  // also de-associate any related objects?
 
+			$this->collProductAttachments = null;
+
+			$this->collProducts = null;
 		} // if (deep)
 	}
 
@@ -407,6 +432,38 @@ abstract class Oops_Db_Propel_Attachment extends BaseObject  implements Persiste
 				}
 				$affectedRows += 1;
 				$this->resetModified();
+			}
+
+			if ($this->productsScheduledForDeletion !== null) {
+				if (!$this->productsScheduledForDeletion->isEmpty()) {
+					ProductAttachmentQuery::create()
+						->filterByPrimaryKeys($this->productsScheduledForDeletion->getPrimaryKeys(false))
+						->delete($con);
+					$this->productsScheduledForDeletion = null;
+				}
+
+				foreach ($this->getProducts() as $product) {
+					if ($product->isModified()) {
+						$product->save($con);
+					}
+				}
+			}
+
+			if ($this->productAttachmentsScheduledForDeletion !== null) {
+				if (!$this->productAttachmentsScheduledForDeletion->isEmpty()) {
+					Oops_Db_ProductAttachmentQuery::create()
+						->filterByPrimaryKeys($this->productAttachmentsScheduledForDeletion->getPrimaryKeys(false))
+						->delete($con);
+					$this->productAttachmentsScheduledForDeletion = null;
+				}
+			}
+
+			if ($this->collProductAttachments !== null) {
+				foreach ($this->collProductAttachments as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
 			}
 
 			$this->alreadyInSave = false;
@@ -566,6 +623,14 @@ abstract class Oops_Db_Propel_Attachment extends BaseObject  implements Persiste
 			}
 
 
+				if ($this->collProductAttachments !== null) {
+					foreach ($this->collProductAttachments as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
+
 
 			$this->alreadyInValidation = false;
 		}
@@ -628,10 +693,11 @@ abstract class Oops_Db_Propel_Attachment extends BaseObject  implements Persiste
 	 *                    Defaults to BasePeer::TYPE_PHPNAME.
 	 * @param     boolean $includeLazyLoadColumns (optional) Whether to include lazy loaded columns. Defaults to TRUE.
 	 * @param     array $alreadyDumpedObjects List of objects to skip to avoid recursion
+	 * @param     boolean $includeForeignObjects (optional) Whether to include hydrated related objects. Default to FALSE.
 	 *
 	 * @return    array an associative array containing the field names (as keys) and field values
 	 */
-	public function toArray($keyType = BasePeer::TYPE_PHPNAME, $includeLazyLoadColumns = true, $alreadyDumpedObjects = array())
+	public function toArray($keyType = BasePeer::TYPE_PHPNAME, $includeLazyLoadColumns = true, $alreadyDumpedObjects = array(), $includeForeignObjects = false)
 	{
 		if (isset($alreadyDumpedObjects['Oops_Db_Attachment'][$this->getPrimaryKey()])) {
 			return '*RECURSION*';
@@ -644,6 +710,11 @@ abstract class Oops_Db_Propel_Attachment extends BaseObject  implements Persiste
 			$keys[2] => $this->getFileName(),
 			$keys[3] => $this->getMime(),
 		);
+		if ($includeForeignObjects) {
+			if (null !== $this->collProductAttachments) {
+				$result['ProductAttachments'] = $this->collProductAttachments->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
+			}
+		}
 		return $result;
 	}
 
@@ -794,6 +865,20 @@ abstract class Oops_Db_Propel_Attachment extends BaseObject  implements Persiste
 		$copyObj->setFile($this->getFile());
 		$copyObj->setFileName($this->getFileName());
 		$copyObj->setMime($this->getMime());
+
+		if ($deepCopy) {
+			// important: temporarily setNew(false) because this affects the behavior of
+			// the getter/setter methods for fkey referrer objects.
+			$copyObj->setNew(false);
+
+			foreach ($this->getProductAttachments() as $relObj) {
+				if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
+					$copyObj->addProductAttachment($relObj->copy($deepCopy));
+				}
+			}
+
+		} // if ($deepCopy)
+
 		if ($makeNew) {
 			$copyObj->setNew(true);
 			$copyObj->setIdAttachment(NULL); // this is a auto-increment column, so set to default value
@@ -838,6 +923,347 @@ abstract class Oops_Db_Propel_Attachment extends BaseObject  implements Persiste
 		return self::$peer;
 	}
 
+
+	/**
+	 * Initializes a collection based on the name of a relation.
+	 * Avoids crafting an 'init[$relationName]s' method name
+	 * that wouldn't work when StandardEnglishPluralizer is used.
+	 *
+	 * @param      string $relationName The name of the relation to initialize
+	 * @return     void
+	 */
+	public function initRelation($relationName)
+	{
+		if ('ProductAttachment' == $relationName) {
+			return $this->initProductAttachments();
+		}
+	}
+
+	/**
+	 * Clears out the collProductAttachments collection
+	 *
+	 * This does not modify the database; however, it will remove any associated objects, causing
+	 * them to be refetched by subsequent calls to accessor method.
+	 *
+	 * @return     void
+	 * @see        addProductAttachments()
+	 */
+	public function clearProductAttachments()
+	{
+		$this->collProductAttachments = null; // important to set this to NULL since that means it is uninitialized
+	}
+
+	/**
+	 * Initializes the collProductAttachments collection.
+	 *
+	 * By default this just sets the collProductAttachments collection to an empty array (like clearcollProductAttachments());
+	 * however, you may wish to override this method in your stub class to provide setting appropriate
+	 * to your application -- for example, setting the initial array to the values stored in database.
+	 *
+	 * @param      boolean $overrideExisting If set to true, the method call initializes
+	 *                                        the collection even if it is not empty
+	 *
+	 * @return     void
+	 */
+	public function initProductAttachments($overrideExisting = true)
+	{
+		if (null !== $this->collProductAttachments && !$overrideExisting) {
+			return;
+		}
+		$this->collProductAttachments = new PropelObjectCollection();
+		$this->collProductAttachments->setModel('Oops_Db_ProductAttachment');
+	}
+
+	/**
+	 * Gets an array of Oops_Db_ProductAttachment objects which contain a foreign key that references this object.
+	 *
+	 * If the $criteria is not null, it is used to always fetch the results from the database.
+	 * Otherwise the results are fetched from the database the first time, then cached.
+	 * Next time the same method is called without $criteria, the cached collection is returned.
+	 * If this Oops_Db_Attachment is new, it will return
+	 * an empty collection or the current collection; the criteria is ignored on a new object.
+	 *
+	 * @param      Criteria $criteria optional Criteria object to narrow the query
+	 * @param      PropelPDO $con optional connection object
+	 * @return     PropelCollection|array Oops_Db_ProductAttachment[] List of Oops_Db_ProductAttachment objects
+	 * @throws     PropelException
+	 */
+	public function getProductAttachments($criteria = null, PropelPDO $con = null)
+	{
+		if(null === $this->collProductAttachments || null !== $criteria) {
+			if ($this->isNew() && null === $this->collProductAttachments) {
+				// return empty collection
+				$this->initProductAttachments();
+			} else {
+				$collProductAttachments = Oops_Db_ProductAttachmentQuery::create(null, $criteria)
+					->filterByAttachment($this)
+					->find($con);
+				if (null !== $criteria) {
+					return $collProductAttachments;
+				}
+				$this->collProductAttachments = $collProductAttachments;
+			}
+		}
+		return $this->collProductAttachments;
+	}
+
+	/**
+	 * Sets a collection of ProductAttachment objects related by a one-to-many relationship
+	 * to the current object.
+	 * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
+	 * and new objects from the given Propel collection.
+	 *
+	 * @param      PropelCollection $productAttachments A Propel collection.
+	 * @param      PropelPDO $con Optional connection object
+	 */
+	public function setProductAttachments(PropelCollection $productAttachments, PropelPDO $con = null)
+	{
+		$this->productAttachmentsScheduledForDeletion = $this->getProductAttachments(new Criteria(), $con)->diff($productAttachments);
+
+		foreach ($productAttachments as $productAttachment) {
+			// Fix issue with collection modified by reference
+			if ($productAttachment->isNew()) {
+				$productAttachment->setAttachment($this);
+			}
+			$this->addProductAttachment($productAttachment);
+		}
+
+		$this->collProductAttachments = $productAttachments;
+	}
+
+	/**
+	 * Returns the number of related Oops_Db_ProductAttachment objects.
+	 *
+	 * @param      Criteria $criteria
+	 * @param      boolean $distinct
+	 * @param      PropelPDO $con
+	 * @return     int Count of related Oops_Db_ProductAttachment objects.
+	 * @throws     PropelException
+	 */
+	public function countProductAttachments(Criteria $criteria = null, $distinct = false, PropelPDO $con = null)
+	{
+		if(null === $this->collProductAttachments || null !== $criteria) {
+			if ($this->isNew() && null === $this->collProductAttachments) {
+				return 0;
+			} else {
+				$query = Oops_Db_ProductAttachmentQuery::create(null, $criteria);
+				if($distinct) {
+					$query->distinct();
+				}
+				return $query
+					->filterByAttachment($this)
+					->count($con);
+			}
+		} else {
+			return count($this->collProductAttachments);
+		}
+	}
+
+	/**
+	 * Method called to associate a Oops_Db_ProductAttachment object to this object
+	 * through the Oops_Db_ProductAttachment foreign key attribute.
+	 *
+	 * @param      Oops_Db_ProductAttachment $l Oops_Db_ProductAttachment
+	 * @return     Oops_Db_Attachment The current object (for fluent API support)
+	 */
+	public function addProductAttachment(Oops_Db_ProductAttachment $l)
+	{
+		if ($this->collProductAttachments === null) {
+			$this->initProductAttachments();
+		}
+		if (!$this->collProductAttachments->contains($l)) { // only add it if the **same** object is not already associated
+			$this->doAddProductAttachment($l);
+		}
+
+		return $this;
+	}
+
+	/**
+	 * @param	ProductAttachment $productAttachment The productAttachment object to add.
+	 */
+	protected function doAddProductAttachment($productAttachment)
+	{
+		$this->collProductAttachments[]= $productAttachment;
+		$productAttachment->setAttachment($this);
+	}
+
+
+	/**
+	 * If this collection has already been initialized with
+	 * an identical criteria, it returns the collection.
+	 * Otherwise if this Attachment is new, it will return
+	 * an empty collection; or if this Attachment has previously
+	 * been saved, it will retrieve related ProductAttachments from storage.
+	 *
+	 * This method is protected by default in order to keep the public
+	 * api reasonable.  You can provide public methods for those you
+	 * actually need in Attachment.
+	 *
+	 * @param      Criteria $criteria optional Criteria object to narrow the query
+	 * @param      PropelPDO $con optional connection object
+	 * @param      string $join_behavior optional join type to use (defaults to Criteria::LEFT_JOIN)
+	 * @return     PropelCollection|array Oops_Db_ProductAttachment[] List of Oops_Db_ProductAttachment objects
+	 */
+	public function getProductAttachmentsJoinProduct($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+	{
+		$query = Oops_Db_ProductAttachmentQuery::create(null, $criteria);
+		$query->joinWith('Product', $join_behavior);
+
+		return $this->getProductAttachments($query, $con);
+	}
+
+	/**
+	 * Clears out the collProducts collection
+	 *
+	 * This does not modify the database; however, it will remove any associated objects, causing
+	 * them to be refetched by subsequent calls to accessor method.
+	 *
+	 * @return     void
+	 * @see        addProducts()
+	 */
+	public function clearProducts()
+	{
+		$this->collProducts = null; // important to set this to NULL since that means it is uninitialized
+	}
+
+	/**
+	 * Initializes the collProducts collection.
+	 *
+	 * By default this just sets the collProducts collection to an empty collection (like clearProducts());
+	 * however, you may wish to override this method in your stub class to provide setting appropriate
+	 * to your application -- for example, setting the initial array to the values stored in database.
+	 *
+	 * @return     void
+	 */
+	public function initProducts()
+	{
+		$this->collProducts = new PropelObjectCollection();
+		$this->collProducts->setModel('Oops_Db_Product');
+	}
+
+	/**
+	 * Gets a collection of Oops_Db_Product objects related by a many-to-many relationship
+	 * to the current object by way of the product_attachment cross-reference table.
+	 *
+	 * If the $criteria is not null, it is used to always fetch the results from the database.
+	 * Otherwise the results are fetched from the database the first time, then cached.
+	 * Next time the same method is called without $criteria, the cached collection is returned.
+	 * If this Oops_Db_Attachment is new, it will return
+	 * an empty collection or the current collection; the criteria is ignored on a new object.
+	 *
+	 * @param      Criteria $criteria Optional query object to filter the query
+	 * @param      PropelPDO $con Optional connection object
+	 *
+	 * @return     PropelCollection|array Oops_Db_Product[] List of Oops_Db_Product objects
+	 */
+	public function getProducts($criteria = null, PropelPDO $con = null)
+	{
+		if(null === $this->collProducts || null !== $criteria) {
+			if ($this->isNew() && null === $this->collProducts) {
+				// return empty collection
+				$this->initProducts();
+			} else {
+				$collProducts = Oops_Db_ProductQuery::create(null, $criteria)
+					->filterByAttachment($this)
+					->find($con);
+				if (null !== $criteria) {
+					return $collProducts;
+				}
+				$this->collProducts = $collProducts;
+			}
+		}
+		return $this->collProducts;
+	}
+
+	/**
+	 * Sets a collection of Oops_Db_Product objects related by a many-to-many relationship
+	 * to the current object by way of the product_attachment cross-reference table.
+	 * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
+	 * and new objects from the given Propel collection.
+	 *
+	 * @param      PropelCollection $products A Propel collection.
+	 * @param      PropelPDO $con Optional connection object
+	 */
+	public function setProducts(PropelCollection $products, PropelPDO $con = null)
+	{
+		$oops_Db_ProductAttachments = ProductAttachmentQuery::create()
+			->filterByOops_Db_Product($products)
+			->filterByAttachment($this)
+			->find($con);
+
+		$this->productsScheduledForDeletion = $this->getProductAttachments()->diff($oops_Db_ProductAttachments);
+		$this->collProductAttachments = $oops_Db_ProductAttachments;
+
+		foreach ($products as $product) {
+			// Fix issue with collection modified by reference
+			if ($product->isNew()) {
+				$this->doAddOops_Db_Product($product);
+			} else {
+				$this->addOops_Db_Product($product);
+			}
+		}
+
+		$this->collProducts = $products;
+	}
+
+	/**
+	 * Gets the number of Oops_Db_Product objects related by a many-to-many relationship
+	 * to the current object by way of the product_attachment cross-reference table.
+	 *
+	 * @param      Criteria $criteria Optional query object to filter the query
+	 * @param      boolean $distinct Set to true to force count distinct
+	 * @param      PropelPDO $con Optional connection object
+	 *
+	 * @return     int the number of related Oops_Db_Product objects
+	 */
+	public function countProducts($criteria = null, $distinct = false, PropelPDO $con = null)
+	{
+		if(null === $this->collProducts || null !== $criteria) {
+			if ($this->isNew() && null === $this->collProducts) {
+				return 0;
+			} else {
+				$query = Oops_Db_ProductQuery::create(null, $criteria);
+				if($distinct) {
+					$query->distinct();
+				}
+				return $query
+					->filterByAttachment($this)
+					->count($con);
+			}
+		} else {
+			return count($this->collProducts);
+		}
+	}
+
+	/**
+	 * Associate a Oops_Db_Product object to this object
+	 * through the product_attachment cross reference table.
+	 *
+	 * @param      Oops_Db_Product $product The Oops_Db_ProductAttachment object to relate
+	 * @return     void
+	 */
+	public function addProduct($product)
+	{
+		if ($this->collProducts === null) {
+			$this->initProducts();
+		}
+		if (!$this->collProducts->contains($product)) { // only add it if the **same** object is not already associated
+			$this->doAddProduct($product);
+
+			$this->collProducts[]= $product;
+		}
+	}
+
+	/**
+	 * @param	Product $product The product object to add.
+	 */
+	protected function doAddProduct($product)
+	{
+		$productAttachment = new Oops_Db_ProductAttachment();
+		$productAttachment->setProduct($product);
+		$this->addOops_Db_ProductAttachment($productAttachment);
+	}
+
 	/**
 	 * Clears the current object and sets all attributes to their default values
 	 */
@@ -867,8 +1293,26 @@ abstract class Oops_Db_Propel_Attachment extends BaseObject  implements Persiste
 	public function clearAllReferences($deep = false)
 	{
 		if ($deep) {
+			if ($this->collProductAttachments) {
+				foreach ($this->collProductAttachments as $o) {
+					$o->clearAllReferences($deep);
+				}
+			}
+			if ($this->collProducts) {
+				foreach ($this->collProducts as $o) {
+					$o->clearAllReferences($deep);
+				}
+			}
 		} // if ($deep)
 
+		if ($this->collProductAttachments instanceof PropelCollection) {
+			$this->collProductAttachments->clearIterator();
+		}
+		$this->collProductAttachments = null;
+		if ($this->collProducts instanceof PropelCollection) {
+			$this->collProducts->clearIterator();
+		}
+		$this->collProducts = null;
 	}
 
 	/**
