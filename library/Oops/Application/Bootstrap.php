@@ -20,30 +20,10 @@ class Oops_Application_Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 		}
 	}
 	
-	protected function _initDispatcher() {
-		
-        $this->bootstrap('FrontController');
-        $front = $this->getResource('FrontController');
-        
-        $dispatcher = $front->getDispatcher();
-        
-        $oopsDispatcher = new Oops_Controller_Dispatcher();
-        $oopsDispatcher->setControllerDirectory($dispatcher->getControllerDirectory());
-        $oopsDispatcher->setDefaultModule($dispatcher->getDefaultModule());
-        
-		$front->setDispatcher($oopsDispatcher);
-		
-	}
-	
-	protected function _initDefaultModule() {
-		
-        $front = $this->bootstrap('FrontController')->getResource('FrontController');
-		
-		$front->addControllerDirectory(
-			OOPS_LIBRARY_PATH . '/Oops/Application/Module/default/controllers', 'default');
-		
-	}
-	
+	/**
+	 * Early request initialization to keep reference of the request object.
+	 * @return Zend_Controller_Request_Http
+	 */
 	protected function _initRequest() {
 		
 		$request = new Zend_Controller_Request_Http();
@@ -60,16 +40,9 @@ class Oops_Application_Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 	}
 	
 	protected function _initHelpers() {
-		/*
-	    Zend_Controller_Action_HelperBroker :: addHelper(
-	        new Oops_Controller_Action_Helper_ViewResolver() 
-	        
-	    );
-	    */
 	    Zend_Controller_Action_HelperBroker :: addHelper(
 	    	new Oops_Controller_Action_Helper_Configuration()
 	    );
-	    
 	    Zend_Controller_Action_HelperBroker :: addHelper(
 	    	new Oops_Controller_Action_Helper_ViewRenderer
 	    );

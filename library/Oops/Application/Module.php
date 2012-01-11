@@ -2,11 +2,10 @@
 
 class Oops_Application_Module extends ModuleCore {
 	
-	private $application;
+	protected $application;
 	protected $request;
-	private $log;
-	
-	private $config;
+	protected $log;
+	protected $config;
 	
 	public function __construct($name = NULL) {
 		
@@ -18,10 +17,10 @@ class Oops_Application_Module extends ModuleCore {
 			$this->getApplicationPath() . '/configs/application.ini', 
 			$this->getApplicationEnv(), true);
 			
+		$config->appnamespace = $this->getNamespace();
+			
 		$config->resources->frontController->moduleDirectory = 
 			$this->getApplicationPath() . '/mvc';
-			
-		$config->appnamespace = $this->getNamespace();
 		
 		// It is necessary to override the default resourceloader, 
 		// because it supposes the application path is located in the same
@@ -30,14 +29,6 @@ class Oops_Application_Module extends ModuleCore {
 		$config->resourceloader = new Zend_Application_Module_Autoloader(array(
         	'namespace' 	=> $this->getNamespace(),
         	'basePath'  	=> $this->getApplicationPath()
-			/*
-			'resourceTypes'	=> array(
-				'tab' => array(
-	                'namespace' => 'Tab',
-	                'path'      => 'tabs',
-	            ),
-			)
-			*/
         ));
         
 		
@@ -64,6 +55,8 @@ class Oops_Application_Module extends ModuleCore {
 		$this->application->bootstrap();
 		
 		$this->log = $this->application->getBootstrap()->getResource('log');
+		
+		$this->log->info("--- Creating " . $this->getNamespace());
 		
 		$this->request = $this->application->getBootstrap()->getContainer()->get('request');
 		
@@ -118,12 +111,13 @@ class Oops_Application_Module extends ModuleCore {
 		// Catch them all !
 		try {
 			
-			$this->request->setModuleName('preferences');
+			$this->request->setModuleName(strtolower($this->getNamespace()) . '-preferences');
+			
 			$response = $this->application->getBootstrap()->run();
 			
 			if ($response->isException()) {
 				$exceptions = $response->getException();
-				throw $exceptions[0];
+				throw array_pop($exceptions);
 			}
 			
 			return (string) $response;
@@ -139,50 +133,57 @@ class Oops_Application_Module extends ModuleCore {
 		// Catch them all !
 		try {
 			
+			$namespace = $this->getNamespace();
+			
+			$this->log->info("Hooking $namespace on $hookName");
+			
+			// Modify the request that will be processed
+			$this->request->setModuleName(strtolower($namespace) . '-hooks');
+			$this->request->setControllerName('index');
+			$this->request->setActionName($hookName);
+			$this->request->setDispatched(false);
+			
+			// Make sure the wanted request object will actually be used
+			// FIXME It seems that sometimes the reference is lost ! 
 			$front 	= $this
 					->application
 					->getBootstrap()
 					->bootstrap('frontController')
 					->getResource('frontController');
-			
-			// Make sure the module directories are always the good ones
-			// Zend_Controller_Front is a singleton, so module names may collide
-			// if the same module has several hooks
-			// FIXME 
-			// Maybe we need a custom FrontController, 
-			// or at least namespace aware
-			$controllerDirectory = $front->getControllerDirectory();
-			$modules = array_keys($controllerDirectory);
-			foreach ($modules as $moduleName) {
-				if ($moduleName != 'default') {
-					$front->removeControllerDirectory($moduleName);
-				}
-			}
-			$front->addModuleDirectory($this->config->resources->frontController->moduleDirectory);
-			
-			// Modify the request that will be processed
-			$this->request->setModuleName('hooks');
-			$this->request->setControllerName('index');
-			$this->request->setActionName($hookName);
-			
+					
 			$front->setRequest($this->request);
 			
-			$this->log->info("hookName : $hookName");
-			
+			// Run the application
 			$response = $this->application->getBootstrap()->run();
 			
-			$namespace = 
-        		$this->application->getBootstrap()->getOption('appnamespace');
-        	
         	$hookBody = $response->getBody($namespace . '-' . $hookName);
         	
+        	// In case of exception, rethrow the last one that was collected
 			if (null == $hookBody && $response->isException()) {
 				$exceptions = $response->getException();
 				throw array_pop($exceptions);
 			}
 			
+			
 			return $hookBody;
 			
+		} catch (Exception $e) {
+			return (string) $e;
+		}
+		
+	}
+	
+	/**
+	 * Convenient method to run the application from the outside. 
+	 * Use getRequest() to modify request before calling run().  
+	 * @return string
+	 */
+	public function run() {
+		
+		try {
+			$this->request->setModuleName(strtolower($this->getNamespace()) . '-hooks');
+			$response = $this->application->getBootstrap()->run();
+			echo (string) $response;
 		} catch (Exception $e) {
 			return (string) $e;
 		}
@@ -213,18 +214,6 @@ class Oops_Application_Module extends ModuleCore {
 	
 	public function hookExtraRight($params) {
 		return $this->hook('extra-right');
-	}
-	
-	public function run() {
-		
-		try {
-			$this->request->setModuleName('hooks');
-			$response = $this->application->getBootstrap()->run();
-			echo (string) $response;
-		} catch (Exception $e) {
-			return (string) $e;
-		}
-		
 	}
 	
 }
