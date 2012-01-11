@@ -7,12 +7,9 @@
                
 Oops - Object Oriented PrestaShop
 
-Oops is a tool for PrestaShop. 
-It is designed to help develop robust modules faster.  
+Oops is a developer tool for PrestaShop 1.4.x
 
-********
-FEATURES
-********
+# Features
 
 - Fully object oriented
 - MVC layer built on Zend Framework
@@ -20,9 +17,7 @@ FEATURES
 - Module namespace, easy autoload
 - PHP and/or Smarty templates
 
-************
-INSTALLATION
-************
+# Installation
 
 Download & extract the latest Oops all-in-one package from GitHub : https://github.com/alexsegura/Oops/downloads
 
@@ -36,9 +31,7 @@ Just copy the contents of each folder in the corresponding folder of PrestaShop 
 Check that Oops is running correctly by installing the "Hello, Oops" module from Modules > Front Office Features. 
 Attach the module to the left column to see it running. 
 
-***************
-GETTING STARTED
-***************
+# Getting started
 
 Check the "Hello, Oops" module code to see a running example
 
