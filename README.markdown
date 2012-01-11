@@ -1,10 +1,11 @@
-  _______                         
+<pre>_____                         
   __  __ \______ ________ ________
   _  / / /_  __ \___  __ \__  ___/
   / /_/ / / /_/ /__  /_/ /_(__  ) 
   \____/  \____/ _  .___/ /____/  
                  /_/                        
-               
+</pre>
+         
 Oops - Object Oriented PrestaShop
 
 Oops is a developer tool for PrestaShop 1.4.x
