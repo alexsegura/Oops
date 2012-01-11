@@ -60,9 +60,9 @@ class Oops_Controller_Action_Helper_ViewRenderer extends Zend_Controller_Action_
     	$request 	= $this->getActionController()->getRequest();
     	
     	$log = $this->getActionController()->getInvokeArg('bootstrap')->getResource("log");
-    	$log->info(($namespace . '-' . $request->getActionName()));
+    	$log->info('initResponseSegment : ' . $namespace . '-' . $request->getActionName());
     	
-		if ($request->getModuleName() == 'hooks') {
+		if ($request->getModuleName() == strtolower($namespace) . "-hooks") {
 			$this->setResponseSegment($namespace . '-' . $request->getActionName());
 		}
 		
