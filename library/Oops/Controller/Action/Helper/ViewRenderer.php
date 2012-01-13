@@ -39,7 +39,10 @@ class Oops_Controller_Action_Helper_ViewRenderer extends Zend_Controller_Action_
         	// This will reproduce the "theme override" behavior
         	// Views should be placed in subfolders for each controller
         	$appnamespace = $this->getNamespace();
-        		
+        	
+        	$this->view->addScriptPath(_PS_THEME_DIR_);
+        	$smartyView->addScriptPath(_PS_THEME_DIR_);
+        	
         	$this->view->addScriptPath(_PS_THEME_DIR_ . 'modules/' . strtolower($appnamespace));
         	$smartyView->addScriptPath(_PS_THEME_DIR_ . 'modules/' . strtolower($appnamespace));
     		

@@ -12,7 +12,7 @@ class Oops_Application_Module extends ModuleCore {
 		$config = new Zend_Config_Ini(
 			realpath(dirname(__FILE__) . '/application.ini'), 
 			$this->getApplicationEnv(), true);
-			
+
 		$moduleConfig = new Zend_Config_Ini(
 			$this->getApplicationPath() . '/configs/application.ini', 
 			$this->getApplicationEnv(), true);
@@ -183,9 +183,13 @@ class Oops_Application_Module extends ModuleCore {
 		try {
 			$this->request->setModuleName(strtolower($this->getNamespace()) . '-hooks');
 			$response = $this->application->getBootstrap()->run();
+			if ($response->isException()) {
+				$exceptions = $response->getException();
+				throw array_pop($exceptions);
+			}
 			echo (string) $response;
 		} catch (Exception $e) {
-			return (string) $e;
+			echo (string) $e;
 		}
 		
 	}
