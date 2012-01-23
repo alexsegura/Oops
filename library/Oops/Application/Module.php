@@ -151,6 +151,13 @@ class Oops_Application_Module extends ModuleCore {
 					->bootstrap('frontController')
 					->getResource('frontController');
 					
+			if ($response = $front->getResponse()) {
+				$hookBody = $response->getBody($namespace . '-' . $hookName);
+				if (!empty($hookBody)) {
+					$response->clearBody($namespace . '-' . $hookName);
+				}
+			}
+					
 			$front->setRequest($this->request);
 			
 			// Run the application
@@ -214,6 +221,10 @@ class Oops_Application_Module extends ModuleCore {
 	
 	public function hookProductTabContent($params) {
 		return $this->hook('product-tab-content');
+	}
+	
+	public function hookTop($params) {
+		return $this->hook('top');
 	}
 	
 	public function hookExtraRight($params) {

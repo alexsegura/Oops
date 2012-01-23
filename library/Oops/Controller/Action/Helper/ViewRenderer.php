@@ -35,6 +35,14 @@ class Oops_Controller_Action_Helper_ViewRenderer extends Zend_Controller_Action_
         	$this->view->addHelperPath('Oops/View/Helper', 'Oops_View_Helper');
         	$smartyView->addHelperPath('Oops/View/Helper', 'Oops_View_Helper');
         	
+        	/*
+        	global $smarty;
+        	$smartyVars = $smarty->get_template_vars();
+        	$this->view->assign($smartyVars);
+        	// print_r($smartyVars);
+        	*/
+        	// exit;
+        	
         	// Add theme module template directory to the stack of script paths
         	// This will reproduce the "theme override" behavior
         	// Views should be placed in subfolders for each controller
@@ -89,6 +97,11 @@ class Oops_Controller_Action_Helper_ViewRenderer extends Zend_Controller_Action_
 	        	$vars = $this->getActionController()->view->getVars();
 	        	$view->assign($vars);
 	        	
+	        	// Last chance to copy smarty vars
+	        	global $smarty;
+        		$smartyVars = $smarty->get_template_vars();
+        		$view->assign($smartyVars);
+	        	
 	        	// Replace the view that will be rendered
 	            $this->setView($view);
 	            
@@ -100,6 +113,11 @@ class Oops_Controller_Action_Helper_ViewRenderer extends Zend_Controller_Action_
 	        }
 	        
         }
+        
+        // Last chance to copy smarty vars
+        global $smarty;
+        $smartyVars = $smarty->get_template_vars();
+        $this->defaultView->assign($smartyVars);
         
         $this->setView($this->defaultView);
         

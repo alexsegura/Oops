@@ -1,6 +1,6 @@
 <?php
 
-class Oops_Form_Element_Categories extends Zend_Form_Element {
+class Oops_Form_Element_CategoriesTree extends Zend_Form_Element {
 	
 	private $_root;
 	
@@ -14,9 +14,9 @@ class Oops_Form_Element_Categories extends Zend_Form_Element {
                 'Oops/Form/Decorator/',
                 'decorator'
     		)
-            ->addDecorator(new Oops_Form_Decorator_Categories())
-            ->addDecorator('HtmlTag', array('tag' => 'dd'))
-            ->addDecorator('Label', array('tag' => 'dt'))
+            ->addDecorator(new Oops_Form_Decorator_CategoriesTree())
+            // ->addDecorator('HtmlTag', array('tag' => 'dd'))
+            // ->addDecorator('Label', array('tag' => 'dt'))
             ;
     }
 	

@@ -9,16 +9,23 @@ class Oops_Controller_Router_Backoffice extends Zend_Controller_Router_Abstract 
 		
 		$url = $this->getFrontController()->getBaseUrl();
 		
+		$request = $this->getFrontController()->getRequest();
+		
 		$params = array();
 		
-		$params['tab'] 			= $this->getFrontController()->getRequest()->getParam('tab');
-		$params['configure'] 	= $this->getFrontController()->getRequest()->getParam('configure');
-		$params['token'] 		= $this->getFrontController()->getRequest()->getParam('token');
-		$params['tab_module'] 	= $this->getFrontController()->getRequest()->getParam('tab_module');
-		$params['module_name'] 	= $this->getFrontController()->getRequest()->getParam('module_name');
-		$params['action'] 		= $this->getFrontController()->getRequest()->getParam('action');
+		$params['tab'] 			= $request->getParam('tab');
+		$params['configure'] 	= $request->getParam('configure');
+		$params['token'] 		= $request->getParam('token');
+		$params['tab_module'] 	= $request->getParam('tab_module');
+		$params['module_name'] 	= $request->getParam('module_name');
+		$params['action'] 		= $request->getParam('action');
 		
-		// $params = $this->getFrontController()->getRequest()->getParams();
+		// TODO Make sure module can't be changed via request object
+		
+		
+		if (!isset($params[$request->getControllerKey()])) {
+			$params[$request->getControllerKey()] = $request->getControllerName();
+		}
 		
 		foreach ($userParams as $key => $value) {
 			$params[$key] = $value;	

@@ -4855,7 +4855,7 @@ abstract class Oops_Db_Propel_Product extends BaseObject  implements Persistent
 	{
 		$categoryProduct = new Oops_Db_CategoryProduct();
 		$categoryProduct->setCategory($category);
-		$this->addOops_Db_CategoryProduct($categoryProduct);
+		$this->addCategoryProduct($categoryProduct);
 	}
 
 	/**
@@ -5007,7 +5007,7 @@ abstract class Oops_Db_Propel_Product extends BaseObject  implements Persistent
 	{
 		$featureProduct = new Oops_Db_FeatureProduct();
 		$featureProduct->setFeature($feature);
-		$this->addOops_Db_FeatureProduct($featureProduct);
+		$this->addFeatureProduct($featureProduct);
 	}
 
 	/**
@@ -5159,7 +5159,7 @@ abstract class Oops_Db_Propel_Product extends BaseObject  implements Persistent
 	{
 		$productAttachment = new Oops_Db_ProductAttachment();
 		$productAttachment->setAttachment($attachment);
-		$this->addOops_Db_ProductAttachment($productAttachment);
+		$this->addProductAttachment($productAttachment);
 	}
 
 	/**

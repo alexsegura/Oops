@@ -1630,7 +1630,7 @@ abstract class Oops_Db_Propel_Lang extends BaseObject  implements Persistent
 	{
 		$categoryLang = new Oops_Db_CategoryLang();
 		$categoryLang->setCategory($category);
-		$this->addOops_Db_CategoryLang($categoryLang);
+		$this->addCategoryLang($categoryLang);
 	}
 
 	/**

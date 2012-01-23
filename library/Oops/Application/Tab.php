@@ -69,8 +69,12 @@ abstract class Oops_Application_Tab extends AdminTabCore {
 	
 	public function display() {
 		try {
-			$this->request->setModuleName($this->getApplicationModuleName());
+			$this->request->setModuleName(strtolower($this->getNamespace()) . '-' . $this->getApplicationModuleName());
 			$response = $this->application->getBootstrap()->run();
+			if ($response->isException()) {
+				$exceptions = $response->getException();
+				throw array_pop($exceptions);
+			}
 			echo (string) $response;
 		} catch (Exception $e) {
 			echo (string) $e;

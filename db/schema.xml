@@ -78,9 +78,16 @@
     <column name="file" phpName="File" type="VARCHAR" size="40" required="true"/>
     <column name="file_name" phpName="FileName" type="VARCHAR" size="128" required="true"/>
     <column name="mime" phpName="Mime" type="VARCHAR" size="128" required="true"/>
+    <behavior name="i18n">
+    	<parameter name="i18n_columns" value="name,description" />
+    	<parameter name="locale_column" value="id_lang" />
+    	<parameter name="i18n_table" value="attachment_lang" />
+    	<parameter name="i18n_phpname" value="AttachmentLang" />
+    	<parameter name="default_locale" value="1" />
+  	</behavior>
   </table>
   <table name="attachment_lang" phpName="AttachmentLang" idMethod="native">
-    <column name="id_attachment" phpName="IdAttachment" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="id_attachment" phpName="IdAttachment" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true" required="true"/>
     <column name="id_lang" phpName="IdLang" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true" required="true"/>
     <column name="name" phpName="Name" type="VARCHAR" size="32" required="false"/>
     <column name="description" phpName="Description" type="LONGVARCHAR" required="false"/>

@@ -51,7 +51,21 @@ class Oops_Db_AttachmentTableMap extends TableMap
 	public function buildRelations()
 	{
 		$this->addRelation('ProductAttachment', 'Oops_Db_ProductAttachment', RelationMap::ONE_TO_MANY, array('id_attachment' => 'id_attachment', ), null, null, 'ProductAttachments');
-		$this->addRelation('Product', 'Oops_Db_Product', RelationMap::MANY_TO_MANY, array(), null, null, 'Products');
+		$this->addRelation('AttachmentLang', 'Oops_Db_AttachmentLang', RelationMap::ONE_TO_MANY, array('id_attachment' => 'id_attachment', ), 'CASCADE', null, 'AttachmentLangs');
+		$this->addRelation('Product', 'Oops_Db_Product', RelationMap::MANY_TO_MANY, array(), 'CASCADE', null, 'Products');
 	} // buildRelations()
+
+	/**
+	 *
+	 * Gets the list of behaviors registered for this table
+	 *
+	 * @return array Associative array (name => parameters) of behaviors
+	 */
+	public function getBehaviors()
+	{
+		return array(
+			'i18n' => array('i18n_table' => 'attachment_lang', 'i18n_phpname' => 'AttachmentLang', 'i18n_columns' => 'name,description', 'locale_column' => 'id_lang', 'default_locale' => '1', 'locale_alias' => '', ),
+		);
+	} // getBehaviors()
 
 } // Oops_Db_AttachmentTableMap

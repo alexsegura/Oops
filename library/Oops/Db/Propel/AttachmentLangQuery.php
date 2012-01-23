@@ -20,6 +20,10 @@
  * @method     Oops_Db_AttachmentLangQuery rightJoin($relation) Adds a RIGHT JOIN clause to the query
  * @method     Oops_Db_AttachmentLangQuery innerJoin($relation) Adds a INNER JOIN clause to the query
  *
+ * @method     Oops_Db_AttachmentLangQuery leftJoinAttachment($relationAlias = null) Adds a LEFT JOIN clause to the query using the Attachment relation
+ * @method     Oops_Db_AttachmentLangQuery rightJoinAttachment($relationAlias = null) Adds a RIGHT JOIN clause to the query using the Attachment relation
+ * @method     Oops_Db_AttachmentLangQuery innerJoinAttachment($relationAlias = null) Adds a INNER JOIN clause to the query using the Attachment relation
+ *
  * @method     Oops_Db_AttachmentLang findOne(PropelPDO $con = null) Return the first Oops_Db_AttachmentLang matching the query
  * @method     Oops_Db_AttachmentLang findOneOrCreate(PropelPDO $con = null) Return the first Oops_Db_AttachmentLang matching the query, or a new Oops_Db_AttachmentLang object populated from the query conditions when no match is found
  *
@@ -229,6 +233,8 @@ abstract class Oops_Db_Propel_AttachmentLangQuery extends ModelCriteria
 	 * $query->filterByIdAttachment(array('min' => 12)); // WHERE id_attachment > 12
 	 * </code>
 	 *
+	 * @see       filterByAttachment()
+	 *
 	 * @param     mixed $idAttachment The value to use as filter.
 	 *              Use scalar values for equality.
 	 *              Use array values for in_array() equivalent.
@@ -325,6 +331,80 @@ abstract class Oops_Db_Propel_AttachmentLangQuery extends ModelCriteria
 			}
 		}
 		return $this->addUsingAlias(Oops_Db_AttachmentLangPeer::DESCRIPTION, $description, $comparison);
+	}
+
+	/**
+	 * Filter the query by a related Oops_Db_Attachment object
+	 *
+	 * @param     Oops_Db_Attachment|PropelCollection $attachment The related object(s) to use as filter
+	 * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+	 *
+	 * @return    Oops_Db_AttachmentLangQuery The current query, for fluid interface
+	 */
+	public function filterByAttachment($attachment, $comparison = null)
+	{
+		if ($attachment instanceof Oops_Db_Attachment) {
+			return $this
+				->addUsingAlias(Oops_Db_AttachmentLangPeer::ID_ATTACHMENT, $attachment->getIdAttachment(), $comparison);
+		} elseif ($attachment instanceof PropelCollection) {
+			if (null === $comparison) {
+				$comparison = Criteria::IN;
+			}
+			return $this
+				->addUsingAlias(Oops_Db_AttachmentLangPeer::ID_ATTACHMENT, $attachment->toKeyValue('PrimaryKey', 'IdAttachment'), $comparison);
+		} else {
+			throw new PropelException('filterByAttachment() only accepts arguments of type Oops_Db_Attachment or PropelCollection');
+		}
+	}
+
+	/**
+	 * Adds a JOIN clause to the query using the Attachment relation
+	 *
+	 * @param     string $relationAlias optional alias for the relation
+	 * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+	 *
+	 * @return    Oops_Db_AttachmentLangQuery The current query, for fluid interface
+	 */
+	public function joinAttachment($relationAlias = null, $joinType = 'LEFT JOIN')
+	{
+		$tableMap = $this->getTableMap();
+		$relationMap = $tableMap->getRelation('Attachment');
+
+		// create a ModelJoin object for this join
+		$join = new ModelJoin();
+		$join->setJoinType($joinType);
+		$join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
+		if ($previousJoin = $this->getPreviousJoin()) {
+			$join->setPreviousJoin($previousJoin);
+		}
+
+		// add the ModelJoin to the current object
+		if($relationAlias) {
+			$this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
+			$this->addJoinObject($join, $relationAlias);
+		} else {
+			$this->addJoinObject($join, 'Attachment');
+		}
+
+		return $this;
+	}
+
+	/**
+	 * Use the Attachment relation Attachment object
+	 *
+	 * @see       useQuery()
+	 *
+	 * @param     string $relationAlias optional alias for the relation,
+	 *                                   to be used as main alias in the secondary query
+	 * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+	 *
+	 * @return    Oops_Db_AttachmentQuery A secondary query class using the current class as primary query
+	 */
+	public function useAttachmentQuery($relationAlias = null, $joinType = 'LEFT JOIN')
+	{
+		return $this
+			->joinAttachment($relationAlias, $joinType)
+			->useQuery($relationAlias ? $relationAlias : 'Attachment', 'Oops_Db_AttachmentQuery');
 	}
 
 	/**

@@ -24,6 +24,10 @@
  * @method     Oops_Db_AttachmentQuery rightJoinProductAttachment($relationAlias = null) Adds a RIGHT JOIN clause to the query using the ProductAttachment relation
  * @method     Oops_Db_AttachmentQuery innerJoinProductAttachment($relationAlias = null) Adds a INNER JOIN clause to the query using the ProductAttachment relation
  *
+ * @method     Oops_Db_AttachmentQuery leftJoinAttachmentLang($relationAlias = null) Adds a LEFT JOIN clause to the query using the AttachmentLang relation
+ * @method     Oops_Db_AttachmentQuery rightJoinAttachmentLang($relationAlias = null) Adds a RIGHT JOIN clause to the query using the AttachmentLang relation
+ * @method     Oops_Db_AttachmentQuery innerJoinAttachmentLang($relationAlias = null) Adds a INNER JOIN clause to the query using the AttachmentLang relation
+ *
  * @method     Oops_Db_Attachment findOne(PropelPDO $con = null) Return the first Oops_Db_Attachment matching the query
  * @method     Oops_Db_Attachment findOneOrCreate(PropelPDO $con = null) Return the first Oops_Db_Attachment matching the query, or a new Oops_Db_Attachment object populated from the query conditions when no match is found
  *
@@ -393,6 +397,79 @@ abstract class Oops_Db_Propel_AttachmentQuery extends ModelCriteria
 	}
 
 	/**
+	 * Filter the query by a related Oops_Db_AttachmentLang object
+	 *
+	 * @param     Oops_Db_AttachmentLang $attachmentLang  the related object to use as filter
+	 * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+	 *
+	 * @return    Oops_Db_AttachmentQuery The current query, for fluid interface
+	 */
+	public function filterByAttachmentLang($attachmentLang, $comparison = null)
+	{
+		if ($attachmentLang instanceof Oops_Db_AttachmentLang) {
+			return $this
+				->addUsingAlias(Oops_Db_AttachmentPeer::ID_ATTACHMENT, $attachmentLang->getIdAttachment(), $comparison);
+		} elseif ($attachmentLang instanceof PropelCollection) {
+			return $this
+				->useAttachmentLangQuery()
+				->filterByPrimaryKeys($attachmentLang->getPrimaryKeys())
+				->endUse();
+		} else {
+			throw new PropelException('filterByAttachmentLang() only accepts arguments of type Oops_Db_AttachmentLang or PropelCollection');
+		}
+	}
+
+	/**
+	 * Adds a JOIN clause to the query using the AttachmentLang relation
+	 *
+	 * @param     string $relationAlias optional alias for the relation
+	 * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+	 *
+	 * @return    Oops_Db_AttachmentQuery The current query, for fluid interface
+	 */
+	public function joinAttachmentLang($relationAlias = null, $joinType = 'LEFT JOIN')
+	{
+		$tableMap = $this->getTableMap();
+		$relationMap = $tableMap->getRelation('AttachmentLang');
+
+		// create a ModelJoin object for this join
+		$join = new ModelJoin();
+		$join->setJoinType($joinType);
+		$join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
+		if ($previousJoin = $this->getPreviousJoin()) {
+			$join->setPreviousJoin($previousJoin);
+		}
+
+		// add the ModelJoin to the current object
+		if($relationAlias) {
+			$this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
+			$this->addJoinObject($join, $relationAlias);
+		} else {
+			$this->addJoinObject($join, 'AttachmentLang');
+		}
+
+		return $this;
+	}
+
+	/**
+	 * Use the AttachmentLang relation AttachmentLang object
+	 *
+	 * @see       useQuery()
+	 *
+	 * @param     string $relationAlias optional alias for the relation,
+	 *                                   to be used as main alias in the secondary query
+	 * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+	 *
+	 * @return    Oops_Db_AttachmentLangQuery A secondary query class using the current class as primary query
+	 */
+	public function useAttachmentLangQuery($relationAlias = null, $joinType = 'LEFT JOIN')
+	{
+		return $this
+			->joinAttachmentLang($relationAlias, $joinType)
+			->useQuery($relationAlias ? $relationAlias : 'AttachmentLang', 'Oops_Db_AttachmentLangQuery');
+	}
+
+	/**
 	 * Filter the query by a related Product object
 	 * using the product_attachment table as cross reference
 	 *
@@ -423,6 +500,61 @@ abstract class Oops_Db_Propel_AttachmentQuery extends ModelCriteria
 		}
 
 		return $this;
+	}
+
+	// i18n behavior
+	
+	/**
+	 * Adds a JOIN clause to the query using the i18n relation
+	 *
+	 * @param     string $locale Locale to use for the join condition, e.g. 'fr_FR'
+	 * @param     string $relationAlias optional alias for the relation
+	 * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'. Defaults to left join.
+	 *
+	 * @return    Oops_Db_AttachmentQuery The current query, for fluid interface
+	 */
+	public function joinI18n($locale = '1', $relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+	{
+		$relationName = $relationAlias ? $relationAlias : 'AttachmentLang';
+		return $this
+			->joinAttachmentLang($relationAlias, $joinType)
+			->addJoinCondition($relationName, $relationName . '.IdLang = ?', $locale);
+	}
+	
+	/**
+	 * Adds a JOIN clause to the query and hydrates the related I18n object.
+	 * Shortcut for $c->joinI18n($locale)->with()
+	 *
+	 * @param     string $locale Locale to use for the join condition, e.g. 'fr_FR'
+	 * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'. Defaults to left join.
+	 *
+	 * @return    Oops_Db_AttachmentQuery The current query, for fluid interface
+	 */
+	public function joinWithI18n($locale = '1', $joinType = Criteria::LEFT_JOIN)
+	{
+		$this
+			->joinI18n($locale, null, $joinType)
+			->with('AttachmentLang');
+		$this->with['AttachmentLang']->setIsWithOneToMany(false);
+		return $this;
+	}
+	
+	/**
+	 * Use the I18n relation query object
+	 *
+	 * @see       useQuery()
+	 *
+	 * @param     string $locale Locale to use for the join condition, e.g. 'fr_FR'
+	 * @param     string $relationAlias optional alias for the relation
+	 * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'. Defaults to left join.
+	 *
+	 * @return    Oops_Db_AttachmentLangQuery A secondary query class using the current class as primary query
+	 */
+	public function useI18nQuery($locale = '1', $relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+	{
+		return $this
+			->joinI18n($locale, $relationAlias, $joinType)
+			->useQuery($relationAlias ? $relationAlias : 'AttachmentLang', 'Oops_Db_AttachmentLangQuery');
 	}
 
 } // Oops_Db_Propel_AttachmentQuery

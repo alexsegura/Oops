@@ -1961,7 +1961,7 @@ abstract class Oops_Db_Propel_Category extends BaseObject  implements Persistent
 	{
 		$categoryLang = new Oops_Db_CategoryLang();
 		$categoryLang->setLang($lang);
-		$this->addOops_Db_CategoryLang($categoryLang);
+		$this->addCategoryLang($categoryLang);
 	}
 
 	/**
@@ -2113,7 +2113,7 @@ abstract class Oops_Db_Propel_Category extends BaseObject  implements Persistent
 	{
 		$categoryProduct = new Oops_Db_CategoryProduct();
 		$categoryProduct->setProduct($product);
-		$this->addOops_Db_CategoryProduct($categoryProduct);
+		$this->addCategoryProduct($categoryProduct);
 	}
 
 	/**

@@ -15,7 +15,8 @@ class Oops_Application_Module_Bootstrap extends Zend_Application_Module_Bootstra
         } else if (false !== strpos(strtolower($class), 'preferences')) {
             $moduleName = 'preferences';
         } else if (false !== strpos(strtolower($class), 'tab')) {
-        	// echo '<pre>' . print_r($this, 1) . '</pre>';exit;
+        	// var_dump($class);
+        	// echo '<pre>' . print_r($this, 1) . '</pre>';
         }
         
         if (isset($moduleName)) {
@@ -43,6 +44,8 @@ class Oops_Application_Module_Bootstrap extends Zend_Application_Module_Bootstra
     	$this->bootstrap('FrontController');
 	    $front = $this->getResource('FrontController');
     	
+	    // var_dump($this->getAppNamespace() . ' '. $moduleName);
+	    
     	$this->setResourceLoader(new Zend_Application_Module_Autoloader(array(
         	'namespace' => $this->getAppNamespace(),
         	'basePath'  => $front->getModuleDirectory($moduleName)
@@ -66,6 +69,7 @@ class Oops_Application_Module_Bootstrap extends Zend_Application_Module_Bootstra
             	$this->_moduleName = $ns . '_Preferences';
             } else if (false !== strpos(strtolower($class), 'tab')) {
             	$name = strtolower($this->_moduleDirectory);
+            	$name = str_replace(strtolower($ns) . '-', '', $name);
 		        $name = str_replace(array('-', '.'), ' ', $name);
 		        $name = ucwords($name);
 		        $this->_moduleName = $ns . '_' . str_replace(' ', '', $name);

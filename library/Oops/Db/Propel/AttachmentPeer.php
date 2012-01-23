@@ -64,6 +64,13 @@ abstract class Oops_Db_Propel_AttachmentPeer {
 	public static $instances = array();
 
 
+	// i18n behavior
+	
+	/**
+	 * The default locale to use for translations
+	 * @var        string
+	 */
+	const DEFAULT_LOCALE = '1';
 	/**
 	 * holds an array of fieldnames
 	 *
@@ -365,6 +372,9 @@ abstract class Oops_Db_Propel_AttachmentPeer {
 	 */
 	public static function clearRelatedInstancePool()
 	{
+		// Invalidate objects in Oops_Db_AttachmentLangPeer instance pool,
+		// since one or more of them may be deleted by ON DELETE CASCADE/SETNULL rule.
+		Oops_Db_AttachmentLangPeer::clearInstancePool();
 	}
 
 	/**
@@ -595,6 +605,7 @@ abstract class Oops_Db_Propel_AttachmentPeer {
 			// use transaction because $criteria could contain info
 			// for more than one table or we could emulating ON DELETE CASCADE, etc.
 			$con->beginTransaction();
+			$affectedRows += Oops_Db_AttachmentPeer::doOnDeleteCascade(new Criteria(Oops_Db_AttachmentPeer::DATABASE_NAME), $con);
 			$affectedRows += BasePeer::doDeleteAll(Oops_Db_AttachmentPeer::TABLE_NAME, $con, Oops_Db_AttachmentPeer::DATABASE_NAME);
 			// Because this db requires some delete cascade/set null emulation, we have to
 			// clear the cached instance *after* the emulation has happened (since
@@ -627,24 +638,14 @@ abstract class Oops_Db_Propel_AttachmentPeer {
 		}
 
 		if ($values instanceof Criteria) {
-			// invalidate the cache for all objects of this type, since we have no
-			// way of knowing (without running a query) what objects should be invalidated
-			// from the cache based on this Criteria.
-			Oops_Db_AttachmentPeer::clearInstancePool();
 			// rename for clarity
 			$criteria = clone $values;
 		} elseif ($values instanceof Oops_Db_Attachment) { // it's a model object
-			// invalidate the cache for this single object
-			Oops_Db_AttachmentPeer::removeInstanceFromPool($values);
 			// create criteria based on pk values
 			$criteria = $values->buildPkeyCriteria();
 		} else { // it's a primary key, or an array of pks
 			$criteria = new Criteria(self::DATABASE_NAME);
 			$criteria->add(Oops_Db_AttachmentPeer::ID_ATTACHMENT, (array) $values, Criteria::IN);
-			// invalidate the cache for this object(s)
-			foreach ((array) $values as $singleval) {
-				Oops_Db_AttachmentPeer::removeInstanceFromPool($singleval);
-			}
 		}
 
 		// Set the correct dbName
@@ -657,6 +658,23 @@ abstract class Oops_Db_Propel_AttachmentPeer {
 			// for more than one table or we could emulating ON DELETE CASCADE, etc.
 			$con->beginTransaction();
 			
+			// cloning the Criteria in case it's modified by doSelect() or doSelectStmt()
+			$c = clone $criteria;
+			$affectedRows += Oops_Db_AttachmentPeer::doOnDeleteCascade($c, $con);
+			
+			// Because this db requires some delete cascade/set null emulation, we have to
+			// clear the cached instance *after* the emulation has happened (since
+			// instances get re-added by the select statement contained therein).
+			if ($values instanceof Criteria) {
+				Oops_Db_AttachmentPeer::clearInstancePool();
+			} elseif ($values instanceof Oops_Db_Attachment) { // it's a model object
+				Oops_Db_AttachmentPeer::removeInstanceFromPool($values);
+			} else { // it's a primary key, or an array of pks
+				foreach ((array) $values as $singleval) {
+					Oops_Db_AttachmentPeer::removeInstanceFromPool($singleval);
+				}
+			}
+			
 			$affectedRows += BasePeer::doDelete($criteria, $con);
 			Oops_Db_AttachmentPeer::clearRelatedInstancePool();
 			$con->commit();
@@ -665,6 +683,38 @@ abstract class Oops_Db_Propel_AttachmentPeer {
 			$con->rollBack();
 			throw $e;
 		}
+	}
+
+	/**
+	 * This is a method for emulating ON DELETE CASCADE for DBs that don't support this
+	 * feature (like MySQL or SQLite).
+	 *
+	 * This method is not very speedy because it must perform a query first to get
+	 * the implicated records and then perform the deletes by calling those Peer classes.
+	 *
+	 * This method should be used within a transaction if possible.
+	 *
+	 * @param      Criteria $criteria
+	 * @param      PropelPDO $con
+	 * @return     int The number of affected rows (if supported by underlying database driver).
+	 */
+	protected static function doOnDeleteCascade(Criteria $criteria, PropelPDO $con)
+	{
+		// initialize var to track total num of affected rows
+		$affectedRows = 0;
+
+		// first find the objects that are implicated by the $criteria
+		$objects = Oops_Db_AttachmentPeer::doSelect($criteria, $con);
+		foreach ($objects as $obj) {
+
+
+			// delete related Oops_Db_AttachmentLang objects
+			$criteria = new Criteria(Oops_Db_AttachmentLangPeer::DATABASE_NAME);
+			
+			$criteria->add(Oops_Db_AttachmentLangPeer::ID_ATTACHMENT, $obj->getIdAttachment());
+			$affectedRows += Oops_Db_AttachmentLangPeer::doDelete($criteria, $con);
+		}
+		return $affectedRows;
 	}
 
 	/**

@@ -36,9 +36,9 @@ class Oops_Db_AttachmentLangTableMap extends TableMap
 		$this->setPhpName('AttachmentLang');
 		$this->setClassname('Oops_Db_AttachmentLang');
 		$this->setPackage('prestashop');
-		$this->setUseIdGenerator(true);
+		$this->setUseIdGenerator(false);
 		// columns
-		$this->addPrimaryKey('ID_ATTACHMENT', 'IdAttachment', 'INTEGER', true, 10, null);
+		$this->addForeignPrimaryKey('ID_ATTACHMENT', 'IdAttachment', 'INTEGER' , 'attachment', 'ID_ATTACHMENT', true, 10, null);
 		$this->addPrimaryKey('ID_LANG', 'IdLang', 'INTEGER', true, 10, null);
 		$this->addColumn('NAME', 'Name', 'VARCHAR', false, 32, null);
 		$this->addColumn('DESCRIPTION', 'Description', 'LONGVARCHAR', false, null, null);
@@ -50,6 +50,7 @@ class Oops_Db_AttachmentLangTableMap extends TableMap
 	 */
 	public function buildRelations()
 	{
+		$this->addRelation('Attachment', 'Oops_Db_Attachment', RelationMap::MANY_TO_ONE, array('id_attachment' => 'id_attachment', ), 'CASCADE', null);
 	} // buildRelations()
 
 } // Oops_Db_AttachmentLangTableMap

@@ -49,6 +49,11 @@ abstract class Oops_Db_Propel_AttachmentLang extends BaseObject  implements Pers
 	protected $description;
 
 	/**
+	 * @var        Attachment
+	 */
+	protected $aAttachment;
+
+	/**
 	 * Flag to prevent endless save loop, if this object is referenced
 	 * by another object which falls in this transaction.
 	 * @var        boolean
@@ -117,6 +122,10 @@ abstract class Oops_Db_Propel_AttachmentLang extends BaseObject  implements Pers
 		if ($this->id_attachment !== $v) {
 			$this->id_attachment = $v;
 			$this->modifiedColumns[] = Oops_Db_AttachmentLangPeer::ID_ATTACHMENT;
+		}
+
+		if ($this->aAttachment !== null && $this->aAttachment->getIdAttachment() !== $v) {
+			$this->aAttachment = null;
 		}
 
 		return $this;
@@ -249,6 +258,9 @@ abstract class Oops_Db_Propel_AttachmentLang extends BaseObject  implements Pers
 	public function ensureConsistency()
 	{
 
+		if ($this->aAttachment !== null && $this->id_attachment !== $this->aAttachment->getIdAttachment()) {
+			$this->aAttachment = null;
+		}
 	} // ensureConsistency
 
 	/**
@@ -288,6 +300,7 @@ abstract class Oops_Db_Propel_AttachmentLang extends BaseObject  implements Pers
 
 		if ($deep) {  // also de-associate any related objects?
 
+			$this->aAttachment = null;
 		} // if (deep)
 	}
 
@@ -398,6 +411,18 @@ abstract class Oops_Db_Propel_AttachmentLang extends BaseObject  implements Pers
 		if (!$this->alreadyInSave) {
 			$this->alreadyInSave = true;
 
+			// We call the save method on the following object(s) if they
+			// were passed to this object by their coresponding set
+			// method.  This object relates to these object(s) by a
+			// foreign key reference.
+
+			if ($this->aAttachment !== null) {
+				if ($this->aAttachment->isModified() || $this->aAttachment->isNew()) {
+					$affectedRows += $this->aAttachment->save($con);
+				}
+				$this->setAttachment($this->aAttachment);
+			}
+
 			if ($this->isNew() || $this->isModified()) {
 				// persist changes
 				if ($this->isNew()) {
@@ -428,10 +453,6 @@ abstract class Oops_Db_Propel_AttachmentLang extends BaseObject  implements Pers
 		$modifiedColumns = array();
 		$index = 0;
 
-		$this->modifiedColumns[] = Oops_Db_AttachmentLangPeer::ID_ATTACHMENT;
-		if (null !== $this->id_attachment) {
-			throw new PropelException('Cannot insert a value for auto-increment primary key (' . Oops_Db_AttachmentLangPeer::ID_ATTACHMENT . ')');
-		}
 
 		 // check the columns in natural order for more readable SQL queries
 		if ($this->isColumnModified(Oops_Db_AttachmentLangPeer::ID_ATTACHMENT)) {
@@ -476,13 +497,6 @@ abstract class Oops_Db_Propel_AttachmentLang extends BaseObject  implements Pers
 			Propel::log($e->getMessage(), Propel::LOG_ERR);
 			throw new PropelException(sprintf('Unable to execute INSERT statement [%s]', $sql), $e);
 		}
-
-		try {
-			$pk = $con->lastInsertId();
-		} catch (Exception $e) {
-			throw new PropelException('Unable to get autoincrement id.', $e);
-		}
-		$this->setIdAttachment($pk);
 
 		$this->setNew(false);
 	}
@@ -561,6 +575,18 @@ abstract class Oops_Db_Propel_AttachmentLang extends BaseObject  implements Pers
 			$failureMap = array();
 
 
+			// We call the validate method on the following object(s) if they
+			// were passed to this object by their coresponding set
+			// method.  This object relates to these object(s) by a
+			// foreign key reference.
+
+			if ($this->aAttachment !== null) {
+				if (!$this->aAttachment->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aAttachment->getValidationFailures());
+				}
+			}
+
+
 			if (($retval = Oops_Db_AttachmentLangPeer::doValidate($this, $columns)) !== true) {
 				$failureMap = array_merge($failureMap, $retval);
 			}
@@ -628,10 +654,11 @@ abstract class Oops_Db_Propel_AttachmentLang extends BaseObject  implements Pers
 	 *                    Defaults to BasePeer::TYPE_PHPNAME.
 	 * @param     boolean $includeLazyLoadColumns (optional) Whether to include lazy loaded columns. Defaults to TRUE.
 	 * @param     array $alreadyDumpedObjects List of objects to skip to avoid recursion
+	 * @param     boolean $includeForeignObjects (optional) Whether to include hydrated related objects. Default to FALSE.
 	 *
 	 * @return    array an associative array containing the field names (as keys) and field values
 	 */
-	public function toArray($keyType = BasePeer::TYPE_PHPNAME, $includeLazyLoadColumns = true, $alreadyDumpedObjects = array())
+	public function toArray($keyType = BasePeer::TYPE_PHPNAME, $includeLazyLoadColumns = true, $alreadyDumpedObjects = array(), $includeForeignObjects = false)
 	{
 		if (isset($alreadyDumpedObjects['Oops_Db_AttachmentLang'][serialize($this->getPrimaryKey())])) {
 			return '*RECURSION*';
@@ -644,6 +671,11 @@ abstract class Oops_Db_Propel_AttachmentLang extends BaseObject  implements Pers
 			$keys[2] => $this->getName(),
 			$keys[3] => $this->getDescription(),
 		);
+		if ($includeForeignObjects) {
+			if (null !== $this->aAttachment) {
+				$result['Attachment'] = $this->aAttachment->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
+			}
+		}
 		return $result;
 	}
 
@@ -798,12 +830,12 @@ abstract class Oops_Db_Propel_AttachmentLang extends BaseObject  implements Pers
 	 */
 	public function copyInto($copyObj, $deepCopy = false, $makeNew = true)
 	{
+		$copyObj->setIdAttachment($this->getIdAttachment());
 		$copyObj->setIdLang($this->getIdLang());
 		$copyObj->setName($this->getName());
 		$copyObj->setDescription($this->getDescription());
 		if ($makeNew) {
 			$copyObj->setNew(true);
-			$copyObj->setIdAttachment(NULL); // this is a auto-increment column, so set to default value
 		}
 	}
 
@@ -846,6 +878,55 @@ abstract class Oops_Db_Propel_AttachmentLang extends BaseObject  implements Pers
 	}
 
 	/**
+	 * Declares an association between this object and a Oops_Db_Attachment object.
+	 *
+	 * @param      Oops_Db_Attachment $v
+	 * @return     Oops_Db_AttachmentLang The current object (for fluent API support)
+	 * @throws     PropelException
+	 */
+	public function setAttachment(Oops_Db_Attachment $v = null)
+	{
+		if ($v === null) {
+			$this->setIdAttachment(NULL);
+		} else {
+			$this->setIdAttachment($v->getIdAttachment());
+		}
+
+		$this->aAttachment = $v;
+
+		// Add binding for other direction of this n:n relationship.
+		// If this object has already been added to the Oops_Db_Attachment object, it will not be re-added.
+		if ($v !== null) {
+			$v->addAttachmentLang($this);
+		}
+
+		return $this;
+	}
+
+
+	/**
+	 * Get the associated Oops_Db_Attachment object
+	 *
+	 * @param      PropelPDO Optional Connection object.
+	 * @return     Oops_Db_Attachment The associated Oops_Db_Attachment object.
+	 * @throws     PropelException
+	 */
+	public function getAttachment(PropelPDO $con = null)
+	{
+		if ($this->aAttachment === null && ($this->id_attachment !== null)) {
+			$this->aAttachment = Oops_Db_AttachmentQuery::create()->findPk($this->id_attachment, $con);
+			/* The following can be used additionally to
+				guarantee the related object contains a reference
+				to this object.  This level of coupling may, however, be
+				undesirable since it could result in an only partially populated collection
+				in the referenced object.
+				$this->aAttachment->addAttachmentLangs($this);
+			 */
+		}
+		return $this->aAttachment;
+	}
+
+	/**
 	 * Clears the current object and sets all attributes to their default values
 	 */
 	public function clear()
@@ -876,6 +957,7 @@ abstract class Oops_Db_Propel_AttachmentLang extends BaseObject  implements Pers
 		if ($deep) {
 		} // if ($deep)
 
+		$this->aAttachment = null;
 	}
 
 	/**

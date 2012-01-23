@@ -54,6 +54,11 @@ abstract class Oops_Db_Propel_Attachment extends BaseObject  implements Persiste
 	protected $collProductAttachments;
 
 	/**
+	 * @var        array Oops_Db_AttachmentLang[] Collection to store aggregation of Oops_Db_AttachmentLang objects.
+	 */
+	protected $collAttachmentLangs;
+
+	/**
 	 * @var        array Oops_Db_Product[] Collection to store aggregation of Oops_Db_Product objects.
 	 */
 	protected $collProducts;
@@ -72,6 +77,20 @@ abstract class Oops_Db_Propel_Attachment extends BaseObject  implements Persiste
 	 */
 	protected $alreadyInValidation = false;
 
+	// i18n behavior
+	
+	/**
+	 * Current locale
+	 * @var        string
+	 */
+	protected $currentLocale = '1';
+	
+	/**
+	 * Current translation objects
+	 * @var        array[Oops_Db_AttachmentLang]
+	 */
+	protected $currentTranslations;
+
 	/**
 	 * An array of objects scheduled for deletion.
 	 * @var		array
@@ -83,6 +102,12 @@ abstract class Oops_Db_Propel_Attachment extends BaseObject  implements Persiste
 	 * @var		array
 	 */
 	protected $productAttachmentsScheduledForDeletion = null;
+
+	/**
+	 * An array of objects scheduled for deletion.
+	 * @var		array
+	 */
+	protected $attachmentLangsScheduledForDeletion = null;
 
 	/**
 	 * Get the [id_attachment] column value.
@@ -312,6 +337,8 @@ abstract class Oops_Db_Propel_Attachment extends BaseObject  implements Persiste
 
 			$this->collProductAttachments = null;
 
+			$this->collAttachmentLangs = null;
+
 			$this->collProducts = null;
 		} // if (deep)
 	}
@@ -343,6 +370,12 @@ abstract class Oops_Db_Propel_Attachment extends BaseObject  implements Persiste
 			if ($ret) {
 				$deleteQuery->delete($con);
 				$this->postDelete($con);
+				// i18n behavior
+				
+				// emulate delete cascade
+				Oops_Db_AttachmentLangQuery::create()
+					->filterByOops_Db_Attachment($this)
+					->delete($con);
 				$con->commit();
 				$this->setDeleted(true);
 			} else {
@@ -460,6 +493,23 @@ abstract class Oops_Db_Propel_Attachment extends BaseObject  implements Persiste
 
 			if ($this->collProductAttachments !== null) {
 				foreach ($this->collProductAttachments as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
+			}
+
+			if ($this->attachmentLangsScheduledForDeletion !== null) {
+				if (!$this->attachmentLangsScheduledForDeletion->isEmpty()) {
+					Oops_Db_AttachmentLangQuery::create()
+						->filterByPrimaryKeys($this->attachmentLangsScheduledForDeletion->getPrimaryKeys(false))
+						->delete($con);
+					$this->attachmentLangsScheduledForDeletion = null;
+				}
+			}
+
+			if ($this->collAttachmentLangs !== null) {
+				foreach ($this->collAttachmentLangs as $referrerFK) {
 					if (!$referrerFK->isDeleted()) {
 						$affectedRows += $referrerFK->save($con);
 					}
@@ -631,6 +681,14 @@ abstract class Oops_Db_Propel_Attachment extends BaseObject  implements Persiste
 					}
 				}
 
+				if ($this->collAttachmentLangs !== null) {
+					foreach ($this->collAttachmentLangs as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
+
 
 			$this->alreadyInValidation = false;
 		}
@@ -713,6 +771,9 @@ abstract class Oops_Db_Propel_Attachment extends BaseObject  implements Persiste
 		if ($includeForeignObjects) {
 			if (null !== $this->collProductAttachments) {
 				$result['ProductAttachments'] = $this->collProductAttachments->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
+			}
+			if (null !== $this->collAttachmentLangs) {
+				$result['AttachmentLangs'] = $this->collAttachmentLangs->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
 			}
 		}
 		return $result;
@@ -877,6 +938,12 @@ abstract class Oops_Db_Propel_Attachment extends BaseObject  implements Persiste
 				}
 			}
 
+			foreach ($this->getAttachmentLangs() as $relObj) {
+				if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
+					$copyObj->addAttachmentLang($relObj->copy($deepCopy));
+				}
+			}
+
 		} // if ($deepCopy)
 
 		if ($makeNew) {
@@ -936,6 +1003,9 @@ abstract class Oops_Db_Propel_Attachment extends BaseObject  implements Persiste
 	{
 		if ('ProductAttachment' == $relationName) {
 			return $this->initProductAttachments();
+		}
+		if ('AttachmentLang' == $relationName) {
+			return $this->initAttachmentLangs();
 		}
 	}
 
@@ -1113,6 +1183,154 @@ abstract class Oops_Db_Propel_Attachment extends BaseObject  implements Persiste
 	}
 
 	/**
+	 * Clears out the collAttachmentLangs collection
+	 *
+	 * This does not modify the database; however, it will remove any associated objects, causing
+	 * them to be refetched by subsequent calls to accessor method.
+	 *
+	 * @return     void
+	 * @see        addAttachmentLangs()
+	 */
+	public function clearAttachmentLangs()
+	{
+		$this->collAttachmentLangs = null; // important to set this to NULL since that means it is uninitialized
+	}
+
+	/**
+	 * Initializes the collAttachmentLangs collection.
+	 *
+	 * By default this just sets the collAttachmentLangs collection to an empty array (like clearcollAttachmentLangs());
+	 * however, you may wish to override this method in your stub class to provide setting appropriate
+	 * to your application -- for example, setting the initial array to the values stored in database.
+	 *
+	 * @param      boolean $overrideExisting If set to true, the method call initializes
+	 *                                        the collection even if it is not empty
+	 *
+	 * @return     void
+	 */
+	public function initAttachmentLangs($overrideExisting = true)
+	{
+		if (null !== $this->collAttachmentLangs && !$overrideExisting) {
+			return;
+		}
+		$this->collAttachmentLangs = new PropelObjectCollection();
+		$this->collAttachmentLangs->setModel('Oops_Db_AttachmentLang');
+	}
+
+	/**
+	 * Gets an array of Oops_Db_AttachmentLang objects which contain a foreign key that references this object.
+	 *
+	 * If the $criteria is not null, it is used to always fetch the results from the database.
+	 * Otherwise the results are fetched from the database the first time, then cached.
+	 * Next time the same method is called without $criteria, the cached collection is returned.
+	 * If this Oops_Db_Attachment is new, it will return
+	 * an empty collection or the current collection; the criteria is ignored on a new object.
+	 *
+	 * @param      Criteria $criteria optional Criteria object to narrow the query
+	 * @param      PropelPDO $con optional connection object
+	 * @return     PropelCollection|array Oops_Db_AttachmentLang[] List of Oops_Db_AttachmentLang objects
+	 * @throws     PropelException
+	 */
+	public function getAttachmentLangs($criteria = null, PropelPDO $con = null)
+	{
+		if(null === $this->collAttachmentLangs || null !== $criteria) {
+			if ($this->isNew() && null === $this->collAttachmentLangs) {
+				// return empty collection
+				$this->initAttachmentLangs();
+			} else {
+				$collAttachmentLangs = Oops_Db_AttachmentLangQuery::create(null, $criteria)
+					->filterByAttachment($this)
+					->find($con);
+				if (null !== $criteria) {
+					return $collAttachmentLangs;
+				}
+				$this->collAttachmentLangs = $collAttachmentLangs;
+			}
+		}
+		return $this->collAttachmentLangs;
+	}
+
+	/**
+	 * Sets a collection of AttachmentLang objects related by a one-to-many relationship
+	 * to the current object.
+	 * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
+	 * and new objects from the given Propel collection.
+	 *
+	 * @param      PropelCollection $attachmentLangs A Propel collection.
+	 * @param      PropelPDO $con Optional connection object
+	 */
+	public function setAttachmentLangs(PropelCollection $attachmentLangs, PropelPDO $con = null)
+	{
+		$this->attachmentLangsScheduledForDeletion = $this->getAttachmentLangs(new Criteria(), $con)->diff($attachmentLangs);
+
+		foreach ($attachmentLangs as $attachmentLang) {
+			// Fix issue with collection modified by reference
+			if ($attachmentLang->isNew()) {
+				$attachmentLang->setAttachment($this);
+			}
+			$this->addAttachmentLang($attachmentLang);
+		}
+
+		$this->collAttachmentLangs = $attachmentLangs;
+	}
+
+	/**
+	 * Returns the number of related Oops_Db_AttachmentLang objects.
+	 *
+	 * @param      Criteria $criteria
+	 * @param      boolean $distinct
+	 * @param      PropelPDO $con
+	 * @return     int Count of related Oops_Db_AttachmentLang objects.
+	 * @throws     PropelException
+	 */
+	public function countAttachmentLangs(Criteria $criteria = null, $distinct = false, PropelPDO $con = null)
+	{
+		if(null === $this->collAttachmentLangs || null !== $criteria) {
+			if ($this->isNew() && null === $this->collAttachmentLangs) {
+				return 0;
+			} else {
+				$query = Oops_Db_AttachmentLangQuery::create(null, $criteria);
+				if($distinct) {
+					$query->distinct();
+				}
+				return $query
+					->filterByAttachment($this)
+					->count($con);
+			}
+		} else {
+			return count($this->collAttachmentLangs);
+		}
+	}
+
+	/**
+	 * Method called to associate a Oops_Db_AttachmentLang object to this object
+	 * through the Oops_Db_AttachmentLang foreign key attribute.
+	 *
+	 * @param      Oops_Db_AttachmentLang $l Oops_Db_AttachmentLang
+	 * @return     Oops_Db_Attachment The current object (for fluent API support)
+	 */
+	public function addAttachmentLang(Oops_Db_AttachmentLang $l)
+	{
+		if ($this->collAttachmentLangs === null) {
+			$this->initAttachmentLangs();
+		}
+		if (!$this->collAttachmentLangs->contains($l)) { // only add it if the **same** object is not already associated
+			$this->doAddAttachmentLang($l);
+		}
+
+		return $this;
+	}
+
+	/**
+	 * @param	AttachmentLang $attachmentLang The attachmentLang object to add.
+	 */
+	protected function doAddAttachmentLang($attachmentLang)
+	{
+		$this->collAttachmentLangs[]= $attachmentLang;
+		$attachmentLang->setAttachment($this);
+	}
+
+	/**
 	 * Clears out the collProducts collection
 	 *
 	 * This does not modify the database; however, it will remove any associated objects, causing
@@ -1261,7 +1479,7 @@ abstract class Oops_Db_Propel_Attachment extends BaseObject  implements Persiste
 	{
 		$productAttachment = new Oops_Db_ProductAttachment();
 		$productAttachment->setProduct($product);
-		$this->addOops_Db_ProductAttachment($productAttachment);
+		$this->addProductAttachment($productAttachment);
 	}
 
 	/**
@@ -1298,6 +1516,11 @@ abstract class Oops_Db_Propel_Attachment extends BaseObject  implements Persiste
 					$o->clearAllReferences($deep);
 				}
 			}
+			if ($this->collAttachmentLangs) {
+				foreach ($this->collAttachmentLangs as $o) {
+					$o->clearAllReferences($deep);
+				}
+			}
 			if ($this->collProducts) {
 				foreach ($this->collProducts as $o) {
 					$o->clearAllReferences($deep);
@@ -1305,10 +1528,17 @@ abstract class Oops_Db_Propel_Attachment extends BaseObject  implements Persiste
 			}
 		} // if ($deep)
 
+		// i18n behavior
+		$this->currentLocale = '1';
+		$this->currentTranslations = null;
 		if ($this->collProductAttachments instanceof PropelCollection) {
 			$this->collProductAttachments->clearIterator();
 		}
 		$this->collProductAttachments = null;
+		if ($this->collAttachmentLangs instanceof PropelCollection) {
+			$this->collAttachmentLangs->clearIterator();
+		}
+		$this->collAttachmentLangs = null;
 		if ($this->collProducts instanceof PropelCollection) {
 			$this->collProducts->clearIterator();
 		}
@@ -1323,6 +1553,150 @@ abstract class Oops_Db_Propel_Attachment extends BaseObject  implements Persiste
 	public function __toString()
 	{
 		return (string) $this->exportTo(Oops_Db_AttachmentPeer::DEFAULT_STRING_FORMAT);
+	}
+
+	// i18n behavior
+	
+	/**
+	 * Sets the locale for translations
+	 *
+	 * @param     string $locale Locale to use for the translation, e.g. 'fr_FR'
+	 *
+	 * @return    Oops_Db_Attachment The current object (for fluent API support)
+	 */
+	public function setLocale($locale = '1')
+	{
+		$this->currentLocale = $locale;
+	
+		return $this;
+	}
+	
+	/**
+	 * Gets the locale for translations
+	 *
+	 * @return    string $locale Locale to use for the translation, e.g. 'fr_FR'
+	 */
+	public function getLocale()
+	{
+		return $this->currentLocale;
+	}
+	
+	/**
+	 * Returns the current translation for a given locale
+	 *
+	 * @param     string $locale Locale to use for the translation, e.g. 'fr_FR'
+	 * @param     PropelPDO $con an optional connection object
+	 *
+	 * @return Oops_Db_AttachmentLang */
+	public function getTranslation($locale = '1', PropelPDO $con = null)
+	{
+		if (!isset($this->currentTranslations[$locale])) {
+			if (null !== $this->collAttachmentLangs) {
+				foreach ($this->collAttachmentLangs as $translation) {
+					if ($translation->getIdLang() == $locale) {
+						$this->currentTranslations[$locale] = $translation;
+						return $translation;
+					}
+				}
+			}
+			if ($this->isNew()) {
+				$translation = new Oops_Db_AttachmentLang();
+				$translation->setIdLang($locale);
+			} else {
+				$translation = Oops_Db_AttachmentLangQuery::create()
+					->filterByPrimaryKey(array($this->getPrimaryKey(), $locale))
+					->findOneOrCreate($con);
+				$this->currentTranslations[$locale] = $translation;
+			}
+			$this->addAttachmentLang($translation);
+		}
+	
+		return $this->currentTranslations[$locale];
+	}
+	
+	/**
+	 * Remove the translation for a given locale
+	 *
+	 * @param     string $locale Locale to use for the translation, e.g. 'fr_FR'
+	 * @param     PropelPDO $con an optional connection object
+	 *
+	 * @return    Oops_Db_Attachment The current object (for fluent API support)
+	 */
+	public function removeTranslation($locale = '1', PropelPDO $con = null)
+	{
+		if (!$this->isNew()) {
+			Oops_Db_AttachmentLangQuery::create()
+				->filterByPrimaryKey(array($this->getPrimaryKey(), $locale))
+				->delete($con);
+		}
+		if (isset($this->currentTranslations[$locale])) {
+			unset($this->currentTranslations[$locale]);
+		}
+		foreach ($this->collAttachmentLangs as $key => $translation) {
+			if ($translation->getIdLang() == $locale) {
+				unset($this->collAttachmentLangs[$key]);
+				break;
+			}
+		}
+	
+		return $this;
+	}
+	
+	/**
+	 * Returns the current translation
+	 *
+	 * @param     PropelPDO $con an optional connection object
+	 *
+	 * @return Oops_Db_AttachmentLang */
+	public function getCurrentTranslation(PropelPDO $con = null)
+	{
+		return $this->getTranslation($this->getLocale(), $con);
+	}
+	
+	
+	/**
+	 * Get the [name] column value.
+	 * 
+	 * @return     string
+	 */
+	public function getName()
+	{	return $this->getCurrentTranslation()->getName();
+	}
+	
+	
+	/**
+	 * Set the value of [name] column.
+	 * 
+	 * @param      string $v new value
+	 * @return     Oops_Db_Attachment The current object (for fluent API support)
+	 */
+	public function setName($v)
+	{	$this->getCurrentTranslation()->setName($v);
+	
+		return $this;
+	}
+	
+	
+	/**
+	 * Get the [description] column value.
+	 * 
+	 * @return     string
+	 */
+	public function getDescription()
+	{	return $this->getCurrentTranslation()->getDescription();
+	}
+	
+	
+	/**
+	 * Set the value of [description] column.
+	 * 
+	 * @param      string $v new value
+	 * @return     Oops_Db_Attachment The current object (for fluent API support)
+	 */
+	public function setDescription($v)
+	{	$this->getCurrentTranslation()->setDescription($v);
+	
+		return $this;
 	}
 
 } // Oops_Db_Propel_Attachment

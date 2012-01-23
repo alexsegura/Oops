@@ -1543,7 +1543,7 @@ abstract class Oops_Db_Propel_Feature extends BaseObject  implements Persistent
 	{
 		$featureProduct = new Oops_Db_FeatureProduct();
 		$featureProduct->setProduct($product);
-		$this->addOops_Db_FeatureProduct($featureProduct);
+		$this->addFeatureProduct($featureProduct);
 	}
 
 	/**

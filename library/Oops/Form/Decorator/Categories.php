@@ -1,7 +1,7 @@
 <?php
 
 class Oops_Form_Decorator_Categories extends Zend_Form_Decorator_Abstract {
-
+	
     public function buildInput() {
     	
         $element = $this->getElement();
@@ -12,37 +12,45 @@ class Oops_Form_Decorator_Categories extends Zend_Form_Decorator_Abstract {
             return $content;
         }
         
-        $root = Oops_Db_CategoryQuery :: create()->findRoot();
+        $root = Oops_Db_CategoryPeer :: retrieveRoot();
         
-        $value = $element->getValue();
+        $name 	= $element->getName();
+        $value 	= $element->getValue();
         
-        $output = '<ul>';
+        $output = '';
         
-        	$output .= '<li class="collapsable">';
-        	
-				$output .= '<span class="folder">';
-				$output .= '<input type="checkbox" name="categories[]" value="1"> ' . $root->getName();
-				$output .= '</span>';
-				$output .= '<ul>';
-				foreach ($root->getChildren() as $child) {
-					
-					$checked = '';
-					if (in_array($child->getIdCategory(), $value)) {
-						$checked = 'checked="checked"';
-					}
-					
-					$output .= '<li>';
-					$output .= '<input type="checkbox" value="' .$child->getIdCategory(). '" name="categories[]" ' .$checked.'>';
-					$output .= '<span class="category_label">'.$child->getName().'</span>';
-					$output .= '</span>';
-					$output .= '</li>';
-					
-				}
-				$output .= '</ul>';
-				
-			$output .= '</li>';
-			
-        $output .= '<ul>';
+        $output .= '<script type="text/javascript" src="../js/jquery/treeview/jquery.treeview.js"></script>';
+		$output .= '<script type="text/javascript" src="../js/jquery/treeview/jquery.treeview.async.js"></script>';
+		$output .= '<script type="text/javascript" src="../js/jquery/treeview/jquery.treeview.edit.js"></script>';
+		$output .= '<script type="text/javascript" src="../js/admin-categories-tree.js"></script>';
+		
+		$output .= '<link type="text/css" rel="stylesheet" href="../css/jquery.treeview.css">';
+		
+		$output .= '<script type="text/javascript">';
+			$output .= 'var inputName = "' .$name. '";';
+			$output .= 'var selectedCat = "' . implode(',', $value) . '";';
+		$output .= '</script>';
+		$output .= '<script type="text/javascript">';
+			$output .= 'var selectedLabel = "s&eacute;lectionn&eacute;e(s)";';
+			$output .= 'var home = "Accueil";';
+		$output .= '</script>';
+        
+		foreach ($value as $categoryId) {
+        	$output .= '<input type="hidden" name="' . $name .'[]" value="'.$categoryId.'" >';
+		}
+        
+		$checked = in_array('1', $value) ? 'checked="checked"' : '';
+        $output .= '<ul id="categories-treeview" class="filetree">';
+		$output .= '<li id="1" class="hasChildren">';
+		$output .= '<span class="folder">';
+		$output .= '<input type="checkbox" name="' . $name .'[]" value="1" onclick="clickOnCategoryBox($(this));" '.$checked.' />';
+		$output .= ' Accueil';
+		$output .= '</span>';
+		$output .= '<ul>';
+		$output .= '<li><span class="placeholder">&nbsp;</span></li>';	
+		$output .= '</ul>';
+		$output .= '</li>';
+		$output .= '</ul>';
         
 		return $output;
 		
@@ -70,19 +78,6 @@ class Oops_Form_Decorator_Categories extends Zend_Form_Decorator_Abstract {
         $errors    = ''; // $this->buildErrors();
         $desc      = $this->buildDescription();
  		
-        /*
-        $output = '<div id="tree" class="jstree-classic" style="font-size: 10px;">'
-        		. '<ul>'
-					. '<li class="jstree-open">'
-					. '<a href="#">Accueil</a>'
-						. '<ul>'
-						. $input
-						. '</ul>'
-					. '</li>'
-                . '</ul>'
-                . '</div>';
-        */
-        
         $output = $input;
  
         switch ($placement) {
