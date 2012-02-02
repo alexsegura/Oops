@@ -22,9 +22,15 @@ class Oops_Controller_Router_Backoffice extends Zend_Controller_Router_Abstract 
 		
 		// TODO Make sure module can't be changed via request object
 		
-		
-		if (!isset($params[$request->getControllerKey()])) {
-			$params[$request->getControllerKey()] = $request->getControllerName();
+		if (!$reset) {
+			
+			if (!isset($params[$request->getControllerKey()])) {
+				$params[$request->getControllerKey()] = $request->getControllerName();
+			}
+			
+			foreach ($request->getParams() as $key => $value) {
+				$params[$key] = $value;	
+			}
 		}
 		
 		foreach ($userParams as $key => $value) {

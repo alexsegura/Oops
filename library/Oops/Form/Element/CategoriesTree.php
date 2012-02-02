@@ -2,7 +2,18 @@
 
 class Oops_Form_Element_CategoriesTree extends Zend_Form_Element {
 	
-	private $_root;
+	protected $root;
+	
+	
+	
+	public function setRoot($root) {
+		return $this->root = $root;
+		return $this;
+	}
+	
+	public function getRoot() {
+		return $this->root;
+	}
 	
 	public function init()
     {

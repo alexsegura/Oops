@@ -7,13 +7,16 @@
  */
 class Oops_Form_Decorator_CategoriesTree extends Zend_Form_Decorator_Abstract {
 	
-	
-	private function appendChildren($category, &$output) {
+	private function appendChildren($rootCategory, $category, &$output) {
 		
 		if ($category->hasChildren()) {
 			
 			$style = '';
-			if ($category->getLevel() > 0) {
+			
+			$distance = $category->getLevel() - $rootCategory->getLevel();
+			$displayChildren = true;
+			if ($distance > 0) {
+				$displayChildren = false;
 				$style .= 'display: none;';
 			}
 			
@@ -48,7 +51,7 @@ class Oops_Form_Decorator_CategoriesTree extends Zend_Form_Decorator_Abstract {
 					$output .= '<a href="' .$url. '">'.$child->getName().'</a>';
 					
 					// Append recursively
-					$this->appendChildren($child, $output);
+					$this->appendChildren($rootCategory, $child, $output);
 				
 				$output .= '</li>';
 				
@@ -69,41 +72,52 @@ class Oops_Form_Decorator_CategoriesTree extends Zend_Form_Decorator_Abstract {
             return $content;
         }
         
-        $root = Oops_Db_CategoryPeer :: retrieveRoot();
+        
+        
+        
         
         $name 	= $element->getName();
         $value 	= $element->getValue();
         
         $output = '';
         
-        
         $output .= '<script type="text/javascript" src="../js/jquery/treeview/jquery.treeview.js"></script>';
 		$output .= '<script type="text/javascript" src="../js/jquery/treeview/jquery.treeview.async.js"></script>';
 		$output .= '<script type="text/javascript" src="../js/jquery/treeview/jquery.treeview.edit.js"></script>';
-		// $output .= '<script type="text/javascript" src="../js/admin-categories-tree.js"></script>';
-		
 		$output .= '<link type="text/css" rel="stylesheet" href="../css/jquery.treeview.css">';
 		
+		// TODO Force a CSS id
 		$output .= '<script type="text/javascript">';
 		$output .= '$(document).ready(function() {
 			$("#tree").treeview({
 				collapsed	: true,
-				animated	: "fast",
+				prerendered	: true, 
+				animated	: "fast"
+				/* 
 				control		: "#sidetreecontrol",
-				prerendered	: true,
 				persist		: "location"
+				*/
 			});
 		});';
 		$output .= '</script>';
 		
+		$rootCategoryId = $element->getRoot();
+		if (!empty($rootCategoryId)) {
+			$root = Oops_Db_CategoryPeer :: retrieveByPk($rootCategoryId);
+		} else {
+			$root = Oops_Db_CategoryPeer :: retrieveRoot();
+		}
 		
 		$output .= '<ul class="treeview" id="tree">';
 		
+			$url = $this->getElement()->getView()->url(array(
+				'id_category' => $root->getIdCategory()
+			));
 			$output .= '<li class="last lastCollapsable">';
 			$output .= '<div class="hitarea lastCollapsable-hitarea"></div>';
-			$output .= '<a href="?/index.cfm">Home</a>';
+			$output .= '<a href="' .$url. '">' . $root->getName() . '</a>';
 		
-			$this->appendChildren($root, $output);
+			$this->appendChildren($root, $root, $output);
 		
 		$output .= '</ul>';
 		
