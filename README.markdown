@@ -41,6 +41,8 @@ Check the "Hello, Oops" module code to see a running example
 
 Read the wiki (https://github.com/alexsegura/Oops/wiki) to learn more
 
+Come and discuss about Oops development on Google Groups : oops-dev@googlegroups.com
+
 
 
 
