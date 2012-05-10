@@ -41,6 +41,14 @@ Check the "Hello, Oops" module code to see a running example
 
 Read the wiki (https://github.com/alexsegura/Oops/wiki) to learn more
 
+# Oops is evolving !
+
+**Big changes are coming !**
+  
+- Usage of Composer to be packaged without dependencies
+- Improvement of ORM
+- Embeddable inside modules
+
 Come and discuss about Oops development on Google Groups : oops-dev@googlegroups.com
 
 
