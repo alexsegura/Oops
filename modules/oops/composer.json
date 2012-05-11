@@ -1,0 +1,7 @@
+{
+    "require": {
+        "propel/propel1": "1.6.*", 
+        "breerly/zf1"	: "1.11.11"
+    }
+}
+
